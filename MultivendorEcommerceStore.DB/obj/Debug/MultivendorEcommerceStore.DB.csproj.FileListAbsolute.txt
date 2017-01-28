@@ -1,0 +1,10 @@
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.dll
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.pdb
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.dll
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.xml
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.dll
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.pdb
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.dll.config
+C:\Users\Faizan\Desktop\Final Year Project\MultivendorEcommerceStore\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.csprojResolveAssemblyReference.cache
