@@ -42,9 +42,10 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<bool> DiscountAvailable { get; set; }
         public Nullable<bool> CurrentOrder { get; set; }
         public string SizeURL { get; set; }
-        public string Logo { get; set; }
         public Nullable<int> Ranking { get; set; }
         public string Note { get; set; }
+        public string ProfilePhoto { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

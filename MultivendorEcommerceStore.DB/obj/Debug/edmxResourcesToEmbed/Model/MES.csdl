@@ -308,10 +308,11 @@
     <Property Name="DiscountAvailable" Type="Boolean" />
     <Property Name="CurrentOrder" Type="Boolean" />
     <Property Name="SizeURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Logo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Ranking" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

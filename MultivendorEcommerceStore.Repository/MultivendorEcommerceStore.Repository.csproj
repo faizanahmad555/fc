@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
+    <Compile Include="ISupplierRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MultivendorEcommerceStore.DB\MultivendorEcommerceStore.DB.csproj">

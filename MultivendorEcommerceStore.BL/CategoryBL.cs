@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MultivendorEcommerceStore.DB.Model;
-using MultivendorEcommerceStore.DB.ViewModels;
+using MultivendorEcommerceStore.DB.ViewModel;
 using MultivendorEcommerceStore.Repository;
 using System.Web;
 using System.IO;

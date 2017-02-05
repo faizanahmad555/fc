@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -294,9 +294,10 @@
           <Property Name="DiscountAvailable" Type="bit" />
           <Property Name="CurrentOrder" Type="bit" />
           <Property Name="SizeURL" Type="varchar" MaxLength="100" />
-          <Property Name="Logo" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProfilePhoto" Type="nvarchar" MaxLength="255" />
           <Property Name="Ranking" Type="int" />
           <Property Name="Note" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -630,8 +631,7 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MultivendorEcommerceStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -943,10 +943,11 @@
           <Property Name="DiscountAvailable" Type="Boolean" />
           <Property Name="CurrentOrder" Type="Boolean" />
           <Property Name="SizeURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Logo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Ranking" Type="Int32" />
           <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
+          <Property Name="ProfilePhoto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1540,6 +1541,8 @@
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
@@ -1562,7 +1565,6 @@
                 <ScalarProperty Name="DiscountAvailable" ColumnName="DiscountAvailable" />
                 <ScalarProperty Name="CurrentOrder" ColumnName="CurrentOrder" />
                 <ScalarProperty Name="SizeURL" ColumnName="SizeURL" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="Ranking" ColumnName="Ranking" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
               </MappingFragment>

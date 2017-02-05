@@ -274,6 +274,8 @@
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
           <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
@@ -296,7 +298,6 @@
           <ScalarProperty Name="DiscountAvailable" ColumnName="DiscountAvailable" />
           <ScalarProperty Name="CurrentOrder" ColumnName="CurrentOrder" />
           <ScalarProperty Name="SizeURL" ColumnName="SizeURL" />
-          <ScalarProperty Name="Logo" ColumnName="Logo" />
           <ScalarProperty Name="Ranking" ColumnName="Ranking" />
           <ScalarProperty Name="Note" ColumnName="Note" />
         </MappingFragment>

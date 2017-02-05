@@ -1,4 +1,4 @@
-﻿using MultivendorEcommerceStore.DB.ViewModels;
+﻿using MultivendorEcommerceStore.DB.ViewModel;
 using MultivendorEcommerceStore.BL;
 using System;
 using System.Collections.Generic;

@@ -140,7 +140,8 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View Model\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AddSupplierViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
