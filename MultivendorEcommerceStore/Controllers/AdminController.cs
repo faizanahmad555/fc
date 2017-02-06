@@ -8,27 +8,28 @@ using System.Web.Mvc;
 
 namespace MultivendorEcommerceStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        [Authorize(Roles = "Admin")]
+        // Dashboard
         public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        // Admin Login
         public ActionResult Login()
         {
             return View();
         }
 
 
+        // Add Supplier
         [HttpGet]
         public ActionResult AddSupplier()
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult AddSupplier(AddSupplierViewModel SupplierViewModel) //, HttpPostedFileBase ProfilePhoto)
         {
@@ -40,5 +41,23 @@ namespace MultivendorEcommerceStore.Controllers
             }
             return View();
         }
+
+        // Show All Suppliers
+        [HttpGet]
+        public ActionResult SupplierList()
+        {
+            AdminBL adminBL = new AdminBL();
+            return View(adminBL.SupplierList());
+        }
+
+        // Delete Supplier
+        [HttpGet]
+        public ActionResult DeleteSupplier(Guid id)
+        {
+            AdminBL adminBL = new AdminBL();
+            adminBL.DeleteSupplier(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -49,6 +49,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
+        public virtual DbSet<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

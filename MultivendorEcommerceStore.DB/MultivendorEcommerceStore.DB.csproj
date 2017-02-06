@@ -130,6 +130,9 @@
     <Compile Include="Model\Supplier.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SupplierBusinessInformation.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>

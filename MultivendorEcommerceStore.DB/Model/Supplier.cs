@@ -18,6 +18,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Supplier()
         {
             this.Products = new HashSet<Product>();
+            this.SupplierBusinessInformations = new HashSet<SupplierBusinessInformation>();
         }
     
         public System.Guid SupplierID { get; set; }
@@ -46,8 +47,12 @@ namespace MultivendorEcommerceStore.DB.Model
         public string Note { get; set; }
         public string ProfilePhoto { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string CNIC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
     }
 }

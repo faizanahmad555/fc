@@ -29,6 +29,20 @@ namespace MultivendorEcommerceStore.BL
             supplier.CreatedOn = DateTime.Now;
             repository.Create(supplier);
         }
+
+        public IEnumerable<Supplier> SupplierList()
+        {
+            ISupplierRepository repository = new SupplierRepository();
+            IEnumerable<Supplier> supplierList = repository.Retrive();
+            return supplierList;
+        }
+
+        public void DeleteSupplier(Guid id)
+        {
+            ISupplierRepository repository = new SupplierRepository();
+            repository.Delete(id);
+        }
+
         //String path = "";
         //if (ProfilePhoto != null)
         //{

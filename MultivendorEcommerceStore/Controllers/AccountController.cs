@@ -396,6 +396,9 @@ namespace MultivendorEcommerceStore.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Clear();
+            Response.Cookies.Clear();
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
 
