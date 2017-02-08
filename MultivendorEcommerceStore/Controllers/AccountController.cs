@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MultivendorEcommerceStore.Models;
+using MultivendorEcommerceStore.DB.ViewModel;
+using MultivendorEcommerceStore.BL;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -94,6 +96,40 @@ namespace MultivendorEcommerceStore.Controllers
                     return View(model);
             }
         }
+
+
+        // Add Supplier
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    AdminBL adminBL = new AdminBL();
+                    UserManager.AddToRole(user.Id, "Supplier");
+                    model.AspNetUserID = user.Id;
+                    adminBL.AddSupplier(model);
+                    return RedirectToAction("AddSupplier", "Admin"); //, new { userID = user.Id });
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return RedirectToAction("AddSupplier", "Admin");
+        }
+
 
         //
         // GET: /Account/VerifyCode

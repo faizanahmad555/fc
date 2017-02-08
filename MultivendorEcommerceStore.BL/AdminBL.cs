@@ -11,22 +11,24 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
-        public void AddSupplier(AddSupplierViewModel viewModel)  //, HttpPostedFileBase ProfilePhoto)
+        public void AddSupplier(AddSupplierViewModel model)  //, HttpPostedFileBase ProfilePhoto)
         {
             ISupplierRepository repository = new SupplierRepository();
             Supplier supplier = new Supplier();
             supplier.SupplierID = Guid.NewGuid();
-            supplier.SupplierFirstName = viewModel.FirstName;
-            supplier.SupplierLastName = viewModel.LastName;
-            supplier.ProfilePhoto = viewModel.ProfilePhoto;
-            supplier.Email = viewModel.Email;
-            supplier.Phone = viewModel.MobileNumber;
-            supplier.Address1 = viewModel.Address;
-            supplier.Country = viewModel.Country;
-            supplier.State = viewModel.State;
-            supplier.State = viewModel.City;
-            supplier.PostalCode = viewModel.PostalCode;
+            supplier.AspNetUserID = model.AspNetUserID;
+            supplier.SupplierFirstName = model.FirstName;
+            supplier.SupplierLastName = model.LastName;
+            supplier.ProfilePhoto = model.ProfilePhoto;
+            supplier.Phone = model.MobileNumber;
+            supplier.Address1 = model.Address;
+            supplier.Country = model.Country;
+            supplier.State = model.State;
+            supplier.State = model.City;
+            supplier.CNIC = model.CNIC;
+            supplier.PostalCode = model.PostalCode;
             supplier.CreatedOn = DateTime.Now;
+
             repository.Create(supplier);
         }
 

@@ -14,5 +14,6 @@ namespace MultivendorEcommerceStore.Repository
         void Update(Supplier entity);
         void Delete(Guid id);
         Supplier GetById(Guid id);
+        Supplier GetByAspNetUserID(string id);
     }
 }

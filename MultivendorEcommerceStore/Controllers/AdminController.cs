@@ -30,17 +30,7 @@ namespace MultivendorEcommerceStore.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult AddSupplier(AddSupplierViewModel SupplierViewModel) //, HttpPostedFileBase ProfilePhoto)
-        {
-            if (SupplierViewModel != null)
-            {
-                AdminBL supplierBL = new AdminBL();
-                supplierBL.AddSupplier(SupplierViewModel);
-                return View("Index");
-            }
-            return View();
-        }
+       
 
         // Show All Suppliers
         [HttpGet]
@@ -50,7 +40,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(adminBL.SupplierList());
         }
 
-        // Delete Supplier
+        // Delete Supplier (Need Changes)
         [HttpGet]
         public ActionResult DeleteSupplier(Guid id)
         {

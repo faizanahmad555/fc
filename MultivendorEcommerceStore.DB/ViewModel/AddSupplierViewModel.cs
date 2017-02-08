@@ -9,10 +9,11 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 {
     public class AddSupplierViewModel
     {
-        public Guid SupplierID { get; set; }
-        
+        public string AspNetUserID { get; set; }
+
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "First Name")]
+        [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
         public string FirstName { get; set; }
 
@@ -20,6 +21,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Last Name")]
+        [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
         public string LastName { get; set; }
 
@@ -54,6 +56,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter characters only")]
         public string MobileNumber { get; set; }
 
 
@@ -79,5 +82,11 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
+
+        [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "CNIC")]
+        public string CNIC { get; set; }
+
+        //public string SupplierConfirmation { get; set; }
     }
 }

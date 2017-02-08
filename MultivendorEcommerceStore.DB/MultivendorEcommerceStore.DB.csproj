@@ -52,16 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\AspNetRole.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\AspNetUser.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserClaim.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserLogin.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs">
@@ -71,9 +62,6 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\C__MigrationHistory.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DiscountVoucher.cs">
@@ -118,12 +106,6 @@
     <Compile Include="Model\Shipper.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sp_helpdiagrams_Result.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\SubCategory.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
@@ -131,9 +113,6 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SupplierBusinessInformation.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tracking.cs">
@@ -146,15 +125,14 @@
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\MES.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MES.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

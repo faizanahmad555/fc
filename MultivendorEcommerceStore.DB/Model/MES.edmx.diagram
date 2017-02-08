@@ -4,31 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b754165372fa4b0b881f56e8835011d3" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetRole" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUser" Width="1.5" PointX="10" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Category" Width="1.5" PointX="1.5" PointY="26.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Conversation" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="0d720338fd964c3b85302e42f62173e1" Name="Diagram1">
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUser" Width="1.5" PointX="1.5" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Category" Width="1.5" PointX="1.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Conversation" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Customer" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.DiscountVoucher" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.EmailHistory" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.EmailHistory" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Order" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.OrderHistory" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Payment" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ReturnRequest" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Shipper" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Shipper" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategory" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Supplier" Width="1.5" PointX="0.75" PointY="29.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.sysdiagram" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Tracking" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.UserMessage" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Supplier" Width="1.5" PointX="0.75" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SupplierBusinessInformation" Width="1.5" PointX="3" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Tracking" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.UserMessage" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SubCategory_Category" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" ManuallyRouted="false" />
@@ -40,9 +35,7 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_OrderDetail" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SupplierBusinessInformation" Width="2.25" PointX="3" PointY="31" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

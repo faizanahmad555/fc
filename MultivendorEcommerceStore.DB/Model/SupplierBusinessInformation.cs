@@ -15,8 +15,9 @@ namespace MultivendorEcommerceStore.DB.Model
     public partial class SupplierBusinessInformation
     {
         public System.Guid BusinessInfoID { get; set; }
-        public System.Guid SupplierID { get; set; }
+        public Nullable<System.Guid> SupplierID { get; set; }
         public string CompanyName { get; set; }
+        public string Logo { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Country { get; set; }
@@ -24,7 +25,8 @@ namespace MultivendorEcommerceStore.DB.Model
         public string City { get; set; }
         public string BusinessExperience { get; set; }
         public string BusinessType { get; set; }
-        public string Gender { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ProductType { get; set; }
     
         public virtual Supplier Supplier { get; set; }
     }
