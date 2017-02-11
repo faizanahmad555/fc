@@ -228,16 +228,14 @@
     <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
     <Property Name="SupplierFirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="SupplierLastName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Address1" Type="nvarchar(max)" />
-    <Property Name="Address2" Type="nvarchar(max)" />
-    <Property Name="Address3" Type="nvarchar(max)" />
-    <Property Name="City" Type="nvarchar" MaxLength="500" />
-    <Property Name="State" Type="nvarchar" MaxLength="500" />
-    <Property Name="PostalCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
     <Property Name="Country" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="100" />
     <Property Name="Fax" Type="nvarchar" MaxLength="100" />
-    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="WebSite" Type="nvarchar" MaxLength="100" />
     <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
     <Property Name="DiscountType" Type="nvarchar" MaxLength="100" />
@@ -421,18 +419,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Supplier_AspNetUsers">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Supplier">
-        <PropertyRef Name="AspNetUserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SupplierBusinessInformation_Supplier">
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
     <End Role="SupplierBusinessInformation" Type="Self.SupplierBusinessInformation" Multiplicity="*" />
@@ -507,10 +493,6 @@
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Supplier_AspNetUsers" Association="Self.FK_Supplier_AspNetUsers">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Supplier" EntitySet="Supplier" />
     </AssociationSet>
     <AssociationSet Name="FK_SupplierBusinessInformation_Supplier" Association="Self.FK_SupplierBusinessInformation_Supplier">
       <End Role="Supplier" EntitySet="Supplier" />

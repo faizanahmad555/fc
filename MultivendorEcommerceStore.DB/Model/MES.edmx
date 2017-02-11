@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -233,16 +233,14 @@
           <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
           <Property Name="SupplierFirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierLastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address1" Type="nvarchar(max)" />
-          <Property Name="Address2" Type="nvarchar(max)" />
-          <Property Name="Address3" Type="nvarchar(max)" />
-          <Property Name="City" Type="nvarchar" MaxLength="500" />
-          <Property Name="State" Type="nvarchar" MaxLength="500" />
-          <Property Name="PostalCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
           <Property Name="Country" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="100" />
           <Property Name="Fax" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="WebSite" Type="nvarchar" MaxLength="100" />
           <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
           <Property Name="DiscountType" Type="nvarchar" MaxLength="100" />
@@ -426,18 +424,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Supplier_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="AspNetUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SupplierBusinessInformation_Supplier">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
           <End Role="SupplierBusinessInformation" Type="Self.SupplierBusinessInformation" Multiplicity="*" />
@@ -513,17 +499,12 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
-          <AssociationSet Name="FK_Supplier_AspNetUsers" Association="Self.FK_Supplier_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Supplier" EntitySet="Supplier" />
-          </AssociationSet>
           <AssociationSet Name="FK_SupplierBusinessInformation_Supplier" Association="Self.FK_SupplierBusinessInformation_Supplier">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MultivendorEcommerceStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -777,16 +758,13 @@
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SupplierFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SupplierLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PostalCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="WebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PaymentMethods" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DiscountType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -804,6 +782,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Supplier_AspNetUsers" FromRole="Supplier" ToRole="AspNetUsers" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
           <NavigationProperty Name="SupplierBusinessInformations" Relationship="Self.FK_SupplierBusinessInformation_Supplier" FromRole="Supplier" ToRole="SupplierBusinessInformation" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SupplierBusinessInformation">
           <Key>
@@ -1312,14 +1291,12 @@
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
                 <ScalarProperty Name="SupplierLastName" ColumnName="SupplierLastName" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Address3" ColumnName="Address3" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />

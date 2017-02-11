@@ -26,9 +26,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public string CompanyName { get; set; }
         public string SupplierFirstName { get; set; }
         public string SupplierLastName { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string Address3 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
@@ -50,6 +47,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
+        public string Address { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

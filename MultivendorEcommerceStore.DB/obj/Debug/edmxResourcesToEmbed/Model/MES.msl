@@ -237,14 +237,12 @@
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
           <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
           <ScalarProperty Name="SupplierLastName" ColumnName="SupplierLastName" />
-          <ScalarProperty Name="Address1" ColumnName="Address1" />
-          <ScalarProperty Name="Address2" ColumnName="Address2" />
-          <ScalarProperty Name="Address3" ColumnName="Address3" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />

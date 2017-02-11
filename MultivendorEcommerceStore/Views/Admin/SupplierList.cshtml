@@ -5,19 +5,21 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>SupplierList</h2>
+<h2 style="text-align:center">SupplierList</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-<table class="table" style="text-align:center">
-    <tr>
+<table class="table"  style="text-align:center">
+    <tr style="text-align:center">
         <th>
             @Html.DisplayName("First Name")
         </th>
         <th>
             @Html.DisplayName("Last Name")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
         </th>
         <th>
             @Html.DisplayName("Address")
@@ -32,20 +34,16 @@
             @Html.DisplayName("City")
         </th>
         <th>
-            @Html.DisplayName("Postal Code")
+            @Html.DisplayName("PostalCode")
         </th>
         <th>
             @Html.DisplayName("Phone")
         </th>
         <th>
-            @Html.DisplayName("Email")
+            @Html.DisplayName("ProfilePhoto")
         </th>
-        <th>
-            @Html.DisplayName("Picture")
-        </th>
-        <th>
-            @Html.DisplayName("Added On")
-        </th>
+
+        <th>Operations</th>
     </tr>
 
     @foreach (var item in Model)
@@ -58,33 +56,30 @@
                 @Html.DisplayFor(modelItem => item.SupplierLastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address1)
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.State)
+                @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PostalCode)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ProfilePhoto)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.SupplierID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.SupplierID }) |

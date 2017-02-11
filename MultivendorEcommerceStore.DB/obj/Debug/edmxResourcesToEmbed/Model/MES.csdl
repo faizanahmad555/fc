@@ -250,16 +250,13 @@
     <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="SupplierFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SupplierLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="State" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PostalCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="WebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="PaymentMethods" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DiscountType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -277,6 +274,7 @@
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Supplier_AspNetUsers" FromRole="Supplier" ToRole="AspNetUsers" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
     <NavigationProperty Name="SupplierBusinessInformations" Relationship="Self.FK_SupplierBusinessInformation_Supplier" FromRole="Supplier" ToRole="SupplierBusinessInformation" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SupplierBusinessInformation">
     <Key>

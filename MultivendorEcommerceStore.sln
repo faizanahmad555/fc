@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultivendorEcommerceStore", "MultivendorEcommerceStore\MultivendorEcommerceStore.csproj", "{97E9647B-E8BB-43E8-A419-33DAAD91D5C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7600B14C-CB3D-4350-8FDA-9A7F67B20028} = {7600B14C-CB3D-4350-8FDA-9A7F67B20028}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultivendorEcommerceStore.BL", "MultivendorEcommerceStore.BL\MultivendorEcommerceStore.BL.csproj", "{196AAFC4-B90B-4E52-B746-FA0F1488A431}"
 EndProject

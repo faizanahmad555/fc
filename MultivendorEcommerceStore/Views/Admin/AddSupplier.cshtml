@@ -1,21 +1,20 @@
 ﻿@model MultivendorEcommerceStore.DB.ViewModel.AddSupplierViewModel
-
 @{
     ViewBag.Title = "AddSupplier";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
 
-<h2>AddSupplier</h2>
+<h2 style="text-align:center">AddSupplier</h2>
 
 @using (Html.BeginForm("AddSupplier", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Enter Supplier Personal Information</h4>
+        <h4 style="text-align:center">Enter Supplier Personal Information</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

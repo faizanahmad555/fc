@@ -21,8 +21,8 @@ namespace MultivendorEcommerceStore.Repository
         public IEnumerable<Supplier> Retrive()
         {
             _db = new MultivendorEcommerceStoreEntities();
-            var suppliers = _db.Suppliers.ToList();
-            return suppliers;
+            return _db.Suppliers.ToList();
+           
         }
 
         public void Update(Supplier entity)

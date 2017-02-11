@@ -20,13 +20,14 @@ namespace MultivendorEcommerceStore.BL
             supplier.SupplierFirstName = model.FirstName;
             supplier.SupplierLastName = model.LastName;
             supplier.ProfilePhoto = model.ProfilePhoto;
+            supplier.Email = model.Email;
             supplier.Phone = model.MobileNumber;
-            supplier.Address1 = model.Address;
+            supplier.Address = model.Address;
             supplier.Country = model.Country;
             supplier.State = model.State;
-            supplier.State = model.City;
-            supplier.CNIC = model.CNIC;
+            supplier.City = model.City;
             supplier.PostalCode = model.PostalCode;
+            supplier.CNIC = model.CNIC;
             supplier.CreatedOn = DateTime.Now;
 
             repository.Create(supplier);

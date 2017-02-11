@@ -28,7 +28,7 @@
                 <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
             </li>
         }
-        else
+        else if (User.IsInRole("Supplier"))
         {
             <li class="active">
                 <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
@@ -37,10 +37,10 @@
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Manage Products <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="#">Add Product</a>
                     </li>
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="#">Show Products</a>
                     </li>
                 </ul>
             </li>

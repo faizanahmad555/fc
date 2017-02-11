@@ -78,12 +78,17 @@ namespace MultivendorEcommerceStore.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindAsync(model.Email, model.Password);
             switch (result)
             {
                 case SignInStatus.Success:
                     if (model.Email == "admin@admin.com")
                     {
                         return RedirectToAction("Index", "Admin");
+                    }
+                    else if (UserManager.IsInRole(user.Id, "Supplier"))
+                    {
+                        return RedirectToAction("Index", "Supplier");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -108,7 +113,6 @@ namespace MultivendorEcommerceStore.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-
                 if (result.Succeeded)
                 {
                     AdminBL adminBL = new AdminBL();
