@@ -23,18 +23,16 @@ namespace MultivendorEcommerceStore.DB.Model
     
         public System.Guid SupplierID { get; set; }
         public string AspNetUserID { get; set; }
-        public string CompanyName { get; set; }
         public string SupplierFirstName { get; set; }
         public string SupplierLastName { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string Address { get; set; }
         public string PostalCode { get; set; }
-        public string Country { get; set; }
+        public Nullable<int> CountryID { get; set; }
+        public Nullable<int> StateID { get; set; }
+        public Nullable<int> CityID { get; set; }
         public string Phone { get; set; }
-        public string Fax { get; set; }
         public string Email { get; set; }
         public string WebSite { get; set; }
-        public string PaymentMethods { get; set; }
         public string DiscountType { get; set; }
         public string DiscountRate { get; set; }
         public string TypeGoods { get; set; }
@@ -47,11 +45,12 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
-        public string Address { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual City City { get; set; }
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        public virtual State State { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
     }

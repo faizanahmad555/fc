@@ -23,9 +23,9 @@ namespace MultivendorEcommerceStore.BL
             supplier.Email = model.Email;
             supplier.Phone = model.MobileNumber;
             supplier.Address = model.Address;
-            supplier.Country = model.Country;
-            supplier.State = model.State;
-            supplier.City = model.City;
+            supplier.CountryID = model.Country;
+            supplier.StateID = model.State;
+            /*supplier.CityID = model.City*/;
             supplier.PostalCode = model.PostalCode;
             supplier.CNIC = model.CNIC;
             supplier.CreatedOn = DateTime.Now;
@@ -45,6 +45,7 @@ namespace MultivendorEcommerceStore.BL
             ISupplierRepository repository = new SupplierRepository();
             repository.Delete(id);
         }
+
 
         //String path = "";
         //if (ProfilePhoto != null)
@@ -103,6 +104,32 @@ namespace MultivendorEcommerceStore.BL
 
         //    return fullPath;
         //}
+
+
+
+
+
+
+        // GET: Countries
+        public IEnumerable<Country> GetCountries()
+        {
+            ICountryRepository countryRepo = new CountryRepository();
+            return countryRepo.Get();
+        }
+
+        // GET: States
+        public IEnumerable<State> GetStatesByCountryID(int ID)
+        {
+            IStateRepository stateRepo = new StateRepository();
+            return stateRepo.Get().Where(s => s.CountryID == ID).ToList();
+        }
+
+        // GET: Cities
+        public IEnumerable<City> GetCitiesByStateID(int ID)
+        {
+            ICityRepository cityRepo = new CityRepository();
+            return cityRepo.Get().Where(c => c.StateID == ID).ToList();
+        }
 
     }
 }

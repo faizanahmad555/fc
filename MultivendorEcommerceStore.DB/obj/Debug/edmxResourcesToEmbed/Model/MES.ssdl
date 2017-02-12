@@ -28,6 +28,14 @@
     <Property Name="Type" Type="int" />
     <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" />
+    <Property Name="StateID" Type="int" />
+  </EntityType>
   <EntityType Name="Conversation">
     <Key>
       <PropertyRef Name="ConversationID" />
@@ -35,6 +43,15 @@
     <Property Name="ConversationID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="UserFrom" Type="int" />
     <Property Name="UserTo" Type="int" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" MaxLength="200" />
+    <Property Name="SortName" Type="varchar" MaxLength="30" />
+    <Property Name="PhoneCode" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -211,6 +228,14 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Website" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateName" Type="varchar" MaxLength="50" />
+    <Property Name="CountryID" Type="int" />
+  </EntityType>
   <EntityType Name="SubCategory">
     <Key>
       <PropertyRef Name="SubCategoryID" />
@@ -225,19 +250,16 @@
     </Key>
     <Property Name="SupplierID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="AspNetUserID" Type="nvarchar" MaxLength="128" />
-    <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
     <Property Name="SupplierFirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="SupplierLastName" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
-    <Property Name="City" Type="nvarchar" MaxLength="100" />
-    <Property Name="State" Type="nvarchar" MaxLength="50" />
     <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
-    <Property Name="Country" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="StateID" Type="int" />
+    <Property Name="CityID" Type="int" />
     <Property Name="Phone" Type="nvarchar" MaxLength="100" />
-    <Property Name="Fax" Type="nvarchar" MaxLength="100" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="WebSite" Type="nvarchar" MaxLength="100" />
-    <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
     <Property Name="DiscountType" Type="nvarchar" MaxLength="100" />
     <Property Name="DiscountRate" Type="nchar" MaxLength="10" />
     <Property Name="TypeGoods" Type="nvarchar" MaxLength="255" />
@@ -261,13 +283,15 @@
     <Property Name="Logo" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="Country" Type="nvarchar" MaxLength="50" />
-    <Property Name="State" Type="nvarchar" MaxLength="50" />
-    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="StateID" Type="int" />
+    <Property Name="CityID" Type="int" />
     <Property Name="BusinessExperience" Type="nvarchar" MaxLength="50" />
     <Property Name="BusinessType" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Tracking">
     <Key>
@@ -287,6 +311,18 @@
     <Property Name="MessageTo" Type="int" />
     <Property Name="ConversationID" Type="uniqueidentifier" />
   </EntityType>
+  <Association Name="FK_Cities_States">
+    <End Role="States" Type="Self.States" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Order_Customer">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -407,6 +443,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_States_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="States" Type="Self.States" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="States">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SubCategory_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
@@ -416,6 +464,42 @@
       </Principal>
       <Dependent Role="SubCategory">
         <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplier_Cities">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplier_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplier_States">
+    <End Role="States" Type="Self.States" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="StateID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -434,7 +518,9 @@
   <EntityContainer Name="MultivendorEcommerceStoreModelStoreContainer">
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiscountVoucher" EntityType="Self.DiscountVoucher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmailHistory" EntityType="Self.EmailHistory" Schema="dbo" store:Type="Tables" />
@@ -445,11 +531,16 @@
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReturnRequest" EntityType="Self.ReturnRequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cities_States" Association="Self.FK_Cities_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
     <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Order" EntitySet="Order" />
@@ -490,9 +581,25 @@
       <End Role="OrderDetail" EntitySet="OrderDetail" />
       <End Role="ReturnRequest" EntitySet="ReturnRequest" />
     </AssociationSet>
+    <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="States" EntitySet="States" />
+    </AssociationSet>
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_Cities" Association="Self.FK_Supplier_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_Countries" Association="Self.FK_Supplier_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_States" Association="Self.FK_Supplier_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Supplier" EntitySet="Supplier" />
     </AssociationSet>
     <AssociationSet Name="FK_SupplierBusinessInformation_Supplier" Association="Self.FK_SupplierBusinessInformation_Supplier">
       <End Role="Supplier" EntitySet="Supplier" />

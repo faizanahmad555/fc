@@ -20,13 +20,15 @@ namespace MultivendorEcommerceStore.DB.Model
         public string Logo { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
+        public Nullable<int> CountryID { get; set; }
+        public Nullable<int> StateID { get; set; }
+        public Nullable<int> CityID { get; set; }
         public string BusinessExperience { get; set; }
         public string BusinessType { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ProductType { get; set; }
+        public string Website { get; set; }
+        public string PaymentMethods { get; set; }
     
         public virtual Supplier Supplier { get; set; }
     }

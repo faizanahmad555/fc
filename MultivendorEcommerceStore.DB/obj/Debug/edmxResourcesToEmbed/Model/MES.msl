@@ -31,12 +31,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.City">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Conversations">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Conversation">
         <MappingFragment StoreEntitySet="Conversation">
           <ScalarProperty Name="ConversationID" ColumnName="ConversationID" />
           <ScalarProperty Name="UserFrom" ColumnName="UserFrom" />
           <ScalarProperty Name="UserTo" ColumnName="UserTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="SortName" ColumnName="SortName" />
+          <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +244,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.State">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SubCategories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
@@ -237,21 +265,18 @@
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
-          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
           <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
           <ScalarProperty Name="SupplierLastName" ColumnName="SupplierLastName" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="WebSite" ColumnName="WebSite" />
-          <ScalarProperty Name="PaymentMethods" ColumnName="PaymentMethods" />
           <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
           <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
           <ScalarProperty Name="TypeGoods" ColumnName="TypeGoods" />
@@ -276,13 +301,15 @@
           <ScalarProperty Name="Logo" ColumnName="Logo" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="BusinessExperience" ColumnName="BusinessExperience" />
           <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="PaymentMethods" ColumnName="PaymentMethods" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

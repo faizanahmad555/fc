@@ -27,7 +27,9 @@ namespace MultivendorEcommerceStore.DB.Model
     
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DiscountVoucher> DiscountVouchers { get; set; }
         public virtual DbSet<EmailHistory> EmailHistories { get; set; }
@@ -38,6 +40,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<State> States { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }

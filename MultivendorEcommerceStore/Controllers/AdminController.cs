@@ -28,6 +28,13 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult AddSupplier()
         {
+            AdminBL adminBL = new AdminBL();
+            var countries = adminBL.GetCountries().Select(c => new
+            {
+                Text = c.CountryName,
+                Value = c.CountryID
+            }).ToList();
+            ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
             return View();
         }
        
@@ -47,6 +54,33 @@ namespace MultivendorEcommerceStore.Controllers
             AdminBL adminBL = new AdminBL();
             adminBL.DeleteSupplier(id);
             return RedirectToAction("Index");
+        }
+
+
+        public JsonResult StatesByCountryID(int id)
+        {
+            AdminBL bl = new AdminBL();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var states = bl.GetStatesByCountryID(id).Select(s => new
+            {
+                Text = s.StateName,
+                Id = s.StateID
+            }).ToList();
+            var state = new SelectList(states, "Id", "Text");
+            return Json(new { state }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CitesByStateID(int id)
+        {
+            AdminBL bl = new AdminBL();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var cities = bl.GetCitiesByStateID(id).Select(s => new
+            {
+                Text = s.CityName,
+                Id = s.CityID
+            }).ToList();
+            var city = new SelectList(cities, "Id", "Text");
+            return Json(new { city }, JsonRequestBehavior.AllowGet);
         }
 
     }
