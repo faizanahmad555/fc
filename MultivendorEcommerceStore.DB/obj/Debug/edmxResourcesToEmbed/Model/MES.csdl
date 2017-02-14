@@ -16,6 +16,7 @@
     <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Suppliers" Relationship="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" FromRole="AspNetUser" ToRole="Supplier" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -305,6 +306,7 @@
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
     <NavigationProperty Name="State" Relationship="Self.FK_Supplier_States" FromRole="Supplier" ToRole="States" />
     <NavigationProperty Name="SupplierBusinessInformations" Relationship="Self.FK_SupplierBusinessInformation_Supplier" FromRole="Supplier" ToRole="SupplierBusinessInformation" />
+    <NavigationProperty Name="AspNetUser" Relationship="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" FromRole="Supplier" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="SupplierBusinessInformation">
     <Key>
@@ -639,5 +641,23 @@
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformations" />
     </AssociationSet>
+    <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Supplier" EntitySet="Suppliers" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Supplier_AspNetUsers1">
+    <End Type="MultivendorEcommerceStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MultivendorEcommerceStoreModel.Supplier" Role="Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

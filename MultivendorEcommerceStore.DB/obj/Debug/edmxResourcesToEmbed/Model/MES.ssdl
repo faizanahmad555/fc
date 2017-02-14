@@ -467,6 +467,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Supplier_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Supplier_Cities">
     <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
@@ -588,6 +602,10 @@
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="Self.FK_Supplier_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Supplier" EntitySet="Supplier" />
     </AssociationSet>
     <AssociationSet Name="FK_Supplier_Cities" Association="Self.FK_Supplier_Cities">
       <End Role="Cities" EntitySet="Cities" />

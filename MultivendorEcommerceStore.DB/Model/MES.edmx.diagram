@@ -43,6 +43,7 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_States" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

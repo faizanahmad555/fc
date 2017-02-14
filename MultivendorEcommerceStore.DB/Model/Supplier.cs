@@ -53,5 +53,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual State State { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
