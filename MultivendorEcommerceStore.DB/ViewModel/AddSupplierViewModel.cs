@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MultivendorEcommerceStore.DB.ViewModel
 {
@@ -18,7 +19,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string FirstName { get; set; }
 
 
-
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Last Name")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
@@ -28,7 +28,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Profile Photo")]
-        public string ProfilePhoto { get; set; }
+        public HttpPostedFileBase ProfilePhoto { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
@@ -42,7 +42,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [StringLength(50, ErrorMessage = "Password is required.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
 
 
         [Required(ErrorMessage = "This field is required.")]

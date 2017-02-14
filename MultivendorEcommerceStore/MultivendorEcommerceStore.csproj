@@ -241,6 +241,7 @@
     <Content Include="Content\Adminplugins\js\plugins\morris\raphael.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Images\Icons\FineCollection.png" />
+    <Content Include="Content\Users\1fd15a34-f907-4fd4-9ece-9790971276da\Profile\Images\Testing636227081113581292.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -344,10 +345,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\DeleteSupplier.cshtml" />
-    <Content Include="Views\Admin\AddSupplier.cshtml" />
     <Content Include="Views\Supplier\SupplierLogin.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\Admin\SupplierList.cshtml" />
+    <Content Include="Views\Admin\AddSupplier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

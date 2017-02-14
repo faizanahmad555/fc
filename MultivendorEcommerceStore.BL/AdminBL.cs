@@ -3,34 +3,77 @@ using MultivendorEcommerceStore.DB.ViewModel;
 using MultivendorEcommerceStore.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
-        public void AddSupplier(AddSupplierViewModel model)  //, HttpPostedFileBase ProfilePhoto)
+        public void AddSupplier(AddSupplierViewModel model) //, HttpPostedFileBase ProfilePhoto)
         {
+            //String path = "";
+            //if (ProfilePhoto != null)
+            //{
+            //    //validate image
+            //    if (ValidateImage(ProfilePhoto))
+            //    {
+            //        //Save image
+            //        path = SaveImage(ProfilePhoto);
+            //    }
+            //}
+
             ISupplierRepository repository = new SupplierRepository();
             Supplier supplier = new Supplier();
+
+            var fileName = Path.GetFileNameWithoutExtension(model.ProfilePhoto.FileName);
+            fileName += DateTime.Now.Ticks + Path.GetExtension(model.ProfilePhoto.FileName);
+            var basePath = "~/Content/Users/" + model.AspNetUserID + "/Profile/Images/";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/" + model.AspNetUserID + "/Profile/Images/"));
+            model.ProfilePhoto.SaveAs(path);
+
+
+
             supplier.SupplierID = Guid.NewGuid();
             supplier.AspNetUserID = model.AspNetUserID;
             supplier.SupplierFirstName = model.FirstName;
             supplier.SupplierLastName = model.LastName;
-            supplier.ProfilePhoto = model.ProfilePhoto;
-            supplier.Email = model.Email;
+            supplier.ProfilePhoto = basePath + fileName;
             supplier.Phone = model.MobileNumber;
             supplier.Address = model.Address;
+            supplier.Email = model.Email;
             supplier.CountryID = model.Country;
             supplier.StateID = model.State;
-            /*supplier.CityID = model.City*/;
-            supplier.PostalCode = model.PostalCode;
+            //supplier.CityID = model.City;
             supplier.CNIC = model.CNIC;
+            supplier.PostalCode = model.PostalCode;
             supplier.CreatedOn = DateTime.Now;
 
             repository.Create(supplier);
+
+            
+            //ISupplierRepository repository = new SupplierRepository();
+            //Supplier supplier = new Supplier();
+            //supplier.SupplierID = Guid.NewGuid();
+            //supplier.AspNetUserID = model.AspNetUserID;
+            //supplier.SupplierFirstName = model.FirstName;
+            //supplier.SupplierLastName = model.LastName;
+            //supplier.ProfilePhoto = model.ProfilePhoto;
+            //supplier.Email = model.Email;
+            //supplier.Phone = model.MobileNumber;
+            //supplier.Address = model.Address;
+            //supplier.CountryID = model.Country;
+            //supplier.StateID = model.State;
+            ///*supplier.CityID = model.City*/;
+            //supplier.PostalCode = model.PostalCode;
+            //supplier.CNIC = model.CNIC;
+            //supplier.CreatedOn = DateTime.Now;
+
+            //repository.Create(supplier);
         }
 
         public IEnumerable<Supplier> SupplierList()
