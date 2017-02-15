@@ -14,15 +14,20 @@
                         <a href="@Url.Action("AddSupplier", "Admin")">Add Supplier</a>
                     </li>
                     <li>
-                        <a href="#">Edit Supplier</a>
-                    </li>
-                    <li>
-                        <a href="#">Delete Supplier</a>
-                    </li>
-                    <li>
                         <a href="@Url.Action("SupplierList", "Admin")">Show All Suppliers</a>
                     </li>
                 </ul>
+
+                <a href="javascript:;" data-toggle="collapse" data-target="#category"><i class="fa fa-fw fa-arrows-v"></i> Manage Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="category" class="collapse">
+                    <li>
+                        <a href="@Url.Action("AddCategory", "Admin")">Add Category</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a>
+                    </li>
+                </ul>
+
             </li>
             <li>
                 <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>

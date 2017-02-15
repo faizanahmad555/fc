@@ -40,7 +40,7 @@ namespace MultivendorEcommerceStore.BL
             }
             Category category = new Category();
             category.CategoryID = Guid.NewGuid();
-            category.CategoryName = CategoryViewModel.Name;
+            //category.CategoryName = CategoryViewModel.Name;
             category.Picture = Path.GetFileName(path);
             category.CreatedOn = DateTime.Now;
             repository.Create(category);

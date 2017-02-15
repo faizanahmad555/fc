@@ -243,6 +243,7 @@
     <Property Name="SubCategoryID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
     <Property Name="CategoryID" Type="uniqueidentifier" />
+    <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>

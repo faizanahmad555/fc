@@ -256,6 +256,7 @@
     <EntitySetMapping Name="SubCategories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />

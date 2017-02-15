@@ -248,6 +248,7 @@
           <Property Name="SubCategoryID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
           <Property Name="CategoryID" Type="uniqueidentifier" />
+          <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -905,6 +906,7 @@
           <Property Name="CategoryID" Type="Guid" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1554,6 +1556,7 @@
           <EntitySetMapping Name="SubCategories">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />

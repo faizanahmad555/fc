@@ -272,6 +272,7 @@
     <Property Name="CategoryID" Type="Guid" />
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>

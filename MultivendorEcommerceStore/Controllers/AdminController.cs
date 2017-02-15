@@ -57,6 +57,28 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+
+        //Add Category
+        [HttpGet]
+        public ActionResult AddCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(AddCategoryViewModel model) //, HttpPostedFileBase Picture)
+        {
+            AdminBL adminBL = new AdminBL();
+            adminBL.AddCategory(model); //, Picture);
+            return View("AddCategory");
+        }
+
+        
+
+
+
+
+
         public JsonResult StatesByCountryID(int id)
         {
             AdminBL bl = new AdminBL();

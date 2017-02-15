@@ -9,15 +9,23 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 {
     public class AddCategoryViewModel
     {
-        [Required]
+        
+        [Required(ErrorMessage = "This filed is required")]
         [StringLength(50, ErrorMessage = "No more than 50 characters", MinimumLength = 1)]
         [Display(Name = "Category Name")]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
 
-        [Display(Name = "Category Logo")]
-        public string LogoPath { get; set; }
-        public int Type { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
 
+        [Display(Name = "Category Picture")]
+        public string Picture { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Sub Category")]
+        public string SubCategoryName { get; set; }
+
+        // public int Type { get; set; }
     }
 }

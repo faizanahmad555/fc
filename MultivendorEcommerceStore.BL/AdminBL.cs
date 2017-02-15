@@ -174,5 +174,29 @@ namespace MultivendorEcommerceStore.BL
             return cityRepo.Get().Where(c => c.StateID == ID).ToList();
         }
 
+
+        // Add Category
+        public void AddCategory(AddCategoryViewModel model)
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            Category category = new Category();
+
+            category.CategoryID = Guid.NewGuid();
+            category.CategoryName = model.CategoryName;
+            category.Description = model.Description;
+            category.CreatedOn = DateTime.Now;
+            categoryRepo.Create(category);
+
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            SubCategory subCategory = new SubCategory();
+
+            subCategory.SubCategoryID = Guid.NewGuid();
+            subCategory.CategoryID = category.CategoryID;
+            subCategory.SubCategoryName = model.SubCategoryName;
+            subCategory.CreatedOn = DateTime.Now;
+
+            subCategoryRepo.Create(subCategory);
+        }
+
     }
 }
