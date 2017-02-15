@@ -15,7 +15,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Category Name")]
         public string CategoryName { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Description")]
         public string Description { get; set; }
 

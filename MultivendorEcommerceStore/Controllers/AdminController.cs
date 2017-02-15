@@ -73,11 +73,6 @@ namespace MultivendorEcommerceStore.Controllers
             return View("AddCategory");
         }
 
-        
-
-
-
-
 
         public JsonResult StatesByCountryID(int id)
         {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MultivendorEcommerceStore.BL;
+using MultivendorEcommerceStore.DB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +11,7 @@ namespace MultivendorEcommerceStore.Controllers
     [Authorize(Roles = "Supplier")]
     public class SupplierController : Controller
     {
+
         // GET: Supplier
         public ActionResult Index()
         {
@@ -19,5 +22,41 @@ namespace MultivendorEcommerceStore.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+            SupplierBL supplierBL = new SupplierBL();
+            var categories = supplierBL.GetCategories().Select(c => new
+            {
+                Text = c.CategoryName,
+                Value = c.CategoryID
+            }).ToList();
+            ViewBag.CategoryDropDown = new SelectList(categories, "Value", "Text");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddProduct(AddProductViewModel model)
+        {
+            SupplierBL supplierBL = new SupplierBL();
+            supplierBL.AddProduct(model);
+            return RedirectToAction("AddProduct");
+        }
+
+
+        public JsonResult SubCategoriesByCategoryID(Guid ID)
+        {
+            SupplierBL supplierBL = new SupplierBL();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var subCategory = supplierBL.GetSubCategoriesByCategoryID(ID).Select(c => new
+            {
+                Text = c.SubCategoryName,
+                Value = c.SubCategoryID
+            }).ToList();
+            var subcategory = new SelectList(subCategory, "Value", "Text");
+            return Json(new { subcategory }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

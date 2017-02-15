@@ -182,12 +182,13 @@
       <PropertyRef Name="ProductID" />
     </Key>
     <Property Name="ProductID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SKU" Type="nvarchar" MaxLength="50" />
+    <Property Name="SKU" Type="nvarchar" MaxLength="100" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="500" />
     <Property Name="ProductDescription" Type="nvarchar(max)" />
     <Property Name="SupplierID" Type="uniqueidentifier" />
+    <Property Name="CategoryID" Type="uniqueidentifier" />
     <Property Name="SubCategoryID" Type="uniqueidentifier" />
-    <Property Name="QuantityPerUnit" Type="int" />
+    <Property Name="Quantity" Type="int" />
     <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
     <Property Name="UnitPrice" Type="money" />
     <Property Name="MSRP" Type="money" />
@@ -206,6 +207,7 @@
     <Property Name="Picture" Type="nvarchar" MaxLength="500" />
     <Property Name="Ranking" Type="int" />
     <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>
@@ -396,6 +398,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_SubCategory">
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -579,6 +593,10 @@
     <AssociationSet Name="FK_OrderHistory_Order" Association="Self.FK_OrderHistory_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderHistory" EntitySet="OrderHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
       <End Role="SubCategory" EntitySet="SubCategory" />

@@ -17,10 +17,18 @@ namespace MultivendorEcommerceStore.Repository
             _db.SaveChanges();
          }
 
+        public IEnumerable<SubCategory> Retrive()
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.SubCategories.ToList();
+        }
+
         public SubCategory GetByID(Guid id)
         {
             _db = new MultivendorEcommerceStoreEntities();
             return _db.SubCategories.Where(c => c.CategoryID == id).FirstOrDefault();
         }
+
+        
     }
 }

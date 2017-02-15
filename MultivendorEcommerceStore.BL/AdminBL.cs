@@ -55,25 +55,6 @@ namespace MultivendorEcommerceStore.BL
 
             repository.Create(supplier);
 
-            
-            //ISupplierRepository repository = new SupplierRepository();
-            //Supplier supplier = new Supplier();
-            //supplier.SupplierID = Guid.NewGuid();
-            //supplier.AspNetUserID = model.AspNetUserID;
-            //supplier.SupplierFirstName = model.FirstName;
-            //supplier.SupplierLastName = model.LastName;
-            //supplier.ProfilePhoto = model.ProfilePhoto;
-            //supplier.Email = model.Email;
-            //supplier.Phone = model.MobileNumber;
-            //supplier.Address = model.Address;
-            //supplier.CountryID = model.Country;
-            //supplier.StateID = model.State;
-            ///*supplier.CityID = model.City*/;
-            //supplier.PostalCode = model.PostalCode;
-            //supplier.CNIC = model.CNIC;
-            //supplier.CreatedOn = DateTime.Now;
-
-            //repository.Create(supplier);
         }
 
         public IEnumerable<Supplier> SupplierList()
@@ -154,6 +135,7 @@ namespace MultivendorEcommerceStore.BL
 
 
         // GET: Countries
+
         public IEnumerable<Country> GetCountries()
         {
             ICountryRepository countryRepo = new CountryRepository();

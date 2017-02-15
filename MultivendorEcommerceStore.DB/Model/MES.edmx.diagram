@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="648c546d33f14b799d48d0e256cc6055" Name="Diagram1">
+      <Diagram DiagramId="648c546d33f14b799d48d0e256cc6055" Name="Diagram1" ZoomLevel="99">
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUser" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Category" Width="1.5" PointX="3.375" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.City" Width="1.5" PointX="7.125" PointY="18" IsExpanded="true" />
@@ -44,6 +44,7 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_States" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

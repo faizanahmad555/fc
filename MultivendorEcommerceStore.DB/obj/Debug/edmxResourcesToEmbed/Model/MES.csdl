@@ -29,6 +29,7 @@
     <Property Name="Type" Type="Int32" />
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
     <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+    <NavigationProperty Name="Products" Relationship="MultivendorEcommerceStoreModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -201,12 +202,11 @@
       <PropertyRef Name="ProductID" />
     </Key>
     <Property Name="ProductID" Type="Guid" Nullable="false" />
-    <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SKU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SupplierID" Type="Guid" />
     <Property Name="SubCategoryID" Type="Guid" />
-    <Property Name="QuantityPerUnit" Type="Int32" />
     <Property Name="UnitSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="MSRP" Type="Decimal" Precision="19" Scale="4" />
@@ -228,6 +228,10 @@
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+    <Property Name="CategoryID" Type="Guid" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Category" Relationship="MultivendorEcommerceStoreModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>
@@ -646,6 +650,10 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="Supplier" EntitySet="Suppliers" />
     </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="MultivendorEcommerceStoreModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_Supplier_AspNetUsers1">
     <End Type="MultivendorEcommerceStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1">
@@ -658,6 +666,18 @@
       </Principal>
       <Dependent Role="Supplier">
         <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Type="MultivendorEcommerceStoreModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="MultivendorEcommerceStoreModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

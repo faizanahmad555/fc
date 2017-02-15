@@ -10,6 +10,8 @@ namespace MultivendorEcommerceStore.Repository
     public interface ISubCategoryRepository
     {
         void Create(SubCategory Entity);
+        IEnumerable<SubCategory> Retrive();
+
         SubCategory GetByID(Guid id);
     }
 }
