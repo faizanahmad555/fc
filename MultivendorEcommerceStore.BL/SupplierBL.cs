@@ -18,7 +18,8 @@ namespace MultivendorEcommerceStore.BL
 
             product.ProductID = Guid.NewGuid();
             product.CategoryID = model.CategoryID;
-            product.SubCategoryID = model.SubCategoryID;
+            
+           product.SubCategoryID = model.SubCategoryID;
 
             //Supplier supplier = new Supplier();
             //product.SupplierID = supplier.SupplierID;
