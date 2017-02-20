@@ -135,6 +135,7 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AddBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddProductViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />

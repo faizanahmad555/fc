@@ -24,7 +24,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // Add Supplier
+        // ADD: Supplier
         [HttpGet]
         public ActionResult AddSupplier()
         {
@@ -37,7 +37,35 @@ namespace MultivendorEcommerceStore.Controllers
             ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
             return View();
         }
-       
+
+        // ADD: Supplier Business Information
+        [HttpGet]
+        public ActionResult AddBusinessInfo(string userID)
+        {
+            if (userID != null)
+            {
+                AdminBL adminBL = new AdminBL();
+                ViewBag.SupplierID = adminBL.GetSupplierByUserID(userID);
+                return View();
+            }
+            return RedirectToAction("AddSupplier", "Admin");
+        }
+
+
+        [HttpPost]
+        public ActionResult AddBusinessInfo(AddBusinessInfoVM model)
+        {
+            if (model != null)
+            {
+                AdminBL adminBL = new AdminBL();
+                adminBL.AddBusinessInfo(model);
+                return View("Index");
+            }
+            return View();
+        }
+
+
+
 
         // Show All Suppliers
         [HttpGet]
@@ -72,7 +100,6 @@ namespace MultivendorEcommerceStore.Controllers
             adminBL.AddCategory(model); //, Picture);
             return View("AddCategory");
         }
-
 
         public JsonResult StatesByCountryID(int id)
         {

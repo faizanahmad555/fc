@@ -13,6 +13,7 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
+        // ADD: Supplier
         public void AddSupplier(AddSupplierViewModel model) //, HttpPostedFileBase ProfilePhoto)
         {
             //String path = "";
@@ -57,6 +58,7 @@ namespace MultivendorEcommerceStore.BL
 
         }
 
+        // GET: Supplier
         public IEnumerable<Supplier> SupplierList()
         {
             ISupplierRepository repository = new SupplierRepository();
@@ -64,78 +66,44 @@ namespace MultivendorEcommerceStore.BL
             return supplierList;
         }
 
+        // DELETE: Supplier
         public void DeleteSupplier(Guid id)
         {
             ISupplierRepository repository = new SupplierRepository();
             repository.Delete(id);
         }
 
+        // ADD: Supplier Busienss Information
+        public void AddBusinessInfo(AddBusinessInfoVM viewModel)
+        {
+            ISupplierBusinessInfo repository = new SupplierBusinessInfo();
+            SupplierBusinessInformation businessInfo = new SupplierBusinessInformation();
 
-        //String path = "";
-        //if (ProfilePhoto != null)
-        //{
-        //    //validate image
-        //    if (ValidateImage(ProfilePhoto))
-        //    {
-        //        //Save image
-        //        path = SaveImage(ProfilePhoto);
-        //    }
-        //}
-        // }
+            businessInfo.BusinessInfoID = Guid.NewGuid();
+            businessInfo.SupplierID = viewModel.SupplierID;
+            businessInfo.CompanyName = viewModel.CompanyName;
+            businessInfo.Logo = viewModel.Logo;
+            businessInfo.Address = viewModel.Address;
+            //businessInfo.Country = viewModel.Country;
+            //businessInfo.State = viewModel.State;
+            //businessInfo.City = viewModel.City;
+            businessInfo.Phone = viewModel.Mobile;
+            businessInfo.BusinessExperience = viewModel.BusinessExperience;
+            businessInfo.ProductType = viewModel.ProductsType;
+            businessInfo.CreatedOn = DateTime.Now;
 
+            repository.Create(businessInfo);
+        }
 
-        //private bool ValidateImage(HttpPostedFileBase file)
-        //{
-        //    //if (file != null)
-        //    //{
-        //    String format = Path.GetExtension(file.FileName).ToString();
-        //    String[] allowedFormat = new String[4] { ".jpg", ".png", ".gif", ".bmp" };
-        //    int maxSize = 1048576;
-        //    int minSize = 30584;
-
-        //    if (file.ContentLength < maxSize && file.ContentLength > minSize)
-        //    {
-        //        if (allowedFormat.Contains(format))
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //            return false;
-        //    }
-        //    else
-        //        return false;
-        //    //}
-        //    //else
-        //    //    return false;
-        //}
-
-        //private String SaveImage(HttpPostedFileBase file)
-        //{
-        //    String extension = Path.GetExtension(file.FileName).ToString();
-        //    String path = HttpContext.Current.Server.MapPath("~/Content/Supplier/Profile/");
-        //    String name = "";
-
-        //    //Generating unique name for image
-        //    string guid = Guid.NewGuid().ToString();
-        //    name = guid + extension;
-        //    //Generating Path to Save Image at Server
-        //    String fullPath = Path.Combine(path, name);
-        //    //Checking if directory exist
-        //    if (!Directory.Exists(path))
-        //        Directory.CreateDirectory(path);
-        //    //Saving Image
-        //    file.SaveAs(fullPath);
-
-        //    return fullPath;
-        //}
-
-
-
+        public Guid GetSupplierByUserID(string userID)
+        {
+            ISupplierRepository repo = new SupplierRepository();
+            return repo.Retrive().FirstOrDefault(s => s.AspNetUserID == userID).SupplierID;
+        }
 
 
 
         // GET: Countries
-
         public IEnumerable<CountryMaster> GetCountries()
         {
             ICountryRepository countryRepo = new CountryRepository();

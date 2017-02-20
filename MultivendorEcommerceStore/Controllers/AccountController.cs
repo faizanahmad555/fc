@@ -120,7 +120,7 @@ namespace MultivendorEcommerceStore.Controllers
                     UserManager.AddToRole(user.Id, "Supplier");
                     model.AspNetUserID = user.Id;
                     adminBL.AddSupplier(model);
-                    return RedirectToAction("AddSupplier", "Admin"); //, new { userID = user.Id });
+                    return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
