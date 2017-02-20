@@ -166,6 +166,7 @@ namespace MultivendorEcommerceStore.BL
             category.CategoryID = Guid.NewGuid();
             category.CategoryName = model.CategoryName;
             category.Description = model.Description;
+            category.Picture = model.Picture;
             category.CreatedOn = DateTime.Now;
             categoryRepo.Create(category);
 
@@ -178,6 +179,17 @@ namespace MultivendorEcommerceStore.BL
             subCategory.CreatedOn = DateTime.Now;
 
             subCategoryRepo.Create(subCategory);
+
+
+            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
+            SubCategoryItem subCategoryItem = new SubCategoryItem();
+
+            subCategoryItem.SubCategoryItemID = Guid.NewGuid();
+            subCategoryItem.SubCategoryID = subCategory.SubCategoryID;
+            subCategoryItem.SubCategoryName = model.SubCategoryItem;
+            subCategoryItem.CreatedOn = DateTime.Now;
+
+            subCategoryItemRepo.Create(subCategoryItem);
         }
 
     }

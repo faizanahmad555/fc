@@ -46,5 +46,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
+        public virtual DbSet<SubCategoryItem> SubCategoryItems { get; set; }
     }
 }

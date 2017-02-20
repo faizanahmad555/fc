@@ -231,6 +231,7 @@
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+    <Property Name="SubCategoryItem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>
@@ -277,6 +278,7 @@
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <NavigationProperty Name="SubCategoryItems" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryItem" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -682,5 +684,34 @@
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformations" />
     </AssociationSet>
+    <EntitySet Name="SubCategoryItems" EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" />
+    <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="SubCategoryItem" EntitySet="SubCategoryItems" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SubCategoryItem">
+    <Key>
+      <PropertyRef Name="SubCategoryItemID" />
+    </Key>
+    <Property Name="SubCategoryItemID" Type="Guid" Nullable="false" />
+    <Property Name="SubCategoryID" Type="Guid" />
+    <Property Name="SubCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="265" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SubCategory" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategoryItem" ToRole="SubCategory" />
+  </EntityType>
+  <Association Name="FK_SubCategoryItem_SubCategory">
+    <End Type="MultivendorEcommerceStoreModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+    <End Type="MultivendorEcommerceStoreModel.SubCategoryItem" Role="SubCategoryItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryID" />
+      </Principal>
+      <Dependent Role="SubCategoryItem">
+        <PropertyRef Name="SubCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

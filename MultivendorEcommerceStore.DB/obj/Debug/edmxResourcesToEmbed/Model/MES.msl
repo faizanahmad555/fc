@@ -192,6 +192,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SKU" ColumnName="SKU" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -333,6 +334,18 @@
           <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
           <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
           <ScalarProperty Name="ConversationID" ColumnName="ConversationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubCategoryItems">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
+        <MappingFragment StoreEntitySet="SubCategoryItem">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -192,6 +192,7 @@
           <Property Name="SupplierID" Type="uniqueidentifier" />
           <Property Name="CategoryID" Type="uniqueidentifier" />
           <Property Name="SubCategoryID" Type="uniqueidentifier" />
+          <Property Name="SubCategoryItem" Type="nchar" MaxLength="10" />
           <Property Name="Quantity" Type="int" />
           <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
           <Property Name="UnitPrice" Type="money" />
@@ -250,6 +251,17 @@
           <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
           <Property Name="CategoryID" Type="uniqueidentifier" />
           <Property Name="Picture" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SubCategoryItem">
+          <Key>
+            <PropertyRef Name="SubCategoryItemID" />
+          </Key>
+          <Property Name="SubCategoryItemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubCategoryID" Type="uniqueidentifier" />
+          <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="265" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Supplier">
@@ -489,6 +501,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubCategoryItem_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="SubCategoryItem" Type="Self.SubCategoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategoryID" />
+            </Principal>
+            <Dependent Role="SubCategoryItem">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Supplier_AspNetUsers1">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -569,6 +593,7 @@
           <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoryItem" EntityType="Self.SubCategoryItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
@@ -629,6 +654,10 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="Self.FK_SubCategoryItem_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="SubCategoryItem" EntitySet="SubCategoryItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="Self.FK_Supplier_AspNetUsers1">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Supplier" EntitySet="Supplier" />
@@ -650,8 +679,7 @@
             <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MultivendorEcommerceStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -886,6 +914,7 @@
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+          <Property Name="SubCategoryItem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="ReturnRequest">
           <Key>
@@ -932,6 +961,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <NavigationProperty Name="SubCategoryItems" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryItem" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1337,7 +1367,36 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformations" />
           </AssociationSet>
+          <EntitySet Name="SubCategoryItems" EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" />
+          <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="SubCategoryItem" EntitySet="SubCategoryItems" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SubCategoryItem">
+          <Key>
+            <PropertyRef Name="SubCategoryItemID" />
+          </Key>
+          <Property Name="SubCategoryItemID" Type="Guid" Nullable="false" />
+          <Property Name="SubCategoryID" Type="Guid" />
+          <Property Name="SubCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="265" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubCategory" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategoryItem" ToRole="SubCategory" />
+        </EntityType>
+        <Association Name="FK_SubCategoryItem_SubCategory">
+          <End Type="MultivendorEcommerceStoreModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+          <End Type="MultivendorEcommerceStoreModel.SubCategoryItem" Role="SubCategoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategoryID" />
+            </Principal>
+            <Dependent Role="SubCategoryItem">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1535,6 +1594,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1676,6 +1736,18 @@
                 <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
                 <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
                 <ScalarProperty Name="ConversationID" ColumnName="ConversationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoryItems">
+            <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
+              <MappingFragment StoreEntitySet="SubCategoryItem">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

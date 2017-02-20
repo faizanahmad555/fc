@@ -119,6 +119,9 @@
     <Compile Include="Model\SubCategory.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SubCategoryItem.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Supplier.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>

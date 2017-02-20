@@ -187,6 +187,7 @@
     <Property Name="SupplierID" Type="uniqueidentifier" />
     <Property Name="CategoryID" Type="uniqueidentifier" />
     <Property Name="SubCategoryID" Type="uniqueidentifier" />
+    <Property Name="SubCategoryItem" Type="nchar" MaxLength="10" />
     <Property Name="Quantity" Type="int" />
     <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
     <Property Name="UnitPrice" Type="money" />
@@ -245,6 +246,17 @@
     <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
     <Property Name="CategoryID" Type="uniqueidentifier" />
     <Property Name="Picture" Type="nvarchar" MaxLength="256" />
+    <Property Name="CreatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SubCategoryItem">
+    <Key>
+      <PropertyRef Name="SubCategoryItemID" />
+    </Key>
+    <Property Name="SubCategoryItemID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SubCategoryID" Type="uniqueidentifier" />
+    <Property Name="SubCategoryName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="265" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
     <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="Supplier">
@@ -484,6 +496,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SubCategoryItem_SubCategory">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+    <End Role="SubCategoryItem" Type="Self.SubCategoryItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryID" />
+      </Principal>
+      <Dependent Role="SubCategoryItem">
+        <PropertyRef Name="SubCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Supplier_AspNetUsers1">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -564,6 +588,7 @@
     <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubCategoryItem" EntityType="Self.SubCategoryItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
@@ -623,6 +648,10 @@
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="Self.FK_SubCategoryItem_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="SubCategoryItem" EntitySet="SubCategoryItem" />
     </AssociationSet>
     <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="Self.FK_Supplier_AspNetUsers1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
