@@ -23,6 +23,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public System.Guid SubCategoryID { get; set; }
         public string SubCategoryName { get; set; }
         public Nullable<System.Guid> CategoryID { get; set; }
+        public string Picture { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
     
         public virtual Category Category { get; set; }

@@ -48,7 +48,7 @@ namespace MultivendorEcommerceStore.BL
             supplier.Email = model.Email;
             supplier.CountryID = model.Country;
             supplier.StateID = model.State;
-            //supplier.CityID = model.City;
+            supplier.CityID = model.City;
             supplier.CNIC = model.CNIC;
             supplier.PostalCode = model.PostalCode;
             supplier.CreatedOn = DateTime.Now;
@@ -136,21 +136,21 @@ namespace MultivendorEcommerceStore.BL
 
         // GET: Countries
 
-        public IEnumerable<Country> GetCountries()
+        public IEnumerable<CountryMaster> GetCountries()
         {
             ICountryRepository countryRepo = new CountryRepository();
             return countryRepo.Get();
         }
 
         // GET: States
-        public IEnumerable<State> GetStatesByCountryID(int ID)
+        public IEnumerable<StateMaster> GetStatesByCountryID(int ID)
         {
             IStateRepository stateRepo = new StateRepository();
             return stateRepo.Get().Where(s => s.CountryID == ID).ToList();
         }
 
         // GET: Cities
-        public IEnumerable<City> GetCitiesByStateID(int ID)
+        public IEnumerable<CityMaster> GetCitiesByStateID(int ID)
         {
             ICityRepository cityRepo = new CityRepository();
             return cityRepo.Get().Where(c => c.StateID == ID).ToList();

@@ -46,13 +46,13 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
     
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual CityMaster CityMaster { get; set; }
+        public virtual CountryMaster CountryMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
-        public virtual State State { get; set; }
+        public virtual StateMaster StateMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

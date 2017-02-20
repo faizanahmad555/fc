@@ -26,16 +26,16 @@
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Cities">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.City">
-        <MappingFragment StoreEntitySet="Cities">
+    <EntitySetMapping Name="CityMasters">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.CityMaster">
+        <MappingFragment StoreEntitySet="CityMaster">
           <ScalarProperty Name="CityID" ColumnName="CityID" />
-          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StateID" ColumnName="StateID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -49,13 +49,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Country">
-        <MappingFragment StoreEntitySet="Countries">
+    <EntitySetMapping Name="CountryMasters">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.CountryMaster">
+        <MappingFragment StoreEntitySet="CountryMaster">
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-          <ScalarProperty Name="SortName" ColumnName="SortName" />
-          <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -193,15 +192,14 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SKU" ColumnName="SKU" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="MSRP" ColumnName="MSRP" />
@@ -220,6 +218,7 @@
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="Ranking" ColumnName="Ranking" />
           <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -246,11 +245,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="States">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.State">
-        <MappingFragment StoreEntitySet="States">
+    <EntitySetMapping Name="StateMasters">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.StateMaster">
+        <MappingFragment StoreEntitySet="StateMaster">
           <ScalarProperty Name="StateID" ColumnName="StateID" />
-          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -258,10 +257,11 @@
     <EntitySetMapping Name="SubCategories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

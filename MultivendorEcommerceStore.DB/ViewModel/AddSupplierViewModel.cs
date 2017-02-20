@@ -74,8 +74,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public int State { get; set; }
 
 
-        //[Required(ErrorMessage = "This field is required.")]
-        //public int City { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
+        public int City { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]

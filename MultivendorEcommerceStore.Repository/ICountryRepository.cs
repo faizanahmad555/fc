@@ -9,6 +9,6 @@ namespace MultivendorEcommerceStore.Repository
 {
     public interface ICountryRepository
     {
-        IEnumerable<Country> Get();
+        IEnumerable<CountryMaster> Get();
     }
 }

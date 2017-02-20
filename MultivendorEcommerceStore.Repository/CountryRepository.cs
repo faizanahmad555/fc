@@ -10,10 +10,10 @@ namespace MultivendorEcommerceStore.Repository
     public class CountryRepository : ICountryRepository
     {
         private MultivendorEcommerceStoreEntities _db;
-        public IEnumerable<Country> Get()
+        public IEnumerable<CountryMaster> Get()
         {
             _db = new MultivendorEcommerceStoreEntities();
-            return _db.Countries.ToList();
+            return _db.CountryMasters.ToList();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace MultivendorEcommerceStore.Controllers
             AdminBL adminBL = new AdminBL();
             var countries = adminBL.GetCountries().Select(c => new
             {
-                Text = c.CountryName,
+                Text = c.Name,
                 Value = c.CountryID
             }).ToList();
             ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
@@ -80,7 +80,7 @@ namespace MultivendorEcommerceStore.Controllers
             List<SelectListItem> list = new List<SelectListItem>();
             var states = bl.GetStatesByCountryID(id).Select(s => new
             {
-                Text = s.StateName,
+                Text = s.Name,
                 Id = s.StateID
             }).ToList();
             var state = new SelectList(states, "Id", "Text");
@@ -93,7 +93,7 @@ namespace MultivendorEcommerceStore.Controllers
             List<SelectListItem> list = new List<SelectListItem>();
             var cities = bl.GetCitiesByStateID(id).Select(s => new
             {
-                Text = s.CityName,
+                Text = s.Name,
                 Id = s.CityID
             }).ToList();
             var city = new SelectList(cities, "Id", "Text");

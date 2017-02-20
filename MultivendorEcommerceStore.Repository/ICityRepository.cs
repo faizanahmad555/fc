@@ -9,6 +9,6 @@ namespace MultivendorEcommerceStore.Repository
 {
     public interface ICityRepository
     {
-        IEnumerable<City> Get();
+        IEnumerable<CityMaster> Get();
     }
 }

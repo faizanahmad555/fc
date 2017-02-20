@@ -9,6 +9,6 @@ namespace MultivendorEcommerceStore.Repository
 {
     public interface IStateRepository
     {
-        IEnumerable<State> Get();
+        IEnumerable<StateMaster> Get();
     }
 }

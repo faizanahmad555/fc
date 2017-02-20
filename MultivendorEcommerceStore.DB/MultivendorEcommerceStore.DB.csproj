@@ -59,13 +59,13 @@
     <Compile Include="Model\Category.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\City.cs">
+    <Compile Include="Model\CityMaster.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Conversation.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Country.cs">
+    <Compile Include="Model\CountryMaster.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">
@@ -113,7 +113,7 @@
     <Compile Include="Model\Shipper.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\State.cs">
+    <Compile Include="Model\StateMaster.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SubCategory.cs">
@@ -146,13 +146,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MES.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="Model\MES.edmx.diagram">
       <DependentUpon>MES.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\MES.Context.tt">
@@ -165,7 +164,6 @@
       <DependentUpon>MES.edmx</DependentUpon>
       <LastGenOutput>MES.cs</LastGenOutput>
     </Content>
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

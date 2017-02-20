@@ -12,25 +12,20 @@ namespace MultivendorEcommerceStore.DB.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class CityMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public CityMaster()
         {
-            this.Products = new HashSet<Product>();
-            this.SubCategories = new HashSet<SubCategory>();
+            this.Suppliers = new HashSet<Supplier>();
         }
     
-        public System.Guid CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Description { get; set; }
-        public string Picture { get; set; }
-        public Nullable<int> DisplayOrder { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public int CityID { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> StateID { get; set; }
     
+        public virtual StateMaster StateMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubCategory> SubCategories { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

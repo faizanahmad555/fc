@@ -10,10 +10,10 @@ namespace MultivendorEcommerceStore.Repository
     public class StateRepository : IStateRepository
     {
         private MultivendorEcommerceStoreEntities _db;
-        public IEnumerable<State> Get()
+        public IEnumerable<StateMaster> Get()
         {
             _db = new MultivendorEcommerceStoreEntities();
-            return _db.States.ToList();
+            return _db.StateMasters.ToList();
         }
     }
 }

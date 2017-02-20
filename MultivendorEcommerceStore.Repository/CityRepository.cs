@@ -10,10 +10,10 @@ namespace MultivendorEcommerceStore.Repository
     public class CityRepository : ICityRepository
     {
         private MultivendorEcommerceStoreEntities _db;
-        public IEnumerable<City> Get()
+        public IEnumerable<CityMaster> Get()
         {
             _db = new MultivendorEcommerceStoreEntities();
-            return _db.Cities.ToList();
+            return _db.CityMasters.ToList();
         }
     }
 }
