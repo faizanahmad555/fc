@@ -1,4 +1,5 @@
-﻿using MultivendorEcommerceStore.BL;
+﻿using Microsoft.AspNet.Identity;
+using MultivendorEcommerceStore.BL;
 using MultivendorEcommerceStore.DB.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        public ActionResult SupplierLogin()
-        {
-            return View();
-        }
 
+        // ADD: Product
         [HttpGet]
         public ActionResult AddProduct()
         {
@@ -33,16 +31,20 @@ namespace MultivendorEcommerceStore.Controllers
                 Value = c.CategoryID
             }).ToList();
             ViewBag.CategoryDropDown = new SelectList(categories, "Value", "Text");
+            //ViewBag.SupplierID = supplierBL.GetSupplierByID(Id);
             return View();
         }
 
         [HttpPost]
         public ActionResult AddProduct(AddProductViewModel model)
         {
+            string UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
             SupplierBL supplierBL = new SupplierBL();
-            supplierBL.AddProduct(model);
+            supplierBL.AddProduct(model, UserId);
             return RedirectToAction("AddProduct");
         }
+
 
 
         public JsonResult SubCategoriesByCategoryID(Guid ID)

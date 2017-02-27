@@ -10,11 +10,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     public class AddProductViewModel
     {
         public Guid SupplierID { get; set; }
-
-        [Display(Name = "Category Name")]
         public Guid CategoryID { get; set; }
-
-        [Display(Name = "SubCategory Name")]
         public Guid SubCategoryID { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
@@ -22,7 +18,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
         public string ProductName { get; set; }
-        
+
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Description")]

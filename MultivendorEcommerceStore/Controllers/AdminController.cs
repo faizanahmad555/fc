@@ -17,12 +17,6 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        // Admin Login
-        public ActionResult Login()
-        {
-            return View();
-        }
-
 
         // ADD: Supplier
         [HttpGet]
@@ -38,6 +32,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+
+
         // ADD: Supplier Business Information
         [HttpGet]
         public ActionResult AddBusinessInfo(string userID)
@@ -50,7 +46,6 @@ namespace MultivendorEcommerceStore.Controllers
             }
             return RedirectToAction("AddSupplier", "Admin");
         }
-
 
         [HttpPost]
         public ActionResult AddBusinessInfo(AddSupplierBusinessInfoVM model)
@@ -66,8 +61,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-
-        // Show All Suppliers
+        // SHOW: All Suppliers
         [HttpGet]
         public ActionResult SupplierList()
         {
@@ -75,7 +69,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View(adminBL.SupplierList());
         }
 
-        // Delete Supplier (Need Changes)
+
+        // DELETE: Supplier (Need Changes)
         [HttpGet]
         public ActionResult DeleteSupplier(Guid id)
         {
@@ -86,7 +81,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        //Create Category
+        //ADD: Category
         [HttpGet]
         public ActionResult AddCategory()
         {
