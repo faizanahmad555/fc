@@ -14,19 +14,8 @@ namespace MultivendorEcommerceStore.BL
     public class AdminBL
     {
         // ADD: Supplier
-        public void AddSupplier(AddSupplierViewModel model) //, HttpPostedFileBase ProfilePhoto)
+        public void AddSupplier(AddSupplierViewModel model)
         {
-            //String path = "";
-            //if (ProfilePhoto != null)
-            //{
-            //    //validate image
-            //    if (ValidateImage(ProfilePhoto))
-            //    {
-            //        //Save image
-            //        path = SaveImage(ProfilePhoto);
-            //    }
-            //}
-
             ISupplierRepository repository = new SupplierRepository();
             Supplier supplier = new Supplier();
 
@@ -121,7 +110,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        // Add Category
+        // ADD: Category
         public void AddCategory(AddCategoryViewModel model)
         {
             ICategoryRepository categoryRepo = new CategoryRepository();
@@ -161,6 +150,14 @@ namespace MultivendorEcommerceStore.BL
             subCategoryItem.CreatedOn = DateTime.Now;
 
             subCategoryItemRepo.Create(subCategoryItem);
+        }
+
+        // SHOW: All Categories
+        public IEnumerable<Category> CategoryList()
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            IEnumerable<Category> categoryList = categoryRepo.Retrive();
+            return categoryList;
         }
 
     }

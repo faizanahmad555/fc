@@ -101,6 +101,11 @@ namespace MultivendorEcommerceStore.Controllers
             return View("AddCategory");
         }
 
+        public ActionResult CategoryList()
+        {
+            AdminBL adminBL = new AdminBL();
+            return View(adminBL.CategoryList());
+        }
 
 
         public JsonResult StatesByCountryID(int id)
