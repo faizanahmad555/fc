@@ -37,8 +37,6 @@ namespace MultivendorEcommerceStore.BL
             Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/" + model.AspNetUserID + "/Profile/Images/"));
             model.ProfilePhoto.SaveAs(path);
 
-
-
             supplier.SupplierID = Guid.NewGuid();
             supplier.AspNetUserID = model.AspNetUserID;
             supplier.SupplierFirstName = model.FirstName;
@@ -55,7 +53,6 @@ namespace MultivendorEcommerceStore.BL
             supplier.CreatedOn = DateTime.Now;
 
             repository.Create(supplier);
-
         }
 
         // GET: Supplier
@@ -74,7 +71,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
         // ADD: Supplier Busienss Information
-        public void AddBusinessInfo(AddBusinessInfoVM viewModel)
+        public void AddBusinessInfo(AddSupplierBusinessInfoVM viewModel)
         {
             ISupplierBusinessInfo repository = new SupplierBusinessInfo();
             SupplierBusinessInformation businessInfo = new SupplierBusinessInformation();
@@ -83,7 +80,6 @@ namespace MultivendorEcommerceStore.BL
             businessInfo.SupplierID = viewModel.SupplierID;
             businessInfo.CompanyName = viewModel.CompanyName;
             businessInfo.Logo = viewModel.Logo;
-            businessInfo.Address = viewModel.Address;
             //businessInfo.Country = viewModel.Country;
             //businessInfo.State = viewModel.State;
             //businessInfo.City = viewModel.City;
@@ -95,13 +91,13 @@ namespace MultivendorEcommerceStore.BL
             repository.Create(businessInfo);
         }
 
+
+
         public Guid GetSupplierByUserID(string userID)
         {
             ISupplierRepository repo = new SupplierRepository();
             return repo.Retrive().FirstOrDefault(s => s.AspNetUserID == userID).SupplierID;
         }
-
-
 
         // GET: Countries
         public IEnumerable<CountryMaster> GetCountries()
@@ -131,10 +127,18 @@ namespace MultivendorEcommerceStore.BL
             ICategoryRepository categoryRepo = new CategoryRepository();
             Category category = new Category();
 
+            var fileName = Path.GetFileNameWithoutExtension(model.Picture.FileName);
+            fileName += DateTime.Now.Ticks + Path.GetExtension(model.Picture.FileName);
+            var basePath = "~/Content/Admin/Category/" + model.CategoryName + "/Images/";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Admin/Category/" + model.CategoryName + "/Images/"));
+            model.Picture.SaveAs(path);
+
             category.CategoryID = Guid.NewGuid();
             category.CategoryName = model.CategoryName;
             category.Description = model.Description;
-            category.Picture = model.Picture;
+            category.Picture = basePath + fileName;
+            category.DisplayOrder = model.DisplayOrder;
             category.CreatedOn = DateTime.Now;
             categoryRepo.Create(category);
 
@@ -144,7 +148,6 @@ namespace MultivendorEcommerceStore.BL
             subCategory.SubCategoryID = Guid.NewGuid();
             subCategory.CategoryID = category.CategoryID;
             subCategory.SubCategoryName = model.SubCategoryName;
-            subCategory.CreatedOn = DateTime.Now;
 
             subCategoryRepo.Create(subCategory);
 

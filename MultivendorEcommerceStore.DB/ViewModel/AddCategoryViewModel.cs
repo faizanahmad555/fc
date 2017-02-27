@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MultivendorEcommerceStore.DB.ViewModel
 {
@@ -29,7 +30,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public int DisplayOrder { get; set; }
 
         [Display(Name = "Category Picture")]
-        public string Picture { get; set; }
+        public HttpPostedFileBase Picture { get; set; }
 
 
         [Required(ErrorMessage = "This field is required")]

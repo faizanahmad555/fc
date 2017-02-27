@@ -53,7 +53,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         [HttpPost]
-        public ActionResult AddBusinessInfo(AddBusinessInfoVM model)
+        public ActionResult AddBusinessInfo(AddSupplierBusinessInfoVM model)
         {
             if (model != null)
             {
@@ -86,7 +86,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        //Add Category
+        //Create Category
         [HttpGet]
         public ActionResult AddCategory()
         {
@@ -94,12 +94,14 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategory(AddCategoryViewModel model) //, HttpPostedFileBase Picture)
+        public ActionResult AddCategory(AddCategoryViewModel model)
         {
             AdminBL adminBL = new AdminBL();
-            adminBL.AddCategory(model); //, Picture);
+            adminBL.AddCategory(model);
             return View("AddCategory");
         }
+
+
 
         public JsonResult StatesByCountryID(int id)
         {

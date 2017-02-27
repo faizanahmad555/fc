@@ -34,17 +34,17 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string Address { get; set; }
 
 
-        [Required(ErrorMessage = "This field is required.")]
-        public string Country { get; set; }
+        //[Required(ErrorMessage = "This field is required.")]
+        //public string Country { get; set; }
 
 
 
-        [Required(ErrorMessage = "This field is required.")]
-        public string State { get; set; }
+        //[Required(ErrorMessage = "This field is required.")]
+        //public string State { get; set; }
 
 
-        [Required(ErrorMessage = "This field is required.")]
-        public string City { get; set; }
+        //[Required(ErrorMessage = "This field is required.")]
+        //public string City { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
