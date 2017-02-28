@@ -43,7 +43,7 @@
             @Html.DisplayName("ProfilePhoto")
         </th>
 
-        <th>Operations</th>
+        <th>Actions</th>
     </tr>
 
     @foreach (var item in Model)
@@ -77,14 +77,20 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <img class="img-thumbnail" src="@Url.Content(item.ProfilePhoto)" height="100" width="100" />
+                <img class="img-thumbnail" src="@Url.Content(item.ProfilePhoto)" height="50" width="50" />
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SupplierID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SupplierID }) |
-                @Html.ActionLink("Delete", "DeleteSupplier", new { id = item.SupplierID })
+                <a href="@Url.Action("EditSupplier", "Admin", new { id = item.SupplierID })" class="btn btn-primary">
+                    <i class="fa fa-pencil"></i>
+                </a>
+
+                <a href="@Url.Action("DeleteSupplier", "Admin", new { id = item.SupplierID})" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+
             </td>
+
         </tr>
     }
 
