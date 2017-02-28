@@ -1,59 +1,95 @@
-﻿<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav">
+﻿<!-- sidebar menu start-->
+<ul class="sidebar-menu" id="nav-accordion">
 
-        @if (User.IsInRole("Admin"))
-        {
-            <li class="active">
-                <a href="@Url.Action("Index", "Admin")"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Manage Supplier <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="@Url.Action("AddSupplier", "Admin")">Add Supplier</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("SupplierList", "Admin")">Show All Suppliers</a>
-                    </li>
-                </ul>
+    @if (User.IsInRole("Admin"))
+    {
+        <li>
+            <a href="@Url.Action("Index", "Admin")" class="active">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
 
-                <a href="javascript:;" data-toggle="collapse" data-target="#category"><i class="fa fa-fw fa-arrows-v"></i> Manage Categories <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="category" class="collapse">
-                    <li>
-                        <a href="@Url.Action("AddCategory", "Admin")">Add Category</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a>
-                    </li>
-                </ul>
+    <!--manage supplier menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Supplier</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("AddSupplier", "Admin")">Add Supplier</a></li>
+                <li><a href="@Url.Action("SupplierList", "Admin")">Show All Supplier</a></li>
 
-            </li>
-            <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-            </li>
-        }
-        else if (User.IsInRole("Supplier"))
-        {
-            <li class="active">
-                <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Manage Products <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="@Url.Action("AddProduct", "Supplier")">Add Product</a>
-                    </li>
-                    <li>
-                        <a href="#">Show Products</a>
-                    </li>
-                </ul>
-            </li>
+                <li class="sub-menu">
+                    <a href="boxed_page.html">Menu Item 2</a>
+                    <ul class="sub">
+                        <li><a href="javascript:;">Menu Item 2.1</a></li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">Menu Item 3</a>
+                            <ul class="sub">
+                                <li><a href="javascript:;">Menu Item 3.1</a></li>
+                                <li><a href="javascript:;">Menu Item 3.2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-            </li>
-        }
-    </ul>
-</div>
-<!-- /.navbar-collapse -->
+            </ul>
+        </li>
+    <!--manage supplier menu end-->
+
+
+     <!--manage categories menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Category</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("AddCategory", "Admin")">Add Category</a></li>
+                <li><a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a></li>
+
+                <li class="sub-menu">
+                    <a href="boxed_page.html">Menu Item 2</a>
+                    <ul class="sub">
+                        <li><a href="javascript:;">Menu Item 2.1</a></li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">Menu Item 3</a>
+                            <ul class="sub">
+                                <li><a href="javascript:;">Menu Item 3.1</a></li>
+                                <li><a href="javascript:;">Menu Item 3.2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+    <!--manage categiries menu end-->
+
+    }
+
+    else if (User.IsInRole("Supplier"))
+    {
+        <li>
+            <a href="@Url.Action("Index", "Supplier")" class="active">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <!--manage products menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("AddProduct", "Supplier")">Add Product</a></li>
+                <li><a href="@Url.Action("Show All Products", "Supplier")">Show All Products</a></li>
+            </ul>
+        </li>
+    <!--manage products menu end-->
+
+    }
+</ul>
