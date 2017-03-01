@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MultivendorEcommerceStore.Repository;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -43,6 +44,11 @@ namespace MultivendorEcommerceStore.Controllers
             String status = _categoryBL.CreateCategory(CategoryViewModel, LogoPath);
             ViewBag.StatusMessage = status;
             return View();
+        }
+
+        public ActionResult ShowCategory()
+        {
+            ICategoryRepository
         }
 
     }
