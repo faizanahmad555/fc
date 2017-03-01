@@ -12,7 +12,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public string AspNetUserID { get; set; }
 
-        [Required(ErrorMessage = "This field is required.")]
+        [Required]
         [Display(Name = "First Name")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
@@ -62,6 +62,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Complete Address")]
+        [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 5)]
         public string Address { get; set; }
 
 
