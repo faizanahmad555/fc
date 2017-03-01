@@ -20,6 +20,18 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // SHOW: Supplier Profile
+        [HttpGet]
+        public ActionResult SupplierProfile()
+        {
+            string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
+            SupplierProfileBL BL = new SupplierProfileBL();
+            var profile = BL.GetProfileByUserIdentity(UserID);
+            return View(profile);
+        }
+
+
         // ADD: Product
         [HttpGet]
         public ActionResult AddProduct()
