@@ -20,7 +20,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // SHOW: Supplier Profile
+        // GET : Supplier Profile
         [HttpGet]
         public ActionResult SupplierProfile()
         {

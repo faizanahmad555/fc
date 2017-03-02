@@ -1469,6 +1469,7 @@
     <Content Include="Views\Admin\CategoryList.cshtml" />
     <Content Include="Views\Supplier\SupplierProfile.cshtml" />
     <Content Include="Views\Shared\_UserInfoDropdown.cshtml" />
+    <Content Include="Views\Admin\EditSupplier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

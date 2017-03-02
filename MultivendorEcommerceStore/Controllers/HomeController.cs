@@ -1,11 +1,8 @@
 ﻿using MultivendorEcommerceStore.DB.ViewModel;
 using MultivendorEcommerceStore.BL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MultivendorEcommerceStore.Repository;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -46,10 +43,10 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        public ActionResult ShowCategory()
-        {
-            ICategoryRepository
-        }
+        //public ActionResult ShowCategory()
+        //{
+        //    ICategoryRepository
+        //}
 
     }
 }

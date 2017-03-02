@@ -70,6 +70,26 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // EDIT: Existing Suppliers
+        [HttpGet]
+        public ActionResult EditSupplier(string UserID, Guid SupplierID)
+        {
+
+            SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
+            EditSupplierViewModel viewModel = supplierProfileBL.EditSupplierProfile(UserID, SupplierID);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditSupplier(EditSupplierViewModel viewModel)
+        {
+            SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
+            supplierProfileBL.AddEditedSupplierProfile(viewModel);
+            return RedirectToAction("SupplierList");
+        }
+
+
+
         // DELETE: Supplier (Need Changes)
         [HttpGet]
         public ActionResult DeleteSupplier(Guid id)
