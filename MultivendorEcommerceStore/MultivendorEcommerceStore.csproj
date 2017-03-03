@@ -1324,6 +1324,7 @@
     <Content Include="Content\assets\xchart\xcharts.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Images\Icons\FineCollection.png" />
+    <Content Include="Content\Users\de7bc409-77ca-4614-b231-4f325cec267b\Profile\Images\Us636241178470882433.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1473,6 +1474,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Users\be134f6f-444f-4566-96ed-d1736cc69a68\Profile\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

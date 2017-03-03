@@ -18,12 +18,15 @@ namespace MultivendorEcommerceStore.Repository
             _db.Suppliers.Add(entity);
             _db.SaveChanges();
         }
+
+
         public IEnumerable<Supplier> Retrive()
         {
             _db = new MultivendorEcommerceStoreEntities();
             return _db.Suppliers.ToList();
            
         }
+
 
         public void Update(Supplier entity)
         {
@@ -32,12 +35,21 @@ namespace MultivendorEcommerceStore.Repository
             _db.SaveChanges();
         }
 
-        public void Delete(Guid id)
+
+        public void Delete(string UserID)
         {
-            var suppliers = GetById(id);
-            _db.Suppliers.Remove(suppliers);
+            var suppliers = GetByAspNetUserID(UserID);
+            _db.AspNetUsers.Remove(suppliers);
             _db.SaveChanges();
         }
+
+
+        public AspNetUser GetByAspNetUserID(string UserID)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.AspNetUsers.Where(s => s.Id == UserID).FirstOrDefault();
+        }
+
 
         public Supplier GetById(Guid id)
         {
@@ -45,10 +57,7 @@ namespace MultivendorEcommerceStore.Repository
             return _db.Suppliers.Where(s => s.SupplierID == id).FirstOrDefault();
         }
 
-        public Supplier GetByAspNetUserID(string id)
-        {
-            _db = new MultivendorEcommerceStoreEntities();
-            return _db.Suppliers.Where(s => s.AspNetUserID == id).FirstOrDefault();
-        }
+
+      
     }
 }

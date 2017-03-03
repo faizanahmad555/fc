@@ -13,6 +13,7 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
+
         // ADD: Supplier
         public void AddSupplier(AddSupplierViewModel model)
         {
@@ -44,7 +45,8 @@ namespace MultivendorEcommerceStore.BL
             repository.Create(supplier);
         }
 
-        // GET: Supplier
+
+        // SHOW: All Suppliers
         public IEnumerable<Supplier> SupplierList()
         {
             ISupplierRepository repository = new SupplierRepository();
@@ -52,12 +54,14 @@ namespace MultivendorEcommerceStore.BL
             return supplierList;
         }
 
+
         // DELETE: Supplier
-        public void DeleteSupplier(Guid id)
+        public void DeleteSupplier(string UserID)
         {
             ISupplierRepository repository = new SupplierRepository();
-            repository.Delete(id);
+            repository.Delete(UserID);
         }
+
 
         // ADD: Supplier Busienss Information
         public void AddBusinessInfo(AddSupplierBusinessInfoVM viewModel)
@@ -80,35 +84,11 @@ namespace MultivendorEcommerceStore.BL
             repository.Create(businessInfo);
         }
 
-
-
         public Guid GetSupplierByUserID(string userID)
         {
             ISupplierRepository repo = new SupplierRepository();
             return repo.Retrive().FirstOrDefault(s => s.AspNetUserID == userID).SupplierID;
         }
-
-        // GET: Countries
-        public IEnumerable<CountryMaster> GetCountries()
-        {
-            ICountryRepository countryRepo = new CountryRepository();
-            return countryRepo.Get();
-        }
-
-        // GET: States
-        public IEnumerable<StateMaster> GetStatesByCountryID(int ID)
-        {
-            IStateRepository stateRepo = new StateRepository();
-            return stateRepo.Get().Where(s => s.CountryID == ID).ToList();
-        }
-
-        // GET: Cities
-        public IEnumerable<CityMaster> GetCitiesByStateID(int ID)
-        {
-            ICityRepository cityRepo = new CityRepository();
-            return cityRepo.Get().Where(c => c.StateID == ID).ToList();
-        }
-
 
         // ADD: Category
         public void AddCategory(AddCategoryViewModel model)
@@ -153,7 +133,6 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-
         // SHOW: All Categories
         public IEnumerable<Category> CategoryList()
         {
@@ -162,5 +141,26 @@ namespace MultivendorEcommerceStore.BL
             return categoryList;
         }
 
+
+        // GET: Countries
+        public IEnumerable<CountryMaster> GetCountries()
+        {
+            ICountryRepository countryRepo = new CountryRepository();
+            return countryRepo.Get();
+        }
+
+        // GET: States
+        public IEnumerable<StateMaster> GetStatesByCountryID(int ID)
+        {
+            IStateRepository stateRepo = new StateRepository();
+            return stateRepo.Get().Where(s => s.CountryID == ID).ToList();
+        }
+
+        // GET: Cities
+        public IEnumerable<CityMaster> GetCitiesByStateID(int ID)
+        {
+            ICityRepository cityRepo = new CityRepository();
+            return cityRepo.Get().Where(c => c.StateID == ID).ToList();
+        }
     }
 }

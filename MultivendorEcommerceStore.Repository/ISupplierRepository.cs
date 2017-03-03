@@ -12,8 +12,8 @@ namespace MultivendorEcommerceStore.Repository
         void Create(Supplier entity);
         IEnumerable<Supplier> Retrive();
         void Update(Supplier entity);
-        void Delete(Guid id);
+        void Delete(string UserID);
         Supplier GetById(Guid id);
-        Supplier GetByAspNetUserID(string id);
+        AspNetUser GetByAspNetUserID(string UserID);
     }
 }

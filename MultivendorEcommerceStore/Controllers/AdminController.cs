@@ -33,7 +33,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
         // ADD: Supplier Business Information
         [HttpGet]
         public ActionResult AddBusinessInfo(string userID)
@@ -90,12 +89,12 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        // DELETE: Supplier (Need Changes)
+        // DELETE: Supplier
         [HttpGet]
-        public ActionResult DeleteSupplier(Guid id)
+        public ActionResult DeleteSupplier(string UserID)//, Guid SupplierID)
         {
             AdminBL adminBL = new AdminBL();
-            adminBL.DeleteSupplier(id);
+            adminBL.DeleteSupplier(UserID);//, SupplierID);
             return RedirectToAction("Index");
         }
 
@@ -116,6 +115,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View("AddCategory");
         }
 
+
+        // SHOW: All Categories
         public ActionResult CategoryList()
         {
             AdminBL adminBL = new AdminBL();
