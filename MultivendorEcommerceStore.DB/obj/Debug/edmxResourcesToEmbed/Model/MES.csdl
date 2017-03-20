@@ -17,6 +17,7 @@
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_AspNetUsers1" FromRole="AspNetUsers" ToRole="Supplier" />
+    <NavigationProperty Name="Customers" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="AspNetUser" ToRole="Customer" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -92,6 +93,8 @@
     <Property Name="DateEntered" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
     <NavigationProperty Name="ReturnRequests" Relationship="Self.FK_ReturnRequest_Customer" FromRole="Customer" ToRole="ReturnRequest" />
+    <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="DiscountVoucher">
     <Key>
@@ -689,6 +692,10 @@
       <End Role="SubCategory" EntitySet="SubCategories" />
       <End Role="SubCategoryItem" EntitySet="SubCategoryItems" />
     </AssociationSet>
+    <AssociationSet Name="FK_Customer_AspNetUsers" Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SubCategoryItem">
     <Key>
@@ -711,6 +718,18 @@
       </Principal>
       <Dependent Role="SubCategoryItem">
         <PropertyRef Name="SubCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_AspNetUsers">
+    <End Type="MultivendorEcommerceStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="MultivendorEcommerceStoreModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="AspNetUserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

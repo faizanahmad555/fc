@@ -1,0 +1,96 @@
+﻿@using MultivendorEcommerceStore.DB.ViewModel
+@model CustomerRegisterLoginViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- page wapper-->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">Authentication</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Authentication</span>
+        </h2>
+        <!-- ../page heading-->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        @using (Html.BeginForm("CustomerRegister", "Account", FormMethod.Post, new { role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h3>Create an account</h3>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <p>Please enter your personal information.</p>
+                            <br />
+                            <div class="form-group row">
+                                @*@Html.LabelFor(model => model.CustomerRegisterVM.FirstName, new { @class = "col-sm-2 control-label" })*@
+                                @Html.TextBoxFor(model => model.CustomerRegisterVM.FirstName, new { @class = "col-sm-3 form-control", @placeholder = "First Name" })
+
+
+                                @*@Html.LabelFor(model => model.CustomerRegisterVM.LastName, new { @class = "col-sm-2 control-label" })*@
+                                @Html.TextBoxFor(model => model.CustomerRegisterVM.LastName, new { @class = "col-sm-3 form-control", @placeholder = "Last Name" })
+                            </div>
+                            <div class="form-group row">
+
+                                @*@Html.LabelFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "control-label" })*@
+                                @Html.TextBoxFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "col-sm-3 form-control", @placeholder = "Email Address" })
+
+                                @*@Html.LabelFor(model => model.CustomerRegisterVM.Password, new { @class = "control-label" })*@
+                                @Html.PasswordFor(model => model.CustomerRegisterVM.Password, new { @class = "col-sm-3 form-control", @placeholder = "Password" })
+                            </div>
+                            <div class="form-group row">
+
+                                @*@Html.LabelFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "control-label" })*@
+                                @Html.PasswordFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "col-sm-3 form-control", @placeholder = "Confirm Password" })
+                            </div>
+
+                            <button type="submit" class="button"><i class="fa fa-user"></i> Create an account</button>
+                        }
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        @using (Html.BeginForm("CustomerLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h3>Already registered?</h3>
+                            <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.LabelFor(model => model.CustomerLoginVM.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.CustomerLoginVM.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CustomerLoginVM.Email, "", new { @class = "text-danger" })
+
+
+                            @Html.LabelFor(model => model.CustomerLoginVM.Password, new { @class = "control-label" })
+                            @Html.PasswordFor(model => model.CustomerLoginVM.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CustomerLoginVM.Password, "", new { @class = "text-danger" })
+
+                            <p class="forgot-pass"><a href="#">Forgot your password?</a></p>
+                            <button type="submit" class="button"><i class="fa fa-lock"></i> Sign In</button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./page wapper-->
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+

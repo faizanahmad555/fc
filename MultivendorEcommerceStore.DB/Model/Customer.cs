@@ -48,10 +48,12 @@ namespace MultivendorEcommerceStore.DB.Model
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
         public Nullable<System.DateTime> DateEntered { get; set; }
+        public string AspNetUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

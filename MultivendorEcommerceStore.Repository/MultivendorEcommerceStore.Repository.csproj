@@ -53,9 +53,11 @@
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CityRepository.cs" />
     <Compile Include="CountryRepository.cs" />
+    <Compile Include="CustomerRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="ICityRepository.cs" />
     <Compile Include="ICountryRepository.cs" />
+    <Compile Include="ICustomerRepository.cs" />
     <Compile Include="IProductRepository.cs" />
     <Compile Include="IStateRepository.cs" />
     <Compile Include="ISubCategoryItemRepository.cs" />

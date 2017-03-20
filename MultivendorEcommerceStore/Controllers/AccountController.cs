@@ -135,6 +135,40 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("AddSupplier", "Admin");
         }
 
+        // REGISTER: Customer
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CustomerRegister(CustomerRegisterLoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
+                var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
+
+                if (result.Succeeded)
+                {
+                    CustomerBL customerBL = new CustomerBL();
+                    UserManager.AddToRole(user.Id, "Customer");
+                    model.CustomerRegisterVM.AspNetUserID = user.Id;
+                    customerBL.CustomerRegister(model);
+                    await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
+                    return RedirectToAction("Index", "Home");
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return RedirectToAction("Login", "Home");
+        }
+
+
 
         //
         // GET: /Account/VerifyCode

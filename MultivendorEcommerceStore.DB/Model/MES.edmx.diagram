@@ -47,6 +47,7 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" Width="1.5" PointX="9.75" PointY="18.125" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,15 +25,15 @@ namespace MultivendorEcommerceStore
 
 
             bundles.Add(new ScriptBundle("~/bundles/ThemeScript").Include(
-                     "~/assets/lib/bootstrap/js/bootstrap.min.js",
-                     "~/Scripts/respond.js",
-                     "~/assets/lib/select2/js/select2.min.js",
-                     "~/assets/lib/jquery.bxslider/jquery.bxslider.min.js",
-                     "~/assets/lib/owl.carousel/owl.carousel.min.js",
-                     "~/assets/lib/countdown/jquery.plugin.js",
-                     "~/assets/lib/jquery.countdown/jquery.countdown.min.js",
-                     "~/assets/js/jquery.actual.min.js",
-                     "~/assets/js/theme-script.js"
+                     //"~/assets/lib/bootstrap/js/bootstrap.min.js",
+                     "~/Scripts/respond.js"
+                     //"~/assets/lib/select2/js/select2.min.js",
+                     //"~/assets/lib/jquery.bxslider/jquery.bxslider.min.js",
+                     //"~/assets/lib/owl.carousel/owl.carousel.min.js",
+                     //"~/assets/lib/countdown/jquery.plugin.js",
+                     //"~/assets/lib/jquery.countdown/jquery.countdown.min.js",
+                     //"~/assets/js/jquery.actual.min.js",
+                     //"~/assets/js/theme-script.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Assets/css").Include(

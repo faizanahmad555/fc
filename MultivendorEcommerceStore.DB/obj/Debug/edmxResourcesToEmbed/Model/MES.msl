@@ -61,6 +61,7 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
