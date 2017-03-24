@@ -12,15 +12,17 @@ namespace MultivendorEcommerceStore.DB.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderHistory
+    public partial class UserProfile
     {
-        public System.Guid OrderHistoryID { get; set; }
-        public Nullable<System.Guid> OrderID { get; set; }
-        public Nullable<short> OrderStatus { get; set; }
-        public string Comments { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-    
-        public virtual Order Order { get; set; }
+        public System.Guid UserProfileID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string ProfilePicPath { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

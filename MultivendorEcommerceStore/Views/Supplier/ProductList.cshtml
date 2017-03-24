@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.Model.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <h4> Product's List </h4>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th>
+                                    @Html.DisplayName("Product Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Description")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Quantity")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Price")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Picture")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Category")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Sub Category")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Added On")
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                                    </td>
+                                    <td>
+                                        <img class="img-thumbnail" src="@Url.Content(item.ProductPicture)" height="50" width="50" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("EditProduct", "Supplier", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })" class="btn btn-primary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+
+                                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

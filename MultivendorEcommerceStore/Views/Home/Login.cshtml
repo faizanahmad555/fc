@@ -1,5 +1,5 @@
 ﻿@using MultivendorEcommerceStore.DB.ViewModel
-@model CustomerRegisterLoginViewModel
+@model CustomerLoginRegisterViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -79,7 +79,7 @@
                             @Html.PasswordFor(model => model.CustomerLoginVM.Password, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerLoginVM.Password, "", new { @class = "text-danger" })
 
-                            <p class="forgot-pass"><a href="#">Forgot your password?</a></p>
+                            <p class="forgot-pass"><a href="@Url.Action("ForgotPassword", "Account")">Forgot your password?</a></p>
                             <button type="submit" class="button"><i class="fa fa-lock"></i> Sign In</button>
                         }
 

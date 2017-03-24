@@ -58,6 +58,32 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // SHOW: All Products
+        [HttpGet]
+        public ActionResult ProductList()
+        {
+            SupplierBL supplierBL = new SupplierBL();
+            return View(supplierBL.ProductList());
+        }
+
+        // EDIT: Existing Products
+        [HttpGet]
+        public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
+        {
+
+            SupplierBL supplierBL = new SupplierBL();
+            EditProductViewModel viewModel = supplierBL.EditSupplierProduct(SupplierID, ProductID);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(EditProductViewModel viewModel)
+        {
+            SupplierBL supplierBL = new SupplierBL();
+            supplierBL.AddEditedSupplierProduct(viewModel);
+            return RedirectToAction("ProductList");
+        }
+
 
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {

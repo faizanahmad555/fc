@@ -25,20 +25,20 @@ namespace MultivendorEcommerceStore
 
 
             bundles.Add(new ScriptBundle("~/bundles/ThemeScript").Include(
-                     //"~/assets/lib/bootstrap/js/bootstrap.min.js",
-                     "~/Scripts/respond.js"
-                     //"~/assets/lib/select2/js/select2.min.js",
-                     //"~/assets/lib/jquery.bxslider/jquery.bxslider.min.js",
-                     //"~/assets/lib/owl.carousel/owl.carousel.min.js",
-                     //"~/assets/lib/countdown/jquery.plugin.js",
-                     //"~/assets/lib/jquery.countdown/jquery.countdown.min.js",
-                     //"~/assets/js/jquery.actual.min.js",
-                     //"~/assets/js/theme-script.js"
-                     ));
+                      //"~/assets/lib/bootstrap/js/bootstrap.min.js",
+                      "~/Scripts/respond.js"
+                      //"~/assets/lib/select2/js/select2.min.js",
+                      //"~/assets/lib/jquery.bxslider/jquery.bxslider.min.js",
+                      //"~/assets/lib/owl.carousel/owl.carousel.min.js",
+                      //"~/assets/lib/countdown/jquery.plugin.js",
+                      //"~/assets/lib/jquery.countdown/jquery.countdown.min.js",
+                      //"~/assets/js/jquery.actual.min.js",
+                      //"~/assets/js/theme-script.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Assets/css").Include(
-                //"~/assets/lib/bootstrap/css/bootstrap.css",
-                "~/assets/lib/font-awesome/css/font-awesome.min.css",
+            //"~/assets/lib/bootstrap/css/bootstrap.css",
+            "~/assets/lib/font-awesome/css/font-awesome.min.css",
                 "~/assets/lib/select2/css/select2.min.css",
                 "~/assets/lib/jquery.bxslider/jquery.bxslider.css",
                 "~/assets/lib/owl.carousel/owl.carousel.css",
@@ -48,8 +48,8 @@ namespace MultivendorEcommerceStore
                 "~/assets/css/style.css",
                 "~/assets/css/responsive.css",
                 "~/assets/css/option5.css"));
-               // "~/Content/site.css"));
-          //   BundleTable.EnableOptimizations = false; // when this is not false
+            // "~/Content/site.css"));
+            //   BundleTable.EnableOptimizations = false; // when this is not false
         }
     }
 }

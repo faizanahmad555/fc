@@ -61,8 +61,8 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Address1" ColumnName="Address1" />
@@ -89,20 +89,6 @@
           <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
           <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
           <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DiscountVouchers">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.DiscountVoucher">
-        <MappingFragment StoreEntitySet="DiscountVoucher">
-          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
-          <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
-          <ScalarProperty Name="VoucherDiscountTypeID" ColumnName="VoucherDiscountTypeID" />
-          <ScalarProperty Name="VoucherValue" ColumnName="VoucherValue" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="UsedOn" ColumnName="UsedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -193,7 +179,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SKU" ColumnName="SKU" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -201,6 +187,7 @@
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -217,7 +204,7 @@
           <ScalarProperty Name="ProductAvailable" ColumnName="ProductAvailable" />
           <ScalarProperty Name="DiscountAvailable" ColumnName="DiscountAvailable" />
           <ScalarProperty Name="CurrentOrder" ColumnName="CurrentOrder" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
           <ScalarProperty Name="Ranking" ColumnName="Ranking" />
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -263,6 +250,18 @@
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubCategoryItems">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
+        <MappingFragment StoreEntitySet="SubCategoryItem">
+          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -338,15 +337,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SubCategoryItems">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
-        <MappingFragment StoreEntitySet="SubCategoryItem">
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
-          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
-          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
-          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

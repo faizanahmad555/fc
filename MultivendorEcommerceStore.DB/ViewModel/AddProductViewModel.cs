@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MultivendorEcommerceStore.DB.ViewModel
 {
@@ -25,11 +26,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         public string ProductDescription { get; set; }
 
+        [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "Product Image")]
+        public HttpPostedFileBase ProductImage1 { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Price")]
         // [DataType(DataType.Currency)]
-        public string UnitPrice { get; set; }
+        public int Price { get; set; }
 
 
         [Required(ErrorMessage = "This feild is required")]

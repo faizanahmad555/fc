@@ -16,8 +16,8 @@
     <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_AspNetUsers" FromRole="AspNetUsers" ToRole="Customer" />
     <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_AspNetUsers1" FromRole="AspNetUsers" ToRole="Supplier" />
-    <NavigationProperty Name="Customers" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="AspNetUser" ToRole="Customer" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -65,6 +65,7 @@
       <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="CustomerID" Type="Guid" Nullable="false" />
+    <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -91,24 +92,9 @@
     <Property Name="ShipPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ShipCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DateEntered" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUsers" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
     <NavigationProperty Name="ReturnRequests" Relationship="Self.FK_ReturnRequest_Customer" FromRole="Customer" ToRole="ReturnRequest" />
-    <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUser" />
-  </EntityType>
-  <EntityType Name="DiscountVoucher">
-    <Key>
-      <PropertyRef Name="DiscountID" />
-    </Key>
-    <Property Name="DiscountID" Type="Guid" Nullable="false" />
-    <Property Name="VoucherCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="VoucherDiscountTypeID" Type="Int16" />
-    <Property Name="VoucherValue" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsActive" Type="Boolean" />
-    <Property Name="UsedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_DiscountVoucher" FromRole="DiscountVoucher" ToRole="Order" />
   </EntityType>
   <EntityType Name="EmailHistory">
     <Key>
@@ -150,7 +136,6 @@
     <Property Name="OrderStatus" Type="Int16" />
     <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-    <NavigationProperty Name="DiscountVoucher" Relationship="Self.FK_Order_DiscountVoucher" FromRole="Order" ToRole="DiscountVoucher" />
     <NavigationProperty Name="Payment" Relationship="Self.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
     <NavigationProperty Name="OrderHistories" Relationship="Self.FK_OrderHistory_Order" FromRole="Order" ToRole="OrderHistory" />
@@ -210,9 +195,10 @@
     <Property Name="SupplierID" Type="Guid" />
     <Property Name="CategoryID" Type="Guid" />
     <Property Name="SubCategoryID" Type="Guid" />
+    <Property Name="SubCategoryItem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="UnitSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UnitPrice" Type="Int32" />
     <Property Name="MSRP" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="AvailableSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AvailableColor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -226,7 +212,7 @@
     <Property Name="ProductAvailable" Type="Boolean" />
     <Property Name="DiscountAvailable" Type="Boolean" />
     <Property Name="CurrentOrder" Type="Boolean" />
-    <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProductPicture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Ranking" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -234,7 +220,7 @@
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
-    <Property Name="SubCategoryItem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>
@@ -281,7 +267,19 @@
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
-    <NavigationProperty Name="SubCategoryItems" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryItem" />
+    <NavigationProperty Name="SubCategoryItems" Relationship="Self.FK_SubCategoryItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryItem" />
+  </EntityType>
+  <EntityType Name="SubCategoryItem">
+    <Key>
+      <PropertyRef Name="SubCategoryItemID" />
+    </Key>
+    <Property Name="SubCategoryItemID" Type="Guid" Nullable="false" />
+    <Property Name="SubCategoryID" Type="Guid" />
+    <Property Name="SubCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="265" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategoryItem_SubCategory" FromRole="SubCategoryItem" ToRole="SubCategory" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -357,6 +355,33 @@
     <Property Name="MessageTo" Type="Int32" />
     <Property Name="ConversationID" Type="Guid" />
   </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileID" />
+    </Key>
+    <Property Name="UserProfileID" Type="Guid" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="ProfilePicPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Customer_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="AspNetUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Supplier_AspNetUsers1">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -372,7 +397,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
@@ -466,18 +493,6 @@
       </Principal>
       <Dependent Role="ReturnRequest">
         <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Order_DiscountVoucher">
-    <End Role="DiscountVoucher" Type="Self.DiscountVoucher" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DiscountVoucher">
-        <PropertyRef Name="DiscountID" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="DiscountVoucherID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -577,8 +592,24 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SubCategoryItem_SubCategory">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SubCategoryItem" Type="Self.SubCategoryItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryID" />
+      </Principal>
+      <Dependent Role="SubCategoryItem">
+        <PropertyRef Name="SubCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SupplierBusinessInformation_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SupplierBusinessInformation" Type="Self.SupplierBusinessInformation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Supplier">
@@ -596,7 +627,6 @@
     <EntitySet Name="Conversations" EntityType="Self.Conversation" />
     <EntitySet Name="CountryMasters" EntityType="Self.CountryMaster" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
-    <EntitySet Name="DiscountVouchers" EntityType="Self.DiscountVoucher" />
     <EntitySet Name="EmailHistories" EntityType="Self.EmailHistory" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -607,10 +637,16 @@
     <EntitySet Name="Shippers" EntityType="Self.Shipper" />
     <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
     <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+    <EntitySet Name="SubCategoryItems" EntityType="Self.SubCategoryItem" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="SupplierBusinessInformations" EntityType="Self.SupplierBusinessInformation" />
     <EntitySet Name="Trackings" EntityType="Self.Tracking" />
     <EntitySet Name="UserMessages" EntityType="Self.UserMessage" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+    <AssociationSet Name="FK_Customer_AspNetUsers" Association="Self.FK_Customer_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
     <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="Self.FK_Supplier_AspNetUsers1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Supplier" EntitySet="Suppliers" />
@@ -647,10 +683,6 @@
       <End Role="Customer" EntitySet="Customers" />
       <End Role="ReturnRequest" EntitySet="ReturnRequests" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_DiscountVoucher" Association="Self.FK_Order_DiscountVoucher">
-      <End Role="DiscountVoucher" EntitySet="DiscountVouchers" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
     <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
       <End Role="Payment" EntitySet="Payments" />
       <End Role="Order" EntitySet="Orders" />
@@ -683,54 +715,13 @@
       <End Role="StateMaster" EntitySet="StateMasters" />
       <End Role="Supplier" EntitySet="Suppliers" />
     </AssociationSet>
+    <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="Self.FK_SubCategoryItem_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="SubCategoryItem" EntitySet="SubCategoryItems" />
+    </AssociationSet>
     <AssociationSet Name="FK_SupplierBusinessInformation_Supplier" Association="Self.FK_SupplierBusinessInformation_Supplier">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformations" />
     </AssociationSet>
-    <EntitySet Name="SubCategoryItems" EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" />
-    <AssociationSet Name="FK_SubCategoryItem_SubCategory" Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory">
-      <End Role="SubCategory" EntitySet="SubCategories" />
-      <End Role="SubCategoryItem" EntitySet="SubCategoryItems" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_AspNetUsers" Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="SubCategoryItem">
-    <Key>
-      <PropertyRef Name="SubCategoryItemID" />
-    </Key>
-    <Property Name="SubCategoryItemID" Type="Guid" Nullable="false" />
-    <Property Name="SubCategoryID" Type="Guid" />
-    <Property Name="SubCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Picture" Type="String" MaxLength="265" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SubCategory" Relationship="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" FromRole="SubCategoryItem" ToRole="SubCategory" />
-  </EntityType>
-  <Association Name="FK_SubCategoryItem_SubCategory">
-    <End Type="MultivendorEcommerceStoreModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
-    <End Type="MultivendorEcommerceStoreModel.SubCategoryItem" Role="SubCategoryItem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SubCategory">
-        <PropertyRef Name="SubCategoryID" />
-      </Principal>
-      <Dependent Role="SubCategoryItem">
-        <PropertyRef Name="SubCategoryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_AspNetUsers">
-    <End Type="MultivendorEcommerceStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-    <End Type="MultivendorEcommerceStoreModel.Customer" Role="Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="AspNetUserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

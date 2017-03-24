@@ -36,7 +36,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string LastName { get; set; }
     }
 
-    public class CustomerLoginViewModel
+    public class CustomerLoginViewModels
     {
         [Required]
         [EmailAddress]
@@ -47,11 +47,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+
+        public bool RememberMe { get; set; }
     }
 
-    public class CustomerRegisterLoginViewModel
+    public class CustomerLoginRegisterViewModel
     {
-        public CustomerLoginViewModel CustomerLoginVM { get; set; }
+        public CustomerLoginViewModels CustomerLoginVM { get; set; }
         public CustomerRegisterViewModel CustomerRegisterVM { get; set; }
     }
 }

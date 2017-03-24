@@ -29,7 +29,12 @@ namespace MultivendorEcommerceStore.Repository
         public void Update(Product entity)
         {
             _db = new MultivendorEcommerceStoreEntities();
-            _db.Entry(entity).State = EntityState.Modified;
+            var supplierProduct = _db.Products.Where(s => s.SupplierID == entity.SupplierID && s.ProductID == entity.ProductID).FirstOrDefault();
+            supplierProduct.ProductName = entity.ProductName;
+            supplierProduct.ProductDescription = entity.ProductDescription;
+            supplierProduct.Quantity = entity.Quantity;
+            supplierProduct.UnitPrice = entity.UnitPrice;
+            supplierProduct.ProductPicture = entity.ProductPicture;
             _db.SaveChanges();
         }
 

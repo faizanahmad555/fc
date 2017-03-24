@@ -85,19 +85,6 @@
     <Property Name="ShipCountry" Type="nvarchar" MaxLength="50" />
     <Property Name="DateEntered" Type="datetime" />
   </EntityType>
-  <EntityType Name="DiscountVoucher">
-    <Key>
-      <PropertyRef Name="DiscountID" />
-    </Key>
-    <Property Name="DiscountID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VoucherCode" Type="nvarchar" MaxLength="200" />
-    <Property Name="VoucherDiscountTypeID" Type="smallint" />
-    <Property Name="VoucherValue" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsActive" Type="bit" />
-    <Property Name="UsedOn" Type="datetime" />
-  </EntityType>
   <EntityType Name="EmailHistory">
     <Key>
       <PropertyRef Name="EmailID" />
@@ -191,7 +178,7 @@
     <Property Name="SubCategoryItem" Type="nchar" MaxLength="10" />
     <Property Name="Quantity" Type="int" />
     <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
-    <Property Name="UnitPrice" Type="money" />
+    <Property Name="UnitPrice" Type="int" />
     <Property Name="MSRP" Type="money" />
     <Property Name="AvailableSize" Type="nvarchar" MaxLength="50" />
     <Property Name="AvailableColor" Type="nvarchar" MaxLength="500" />
@@ -205,10 +192,11 @@
     <Property Name="ProductAvailable" Type="bit" />
     <Property Name="DiscountAvailable" Type="bit" />
     <Property Name="CurrentOrder" Type="bit" />
-    <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProductPicture" Type="nvarchar" MaxLength="500" />
     <Property Name="Ranking" Type="int" />
     <Property Name="Note" Type="nvarchar(max)" />
     <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>
@@ -327,6 +315,21 @@
     <Property Name="MessageTo" Type="int" />
     <Property Name="ConversationID" Type="uniqueidentifier" />
   </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileID" />
+    </Key>
+    <Property Name="UserProfileID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="ProfilePicPath" Type="varchar" MaxLength="500" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="100" />
+    <Property Name="City" Type="varchar" MaxLength="100" />
+  </EntityType>
   <Association Name="FK_CityMaster_StateMaster">
     <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
     <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
@@ -360,18 +363,6 @@
       </Principal>
       <Dependent Role="Order">
         <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Order_DiscountVoucher">
-    <End Role="DiscountVoucher" Type="Self.DiscountVoucher" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DiscountVoucher">
-        <PropertyRef Name="DiscountID" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="DiscountVoucherID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -596,7 +587,6 @@
     <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DiscountVoucher" EntityType="Self.DiscountVoucher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmailHistory" EntityType="Self.EmailHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -612,6 +602,7 @@
     <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
       <End Role="StateMaster" EntitySet="StateMaster" />
       <End Role="CityMaster" EntitySet="CityMaster" />
@@ -622,10 +613,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
       <End Role="Customer" EntitySet="Customer" />
-      <End Role="Order" EntitySet="Order" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_DiscountVoucher" Association="Self.FK_Order_DiscountVoucher">
-      <End Role="DiscountVoucher" EntitySet="DiscountVoucher" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">

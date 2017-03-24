@@ -71,9 +71,6 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DiscountVoucher.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\EmailHistory.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
@@ -134,13 +131,17 @@
     <Compile Include="Model\UserMessage.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserProfile.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddProductViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
+    <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
-    <Compile Include="ViewModel\CustomerRegisterLoginViewModel.cs" />
     <Compile Include="ViewModel\SupplierProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

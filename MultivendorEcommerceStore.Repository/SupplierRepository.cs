@@ -31,7 +31,14 @@ namespace MultivendorEcommerceStore.Repository
         public void Update(Supplier entity)
         {
             _db = new MultivendorEcommerceStoreEntities();
-            _db.Entry(entity).State = EntityState.Modified;
+            var supplierProfile = _db.Suppliers.Where(s => s.AspNetUserID == entity.AspNetUserID).FirstOrDefault();
+            supplierProfile.SupplierFirstName = entity.SupplierFirstName;
+            supplierProfile.SupplierLastName = entity.SupplierLastName;
+            supplierProfile.Address = entity.Address;
+            supplierProfile.Phone = entity.Phone;
+            supplierProfile.ProfilePhoto = entity.ProfilePhoto;
+            supplierProfile.PostalCode = entity.PostalCode;
+            supplierProfile.CNIC = entity.CNIC;
             _db.SaveChanges();
         }
 

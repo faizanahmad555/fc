@@ -12,7 +12,7 @@ namespace MultivendorEcommerceStore.BL
     public class CustomerBL
     {
         // ADD: Customer
-        public void CustomerRegister(CustomerRegisterLoginViewModel model)
+        public void CustomerRegister(CustomerLoginRegisterViewModel model)
         {
             ICustomerRepository customerRepo = new CustomerRepository();
             Customer customer = new Customer();
