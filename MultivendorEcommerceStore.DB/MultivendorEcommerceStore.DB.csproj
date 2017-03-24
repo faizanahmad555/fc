@@ -140,6 +140,7 @@
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
+    <Compile Include="ViewModel\DashboardStatisticsVM.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
     <Compile Include="ViewModel\SupplierProfileViewModel.cs" />

@@ -54,10 +54,12 @@
     <Compile Include="CityRepository.cs" />
     <Compile Include="CountryRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
+    <Compile Include="DashboardRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="ICityRepository.cs" />
     <Compile Include="ICountryRepository.cs" />
     <Compile Include="ICustomerRepository.cs" />
+    <Compile Include="IDashboardRepository.cs" />
     <Compile Include="IProductRepository.cs" />
     <Compile Include="IStateRepository.cs" />
     <Compile Include="ISubCategoryItemRepository.cs" />

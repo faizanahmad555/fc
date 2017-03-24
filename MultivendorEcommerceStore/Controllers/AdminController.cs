@@ -14,7 +14,8 @@ namespace MultivendorEcommerceStore.Controllers
         // Dashboard
         public ActionResult Index()
         {
-            return View();
+            AdminDashboardBL adminDBL = new AdminDashboardBL();
+            return View(adminDBL.DashboardStats());
         }
 
 

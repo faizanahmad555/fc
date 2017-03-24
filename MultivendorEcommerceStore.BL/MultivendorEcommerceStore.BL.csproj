@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboardBL.cs" />
     <Compile Include="CategoryBL.cs" />
     <Compile Include="CustomerBL.cs" />
     <Compile Include="HomeBL.cs" />
