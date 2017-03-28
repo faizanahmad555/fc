@@ -28,3 +28,13 @@ C:\Users\Fahad\Source\Repo\fc\MultivendorEcommerceStore.DB\bin\Debug\EntityFrame
 C:\Users\Fahad\Source\Repo\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.csprojResolveAssemblyReference.cache
 C:\Users\Fahad\Source\Repo\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.dll
 C:\Users\Fahad\Source\Repo\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.pdb
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.dll.config
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.dll
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\MultivendorEcommerceStore.DB.pdb
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.dll
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.xml
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.csprojResolveAssemblyReference.cache
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.dll
+C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore.DB\obj\Debug\MultivendorEcommerceStore.DB.pdb
