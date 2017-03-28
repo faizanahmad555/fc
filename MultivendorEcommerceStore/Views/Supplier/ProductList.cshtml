@@ -39,6 +39,12 @@
                                 <th>
                                     @Html.DisplayName("Added On")
                                 </th>
+                                <th>
+                                    @Html.DisplayName("Status")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Active")
+                                </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -70,6 +76,12 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CreatedOn)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsActive)
                                     </td>
                                     <td>
                                         <a href="@Url.Action("EditProduct", "Supplier", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })" class="btn btn-primary">

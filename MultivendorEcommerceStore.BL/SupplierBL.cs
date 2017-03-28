@@ -40,6 +40,8 @@ namespace MultivendorEcommerceStore.BL
             product.UnitPrice = model.Price;
             product.Quantity = model.Quantity;
             product.UnitSize = model.Size;
+            product.Status = (int)ProductStatus.Pending;
+            product.IsActive = (int)ProductActive.IsActive;
             product.CreatedOn = DateTime.Now;
 
             repositroy.Create(product);
