@@ -36,7 +36,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderHistory> OrderHistories { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<StateMaster> StateMasters { get; set; }
@@ -47,5 +46,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

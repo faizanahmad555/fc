@@ -9,18 +9,23 @@ using System.Web.Mvc;
 
 namespace MultivendorEcommerceStore.Controllers
 {
-    [Authorize(Roles = "Supplier")]
     public class SupplierController : Controller
     {
-
         // GET: Supplier
+        [Authorize(Roles = "Supplier")]
         public ActionResult Index()
         {
             return View();
         }
 
 
+        public ActionResult SupplierLogin()
+        {
+            return View();
+        }
+
         // GET : Supplier Profile
+        [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult SupplierProfile()
         {
@@ -33,6 +38,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         // ADD: Product
+        [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult AddProduct()
         {
@@ -47,6 +53,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Supplier")]
         [HttpPost]
         public ActionResult AddProduct(AddProductViewModel model)
         {
@@ -59,6 +66,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         // SHOW: All Products
+        [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult ProductList()
         {
@@ -67,6 +75,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
         // EDIT: Existing Products
+        [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
         {
@@ -76,6 +85,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Supplier")]
         [HttpPost]
         public ActionResult EditProduct(EditProductViewModel viewModel)
         {
@@ -84,7 +94,7 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("ProductList");
         }
 
-
+        [Authorize(Roles = "Supplier")]
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {
             SupplierBL supplierBL = new SupplierBL();

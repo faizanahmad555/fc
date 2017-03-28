@@ -37,8 +37,8 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<decimal> SalesTax { get; set; }
     
         public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

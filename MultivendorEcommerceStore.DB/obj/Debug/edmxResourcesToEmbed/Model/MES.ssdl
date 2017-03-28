@@ -196,7 +196,8 @@
     <Property Name="Ranking" Type="int" />
     <Property Name="Note" Type="nvarchar(max)" />
     <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="ReturnRequest">
     <Key>

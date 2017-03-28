@@ -48,7 +48,8 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<int> Ranking { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> IsActive { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
