@@ -136,6 +136,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AddExistingCategoryItemViewModel.cs" />
+    <Compile Include="ViewModel\AddExistingCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddProductViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />

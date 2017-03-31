@@ -19,8 +19,9 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        public ActionResult SupplierLogin()
+        public ActionResult SupplierLogin(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 

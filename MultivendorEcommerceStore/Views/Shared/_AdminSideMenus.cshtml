@@ -4,7 +4,7 @@
     @if (User.IsInRole("Admin"))
     {
         <li>
-            <a href="@Url.Action("Index", "Admin")" class="active">
+            <a href="@Url.Action("Index", "Admin")">
                 <i class="fa fa-dashboard"></i>
                 <span>Dashboard</span>
             </a>
@@ -46,23 +46,15 @@
                 <span>Manage Category</span>
             </a>
             <ul class="sub">
-                <li><a href="@Url.Action("AddCategory", "Admin")">Add Category</a></li>
-                <li><a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a></li>
-
                 <li class="sub-menu">
-                    <a href="boxed_page.html">Menu Item 2</a>
+                    <a href="boxed_page.html">Add Category</a>
                     <ul class="sub">
-                        <li><a href="javascript:;">Menu Item 2.1</a></li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">Menu Item 3</a>
-                            <ul class="sub">
-                                <li><a href="javascript:;">Menu Item 3.1</a></li>
-                                <li><a href="javascript:;">Menu Item 3.2</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="@Url.Action("AddCategory", "Admin")">Add Category</a></li>
+                        <li><a href="@Url.Action("AddExistingCategory", "Admin")">Add Sub Category</a></li>
+                        <li><a href="@Url.Action("AddExistingCategoryItem", "Admin")">Add SubCategory Item</a></li>
                     </ul>
                 </li>
-
+                <li><a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a></li>
             </ul>
         </li>
     <!--manage categiries menu end-->

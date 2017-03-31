@@ -13,21 +13,91 @@ namespace MultivendorEcommerceStore.BL
 {
     public class CategoryBL
     {
-        private ICategoryRepository repository;
-
-        public CategoryBL()
+        // ADD: Category
+        public void AddCategory(AddCategoryViewModel model)
         {
-            repository = new CategoryRepository();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            Category category = new Category();
+
+            var fileName = Path.GetFileNameWithoutExtension(model.Picture.FileName);
+            fileName += DateTime.Now.Ticks + Path.GetExtension(model.Picture.FileName);
+            var basePath = "~/Content/Admin/Category/" + model.CategoryName + "/Images/";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Admin/Category/" + model.CategoryName + "/Images/"));
+            model.Picture.SaveAs(path);
+
+            category.CategoryID = Guid.NewGuid();
+            category.CategoryName = model.CategoryName;
+            //category.Description = model.Description;
+            category.Picture = basePath + fileName;
+            category.DisplayOrder = model.DisplayOrder;
+            category.CreatedOn = DateTime.Now;
+
+            categoryRepo.Create(category);
         }
 
+
+
+        // ADD: SubCategory For DisplayOrder 1 And 2
+        public void AddExistingCategory(AddExistingCategoryViewModel model)
+        {
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            SubCategory subCategory = new SubCategory();
+
+            subCategory.SubCategoryID = Guid.NewGuid();
+            subCategory.CategoryID = model.CategoryID;
+            subCategory.SubCategoryName = model.SubCategoryName;
+            subCategory.CreatedOn = DateTime.Now;
+            subCategoryRepo.Create(subCategory);
+        }
+
+
+        // ADD: SubCategoryItem For DisplayOrder 1
+        public void AddExistingCategoryItems(AddExistingCategoryItemViewModel model)
+        {
+            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
+            SubCategoryItem subCategoryItem = new SubCategoryItem();
+
+            subCategoryItem.SubCategoryItemID = Guid.NewGuid();
+            subCategoryItem.SubCategoryID = model.SubCategoryID;
+            subCategoryItem.SubCategoryName = model.SubCategoryItem;
+            subCategoryItem.CreatedOn = DateTime.Now;
+            subCategoryItemRepo.Create(subCategoryItem);
+        }
+
+
+        public IEnumerable<Category> GetCategories()
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            return categoryRepo.Retrive();
+        }
+
+        public IEnumerable<Category> GetCategoriess()
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            return categoryRepo.Retrive().Where(c => c.DisplayOrder == 1);
+        }
+
+
+        // SHOW: All Categories
         public IEnumerable<Category> CategoryList()
         {
-            IEnumerable<Category> categoryList = repository.Retrive();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            IEnumerable<Category> categoryList = categoryRepo.Retrive();
             return categoryList;
         }
 
+
+        public IEnumerable<SubCategory> GetSubCategoriesByCategoryID(Guid ID)
+        {
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            return subCategoryRepo.Retrive().Where(c => c.CategoryID == ID).ToList();
+        }
+
+
         public String CreateCategory(AddCategoryViewModel CategoryViewModel, HttpPostedFileBase LogoPath)
         {
+            ICategoryRepository categoryRepo = new CategoryRepository();
             String path = "";
             if (LogoPath != null)
             {
@@ -43,7 +113,7 @@ namespace MultivendorEcommerceStore.BL
             //category.CategoryName = CategoryViewModel.Name;
             category.Picture = Path.GetFileName(path);
             category.CreatedOn = DateTime.Now;
-            repository.Create(category);
+            categoryRepo.Create(category);
             return "Category Created";
         }
 

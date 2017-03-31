@@ -34,6 +34,8 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+
+
         // ADD: Supplier Business Information
         [HttpGet]
         public ActionResult AddBusinessInfo(string userID)
@@ -61,6 +63,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
+
         // SHOW: All Suppliers
         [HttpGet]
         public ActionResult SupplierList()
@@ -68,6 +71,8 @@ namespace MultivendorEcommerceStore.Controllers
             AdminBL adminBL = new AdminBL();
             return View(adminBL.SupplierList());
         }
+
+
 
 
         // EDIT: Existing Suppliers
@@ -90,6 +95,7 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
+
         // DELETE: Supplier
         [HttpGet]
         public ActionResult DeleteSupplier(string UserID)//, Guid SupplierID)
@@ -98,6 +104,8 @@ namespace MultivendorEcommerceStore.Controllers
             adminBL.DeleteSupplier(UserID);//, SupplierID);
             return RedirectToAction("Index");
         }
+
+
 
 
 
@@ -111,18 +119,69 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpPost]
         public ActionResult AddCategory(AddCategoryViewModel model)
         {
-            AdminBL adminBL = new AdminBL();
-            adminBL.AddCategory(model);
+            CategoryBL categoryBL = new CategoryBL();
+            categoryBL.AddCategory(model);
             return View("AddCategory");
         }
+
+
+        //ADD: To Existing Category
+        [HttpGet]
+        public ActionResult AddExistingCategory()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categories = categoryBL.GetCategories().Select(c => new
+            {
+                Text = c.CategoryName,
+                Value = c.CategoryID
+            }).ToList();
+            ViewBag.CategoryDropDown = new SelectList(categories, "Value", "Text");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddExistingCategory(AddExistingCategoryViewModel model)
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            categoryBL.AddExistingCategory(model);
+            return RedirectToAction("CategoryList");
+        }
+
+
+
+        //ADD: To Existing SubCategory
+        [HttpGet]
+        public ActionResult AddExistingCategoryItem()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categories = categoryBL.GetCategoriess().Select(c => new
+            {
+                Text = c.CategoryName,
+                Value = c.CategoryID
+            }).ToList();
+            ViewBag.CategoryDropDown = new SelectList(categories, "Value", "Text");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddExistingCategoryItem(AddExistingCategoryItemViewModel model)
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            categoryBL.AddExistingCategoryItems(model);
+            return RedirectToAction("CategoryList");
+        }
+
+
 
 
         // SHOW: All Categories
         public ActionResult CategoryList()
         {
-            AdminBL adminBL = new AdminBL();
-            return View(adminBL.CategoryList());
+            CategoryBL categoryBL = new CategoryBL();
+            return View(categoryBL.CategoryList());
         }
+
+
 
 
         public JsonResult StatesByCountryID(int id)
@@ -149,6 +208,19 @@ namespace MultivendorEcommerceStore.Controllers
             }).ToList();
             var city = new SelectList(cities, "Id", "Text");
             return Json(new { city }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SubCategoriesByCategoryID(Guid ID)
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var subCategory = categoryBL.GetSubCategoriesByCategoryID(ID).Select(c => new
+            {
+                Text = c.SubCategoryName,
+                Value = c.SubCategoryID
+            }).ToList();
+            var subcategory = new SelectList(subCategory, "Value", "Text");
+            return Json(new { subcategory }, JsonRequestBehavior.AllowGet);
         }
 
     }

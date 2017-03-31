@@ -90,58 +90,7 @@ namespace MultivendorEcommerceStore.BL
             return repo.Retrive().FirstOrDefault(s => s.AspNetUserID == userID).SupplierID;
         }
 
-        // ADD: Category
-        public void AddCategory(AddCategoryViewModel model)
-        {
-            ICategoryRepository categoryRepo = new CategoryRepository();
-            Category category = new Category();
-
-            var fileName = Path.GetFileNameWithoutExtension(model.Picture.FileName);
-            fileName += DateTime.Now.Ticks + Path.GetExtension(model.Picture.FileName);
-            var basePath = "~/Content/Admin/Category/" + model.CategoryName + "/Images/";
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Admin/Category/" + model.CategoryName + "/Images/"));
-            model.Picture.SaveAs(path);
-
-            category.CategoryID = Guid.NewGuid();
-            category.CategoryName = model.CategoryName;
-            category.Description = model.Description;
-            category.Picture = basePath + fileName;
-            category.DisplayOrder = model.DisplayOrder;
-            category.CreatedOn = DateTime.Now;
-            categoryRepo.Create(category);
-
-            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
-            SubCategory subCategory = new SubCategory();
-
-            subCategory.SubCategoryID = Guid.NewGuid();
-            subCategory.CategoryID = category.CategoryID;
-            subCategory.SubCategoryName = model.SubCategoryName;
-
-            subCategoryRepo.Create(subCategory);
-
-
-            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
-            SubCategoryItem subCategoryItem = new SubCategoryItem();
-
-            subCategoryItem.SubCategoryItemID = Guid.NewGuid();
-            subCategoryItem.SubCategoryID = subCategory.SubCategoryID;
-            subCategoryItem.SubCategoryName = model.SubCategoryItem;
-            subCategoryItem.CreatedOn = DateTime.Now;
-
-            subCategoryItemRepo.Create(subCategoryItem);
-        }
-
-
-        // SHOW: All Categories
-        public IEnumerable<Category> CategoryList()
-        {
-            ICategoryRepository categoryRepo = new CategoryRepository();
-            IEnumerable<Category> categoryList = categoryRepo.Retrive();
-            return categoryList;
-        }
-
-
+       
         // GET: Countries
         public IEnumerable<CountryMaster> GetCountries()
         {

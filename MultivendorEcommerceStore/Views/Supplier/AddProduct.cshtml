@@ -43,7 +43,7 @@
                                 <div class="col-md-3">
                                     @Html.DropDownListFor(Model => Model.SubCategoryID,
                     new SelectList(string.Empty, "Value", "Text"),
-                    "--Select State--",
+                    "--Select Sub Cateory--",
                     new { @class = "form-control", @id = "SubCategory" })
                                     @Html.ValidationMessageFor(model => model.SubCategoryID, "", new { @class = "text-danger" })
                                 </div>
