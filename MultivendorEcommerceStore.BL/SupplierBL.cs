@@ -41,7 +41,7 @@ namespace MultivendorEcommerceStore.BL
             product.Quantity = model.Quantity;
             product.UnitSize = model.Size;
             product.Status = (int)ProductStatus.Pending;
-            product.IsActive = (int)ProductActive.IsActive;
+            product.IsActive = (int)ProductActive.Yes;
             product.CreatedOn = DateTime.Now;
 
             repositroy.Create(product);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.Model.Product>
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.ProductListViewModel>
 
 @{
     ViewBag.Title = "ProductList";
@@ -37,13 +37,13 @@
                                     @Html.DisplayName("Sub Category")
                                 </th>
                                 <th>
-                                    @Html.DisplayName("Added On")
-                                </th>
-                                <th>
                                     @Html.DisplayName("Status")
                                 </th>
                                 <th>
                                     @Html.DisplayName("Active")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Added On")
                                 </th>
                                 <th>Actions</th>
                             </tr>
@@ -63,25 +63,25 @@
                                         @Html.DisplayFor(modelItem => item.Quantity)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                                        @Html.DisplayFor(modelItem => item.Price)
                                     </td>
                                     <td>
-                                        <img class="img-thumbnail" src="@Url.Content(item.ProductPicture)" height="50" width="50" />
+                                        <img class="img-thumbnail" src="@Url.Content(item.ProductImage1)" height="50" width="50" />
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                                        @Html.DisplayFor(modelItem => item.SubCategoryName)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Status)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.IsActive)
+                                        @Html.DisplayFor(modelItem => item.Active)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedOn)
                                     </td>
                                     <td>
                                         <a href="@Url.Action("EditProduct", "Supplier", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })" class="btn btn-primary">

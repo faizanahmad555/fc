@@ -71,8 +71,8 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult ProductList()
         {
-            SupplierBL supplierBL = new SupplierBL();
-            return View(supplierBL.ProductList());
+            ProductBL productBL = new ProductBL();
+            return View(productBL.ProductList());
         }
 
         // EDIT: Existing Products

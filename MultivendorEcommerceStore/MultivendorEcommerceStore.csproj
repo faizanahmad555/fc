@@ -1466,15 +1466,15 @@
     <Content Include="Views\Admin\AddCategory.cshtml" />
     <Content Include="Views\Supplier\AddProduct.cshtml" />
     <Content Include="Views\Admin\AddBusinessInfo.cshtml" />
-    <Content Include="Views\Admin\CategoryList.cshtml" />
     <Content Include="Views\Supplier\SupplierProfile.cshtml" />
     <Content Include="Views\Shared\_UserInfoDropdown.cshtml" />
     <Content Include="Views\Admin\EditSupplier.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Supplier\ProductList.cshtml" />
     <Content Include="Views\Supplier\EditProduct.cshtml" />
     <Content Include="Views\Admin\AddExistingCategory.cshtml" />
     <Content Include="Views\Admin\AddExistingCategoryItem.cshtml" />
+    <Content Include="Views\Supplier\ProductList.cshtml" />
+    <Content Include="Views\Admin\CategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

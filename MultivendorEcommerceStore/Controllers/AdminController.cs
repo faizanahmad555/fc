@@ -73,8 +73,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
-
         // EDIT: Existing Suppliers
         [HttpGet]
         public ActionResult EditSupplier(string UserID, Guid SupplierID)
@@ -175,13 +173,18 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         // SHOW: All Categories
+        public ActionResult CategoryLists()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            return View(categoryBL.CategoryLists());
+        }
+
+        // SHOW: All Categories
         public ActionResult CategoryList()
         {
             CategoryBL categoryBL = new CategoryBL();
             return View(categoryBL.CategoryList());
         }
-
-
 
 
         public JsonResult StatesByCountryID(int id)

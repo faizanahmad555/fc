@@ -45,15 +45,42 @@ namespace MultivendorEcommerceStore.BL
             repository.Create(supplier);
         }
 
-
         // SHOW: All Suppliers
-        public IEnumerable<Supplier> SupplierList()
+        public List<SupplierListViewModel> SupplierList()
         {
-            ISupplierRepository repository = new SupplierRepository();
-            IEnumerable<Supplier> supplierList = repository.Retrive();
-            return supplierList;
-        }
+            ISupplierRepository supplierRepo = new SupplierRepository();
+            ICountryRepository countryRepo = new CountryRepository();
+            IStateRepository stateRepo = new StateRepository();
+            ICityRepository cityRepo = new CityRepository();
 
+            List<SupplierListViewModel> viewModelList = new List<SupplierListViewModel>();
+
+            var supplierTbl = supplierRepo.Retrive();
+            
+            foreach (var supplier in supplierTbl)
+            {
+                SupplierListViewModel viewModel = new SupplierListViewModel();
+
+                var city = cityRepo.Get().Where(s => s.CityID == supplier.CityID).FirstOrDefault();
+                var state = stateRepo.Get().Where(s => s.StateID == city.StateID).FirstOrDefault();
+                var country = countryRepo.Get().Where(s => s.CountryID == state.CountryID).FirstOrDefault();
+
+                viewModel.AspNetUserID = supplier.AspNetUserID;
+                viewModel.SupplierID = supplier.SupplierID;
+                viewModel.FirstName = supplier.SupplierFirstName;
+                viewModel.LastName = supplier.SupplierLastName;
+                viewModel.Email = supplier.Email;
+                viewModel.Address = supplier.Address;
+                viewModel.MobileNumber = supplier.Phone;
+                viewModel.PostalCode = supplier.PostalCode;
+                viewModel.ProfilePhoto = supplier.ProfilePhoto;
+                viewModel.City = city.Name;
+                viewModel.State = state.Name;
+                viewModel.Country = country.Name;
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
+        }
 
         // DELETE: Supplier
         public void DeleteSupplier(string UserID)

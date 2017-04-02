@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MultivendorEcommerceStore.Repository
 {
-    public  enum ProductStatus
+    public enum ProductStatus : int
     {
-        Pending=1,
-        Approved=2,
-        Reject=3
+        Pending = 1,
+        Approved = 2,
+        Reject = 3
 
     }
-    public enum  ProductActive
+    public enum ProductActive : int
     {
-       IsActive = 1,
-       InActive = 2
+        Yes = 1,
+        No = 2
     }
 }

@@ -37,7 +37,6 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-
         // ADD: SubCategory For DisplayOrder 1 And 2
         public void AddExistingCategory(AddExistingCategoryViewModel model)
         {
@@ -80,11 +79,47 @@ namespace MultivendorEcommerceStore.BL
 
 
         // SHOW: All Categories
-        public IEnumerable<Category> CategoryList()
+        public IEnumerable<Category> CategoryLists()
         {
             ICategoryRepository categoryRepo = new CategoryRepository();
             IEnumerable<Category> categoryList = categoryRepo.Retrive();
             return categoryList;
+        }
+
+
+        // SHOW: All Categories
+        public List<CategoryListViewModel> CategoryList()
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            ISubCategoryItemRepository subCategoryRepoItem = new SubCategoryItemRepository();
+
+            List<CategoryListViewModel> viewModelList = new List<CategoryListViewModel>();
+
+            var subcategoryTbl = subCategoryRepo.Retrive();
+            var subcategoryItemTbl = subCategoryRepoItem.Retrive();
+
+            foreach (var subcategoryItem in subcategoryItemTbl)
+            {
+                CategoryListViewModel viewModel = new CategoryListViewModel();
+
+                var subcategory = subCategoryRepo.Retrive().Where(s => s.SubCategoryID == subcategoryItem.SubCategoryID).FirstOrDefault();
+                var category = categoryRepo.Retrive().Where(s => s.CategoryID == subcategory.CategoryID).FirstOrDefault();
+
+
+                viewModel.CategoryID = category.CategoryID;
+                viewModel.SubCategoryID = subcategory.SubCategoryID;
+
+                viewModel.CategoryPicture = category.Picture;
+                viewModel.DisplayOrder = category.DisplayOrder;
+                viewModel.CategoryName = category.CategoryName;
+                viewModel.SubCategoryName = subcategory.SubCategoryName;
+                viewModel.SubCategoryItemID = subcategoryItem.SubCategoryItemID;
+                viewModel.SubCategoryItem = subcategoryItem.SubCategoryName;
+
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
         }
 
 
