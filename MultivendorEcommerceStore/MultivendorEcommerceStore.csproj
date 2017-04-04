@@ -1475,6 +1475,8 @@
     <Content Include="Views\Admin\AddExistingCategoryItem.cshtml" />
     <Content Include="Views\Supplier\ProductList.cshtml" />
     <Content Include="Views\Admin\CategoryList.cshtml" />
+    <Content Include="Views\Home\DailyDealProducts.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,6 +33,17 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+        public ActionResult DailyDealProducts()
+        {
+            return View();
+        }
+
+        public ActionResult Products()
+        {
+            ProductBL productBL = new ProductBL();
+            return View(productBL.ProductList());
+        }
+
         //Create Category
         [HttpGet]
         public ActionResult CreateCategory()
