@@ -1,16 +1,19 @@
-﻿<ul class="nav pull-right top-menu">
+﻿@{
+    MultivendorEcommerceStore.DB.ViewModel.UserProfileViewModel layoutModel = ViewBag.LayoutModel;
+}
+<ul class="nav pull-right top-menu">
     <li>
         <input type="text" class="form-control search" placeholder="Search">
     </li>
     <!-- user login dropdown start-->
     <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <img alt="" src="img/avatar1_small.jpg">
-            <span class="username">@User.Identity.Name</span>
-            <b class="caret"></b>
-        </a>
         @if (User.IsInRole("Admin"))
         {
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="~/Content/Adminplugins/img/avatar1_small.jpg">
+                <span class="username">@User.Identity.Name</span>
+                <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu extended logout">
                 <div class="log-arrow-up"></div>
                 <li><a href="#"><i class="fa fa-suitcase"></i>Profile</a></li>
@@ -30,6 +33,11 @@
         }
         else if (User.IsInRole("Supplier"))
         {
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="@Url.Content(layoutModel.ProfilePhoto)" height="29" width="29">
+                <span class="username">@User.Identity.Name</span>
+                <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu extended logout">
                 <div class="log-arrow-up"></div>
                 <li><a href="@Url.Action("SupplierProfile", "Supplier")"><i class="fa fa-suitcase"></i>Profile</a></li>
@@ -47,9 +55,6 @@
                 </li>
             </ul>
         }
-
-
-
     </li>
     <li class="sb-toggle-right">
         <i class="fa  fa-align-right"></i>

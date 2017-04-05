@@ -61,6 +61,7 @@
     <Compile Include="AdminBL.cs" />
     <Compile Include="SupplierBL.cs" />
     <Compile Include="SupplierProfileBL.cs" />
+    <Compile Include="UserProfileBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

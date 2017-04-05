@@ -92,8 +92,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
-
         // DELETE: Supplier
         [HttpGet]
         public ActionResult DeleteSupplier(string UserID)//, Guid SupplierID)
@@ -146,7 +144,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
         //ADD: To Existing SubCategory
         [HttpGet]
         public ActionResult AddExistingCategoryItem()
@@ -185,6 +182,35 @@ namespace MultivendorEcommerceStore.Controllers
             CategoryBL categoryBL = new CategoryBL();
             return View(categoryBL.CategoryList());
         }
+
+
+
+        // SHOW: Products of All Suppliers
+        public ActionResult ProductList()
+        {
+            ProductBL productBL = new ProductBL();
+            return View(productBL.ProductList());
+        }
+
+
+        // EDIT: Existing Products of All Suppliers
+        [HttpGet]
+        public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
+        {
+            ProductBL productBL = new ProductBL();
+            EditProductViewModel viewModel = productBL.EditSupplierProduct(SupplierID, ProductID);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(EditProductViewModel viewModel)
+        {
+            ProductBL productBL = new ProductBL();
+            productBL.AddEditedSupplierProduct(viewModel);
+            return RedirectToAction("ProductList");
+        }
+
+
 
 
         public JsonResult StatesByCountryID(int id)

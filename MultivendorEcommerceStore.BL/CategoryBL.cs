@@ -65,11 +65,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        public IEnumerable<Category> GetCategories()
-        {
-            ICategoryRepository categoryRepo = new CategoryRepository();
-            return categoryRepo.Retrive();
-        }
+       
 
         public IEnumerable<Category> GetCategoriess()
         {
@@ -78,7 +74,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        // SHOW: All Categories
+        // SHOW: All Categories(For Testing)
         public IEnumerable<Category> CategoryLists()
         {
             ICategoryRepository categoryRepo = new CategoryRepository();
@@ -86,8 +82,9 @@ namespace MultivendorEcommerceStore.BL
             return categoryList;
         }
 
+       
 
-        // SHOW: All Categories
+        // SHOW: All Categories(For Admin Side)
         public List<CategoryListViewModel> CategoryList()
         {
             ICategoryRepository categoryRepo = new CategoryRepository();
@@ -123,6 +120,15 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
+        // GET: Category(For Category DropDown)
+        public IEnumerable<Category> GetCategories()
+        {
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            return categoryRepo.Retrive();
+        }
+        
+
+        // GET: SubCategories By CategoryID(For SubCategory DropDown)
         public IEnumerable<SubCategory> GetSubCategoriesByCategoryID(Guid ID)
         {
             ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();

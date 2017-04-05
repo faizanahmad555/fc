@@ -38,7 +38,6 @@
         </li>
     <!--manage supplier menu end-->
 
-
      <!--manage categories menu start-->
         <li class="sub-menu">
             <a href="javascript:;">
@@ -58,6 +57,19 @@
             </ul>
         </li>
     <!--manage categiries menu end-->
+
+        <!--manage products menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub">
+                @*<li><a href="@Url.Action("AddProduct", "Admin")">Add Product</a></li>*@
+                <li><a href="@Url.Action("ProductList", "Admin")">Show All Products</a></li>
+            </ul>
+        </li>
+    <!--manage products menu end-->
 
     }
 

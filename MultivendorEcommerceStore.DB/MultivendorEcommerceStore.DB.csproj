@@ -150,6 +150,7 @@
     <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="ViewModel\SupplierListViewModel.cs" />
     <Compile Include="ViewModel\SupplierProfileViewModel.cs" />
+    <Compile Include="ViewModel\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

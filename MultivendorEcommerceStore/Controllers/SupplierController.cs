@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MultivendorEcommerceStore.Controllers
 {
-    public class SupplierController : Controller
+    public class SupplierController : BaseController
     {
         // GET: Supplier
         [Authorize(Roles = "Supplier")]
@@ -30,12 +30,12 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult SupplierProfile()
         {
-            string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            //string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
-            SupplierProfileBL BL = new SupplierProfileBL();
-            var profile = BL.GetProfileByUserIdentity(UserID);
-            return View(profile);
+            UserProfileBL userProfileBL = new UserProfileBL();
+            return View(userProfileBL.GetProfileByUserIdentity(CurrentUserID));
         }
+
 
 
         // ADD: Product
@@ -43,14 +43,13 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult AddProduct()
         {
-            SupplierBL supplierBL = new SupplierBL();
-            var categories = supplierBL.GetCategories().Select(c => new
+            CategoryBL categoryBL = new CategoryBL();
+            var categories = categoryBL.GetCategories().Select(c => new
             {
                 Text = c.CategoryName,
                 Value = c.CategoryID
             }).ToList();
             ViewBag.CategoryDropDown = new SelectList(categories, "Value", "Text");
-            //ViewBag.SupplierID = supplierBL.GetSupplierByID(Id);
             return View();
         }
 
@@ -58,31 +57,31 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpPost]
         public ActionResult AddProduct(AddProductViewModel model)
         {
-            string UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-
-            SupplierBL supplierBL = new SupplierBL();
-            supplierBL.AddProduct(model, UserId);
+            ProductBL productBL = new ProductBL();
+            productBL.AddProduct(model, CurrentSupplierID);
             return RedirectToAction("AddProduct");
         }
 
 
-        // SHOW: All Products
+
+        // SHOW: Current Supplier Products
         [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult ProductList()
         {
             ProductBL productBL = new ProductBL();
-            return View(productBL.ProductList());
+            return View(productBL.GetProductsBySupplierID(CurrentSupplierID));
         }
+
+
 
         // EDIT: Existing Products
         [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
         {
-
-            SupplierBL supplierBL = new SupplierBL();
-            EditProductViewModel viewModel = supplierBL.EditSupplierProduct(SupplierID, ProductID);
+            ProductBL productBL = new ProductBL();
+            EditProductViewModel viewModel = productBL.EditSupplierProduct(SupplierID, ProductID);
             return View(viewModel);
         }
 
@@ -90,17 +89,20 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpPost]
         public ActionResult EditProduct(EditProductViewModel viewModel)
         {
-            SupplierBL supplierBL = new SupplierBL();
-            supplierBL.AddEditedSupplierProduct(viewModel);
+            ProductBL productBL = new ProductBL();
+            productBL.AddEditedSupplierProduct(viewModel);
             return RedirectToAction("ProductList");
         }
 
+        
+
+        // GET: SubCategories By CategoryID
         [Authorize(Roles = "Supplier")]
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {
-            SupplierBL supplierBL = new SupplierBL();
+            CategoryBL categoryBL = new CategoryBL();
             List<SelectListItem> list = new List<SelectListItem>();
-            var subCategory = supplierBL.GetSubCategoriesByCategoryID(ID).Select(c => new
+            var subCategory = categoryBL.GetSubCategoriesByCategoryID(ID).Select(c => new
             {
                 Text = c.SubCategoryName,
                 Value = c.SubCategoryID
