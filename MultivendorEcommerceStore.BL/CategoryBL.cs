@@ -21,9 +21,9 @@ namespace MultivendorEcommerceStore.BL
 
             var fileName = Path.GetFileNameWithoutExtension(model.Picture.FileName);
             fileName += DateTime.Now.Ticks + Path.GetExtension(model.Picture.FileName);
-            var basePath = "~/Content/Admin/Category/" + model.CategoryName + "/Images/";
+            var basePath = "/Content/Admin/Category/" + model.CategoryName + "/Images/";
             var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Admin/Category/" + model.CategoryName + "/Images/"));
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("/Content/Admin/Category/" + model.CategoryName + "/Images/"));
             model.Picture.SaveAs(path);
 
             category.CategoryID = Guid.NewGuid();
@@ -65,7 +65,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-       
+
 
         public IEnumerable<Category> GetCategoriess()
         {
@@ -82,37 +82,43 @@ namespace MultivendorEcommerceStore.BL
             return categoryList;
         }
 
-       
 
-        // SHOW: All Categories(For Admin Side)
+
+        // SHOW: All Categories(For Front End)
         public List<CategoryListViewModel> CategoryList()
         {
             ICategoryRepository categoryRepo = new CategoryRepository();
-            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
-            ISubCategoryItemRepository subCategoryRepoItem = new SubCategoryItemRepository();
-
             List<CategoryListViewModel> viewModelList = new List<CategoryListViewModel>();
 
-            var subcategoryTbl = subCategoryRepo.Retrive();
-            var subcategoryItemTbl = subCategoryRepoItem.Retrive();
+            var MainCat = categoryRepo.Retrive();
 
-            foreach (var subcategoryItem in subcategoryItemTbl)
+            foreach (var category in MainCat)
             {
                 CategoryListViewModel viewModel = new CategoryListViewModel();
 
-                var subcategory = subCategoryRepo.Retrive().Where(s => s.SubCategoryID == subcategoryItem.SubCategoryID).FirstOrDefault();
-                var category = categoryRepo.Retrive().Where(s => s.CategoryID == subcategory.CategoryID).FirstOrDefault();
+                CategoryEntity cat = new CategoryEntity();
 
+                cat.CategoryID = category.CategoryID;
+                cat.CategoryName = category.CategoryName;
+                cat.CategoryPicture = category.Picture;
+                cat.DisplayOrder = category.DisplayOrder;
 
-                viewModel.CategoryID = category.CategoryID;
-                viewModel.SubCategoryID = subcategory.SubCategoryID;
+                foreach (var subcategory in category.SubCategories)
+                {
+                    SubCategoryEntity subcat = new SubCategoryEntity();
+                    subcat.SubCategoryID = subcategory.SubCategoryID;
+                    subcat.SubCategoryName = subcategory.SubCategoryName;
+                    cat.listSubCategoryEntity.Add(subcat);
 
-                viewModel.CategoryPicture = category.Picture;
-                viewModel.DisplayOrder = category.DisplayOrder;
-                viewModel.CategoryName = category.CategoryName;
-                viewModel.SubCategoryName = subcategory.SubCategoryName;
-                viewModel.SubCategoryItemID = subcategoryItem.SubCategoryItemID;
-                viewModel.SubCategoryItem = subcategoryItem.SubCategoryName;
+                    foreach (var subcategoryitem in subcategory.SubCategoryItems)
+                    {
+                        SubCategoryItemEntity subcatItem = new SubCategoryItemEntity();
+                        subcatItem.SubCategoryItemID = subcategoryitem.SubCategoryItemID;
+                        subcatItem.SubCategoryItemName = subcategoryitem.SubCategoryName;
+                        subcat.listSubCategoryItemEntity.Add(subcatItem);
+                    }
+                }
+                viewModel.listCategoryEntity.Add(cat);
 
                 viewModelList.Add(viewModel);
             }
@@ -126,7 +132,7 @@ namespace MultivendorEcommerceStore.BL
             ICategoryRepository categoryRepo = new CategoryRepository();
             return categoryRepo.Retrive();
         }
-        
+
 
         // GET: SubCategories By CategoryID(For SubCategory DropDown)
         public IEnumerable<SubCategory> GetSubCategoriesByCategoryID(Guid ID)

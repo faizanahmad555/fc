@@ -30,6 +30,9 @@
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = "Password" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
                     <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <input type="submit" value="Log in" class="btn btn-lg btn-success btn-block" />

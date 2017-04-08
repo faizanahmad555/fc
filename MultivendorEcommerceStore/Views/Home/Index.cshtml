@@ -1,7 +1,7 @@
 ﻿@{
+
     ViewBag.Title = "Home Page";
 }
-
 <!-- Home slideder-->
 <div id="home-slider">
     <div class="container">
@@ -11,9 +11,9 @@
                 <div class="homeslider">
                     <div class="content-slide">
                         <ul id="contenhomeslider">
-                            <li><img alt="Funky roots" src="~/assets/data/slide.jpg" title="Funky roots" /></li>
-                            <li><img alt="Funky roots" src="~/assets/data/slide.jpg" title="Funky roots" /></li>
-                            <li><img alt="Funky roots" src="~/assets/data/slide.jpg" title="Funky roots" /></li>
+                            <li><img alt="Funky roots" src="~/assets/data/slider1.jpg" title="Funky roots" /></li>
+                            <li><img alt="Funky roots" src="~/assets/data/slider1.jpg" title="Funky roots" /></li>
+                            <li><img alt="Funky roots" src="~/assets/data/slider1.jpg" title="Funky roots" /></li>
                         </ul>
                     </div>
                 </div>
@@ -25,13 +25,12 @@
     </div>
 </div>
 <!-- END Home slideder-->
-
 <!-- servives -->
 <div class="container">
     <div class="service ">
         <div class="col-xs-6 col-sm-3 service-item">
             <div class="icon">
-                <img alt="services" src="assets/data/s1.png" />
+                <img alt="services" src="~/assets/data/s1.png" />
             </div>
             <div class="info">
                 <a href="#"><h3>Free Shipping</h3></a>
@@ -40,7 +39,7 @@
         </div>
         <div class="col-xs-6 col-sm-3 service-item">
             <div class="icon">
-                <img alt="services" src="assets/data/s2.png" />
+                <img alt="services" src="~/assets/data/s2.png" />
             </div>
             <div class="info">
                 <a href="#"><h3>30-day return</h3></a>
@@ -49,9 +48,8 @@
         </div>
         <div class="col-xs-6 col-sm-3 service-item">
             <div class="icon">
-                <img alt="services" src="assets/data/s3.png" />
+                <img alt="services" src="~/assets/data/s3.png" />
             </div>
-
             <div class="info">
                 <a href="#"><h3>24/7 support</h3></a>
                 <span>Online consultations</span>
@@ -59,7 +57,7 @@
         </div>
         <div class="col-xs-6 col-sm-3 service-item">
             <div class="icon">
-                <img alt="services" src="assets/data/s4.png" />
+                <img alt="services" src="~/assets/data/s4.png" />
             </div>
             <div class="info">
                 <a href="#"><h3>SAFE SHOPPING</h3></a>
@@ -69,5 +67,20 @@
     </div>
 </div>
 <!-- end services -->
+<!-- DEALS -->
+@Html.Partial("_DEALS")
+<!-- END DEALS -->
+<!-- Main Content -->
+<div class="content-page">
+    <div class="option5 container">
 
-@*@Html.Partial("_DailyDealProducts")*@
+        <!-- featured category fashion -->
+        @Html.Partial("_FASHIONCategoryProducts")
+        <!-- end featured category fashion -->
+
+
+
+
+    </div>
+</div>
+<!-- END Main Content -->

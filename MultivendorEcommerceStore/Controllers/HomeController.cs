@@ -44,25 +44,13 @@ namespace MultivendorEcommerceStore.Controllers
             return View(productBL.ProductList());
         }
 
-        //Create Category
-        [HttpGet]
-        public ActionResult CreateCategory()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult CreateCategory(AddCategoryViewModel CategoryViewModel, HttpPostedFileBase LogoPath)
+        public PartialViewResult _ShowCategories()
         {
-            String status = _categoryBL.CreateCategory(CategoryViewModel, LogoPath);
-            ViewBag.StatusMessage = status;
-            return View();
+            CategoryBL categoryBL = new CategoryBL();
+            var categorylist = categoryBL.CategoryList();
+            return PartialView("_ShowCategories", categorylist);
         }
-
-        //public ActionResult ShowCategory()
-        //{
-        //    ICategoryRepository
-        //}
 
     }
 }

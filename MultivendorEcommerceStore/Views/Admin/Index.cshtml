@@ -36,18 +36,19 @@
         </section>
     </div>
 
-
     <div class="col-lg-3 col-sm-6">
         <section class="panel">
             <div class="symbol red">
                 <i class="fa fa-tags"></i>
             </div>
-            <div class="value">
-                <h1>
-                    @Model.ProductsCount
-                </h1>
-                <p>Total Products</p>
-            </div>
+            <a href="@Url.Action("ProductList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @Model.ProductsCount
+                    </h1>
+                    <p>Total Products</p>
+                </div>
+            </a>
         </section>
     </div>
     <div class="col-lg-3 col-sm-6">

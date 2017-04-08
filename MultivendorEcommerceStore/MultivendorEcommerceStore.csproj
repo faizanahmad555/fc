@@ -723,6 +723,7 @@
     <Content Include="assets\data\slide-option2.jpg" />
     <Content Include="assets\data\slide.jpg" />
     <Content Include="assets\data\slide1.jpg" />
+    <Content Include="assets\data\slider1.jpg" />
     <Content Include="assets\data\sport.png" />
     <Content Include="assets\data\sport1.jpg" />
     <Content Include="assets\data\sport2.jpg" />
@@ -1481,6 +1482,9 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Home\_FASHIONCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_DEALS.cshtml" />
+    <Content Include="Views\Home\_ShowCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
