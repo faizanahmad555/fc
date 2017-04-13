@@ -15,8 +15,8 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+<body class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "home" : "category-page")">
 
-<body class="category-page">
     <!-- HEADER -->
     <div id="header" class="header">
         <div class="top-header">
@@ -266,100 +266,7 @@
                     </ul>
                 </div>
             </div> <!-- /#trademark-box -->
-            <!-- #trademark-text-box -->
-            <!-- <div id="trademark-text-box" class="row">
-                <div class="col-sm-12">
-                    <ul id="trademark-search-list" class="trademark-list">
-                        <li class="trademark-text-tit">HOT SEARCHED KEYWORDS:</li>
-                        <li><a href="#" >Xiaomii Mi3</a></li>
-                        <li><a href="#" >Digiflipii Pro XT 712 Tablet</a></li>
-                        <li><a href="#" >Mi 3 Phones</a></li>
-                        <li><a href="#" >Iphonei 6 Plus</a></li>
-                        <li><a href="#" >Women's Bags</a></li>
-                        <li><a href="#" >Wallets</a></li>
-                        <li><a href="#" >Women's Clutches</a></li>
-                        <li><a href="#" >Backpacks Totes</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul id="trademark-tv-list" class="trademark-list">
-                        <li class="trademark-text-tit">TVS:</li>
-                        <li><a href="#" >Sonyi TV</a></li>
-                        <li><a href="#" >Samsing TV</a></li>
-                        <li><a href="#" >LGi TV</a></li>
-                        <li><a href="#" >Onidai TV</a></li>
-                        <li><a href="#" >Toshibai TV</a></li>
-                        <li><a href="#" >Philipsi TV</a></li>
-                        <li><a href="#" >Micromaxi TV</a></li>
-                        <li><a href="#" >LED TV</a></li>
-                        <li><a href="#" >LCD TV</a></li>
-                        <li><a href="#" >Plasma TV</a></li>
-                        <li><a href="#" >3D TV</a></li>
-                        <li><a href="#" >Smart TV</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul id="trademark-mobile-list" class="trademark-list">
-                        <li class="trademark-text-tit">MOBILES:</li>
-                        <li><a href="#" >Moto E</a></li>
-                        <li><a href="#" >Samsong Mobile</a></li>
-                        <li><a href="#" >Micromaxo Mobile</a></li>
-                        <li><a href="#" >Nokiao Mobile</a></li>
-                        <li><a href="#" >HTCo Mobile</a></li>
-                        <li><a href="#" >Sonyo Mobile</a></li>
-                        <li><a href="#" >Appleo Mobile</a></li>
-                        <li><a href="#" >LoG Mobile</a></li>
-                        <li><a href="#" >Karbonno Mobile</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul id="trademark-laptop-list" class="trademark-list">
-                        <li class="trademark-text-tit">LAPTOPS::</li>
-                        <li><a href="#" >Appleo Laptop</a></li>
-                        <li><a href="#" >Acero Laptop</a></li>
-                        <li><a href="#" >Samsoung Laptop</a></li>
-                        <li><a href="#" >Lenoovo Laptop</a></li>
-                        <li><a href="#" >Sonoy Laptop</a></li>
-                        <li><a href="#" >Dello Laptop</a></li>
-                        <li><a href="#" >Asuos Laptop</a></li>
-                        <li><a href="#" >Toshibao Laptop</a></li>
-                        <li><a href="#" >LGo Laptop</a></li>
-                        <li><a href="#" >HPo Laptop</a></li>
-                        <li><a href="#" >Notebook</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul id="trademark-watches-list" class="trademark-list">
-                        <li class="trademark-text-tit">WATCHES:</li>
-                        <li><a href="#" >FCUKo Watches</a></li>
-                        <li><a href="#" >Titano Watches</a></li>
-                        <li><a href="#" >Casioo Watches</a></li>
-                        <li><a href="#" >Fastracko Watches</a></li>
-                        <li><a href="#" >Timexo Watches</a></li>
-                        <li><a href="#" >Fossilo Watches</a></li>
-                        <li><a href="#" >Dieselo Watches</a></li>
-                        <li><a href="#" >Toshibao Laptop</a></li>
-                        <li><a href="#" >Luxury Watches</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul id="trademark-shoes-list" class="trademark-list">
-                        <li class="trademark-text-tit">FOOTWEAR:</li>
-                        <li><a href="#" >Shoes</a></li>
-                        <li><a href="#" >Casualo Shoes</a></li>
-                        <li><a href="#" >Sports Shoes</a></li>
-                        <li><a href="#" >Adidaso Shoes</a></li>
-                        <li><a href="#" >Gaso Shoes</a></li>
-                        <li><a href="#" >Pumao Shoes</a></li>
-                        <li><a href="#" >Reeboko Shoes</a></li>
-                        <li><a href="#" >Woodlando Shoes</a></li>
-                        <li><a href="#" >Red tape Shoes</a></li>
-                        <li><a href="#" >Nikeo Shoes</a></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- /#trademark-text-box -->
-
+            
             <div id="footer-menu-box">
                 <div class="col-sm-12">
                     <ul class="footer-menu-list">
@@ -428,5 +335,7 @@
     <script type="text/javascript" src="~/assets/js/jquery.actual.min.js"></script>
     <script type="text/javascript" src="~/assets/js/theme-script.js"></script>
 </body>
+
+
 
 </html>

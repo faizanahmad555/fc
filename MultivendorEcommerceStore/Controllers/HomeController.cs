@@ -45,6 +45,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // SHOW: All Categories of Display Order 1
         public PartialViewResult _ShowCategories()
         {
             CategoryBL categoryBL = new CategoryBL();

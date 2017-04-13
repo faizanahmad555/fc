@@ -1,49 +1,134 @@
 ﻿@using MultivendorEcommerceStore.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
-    Layout = null;
-}
-
-@{
     ViewBag.Title = "Admin Area";
     Layout = null;
 }
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<h2 style="text-align:center">@ViewBag.Title.</h2>
-<div class="container">
-    <hr />
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <section id="loginForm">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from thevectorlab.net/flatlab/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Feb 2017 17:42:34 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FineCollection, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.html">
+
+    <title>FineCollection - Admin Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/Adminplugins/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Adminplugins/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Adminplugins/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/Adminplugins/css/style.css" rel="stylesheet">
+    <link href="~/Content/Adminplugins/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="login-body">
+    <div class="container">
+        <div class="form-signin">
+            <h2 class="form-signin-heading">sign in now</h2>
+            <div class="login-wrap">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+                {
                     @Html.AntiForgeryToken()
-                    <h4>Please Sign In</h4>
-                    <hr class="colorgraph">
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", placeholder = "Email Address" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = "Password" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>
-                    <div class="form-group">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" value="Log in" class="btn btn-lg btn-success btn-block" />
+
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", placeholder = "Email Address" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                    <label class="checkbox">
+                        <input type="checkbox" value="remember-me"> Remember me
+                        <span class="pull-right">
+                            <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+
+                        </span>
+                    </label>
+                    <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+
+                }
+
+                <p>or you can sign in via social network</p>
+                <div class="login-social-link">
+                    <a href="index-2.html" class="facebook">
+                        <i class="fa fa-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="index-2.html" class="twitter">
+                        <i class="fa fa-twitter"></i>
+                        Twitter
+                    </a>
+                </div>
+                <div class="registration">
+                    Don't have an account yet?
+                    <a class="" href="registration.html">
+                        Create an account
+                    </a>
+                </div>
+
+            </div>
+
+            @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <!-- Modal -->
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Forgot Password ?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Enter your e-mail address below to reset your password.</p>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control placeholder-no-fix", placeholder = "Email Address" })
+
+                                @*<input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">*@
+
+                            </div>
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
                         </div>
                     </div>
-                }
-            </section>
+                </div>
+            <!-- modal -->
+            }
         </div>
+
     </div>
-</div>
-                
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/Content/Adminplugins/js/jquery.js"></script>
+    <script src="~/Content/Adminplugins/js/bootstrap.min.js"></script>
+
+
+</body>
+
+<!-- Mirrored from thevectorlab.net/flatlab/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Feb 2017 17:42:34 GMT -->
+</html>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
