@@ -53,5 +53,15 @@ namespace MultivendorEcommerceStore.Controllers
             return PartialView("_ShowCategories", categorylist);
         }
 
+
+        public PartialViewResult _FASHIONCategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_FASHIONCategoryProducts", categoryList);
+        }
+
+
+
     }
 }

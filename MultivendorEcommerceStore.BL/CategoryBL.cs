@@ -90,7 +90,7 @@ namespace MultivendorEcommerceStore.BL
             ICategoryRepository categoryRepo = new CategoryRepository();
             List<CategoryListViewModel> viewModelList = new List<CategoryListViewModel>();
 
-            var MainCat = categoryRepo.Retrive();
+            var MainCat = categoryRepo.Retrive().OrderBy(s=>s.CategoryName);
 
             foreach (var category in MainCat)
             {
@@ -140,6 +140,23 @@ namespace MultivendorEcommerceStore.BL
             ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
             return subCategoryRepo.Retrive().Where(c => c.CategoryID == ID).ToList();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         public String CreateCategory(AddCategoryViewModel CategoryViewModel, HttpPostedFileBase LogoPath)

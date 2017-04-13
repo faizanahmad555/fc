@@ -140,7 +140,7 @@ namespace MultivendorEcommerceStore.Controllers
         {
             CategoryBL categoryBL = new CategoryBL();
             categoryBL.AddExistingCategory(model);
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("AddExistingCategory");
         }
 
 
@@ -163,7 +163,7 @@ namespace MultivendorEcommerceStore.Controllers
         {
             CategoryBL categoryBL = new CategoryBL();
             categoryBL.AddExistingCategoryItems(model);
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("AddExistingCategoryItem");
         }
 
 

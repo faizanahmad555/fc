@@ -315,7 +315,9 @@
     <Content Include="assets\data\category-slide.jpg" />
     <Content Include="assets\data\chaneee.png" />
     <Content Include="assets\data\ckoo.png" />
+    <Content Include="assets\data\digital.jpg" />
     <Content Include="assets\data\digital.png" />
+    <Content Include="assets\data\electronic.jpg" />
     <Content Include="assets\data\electronic.png" />
     <Content Include="assets\data\f.jpg" />
     <Content Include="assets\data\f1.jpg" />
@@ -324,12 +326,14 @@
     <Content Include="assets\data\f4.jpg" />
     <Content Include="assets\data\f5.jpg" />
     <Content Include="assets\data\f6.jpg" />
+    <Content Include="assets\data\fashion.jpg" />
     <Content Include="assets\data\fashion.png" />
     <Content Include="assets\data\full1.jpg" />
     <Content Include="assets\data\full2.jpg" />
     <Content Include="assets\data\full3.jpg" />
     <Content Include="assets\data\full4.jpg" />
     <Content Include="assets\data\furniture.png" />
+    <Content Include="assets\data\furniture1.jpg" />
     <Content Include="assets\data\g.jpg" />
     <Content Include="assets\data\girl1.jpg" />
     <Content Include="assets\data\girl1.png" />
@@ -349,6 +353,7 @@
     <Content Include="assets\data\icon-sports.png" />
     <Content Include="assets\data\introduce-logo.png" />
     <Content Include="assets\data\jewelry-slide.jpg" />
+    <Content Include="assets\data\jewelry.jpg" />
     <Content Include="assets\data\jewelry.png" />
     <Content Include="assets\data\kid.jpg" />
     <Content Include="assets\data\kid.png" />
@@ -725,6 +730,7 @@
     <Content Include="assets\data\slide.jpg" />
     <Content Include="assets\data\slide1.jpg" />
     <Content Include="assets\data\slider1.jpg" />
+    <Content Include="assets\data\sport.jpg" />
     <Content Include="assets\data\sport.png" />
     <Content Include="assets\data\sport1.jpg" />
     <Content Include="assets\data\sport2.jpg" />
