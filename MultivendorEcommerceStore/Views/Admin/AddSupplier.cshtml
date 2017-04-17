@@ -163,7 +163,7 @@
         $("#SelectedCountry").change(function () {
             var countryId = $('#SelectedCountry').val();
             $.ajax({
-                url: "/Admin/StatesByCountryID/" + countryId,
+                url: "/Ajax/StatesByCountryID/" + countryId,
                 type: "Get",
                 contentType: "application/json; charset=utf-8",
                 datatype: 'JSON',
@@ -179,7 +179,7 @@
         $("#States").change(function () {
             var stateId = $('#States').val();
             $.ajax({
-                url: "/Admin/CitesByStateID/" + stateId,
+                url: "/Ajax/CitesByStateID/" + stateId,
                 type: "Get",
                 contentType: "application/json; charset=utf-8",
                 datatype: 'JSON',

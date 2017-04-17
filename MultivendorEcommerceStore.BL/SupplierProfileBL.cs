@@ -75,56 +75,38 @@ namespace MultivendorEcommerceStore.BL
             return viewModel;
         }
 
-        //// GET: Supplier Profile
-        //public SupplierProfileViewModel GetProfileByUserIdentity(string userID)
-        //{
-        //    SupplierRepository repo = new SupplierRepository();
-        //    ICountryRepository countryRepo = new CountryRepository();
-        //    IStateRepository stateRepo = new StateRepository();
-        //    ICityRepository cityRepo = new CityRepository();
-
-        //    SupplierProfileViewModel viewModel = new SupplierProfileViewModel();
-
-        //    var yourProfile = repo.Retrive().Where(s => s.AspNetUserID == userID).FirstOrDefault();
-        //    if (yourProfile != null)
-        //    {
-        //        var city = cityRepo.Get().Where(s => s.CityID == yourProfile.CityID).FirstOrDefault();
-        //        var state = stateRepo.Get().Where(s => s.StateID == yourProfile.StateID).FirstOrDefault();
-        //        var country = countryRepo.Get().Where(s => s.CountryID == state.CountryID).FirstOrDefault();
-
-        //        viewModel.UserID = userID;
-        //        viewModel.SupplierID = yourProfile.SupplierID;
-        //        viewModel.FirstName = yourProfile.SupplierFirstName;
-        //        viewModel.LastName = yourProfile.SupplierLastName;
-        //        viewModel.Email = yourProfile.Email;
-        //        viewModel.Address = yourProfile.Address;
-        //        viewModel.PhoneNo = yourProfile.Phone;
-        //        viewModel.ProfilePhoto = yourProfile.ProfilePhoto;
-        //        viewModel.City = city.Name;
-        //        viewModel.State = state.Name;
-        //        viewModel.Country = country.Name;
-        //    }
-        //    return viewModel;
-        //}
-
 
         // GET EXISTING : SupplierProfile For Edit
         public EditSupplierViewModel EditSupplierProfile(string UserID, Guid supplierID)
         {
             ISupplierRepository supplierRepo = new SupplierRepository();
+            ICountryRepository countryRepo = new CountryRepository();
+            IStateRepository stateRepo = new StateRepository();
+            ICityRepository cityRepo = new CityRepository();
+
+            EditSupplierViewModel viewModel = new EditSupplierViewModel();
 
             var supplierProfile = supplierRepo.Retrive().Where(s => s.AspNetUserID == UserID && s.SupplierID == supplierID).FirstOrDefault();
 
-            EditSupplierViewModel viewModel = new EditSupplierViewModel();
-            viewModel.AspNetUserID = UserID;
-            viewModel.SupplierID = supplierID;
-            viewModel.FirstName = supplierProfile.SupplierFirstName;
-            viewModel.LastName = supplierProfile.SupplierLastName;
-            viewModel.ProfilePhotoPath = supplierProfile.ProfilePhoto;
-            viewModel.MobileNumber = supplierProfile.Phone;
-            viewModel.CNIC = supplierProfile.CNIC;
-            viewModel.Address = supplierProfile.Address;
-            viewModel.PostalCode = supplierProfile.PostalCode;
+            if (supplierProfile != null)
+            {
+                var city = cityRepo.Get().Where(s => s.CityID == supplierProfile.CityID).FirstOrDefault();
+                var state = stateRepo.Get().Where(s => s.StateID == supplierProfile.StateID).FirstOrDefault();
+                var country = countryRepo.Get().Where(s => s.CountryID == supplierProfile.CountryID).FirstOrDefault();
+
+                viewModel.AspNetUserID = UserID;
+                viewModel.SupplierID = supplierID;
+                viewModel.FirstName = supplierProfile.SupplierFirstName;
+                viewModel.LastName = supplierProfile.SupplierLastName;
+                viewModel.ProfilePhotoPath = supplierProfile.ProfilePhoto;
+                viewModel.MobileNumber = supplierProfile.Phone;
+                viewModel.CNIC = supplierProfile.CNIC;
+                viewModel.Address = supplierProfile.Address;
+                viewModel.PostalCode = supplierProfile.PostalCode;
+                viewModel.CityID = city.CityID;
+                viewModel.StateID = state.StateID;
+                viewModel.CountryID = country.CountryID;
+            }
             return viewModel;
         }
 
@@ -158,6 +140,9 @@ namespace MultivendorEcommerceStore.BL
             supplier.CNIC = viewModel.CNIC;
             supplier.Address = viewModel.Address;
             supplier.PostalCode = viewModel.PostalCode;
+            supplier.CityID = viewModel.CityID;
+            supplier.StateID = viewModel.StateID;
+            supplier.CountryID = viewModel.CountryID;
 
             supplierRepo.Update(supplier);
         }

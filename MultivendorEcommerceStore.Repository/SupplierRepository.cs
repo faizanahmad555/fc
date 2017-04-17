@@ -39,6 +39,9 @@ namespace MultivendorEcommerceStore.Repository
             supplierProfile.ProfilePhoto = entity.ProfilePhoto;
             supplierProfile.PostalCode = entity.PostalCode;
             supplierProfile.CNIC = entity.CNIC;
+            supplierProfile.CountryID = entity.CountryID;
+            supplierProfile.StateID = entity.StateID;
+            supplierProfile.CityID = entity.CityID;
             _db.SaveChanges();
         }
 

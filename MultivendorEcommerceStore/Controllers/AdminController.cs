@@ -34,8 +34,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
-
         // ADD: Supplier Business Information
         [HttpGet]
         public ActionResult AddBusinessInfo(string userID)
@@ -77,10 +75,23 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult EditSupplier(string UserID, Guid SupplierID)
         {
-
-            SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
-            EditSupplierViewModel viewModel = supplierProfileBL.EditSupplierProfile(UserID, SupplierID);
-            return View(viewModel);
+            if (UserID != null && SupplierID != null)
+            {
+                AdminBL adminBL = new AdminBL();
+                SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
+                var countries = adminBL.GetCountries().Select(c => new
+                {
+                    Text = c.Name,
+                    Value = c.CountryID
+                }).ToList();
+                ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
+                EditSupplierViewModel viewModel = supplierProfileBL.EditSupplierProfile(UserID, SupplierID);
+                return View(viewModel);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         [HttpPost]
@@ -100,8 +111,6 @@ namespace MultivendorEcommerceStore.Controllers
             adminBL.DeleteSupplier(UserID);//, SupplierID);
             return RedirectToAction("Index");
         }
-
-
 
 
 
@@ -210,34 +219,6 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("ProductList");
         }
 
-
-
-
-        public JsonResult StatesByCountryID(int id)
-        {
-            AdminBL bl = new AdminBL();
-            List<SelectListItem> list = new List<SelectListItem>();
-            var states = bl.GetStatesByCountryID(id).Select(s => new
-            {
-                Text = s.Name,
-                Id = s.StateID
-            }).ToList();
-            var state = new SelectList(states, "Id", "Text");
-            return Json(new { state }, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult CitesByStateID(int id)
-        {
-            AdminBL bl = new AdminBL();
-            List<SelectListItem> list = new List<SelectListItem>();
-            var cities = bl.GetCitiesByStateID(id).Select(s => new
-            {
-                Text = s.Name,
-                Id = s.CityID
-            }).ToList();
-            var city = new SelectList(cities, "Id", "Text");
-            return Json(new { city }, JsonRequestBehavior.AllowGet);
-        }
 
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {

@@ -32,7 +32,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProfilePhoto, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 <input type="file" name="ProfilePhoto" value="ProfilePhoto" class="btn btn-default" />
                 @Html.ValidationMessageFor(model => model.ProfilePhoto, "", new { @class = "text-danger" })
             </div>
@@ -40,7 +40,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
@@ -48,7 +48,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
@@ -58,7 +58,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
@@ -66,7 +66,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
             </div>
@@ -74,39 +74,43 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.CountryID, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(Model => Model.CountryID
+                        , (SelectList)ViewBag.CountryDropDown
+                        , "--Select Country--"
+                        , new { @class = "form-control", @id = "SelectedCountry" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.StateID, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.StateID
+                        , new SelectList(string.Empty, "Value", "Text")
+                        , "--Select State--"
+                        , new { @class = "form-control", @id = "States" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.CityID, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.CityID
+                        , new SelectList(string.Empty, "Value", "Text")
+                        , "--Select City--"
+                        , new { @class = "form-control", @id = "Cities" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
             </div>
@@ -114,7 +118,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CNIC, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.CNIC, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CNIC, "", new { @class = "text-danger" })
             </div>
@@ -131,3 +135,43 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@section Scripts{
+    <script type="text/javascript">
+        $("#SelectedCountry").change(function () {
+            var countryId = $('#SelectedCountry').val();
+            $.ajax({
+                url: "/Admin/StatesByCountryID/" + countryId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#States').empty();
+                    for (var i = 0; i < data.state.length; i++) {
+                        $('#States').append("<option value= " + data.state[i].Value + ">" + data.state[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+        $("#States").change(function () {
+            var stateId = $('#States').val();
+            $.ajax({
+                url: "/Admin/CitesByStateID/" + stateId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#Cities').empty();
+                    for (var i = 0; i < data.city.length; i++) {
+                        $('#Cities').append("<option value= " + data.city[i].Value + ">" + data.city[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -45,14 +45,17 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string Address { get; set; }
 
 
-        public string Country { get; set; }
+
+        [Display(Name = "Country")]
+        public int CountryID { get; set; }
 
 
+        [Display(Name = "State")]
+        public int StateID { get; set; }
 
-        public string State { get; set; }
 
-
-        public string City { get; set; }
+        [Display(Name = "City")]
+        public int CityID { get; set; }
 
 
         [Display(Name = "Postal Code")]
