@@ -1493,6 +1493,7 @@
     <Content Include="Views\Home\_FASHIONCategoryProducts.cshtml" />
     <Content Include="Views\Home\_DEALS.cshtml" />
     <Content Include="Views\Home\_ShowCategories.cshtml" />
+    <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
