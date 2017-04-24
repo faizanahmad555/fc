@@ -30,7 +30,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<CityMaster> CityMasters { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<CountryMaster> CountryMasters { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<EmailHistory> EmailHistories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
@@ -45,7 +44,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.CustomerListViewModel>
+
+@{
+    ViewBag.Title = "CustomerList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <h4> Customer's List </h4>
+            </header>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th>
+                                    @Html.DisplayName("First Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Last Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Email")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Added On")
+                                </th>
+                                
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                                    </td>
+
+                                    <td>
+                                        <a href="@Url.Action("EditCustomer", "Admin", new { CustomerID = item.CustomerID, UserID = item.AspNetUserID  })" class="btn btn-primary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+
+                                        <a href="@Url.Action("DeleteCustomer", "Admin", new { UserID = item.AspNetUserID })" class="btn btn-danger">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

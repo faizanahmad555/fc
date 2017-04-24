@@ -51,6 +51,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "CNIC")]
         public string CNIC { get; set; }
 
+        [Display(Name = "Added on")]
+        public DateTime? CreatedOn { get; set; }
+
         //public string SupplierConfirmation { get; set; }
     }
 }

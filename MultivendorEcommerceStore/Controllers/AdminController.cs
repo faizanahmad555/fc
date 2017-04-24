@@ -201,7 +201,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(productBL.ProductList());
         }
 
-
+        
         // EDIT: Existing Products of All Suppliers
         [HttpGet]
         public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
@@ -220,6 +220,27 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // DELETE: Products of All Suppliers
+        [HttpGet]
+        public ActionResult DeleteProduct(Guid ProductID)
+        {
+            ProductBL productBL = new ProductBL();
+            productBL.DeleteProduct(ProductID);
+            return RedirectToAction("ProductList");
+        }
+
+
+
+        // SHOW: All Customers
+        [HttpGet]
+        public ActionResult CustomerList()
+        {
+            CustomerBL customerBL = new CustomerBL();
+            return View(customerBL.CustomerList());
+        }
+
+
+        
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {
             CategoryBL categoryBL = new CategoryBL();

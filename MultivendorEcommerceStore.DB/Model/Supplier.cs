@@ -45,6 +45,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
+        public string Gender { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CityMaster CityMaster { get; set; }

@@ -22,8 +22,35 @@ namespace MultivendorEcommerceStore.BL
             customer.Email = model.CustomerRegisterVM.EmailAddress;
             customer.FirstName = model.CustomerRegisterVM.FirstName;
             customer.LastName = model.CustomerRegisterVM.LastName;
+            customer.CreatedOn = DateTime.Now;
 
             customerRepo.Create(customer);
         }
+
+
+        // GET: All Customers(Admin Side)
+        public List<CustomerListViewModel> CustomerList()
+        {
+            ICustomerRepository customerRepo = new CustomerRepository();
+            List<CustomerListViewModel> viewModelList = new List<CustomerListViewModel>();
+
+            var customerTbl = customerRepo.Retrive().ToList();
+
+            foreach (var customer in customerTbl)
+            {
+                CustomerListViewModel viewModel = new CustomerListViewModel();
+
+                viewModel.CustomerID = customer.CustomerID;
+                viewModel.AspNetUserID = customer.AspNetUserID;
+                viewModel.FirstName = customer.FirstName;
+                viewModel.LastName = customer.LastName;
+                viewModel.Email = customer.Email;
+                //viewModel.Phone = customer.Phone;
+                viewModel.CreatedOn = customer.CreatedOn;
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
+        }
+
     }
 }

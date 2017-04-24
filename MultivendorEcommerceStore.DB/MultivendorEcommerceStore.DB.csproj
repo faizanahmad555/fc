@@ -131,9 +131,6 @@
     <Compile Include="Model\UserMessage.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\UserProfile.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddExistingCategoryItemViewModel.cs" />
@@ -142,6 +139,7 @@
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\CategoryListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\DashboardStatisticsVM.cs" />
     <Compile Include="ViewModel\DisplayProductViewModel.cs" />

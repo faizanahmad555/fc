@@ -48,7 +48,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public string ShipState { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
-        public Nullable<System.DateTime> DateEntered { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -14,13 +14,7 @@ namespace MultivendorEcommerceStore.BL
     public class SupplierBL
     {
 
-        // SHOW: ALL Products
-        public IEnumerable<Product> ProductList()
-        {
-            IProductRepository repository = new ProductRepository();
-            IEnumerable<Product> productList = repository.Retrive();
-            return productList;
-        }
+     
 
 
 

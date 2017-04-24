@@ -88,7 +88,7 @@
           <Property Name="ShipState" Type="nvarchar" MaxLength="50" />
           <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="50" />
           <Property Name="ShipCountry" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateEntered" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="EmailHistory">
           <Key>
@@ -262,6 +262,7 @@
           <Property Name="AspNetUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="SupplierFirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
           <Property Name="CountryID" Type="int" />
@@ -320,21 +321,6 @@
           <Property Name="MessageFrom" Type="int" />
           <Property Name="MessageTo" Type="int" />
           <Property Name="ConversationID" Type="uniqueidentifier" />
-        </EntityType>
-        <EntityType Name="UserProfile">
-          <Key>
-            <PropertyRef Name="UserProfileID" />
-          </Key>
-          <Property Name="UserProfileID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="50" />
-          <Property Name="LastName" Type="varchar" MaxLength="50" />
-          <Property Name="Gender" Type="varchar" MaxLength="50" />
-          <Property Name="DOB" Type="datetime" />
-          <Property Name="ProfilePicPath" Type="varchar" MaxLength="500" />
-          <Property Name="Address" Type="varchar(max)" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" />
-          <Property Name="Country" Type="varchar" MaxLength="100" />
-          <Property Name="City" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_CityMaster_StateMaster">
           <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
@@ -608,7 +594,6 @@
           <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
             <End Role="StateMaster" EntitySet="StateMaster" />
             <End Role="CityMaster" EntitySet="CityMaster" />
@@ -710,8 +695,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_AspNetUsers" FromRole="AspNetUsers" ToRole="Customer" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_AspNetUsers1" FromRole="AspNetUsers" ToRole="Supplier" />
+          <NavigationProperty Name="Customers" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="AspNetUser" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -754,42 +739,6 @@
           <NavigationProperty Name="StateMasters" Relationship="Self.FK_StateMaster_CountryMaster" FromRole="CountryMaster" ToRole="StateMaster" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_CountryMaster" FromRole="CountryMaster" ToRole="Supplier" />
         </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="CustomerID" />
-          </Key>
-          <Property Name="CustomerID" Type="Guid" Nullable="false" />
-          <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreditCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CardExpDate" Type="DateTime" Precision="0" />
-          <Property Name="CardExpYear" Type="DateTime" Precision="0" />
-          <Property Name="BillingAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="BillingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShipAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ShipCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShipState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShipPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShipCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateEntered" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
-          <NavigationProperty Name="ReturnRequests" Relationship="Self.FK_ReturnRequest_Customer" FromRole="Customer" ToRole="ReturnRequest" />
-        </EntityType>
         <EntityType Name="EmailHistory">
           <Key>
             <PropertyRef Name="EmailID" />
@@ -829,10 +778,10 @@
           <Property Name="DiscountVoucherID" Type="Guid" />
           <Property Name="OrderStatus" Type="Int16" />
           <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Payment" Relationship="Self.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
           <NavigationProperty Name="OrderHistories" Relationship="Self.FK_OrderHistory_Order" FromRole="Order" ToRole="OrderHistory" />
+          <NavigationProperty Name="Customer" Relationship="MultivendorEcommerceStoreModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -889,8 +838,8 @@
           <Property Name="ShipperID" Type="Guid" />
           <Property Name="ReturnReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fullfilled" Type="Boolean" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_ReturnRequest_Customer" FromRole="ReturnRequest" ToRole="Customer" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_ReturnRequest_OrderDetail" FromRole="ReturnRequest" ToRole="OrderDetail" />
+          <NavigationProperty Name="Customer" Relationship="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" FromRole="ReturnRequest" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -971,6 +920,7 @@
           <NavigationProperty Name="StateMaster" Relationship="Self.FK_Supplier_StateMaster" FromRole="Supplier" ToRole="StateMaster" />
           <NavigationProperty Name="SupplierBusinessInformations" Relationship="Self.FK_SupplierBusinessInformation_Supplier" FromRole="Supplier" ToRole="SupplierBusinessInformation" />
           <NavigationProperty Name="Products" Relationship="MultivendorEcommerceStoreModel.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SupplierBusinessInformation">
           <Key>
@@ -1011,33 +961,6 @@
           <Property Name="MessageTo" Type="Int32" />
           <Property Name="ConversationID" Type="Guid" />
         </EntityType>
-        <EntityType Name="UserProfile">
-          <Key>
-            <PropertyRef Name="UserProfileID" />
-          </Key>
-          <Property Name="UserProfileID" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DOB" Type="DateTime" Precision="3" />
-          <Property Name="ProfilePicPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_Customer_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="AspNetUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Supplier_AspNetUsers1">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1111,30 +1034,6 @@
             </Principal>
             <Dependent Role="Supplier">
               <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ReturnRequest_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="ReturnRequest">
-              <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1232,7 +1131,6 @@
           <EntitySet Name="CityMasters" EntityType="Self.CityMaster" />
           <EntitySet Name="Conversations" EntityType="Self.Conversation" />
           <EntitySet Name="CountryMasters" EntityType="Self.CountryMaster" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="EmailHistories" EntityType="Self.EmailHistory" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -1247,11 +1145,6 @@
           <EntitySet Name="SupplierBusinessInformations" EntityType="Self.SupplierBusinessInformation" />
           <EntitySet Name="Trackings" EntityType="Self.Tracking" />
           <EntitySet Name="UserMessages" EntityType="Self.UserMessage" />
-          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
-          <AssociationSet Name="FK_Customer_AspNetUsers" Association="Self.FK_Customer_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_Supplier_AspNetUsers1" Association="Self.FK_Supplier_AspNetUsers1">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Supplier" EntitySet="Suppliers" />
@@ -1275,14 +1168,6 @@
           <AssociationSet Name="FK_Supplier_CountryMaster" Association="Self.FK_Supplier_CountryMaster">
             <End Role="CountryMaster" EntitySet="CountryMasters" />
             <End Role="Supplier" EntitySet="Suppliers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReturnRequest_Customer" Association="Self.FK_ReturnRequest_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="ReturnRequest" EntitySet="ReturnRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
             <End Role="Payment" EntitySet="Payments" />
@@ -1328,6 +1213,19 @@
           <AssociationSet Name="FK_Product_Supplier" Association="MultivendorEcommerceStoreModel.FK_Product_Supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="MultivendorEcommerceStoreModel.Customer" />
+          <AssociationSet Name="FK_Customer_AspNetUsers" Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="MultivendorEcommerceStoreModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnRequest_Customer" Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ReturnRequest" EntitySet="ReturnRequests" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Product">
@@ -1419,6 +1317,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreditCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardExpDate" Type="DateTime" Precision="0" />
+          <Property Name="CardExpYear" Type="DateTime" Precision="0" />
+          <Property Name="BillingAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUser" />
+          <NavigationProperty Name="Orders" Relationship="MultivendorEcommerceStoreModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="ReturnRequests" Relationship="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" FromRole="Customer" ToRole="ReturnRequest" />
+        </EntityType>
+        <Association Name="FK_Customer_AspNetUsers">
+          <End Type="MultivendorEcommerceStoreModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="MultivendorEcommerceStoreModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AspNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Type="MultivendorEcommerceStoreModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="MultivendorEcommerceStoreModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnRequest_Customer">
+          <End Type="MultivendorEcommerceStoreModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="MultivendorEcommerceStoreModel.ReturnRequest" Role="ReturnRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="ReturnRequest">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1479,40 +1449,6 @@
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
-                <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
-                <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
-                <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
-                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
-                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
-                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-                <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
-                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-                <ScalarProperty Name="ShipState" ColumnName="ShipState" />
-                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1658,6 +1594,7 @@
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
                 <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
@@ -1726,22 +1663,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserProfiles">
-            <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.UserProfile">
-              <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="City" ColumnName="City" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -1775,6 +1696,40 @@
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+                <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
+                <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
+                <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
+                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

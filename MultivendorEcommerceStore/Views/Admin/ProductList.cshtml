@@ -88,8 +88,10 @@
                                             <i class="fa fa-pencil"></i>
                                         </a>
 
-                                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.ProductID }) |*@
+                                        <a href="@Url.Action("DeleteProduct", "Admin", new { ProductID = item.ProductID })" class="btn btn-danger">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             }

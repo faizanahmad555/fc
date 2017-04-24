@@ -38,6 +38,7 @@
         </li>
     <!--manage supplier menu end-->
 
+
      <!--manage categories menu start-->
         <li class="sub-menu">
             <a href="javascript:;">
@@ -58,6 +59,7 @@
         </li>
     <!--manage categiries menu end-->
 
+
         <!--manage products menu start-->
         <li class="sub-menu">
             <a href="javascript:;">
@@ -71,7 +73,25 @@
         </li>
     <!--manage products menu end-->
 
+
+        <!--manage custumers menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Customers</span>
+            </a>
+            <ul class="sub">
+                @*<li><a href="@Url.Action("AddProduct", "Admin")">Add Product</a></li>*@
+                <li><a href="@Url.Action("CustomerList", "Admin")">Show All Customers</a></li>
+            </ul>
+        </li>
+    <!--manage custumers menu end-->
+
     }
+
+
+
+
 
     else if (User.IsInRole("Supplier"))
     {

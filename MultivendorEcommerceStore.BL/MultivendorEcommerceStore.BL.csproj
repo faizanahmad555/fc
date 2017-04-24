@@ -55,7 +55,6 @@
     <Compile Include="CategoryBL.cs" />
     <Compile Include="CustomerBL.cs" />
     <Compile Include="FrontEndProductBL.cs" />
-    <Compile Include="HomeBL.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminBL.cs" />

@@ -83,7 +83,7 @@
     <Property Name="ShipState" Type="nvarchar" MaxLength="50" />
     <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="50" />
     <Property Name="ShipCountry" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateEntered" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="EmailHistory">
     <Key>
@@ -257,6 +257,7 @@
     <Property Name="AspNetUserID" Type="nvarchar" MaxLength="128" />
     <Property Name="SupplierFirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="SupplierLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
     <Property Name="CountryID" Type="int" />
@@ -315,21 +316,6 @@
     <Property Name="MessageFrom" Type="int" />
     <Property Name="MessageTo" Type="int" />
     <Property Name="ConversationID" Type="uniqueidentifier" />
-  </EntityType>
-  <EntityType Name="UserProfile">
-    <Key>
-      <PropertyRef Name="UserProfileID" />
-    </Key>
-    <Property Name="UserProfileID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FirstName" Type="varchar" MaxLength="50" />
-    <Property Name="LastName" Type="varchar" MaxLength="50" />
-    <Property Name="Gender" Type="varchar" MaxLength="50" />
-    <Property Name="DOB" Type="datetime" />
-    <Property Name="ProfilePicPath" Type="varchar" MaxLength="500" />
-    <Property Name="Address" Type="varchar(max)" />
-    <Property Name="Phone" Type="varchar" MaxLength="50" />
-    <Property Name="Country" Type="varchar" MaxLength="100" />
-    <Property Name="City" Type="varchar" MaxLength="100" />
   </EntityType>
   <Association Name="FK_CityMaster_StateMaster">
     <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
@@ -603,7 +589,6 @@
     <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
       <End Role="StateMaster" EntitySet="StateMaster" />
       <End Role="CityMaster" EntitySet="CityMaster" />

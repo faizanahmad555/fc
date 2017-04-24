@@ -58,40 +58,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Address1" ColumnName="Address1" />
-          <ScalarProperty Name="Address2" ColumnName="Address2" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
-          <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
-          <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
-          <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
-          <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
-          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
-          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
-          <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
-          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
-          <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-          <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EmailHistories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.EmailHistory">
         <MappingFragment StoreEntitySet="EmailHistory">
@@ -234,6 +200,7 @@
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
@@ -302,22 +269,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserProfiles">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.UserProfile">
-        <MappingFragment StoreEntitySet="UserProfile">
-          <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="ProfilePicPath" ColumnName="ProfilePicPath" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="City" ColumnName="City" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
@@ -351,6 +302,40 @@
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="SKU" ColumnName="SKU" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+          <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+          <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
+          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+          <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+          <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
+          <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
+          <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
+          <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

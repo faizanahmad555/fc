@@ -35,7 +35,8 @@ namespace MultivendorEcommerceStore.Repository
 
         public IEnumerable<Customer> Retrive()
         {
-            throw new NotImplementedException();
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.Customers.ToList();
         }
 
         public void Update(Customer entity)
