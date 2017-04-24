@@ -11,6 +11,10 @@ using Microsoft.Owin.Security;
 using MultivendorEcommerceStore.Models;
 using MultivendorEcommerceStore.DB.ViewModel;
 using MultivendorEcommerceStore.BL;
+using System.Data.SqlClient;
+using System.Web.Hosting;
+using System.IO;
+using System.Configuration;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -19,6 +23,13 @@ namespace MultivendorEcommerceStore.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        public static string EConfUser { get; set; }
+        public static string connection = GetConnectionString("DefaultConnection");
+        public static string command = null;
+        public static string parameterName = null;
+        public static string methodName = null;
+        string codeType = null;
 
         public AccountController()
         {
@@ -99,42 +110,262 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-        // POST: /Account/SupplierLogin
+        //// POST: /Account/SupplierLogin
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> SupplierLogin(SupplierLoginViewModel model, string returnUrl)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    // This doesn't count login failures towards account lockout
+        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    var user = await UserManager.FindAsync(model.Email, model.Password);
+        //    switch (result)
+        //    {
+        //        case SignInStatus.Success:
+
+        //            if (UserManager.IsInRole(user.Id, "Supplier"))
+        //            {
+        //                return RedirectToAction("Index", "Supplier");
+        //            }
+        //            return RedirectToLocal(returnUrl);
+        //        case SignInStatus.LockedOut:
+        //            return View("Lockout");
+        //        case SignInStatus.RequiresVerification:
+        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //        case SignInStatus.Failure:
+        //        default:
+        //            ModelState.AddModelError("", "Invalid login attempt.");
+        //            return View(model);
+        //    }
+        //}
+
+        // POST: /Account/CustomerLogin
+
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult SupplierLogin(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+
+        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SupplierLogin(SupplierLoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var custEmailConf = EmailConfirmation(model.Email);
+            var custUserName = FindUserName(model.Email);
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var user = await UserManager.FindAsync(model.Email, model.Password);
-            switch (result)
+            if (custEmailConf == false && custUserName != null && result.ToString() == "Success")
             {
-                case SignInStatus.Success:
-
-                    if (UserManager.IsInRole(user.Id, "Supplier"))
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                EConfUser = model.Email;
+                return RedirectToAction("EmailConfirmationFailed", "Account");
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                if (ModelState.IsValid)
+                {
+                    switch (result)
                     {
-                        return RedirectToAction("Index", "Supplier");
+                        case SignInStatus.Success:
+                            //UpdateLastLoginDate(model.LoginUsername);
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View("Login");
                     }
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                }
+                // If we got this far, something failed, redisplay form
+                return View("Login");
             }
         }
 
-        // POST: /Account/CustomerLogin
+
+
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var custEmail = FindEmail(model.Email);
+                var custUserName = FindUserName(model.Email);
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+
+                };
+                if (custEmail == null && custUserName == null)
+                {
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        AdminBL adminBL = new AdminBL();
+                        UserManager.AddToRole(user.Id, "Supplier");
+                        model.AspNetUserID = user.Id;
+                        adminBL.AddSupplier(model);
+                        // Send an email with this link
+                        codeType = "EmailConfirmation";
+                        await SendEmail("ConfirmEmail", "Account", user, model.Email, "WelcomeEmail", "Confirm your account");
+                        return RedirectToAction("ConfirmationEmailSent", "Account");
+                    }
+                    AddErrors(result);
+                }
+                else
+                {
+                    if (custEmail != null)
+                    {
+                        ModelState.AddModelError("", "Email is already registered.");
+                    }
+                    if (custUserName != null)
+                    {
+                        ModelState.AddModelError("", "Username " + model.Email.ToLower() + " is already taken.");
+                    }
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+     
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, DateTime date, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return RedirectToAction("ConfirmationLinkExpired", "Account");
+            }
+            var emailConf = EmailConfirmationById(userId);
+            if (emailConf == true)
+            {
+                return RedirectToAction("ConfirmationLinkUsed", "Account");
+            }
+            if (date != null)
+            {
+                if (date.AddMinutes(10) < DateTime.Now)
+                {
+                    return RedirectToAction("ConfirmationLinkExpired", "Account");
+                }
+                else
+                {
+                    var result = await UserManager.ConfirmEmailAsync(userId, code);
+                    return View(result.Succeeded ? "ConfirmEmail" : "Error");
+                }
+            }
+            else
+            {
+                return View("Error");
+            }
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendConfirmationMail()
+        {
+            string res = null;
+            string connection = GetConnectionString("DefaultConnection");
+            using (SqlConnection myConnection = new SqlConnection(connection))
+            using (SqlCommand cmd = new SqlCommand("SELECT Email AS Email FROM AspNetUsers WHERE UserName = @UserName", myConnection))
+            {
+                cmd.Parameters.AddWithValue("@UserName", EConfUser);
+                myConnection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        // Read advances to the next row.
+                        if (reader.Read())
+                        {
+                            // To avoid unexpected bugs access columns by name.
+                            res = reader["Email"].ToString();
+                            var user = await UserManager.FindByEmailAsync(res);
+                            //UpdateEmailLinkDate(EConfUser);
+                            codeType = "EmailConfirmation";
+                            await SendEmail("ConfirmEmail", "Account", user, res, "WelcomeEmail", "Confirm your account");
+                        }
+                        myConnection.Close();
+                    }
+                }
+            }
+            return RedirectToAction("ConfirmationEmailSent", "Account");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult EmailConfirmationFailed()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ConfirmationEmailSent()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ConfirmationLinkExpired()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ConfirmationLinkUsed()
+        {
+            return View();
+        }
+
+
+        public async Task SendEmail(string actionName, string controllerName, ApplicationUser user, string email, string emailTemplate, string emailSubject)
+        {
+            string code = null;
+            if (codeType == "EmailConfirmation")
+            {
+                code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            }
+            else if (codeType == "ResetPassword")
+            {
+                code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            }
+            var callbackUrl = Url.Action(actionName, controllerName, new { userId = user.Id, date = DateTime.Now, code = code }, protocol: Request.Url.Scheme);
+            var message = await EMailTemplate(emailTemplate);
+            message = message.Replace("@ViewBag.Name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(user.UserName));
+            message = message.Replace("@ViewBag.Link", callbackUrl);
+            await MessageServices.SendEmailAsync(email, emailSubject, message);
+        }
+
+
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -169,36 +400,36 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-        // Add Supplier
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    AdminBL adminBL = new AdminBL();
-                    UserManager.AddToRole(user.Id, "Supplier");
-                    model.AspNetUserID = user.Id;
-                    adminBL.AddSupplier(model);
-                    return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+        //// Add Supplier
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            AdminBL adminBL = new AdminBL();
+        //            UserManager.AddToRole(user.Id, "Supplier");
+        //            model.AspNetUserID = user.Id;
+        //            adminBL.AddSupplier(model);
+        //            return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
+        //            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+        //            // Send an email with this link
+        //            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-            // If we got this far, something failed, redisplay form
-            return RedirectToAction("AddSupplier", "Admin");
-        }
+        //            //return RedirectToAction("Index", "Home");
+        //        }
+        //        AddErrors(result);
+        //    }
+        //    // If we got this far, something failed, redisplay form
+        //    return RedirectToAction("AddSupplier", "Admin");
+        //}
 
         // REGISTER: Customer
         [HttpPost]
@@ -316,18 +547,18 @@ namespace MultivendorEcommerceStore.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
+        ////
+        //// GET: /Account/ConfirmEmail
+        //[AllowAnonymous]
+        //public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        //{
+        //    if (userId == null || code == null)
+        //    {
+        //        return View("Error");
+        //    }
+        //    var result = await UserManager.ConfirmEmailAsync(userId, code);
+        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        //}
 
         //
         // GET: /Account/ForgotPassword
@@ -628,6 +859,141 @@ namespace MultivendorEcommerceStore.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+       
+
+        public static async Task<string> EMailTemplate(string template)
+        {
+            var templateFilePath = HostingEnvironment.MapPath("~/Content/templates/") + template + ".cshtml";
+            StreamReader objstreamreaderfile = new StreamReader(templateFilePath);
+            var body = await objstreamreaderfile.ReadToEndAsync();
+            objstreamreaderfile.Close();
+            return body;
+        }
+
+        public static string GetConnectionString(string connection)
+        {
+            return ConfigurationManager.ConnectionStrings[connection].ConnectionString;
+        }
+
+        public static string ReturnString(string str)
+        {
+            string strOut = null;
+            using (SqlConnection myConnection = new SqlConnection(connection))
+            using (SqlCommand cmd = new SqlCommand(command, myConnection))
+            {
+                cmd.Parameters.AddWithValue(parameterName, str);
+                myConnection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            if (methodName == "FindEmail")
+                            {
+                                strOut = reader["Email"].ToString();
+                            }
+                            else if (methodName == "FindUserName" || methodName == "FindUserNameById")
+                            {
+                                strOut = reader["UserName"].ToString();
+                            }
+                            else if (methodName == "FindUserId")
+                            {
+                                strOut = reader["UserId"].ToString();
+                            }
+                        }
+                        myConnection.Close();
+                    }
+                    return strOut;
+                }
+            }
+        }
+        public static string FindEmail(string email)
+        {
+            command = "SELECT Email AS Email FROM AspNetUsers WHERE Email = @Email";
+            parameterName = "@Email";
+            methodName = "FindEmail";
+            return ReturnString(email);
+        }
+        public string FindUserName(string username)
+        {
+            command = "SELECT UserName AS UserName FROM AspNetUsers WHERE UserName = @UserName";
+            parameterName = "@UserName";
+            methodName = "FindUserName";
+            return ReturnString(username);
+        }
+        public string FindUserNameById(string userid)
+        {
+            command = "SELECT UserName AS UserName FROM AspNetUsers WHERE Id = @Id";
+            parameterName = "@Id";
+            methodName = "FindUserNameById";
+            return ReturnString(userid);
+        }
+        public string FindUserId(string userprokey)
+        {
+            command = "SELECT UserId AS UserId FROM AspNetUserLogins WHERE ProviderKey = @ProviderKey";
+            parameterName = "@ProviderKey";
+            methodName = "FindUserId";
+            return ReturnString(userprokey);
+        }
+
+
+        public bool ReturnBool(string str)
+        {
+            bool econfOut = false;
+            string res = null;
+            using (SqlConnection myConnection = new SqlConnection(connection))
+            using (SqlCommand cmd = new SqlCommand(command, myConnection))
+            {
+                cmd.Parameters.AddWithValue(parameterName, str);
+                myConnection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            res = reader["EmailConfirmed"].ToString();
+                            if (res == "False")
+                            {
+                                econfOut = false;
+                            }
+                            else
+                            {
+                                econfOut = true;
+                            }
+                        }
+                        myConnection.Close();
+                    }
+                    return econfOut;
+                }
+            }
+        }
+        public bool EmailConfirmation(string username)
+        {
+            command = "SELECT EmailConfirmed AS EmailConfirmed FROM AspNetUsers WHERE UserName = @UserName";
+            parameterName = "@UserName";
+            return ReturnBool(username);
+        }
+        public bool EmailConfirmationById(string userid)
+        {
+            command = "SELECT EmailConfirmed AS EmailConfirmed FROM AspNetUsers WHERE Id = @Id";
+            parameterName = "@Id";
+            return ReturnBool(userid);
+        }
+
+        public static int UpdateDatabase(string username)
+        {
+            using (SqlConnection myConnection = new SqlConnection(connection))
+            using (SqlCommand cmd = new SqlCommand(command, myConnection))
+            {
+                cmd.Parameters.AddWithValue(parameterName, username);
+                myConnection.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
         #endregion
     }
 }
