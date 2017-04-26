@@ -223,10 +223,13 @@ namespace MultivendorEcommerceStore.Controllers
                         UserManager.AddToRole(user.Id, "Supplier");
                         model.AspNetUserID = user.Id;
                         adminBL.AddSupplier(model);
+
                         // Send an email with this link
                         codeType = "EmailConfirmation";
                         await SendEmail("ConfirmEmail", "Account", user, model.Email, "WelcomeEmail", "Confirm your account");
-                        return RedirectToAction("ConfirmationEmailSent", "Account");
+                        return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
+
+                        //return RedirectToAction("ConfirmationEmailSent", "Account");
                     }
                     AddErrors(result);
                 }

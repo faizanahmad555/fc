@@ -20,12 +20,16 @@ namespace MultivendorEcommerceStore.Repository
 
         public void Delete(string UserID)
         {
-            throw new NotImplementedException();
+            var customers = GetByAspNetUserID(UserID);
+            _db.AspNetUsers.Remove(customers);
+            _db.SaveChanges();
         }
 
+       
         public AspNetUser GetByAspNetUserID(string UserID)
         {
-            throw new NotImplementedException();
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.AspNetUsers.Where(s => s.Id == UserID).FirstOrDefault();
         }
 
         public Customer GetById(Guid Id)

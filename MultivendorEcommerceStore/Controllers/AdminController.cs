@@ -32,7 +32,7 @@ namespace MultivendorEcommerceStore.Controllers
             ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
             return View();
         }
-
+        
 
         // ADD: Supplier Business Information
         [HttpGet]
@@ -59,9 +59,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-
-
-
+        
         // SHOW: All Suppliers
         [HttpGet]
         public ActionResult SupplierList()
@@ -103,13 +101,12 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // DELETE: Supplier
-        [HttpGet]
-        public ActionResult DeleteSupplier(string UserID)//, Guid SupplierID)
+        // DELETE: All Suppliers
+        public bool DeleteSupplier(string UserID)
         {
             AdminBL adminBL = new AdminBL();
-            adminBL.DeleteSupplier(UserID);//, SupplierID);
-            return RedirectToAction("Index");
+            adminBL.DeleteSupplier(UserID);
+            return true;
         }
 
 
@@ -176,8 +173,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
-
         // SHOW: All Categories
         public ActionResult CategoryLists()
         {
@@ -192,8 +187,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(categoryBL.CategoryList());
         }
 
-
-
+        
         // SHOW: Products of All Suppliers
         public ActionResult ProductList()
         {
@@ -222,11 +216,20 @@ namespace MultivendorEcommerceStore.Controllers
 
         // DELETE: Products of All Suppliers
         [HttpGet]
-        public ActionResult DeleteProduct(Guid ProductID)
+        public PartialViewResult _DeleteProduct(Guid? ProductID)
+        {
+
+            /*var deleteItem = db.Items.Find(id);*/  // I'm using 'Items' as a generic term for whatever item you have
+
+            return PartialView("Delete", ProductID);
+        }
+
+        
+        public bool DeleteProductConfirm(Guid ProductID)
         {
             ProductBL productBL = new ProductBL();
             productBL.DeleteProduct(ProductID);
-            return RedirectToAction("ProductList");
+            return true;
         }
 
 
@@ -240,7 +243,15 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        
+        // DELETE: Customers
+        public bool DeleteCustomer(string UserID)
+        {
+            CustomerBL customerBL = new CustomerBL();
+            customerBL.DeleteCustomer(UserID);
+            return true;
+        }
+
+
         public JsonResult SubCategoriesByCategoryID(Guid ID)
         {
             CategoryBL categoryBL = new CategoryBL();

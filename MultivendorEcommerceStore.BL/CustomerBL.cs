@@ -28,7 +28,7 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        // GET: All Customers(Admin Side)
+        // GET: All Customers (For Admin Side)
         public List<CustomerListViewModel> CustomerList()
         {
             ICustomerRepository customerRepo = new CustomerRepository();
@@ -50,6 +50,14 @@ namespace MultivendorEcommerceStore.BL
                 viewModelList.Add(viewModel);
             }
             return viewModelList;
+        }
+
+
+        // DELETE: Customer (For Admin Side)
+        public void DeleteCustomer(string UserID)
+        {
+            ICustomerRepository customerRepo = new CustomerRepository();
+            customerRepo.Delete(UserID);
         }
 
     }

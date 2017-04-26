@@ -19,12 +19,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        public ActionResult SupplierLogin(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
         // GET : Supplier Profile
         [Authorize(Roles = "Supplier")]
         [HttpGet]
@@ -36,8 +30,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(userProfileBL.GetProfileByUserIdentity(CurrentUserID));
         }
 
-
-
+        
         // ADD: Product
         [Authorize(Roles = "Supplier")]
         [HttpGet]
@@ -63,7 +56,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
         // SHOW: Current Supplier Products
         [Authorize(Roles = "Supplier")]
         [HttpGet]
@@ -72,7 +64,6 @@ namespace MultivendorEcommerceStore.Controllers
             ProductBL productBL = new ProductBL();
             return View(productBL.GetProductsBySupplierID(CurrentSupplierID));
         }
-
 
 
         // EDIT: Existing Products
@@ -94,7 +85,6 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("ProductList");
         }
 
-        
 
         // GET: SubCategories By CategoryID
         [Authorize(Roles = "Supplier")]
