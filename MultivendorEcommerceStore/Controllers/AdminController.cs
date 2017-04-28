@@ -233,6 +233,13 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        public int? ChangeProductActiveStatus(Guid ProductID, int IsActive)
+        {
+            ProductBL productBL = new ProductBL();
+            return productBL.ChangeProductStatus(ProductID, IsActive);
+        }
+
+
 
         // SHOW: All Customers
         [HttpGet]

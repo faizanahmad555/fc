@@ -16,6 +16,6 @@ namespace MultivendorEcommerceStore.Repository
     public enum ProductActive : int
     {
         Yes = 1,
-        No = 2
+        No = 0
     }
 }

@@ -60,14 +60,18 @@
                             <li><a href="#">Compare</a></li>
                             <li><a href="#">Wishlists</a></li>
                             <li>
-                                @if (Request.IsAuthenticated)
-                                {
-                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                @*@if (UserManager.IsInRole())
+                                {*@
+                                    @if (Request.IsAuthenticated)
                                     {
-                                        @Html.AntiForgeryToken()
-                                        <a href="javascript:document.getElementById('logoutForm').submit()"> Log out</a>
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a href="javascript:document.getElementById('logoutForm').submit()"> Log out</a>
+                                        }
                                     }
-                                }
+                                @*}*@
+
                             </li>
                         </ul>
                     </div>
@@ -179,7 +183,7 @@
                         <div class="col-sm-4">
                             <div class="introduce-title">Company</div>
                             <ul id="introduce-company" class="introduce-list">
-                                <li><a href="@Url.Action("SupplierLogin", "Supplier")">Join Us</a></li>
+                                <li><a href="@Url.Action("SupplierLogin", "Account")">Join Us</a></li>
                                 <li><a href="#">About Us</a></li>
                                 <li><a href="#">Affiliate Program</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
@@ -266,7 +270,7 @@
                     </ul>
                 </div>
             </div> <!-- /#trademark-box -->
-            
+
             <div id="footer-menu-box">
                 <div class="col-sm-12">
                     <ul class="footer-menu-list">

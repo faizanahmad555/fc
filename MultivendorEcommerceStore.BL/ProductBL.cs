@@ -180,5 +180,27 @@ namespace MultivendorEcommerceStore.BL
             }
             return viewModelList;
         }
+
+        public int? ChangeProductStatus(Guid ProductID, int IsActive)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            var productTbl = productRepo.Retrive().Where(p => p.ProductID == ProductID).FirstOrDefault();
+
+            if (IsActive == 1)
+            {
+                IsActive = 0;
+            }
+            else if (IsActive == 0)
+            {
+                IsActive = 1;
+            }
+            productTbl.IsActive = IsActive;
+
+            return productRepo.ChangeActiveStatus(productTbl);
+            
+        }
+
+
+
     }
 }

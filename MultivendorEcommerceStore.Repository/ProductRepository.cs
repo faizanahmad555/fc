@@ -38,7 +38,7 @@ namespace MultivendorEcommerceStore.Repository
             _db.SaveChanges();
         }
 
-        
+
         public void Delete(Guid id)
         {
             var product = GetById(id);
@@ -52,6 +52,13 @@ namespace MultivendorEcommerceStore.Repository
             return _db.Products.Where(s => s.ProductID == id).FirstOrDefault();
         }
 
-
+        public int? ChangeActiveStatus(Product entity)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            var product =  _db.Products.Where(s => s.ProductID == entity.ProductID).FirstOrDefault();
+            product.IsActive = entity.IsActive;
+            _db.SaveChanges();
+            return entity.IsActive;
+        }
     }
 }

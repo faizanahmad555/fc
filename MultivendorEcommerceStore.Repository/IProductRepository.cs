@@ -15,6 +15,9 @@ namespace MultivendorEcommerceStore.Repository
         void Delete(Guid id);
         Product GetById(Guid id);
 
+
+        int? ChangeActiveStatus(Product entity);
+
        // Product GetByAspNetUserID(string id);
 
     }

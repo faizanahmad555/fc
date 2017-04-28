@@ -85,6 +85,13 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("ProductList");
         }
 
+        [Authorize(Roles = "Supplier")]
+        public int? ChangeProductActive(Guid ProductID, int IsActive)
+        {
+            ProductBL productBL = new ProductBL();
+            return productBL.ChangeProductStatus(ProductID, IsActive);
+        }
+
 
         // GET: SubCategories By CategoryID
         [Authorize(Roles = "Supplier")]

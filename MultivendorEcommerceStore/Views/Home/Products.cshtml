@@ -498,7 +498,7 @@
                     </ul>
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Where(s=>s.Active == "Yes"))
                         {
                             <li class="col-sx-12 col-sm-4">
                                 <div class="product-container">
