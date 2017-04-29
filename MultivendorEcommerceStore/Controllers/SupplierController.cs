@@ -85,28 +85,14 @@ namespace MultivendorEcommerceStore.Controllers
             return RedirectToAction("ProductList");
         }
 
-        [Authorize(Roles = "Supplier")]
-        public int? ChangeProductActive(Guid ProductID, int IsActive)
+
+        public bool DeleteProductConfirm(Guid ProductID)
         {
             ProductBL productBL = new ProductBL();
-            return productBL.ChangeProductStatus(ProductID, IsActive);
+            productBL.DeleteProduct(ProductID);
+            return true;
         }
 
-
-        // GET: SubCategories By CategoryID
-        [Authorize(Roles = "Supplier")]
-        public JsonResult SubCategoriesByCategoryID(Guid ID)
-        {
-            CategoryBL categoryBL = new CategoryBL();
-            List<SelectListItem> list = new List<SelectListItem>();
-            var subCategory = categoryBL.GetSubCategoriesByCategoryID(ID).Select(c => new
-            {
-                Text = c.SubCategoryName,
-                Value = c.SubCategoryID
-            }).ToList();
-            var subcategory = new SelectList(subCategory, "Value", "Text");
-            return Json(new { subcategory }, JsonRequestBehavior.AllowGet);
-        }
 
     }
 }

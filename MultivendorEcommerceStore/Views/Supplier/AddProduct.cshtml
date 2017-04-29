@@ -41,9 +41,18 @@
                                 <div class="col-md-3">
                                     @Html.DropDownListFor(Model => Model.SubCategoryID,
                     new SelectList(string.Empty, "Value", "Text"),
-                    "--Select Sub Cateory--",
+                    "--Select Sub Category--",
                     new { @class = "form-control", @id = "SubCategory" })
                                     @Html.ValidationMessageFor(model => model.SubCategoryID, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.SubCategoryItemID, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(Model => Model.SubCategoryItemID,
+                    new SelectList(string.Empty, "Value", "Text"),
+                    "--Select SubCategory Item--",
+                    new { @class = "form-control", @id = "SubCategoryItem" })
+                                    @Html.ValidationMessageFor(model => model.SubCategoryItemID, "", new { @class = "text-danger" })
                                 </div>
 
                                 @Html.LabelFor(model => model.ProductImage1, new { @class = "control-label col-md-1" })
@@ -109,11 +118,13 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 @section Scripts {
-    <script type="text/javascript">
+<script type="text/javascript" src="~/Scripts/JavaScript.js"></script>
+
+    @*<script type="text/javascript">
         $("#SelectedCategory").change(function () {
             var categoryId = $('#SelectedCategory').val();
             $.ajax({
-                url: "/Supplier/SubCategoriesByCategoryID/" + categoryId,
+                url: "/Product/SubCategoriesByCategoryID/" + categoryId,
                 type: "Get",
                 contentType: "application/json; charset=utf-8",
                 datatype: 'JSON',
@@ -126,7 +137,23 @@
             });
         });
 
-    </script>
+        $("#SubCategory").change(function () {
+            var subcategoryId = $('#SubCategory').val();
+            $.ajax({
+                url: "/Product/SubCategoryItemsBySubCategoryID/" + subcategoryId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#SubCategoryItem').empty();
+                    for (var i = 0; i < data.subcategoryitem.length; i++) {
+                        $('#SubCategoryItem').append("<option value= " + data.subcategoryitem[i].Value + ">" + data.subcategoryitem[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+    </script>*@
 
     @Scripts.Render("~/bundles/jqueryval")
 }

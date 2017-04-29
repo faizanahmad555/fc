@@ -27,7 +27,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.Guid> SupplierID { get; set; }
         public Nullable<System.Guid> CategoryID { get; set; }
         public Nullable<System.Guid> SubCategoryID { get; set; }
-        public string SubCategoryItem { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string UnitSize { get; set; }
         public Nullable<int> UnitPrice { get; set; }
@@ -50,6 +49,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> IsActive { get; set; }
         public Nullable<int> Status { get; set; }
+        public Nullable<System.Guid> SubCategoryItemID { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

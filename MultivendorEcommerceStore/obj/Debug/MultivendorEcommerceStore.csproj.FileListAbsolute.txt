@@ -440,3 +440,10 @@ C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore\obj\Debug\MultivendorEc
 C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore\obj\Debug\MultivendorEcommerceStore.csproj.GenerateResource.Cache
 C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore\obj\Debug\MultivendorEcommerceStore.dll
 C:\Users\Fahad\Source\Repos\fc\MultivendorEcommerceStore\obj\Debug\MultivendorEcommerceStore.pdb
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Twilio.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Twilio.xml

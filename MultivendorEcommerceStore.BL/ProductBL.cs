@@ -22,14 +22,15 @@ namespace MultivendorEcommerceStore.BL
 
             var fileName = Path.GetFileNameWithoutExtension(model.ProductImage1.FileName);
             fileName += DateTime.Now.Ticks + Path.GetExtension(model.ProductImage1.FileName);
-            var basePath = "~/Content/Users/Suppliers/" + model.SupplierID + "/Products/Images/";
+            var basePath = "~/Content/Users/Suppliers/" + SupplierID + "/Products/Images/";
             var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + model.SupplierID + "/Products/Images/"));
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + SupplierID + "/Products/Images/"));
             model.ProductImage1.SaveAs(path);
 
             product.ProductID = Guid.NewGuid();
             product.CategoryID = model.CategoryID;
             product.SubCategoryID = model.SubCategoryID;
+            product.SubCategoryItemID = model.SubCategoryItemID;
 
             product.SupplierID = SupplierID;
             product.ProductName = model.ProductName;
@@ -145,7 +146,7 @@ namespace MultivendorEcommerceStore.BL
 
 
 
-        // GET: Current Supplier Products(For Supplier Side)
+        // SHOW: Current Supplier Products(For Supplier Side)
         public List<ProductListViewModel> GetProductsBySupplierID(Guid SupplierID)
         {
             IProductRepository productRepo = new ProductRepository();
@@ -200,6 +201,31 @@ namespace MultivendorEcommerceStore.BL
             
         }
 
+
+        // GET: Product Detials
+        public List<DisplayProductViewModel> GetProductDetails(Guid ProductID)
+        {
+            IProductRepository productRepo = new ProductRepository();
+
+            List<DisplayProductViewModel> viewModelList = new List<DisplayProductViewModel>();
+
+            var productDetail = productRepo.Retrive().Where(s => s.ProductID == ProductID).ToList();
+
+            foreach (var product in productDetail)
+            {
+                DisplayProductViewModel viewModel = new DisplayProductViewModel();
+                //viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
+                viewModel.ProductID = product.ProductID;
+                viewModel.ProductName = product.ProductName;
+                viewModel.ProductDescription = product.ProductDescription;
+                viewModel.ProductImage1 = product.ProductPicture;
+                viewModel.Price = product.UnitPrice;
+                viewModel.Quantity = product.Quantity;
+                viewModel.Size = product.UnitSize;
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
+        }
 
 
     }

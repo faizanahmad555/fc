@@ -259,18 +259,6 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        public JsonResult SubCategoriesByCategoryID(Guid ID)
-        {
-            CategoryBL categoryBL = new CategoryBL();
-            List<SelectListItem> list = new List<SelectListItem>();
-            var subCategory = categoryBL.GetSubCategoriesByCategoryID(ID).Select(c => new
-            {
-                Text = c.SubCategoryName,
-                Value = c.SubCategoryID
-            }).ToList();
-            var subcategory = new SelectList(subCategory, "Value", "Text");
-            return Json(new { subcategory }, JsonRequestBehavior.AllowGet);
-        }
 
     }
 }

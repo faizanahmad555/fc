@@ -503,7 +503,7 @@
                             <li class="col-sx-12 col-sm-4">
                                 <div class="product-container">
                                     <div class="left-block">
-                                        <a href="#">
+                                        <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
                                             <img class="img-thumbnail" src="@Url.Content(item.ProductImage1)" height="350" width="350" />
                                         </a>
                                         <div class="quick-view">
@@ -516,7 +516,7 @@
                                         </div>
                                     </div>
                                     <div class="right-block">
-                                        <h5 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.ProductName)</a></h5>
+                                        <h5 class="product-name"><a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a></h5>
                                         <div class="product-star">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>

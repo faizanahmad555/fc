@@ -22,6 +22,8 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -177,6 +179,8 @@
     <EntitySetMapping Name="SubCategories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -188,6 +192,8 @@
     <EntitySetMapping Name="SubCategoryItems">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
         <MappingFragment StoreEntitySet="SubCategoryItem">
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
@@ -272,6 +278,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -294,7 +301,6 @@
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />

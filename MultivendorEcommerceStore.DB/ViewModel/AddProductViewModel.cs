@@ -13,6 +13,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public Guid SupplierID { get; set; }
         public Guid CategoryID { get; set; }
         public Guid SubCategoryID { get; set; }
+        public Guid SubCategoryItemID { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Name")]

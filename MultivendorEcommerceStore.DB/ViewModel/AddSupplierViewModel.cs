@@ -51,7 +51,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set;}
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]

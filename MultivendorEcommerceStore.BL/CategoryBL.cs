@@ -142,6 +142,14 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
+        // GET: SubCategoryItems By SubCategoryID(For SubCategoryItems DropDown)
+        public IEnumerable<SubCategoryItem> GetSubCategoryItemsBySubCategoryID(Guid ID)
+        {
+            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
+            return subCategoryItemRepo.Retrive().Where(c => c.SubCategoryID == ID).ToList();
+        }
+
+
 
 
 

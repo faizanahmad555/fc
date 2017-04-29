@@ -32,6 +32,8 @@
           <Property Name="Picture" Type="nvarchar" MaxLength="500" />
           <Property Name="DisplayOrder" Type="int" />
           <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="CityMaster">
           <Key>
@@ -180,7 +182,7 @@
           <Property Name="SupplierID" Type="uniqueidentifier" />
           <Property Name="CategoryID" Type="uniqueidentifier" />
           <Property Name="SubCategoryID" Type="uniqueidentifier" />
-          <Property Name="SubCategoryItem" Type="nchar" MaxLength="10" />
+          <Property Name="SubCategoryItemID" Type="uniqueidentifier" />
           <Property Name="Quantity" Type="int" />
           <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
           <Property Name="UnitPrice" Type="int" />
@@ -242,6 +244,8 @@
           <Property Name="CategoryID" Type="uniqueidentifier" />
           <Property Name="Picture" Type="nvarchar" MaxLength="256" />
           <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="SubCategoryItem">
           <Key>
@@ -253,6 +257,8 @@
           <Property Name="Picture" Type="nvarchar" MaxLength="265" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -712,6 +718,8 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
           <NavigationProperty Name="Products" Relationship="MultivendorEcommerceStoreModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CityMaster">
           <Key>
@@ -875,6 +883,8 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="SubCategoryItems" Relationship="Self.FK_SubCategoryItem_SubCategory" FromRole="SubCategory" ToRole="SubCategoryItem" />
           <NavigationProperty Name="Products" Relationship="MultivendorEcommerceStoreModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SubCategoryItem">
           <Key>
@@ -887,6 +897,8 @@
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategoryItem_SubCategory" FromRole="SubCategoryItem" ToRole="SubCategory" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1241,7 +1253,6 @@
           <Property Name="SupplierID" Type="Guid" />
           <Property Name="CategoryID" Type="Guid" />
           <Property Name="SubCategoryID" Type="Guid" />
-          <Property Name="SubCategoryItem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="UnitSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UnitPrice" Type="Int32" />
@@ -1268,6 +1279,7 @@
           <NavigationProperty Name="OrderDetails" Relationship="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="SubCategory" Relationship="MultivendorEcommerceStoreModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="Supplier" Relationship="MultivendorEcommerceStoreModel.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+          <Property Name="SubCategoryItemID" Type="Guid" />
         </EntityType>
         <Association Name="FK_Product_Category">
           <End Type="MultivendorEcommerceStoreModel.Category" Role="Category" Multiplicity="0..1">
@@ -1418,6 +1430,8 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1573,6 +1587,8 @@
           <EntitySetMapping Name="SubCategories">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -1584,6 +1600,8 @@
           <EntitySetMapping Name="SubCategoryItems">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
               <MappingFragment StoreEntitySet="SubCategoryItem">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
@@ -1668,6 +1686,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -1690,7 +1709,6 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="SubCategoryItem" ColumnName="SubCategoryItem" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />

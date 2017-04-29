@@ -20,6 +20,8 @@ namespace MultivendorEcommerceStore.DB.Model
         public string Picture { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string Link { get; set; }
     
         public virtual SubCategory SubCategory { get; set; }
     }

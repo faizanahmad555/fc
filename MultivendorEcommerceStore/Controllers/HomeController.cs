@@ -62,6 +62,18 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        public ActionResult ProductDetail(Guid ProductID)
+        {
+            if (ProductID != null)
+            {
+                ProductBL productBL = new ProductBL();
+                return View(productBL.GetProductDetails(ProductID));
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
 
     }
 }
