@@ -85,12 +85,15 @@ namespace MultivendorEcommerceStore.BL
             return viewModelList;
         }
 
-        // SHOW: ALL Supplier Products(For Admin Side)
+
+
+        // SHOW: ALL Supplier Products(For Front End Side)
         public List<ProductListViewModel> ProductLists(Guid PId)
         {
             IProductRepository productRepo = new ProductRepository();
             ICategoryRepository categoryRepo = new CategoryRepository();
             ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
 
             List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
 
@@ -100,6 +103,7 @@ namespace MultivendorEcommerceStore.BL
             {
                 var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
                 var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
+                var subCategoryItem = subCategoryItemRepo.Retrive().Where(c => c.SubCategoryItemID == product.SubCategoryItemID).FirstOrDefault();
 
                 ProductListViewModel viewModel = new ProductListViewModel();
 
@@ -107,6 +111,7 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.ProductID = product.ProductID;
                 viewModel.CategoryName = category.CategoryName;
                 viewModel.SubCategoryName = subCategory.SubCategoryName;
+                viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
                 viewModel.ProductName = product.ProductName;
                 viewModel.ProductDescription = product.ProductDescription;
                 viewModel.ProductImage1 = product.ProductPicture;
@@ -244,6 +249,9 @@ namespace MultivendorEcommerceStore.BL
         public List<DisplayProductViewModel> GetProductDetails(Guid ProductID)
         {
             IProductRepository productRepo = new ProductRepository();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+            ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
 
             List<DisplayProductViewModel> viewModelList = new List<DisplayProductViewModel>();
 
@@ -251,9 +259,18 @@ namespace MultivendorEcommerceStore.BL
 
             foreach (var product in productDetail)
             {
+                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
+                var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
+                var subCategoryItem = subCategoryItemRepo.Retrive().Where(c => c.SubCategoryItemID == product.SubCategoryItemID).FirstOrDefault();
+
+
                 DisplayProductViewModel viewModel = new DisplayProductViewModel();
-                //viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
+                viewModel.CategoryName = category.CategoryName;
+                viewModel.SubCategoryName = subCategory.SubCategoryName;
+                viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
+
                 viewModel.ProductID = product.ProductID;
+                //viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
                 viewModel.ProductName = product.ProductName;
                 viewModel.ProductDescription = product.ProductDescription;
                 viewModel.ProductImage1 = product.ProductPicture;

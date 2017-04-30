@@ -57,6 +57,47 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        public PartialViewResult _SPORTSCategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_SPORTSCategoryProducts", categoryList);
+        }
+
+
+        public PartialViewResult _ELECTRONICSCategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_ELECTRONICSCategoryProducts", categoryList);
+        }
+
+
+        public PartialViewResult _DIGITALCategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_DIGITALCategoryProducts", categoryList);
+        }
+
+
+        public PartialViewResult _FURNITURECategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_FURNITURECategoryProducts", categoryList);
+        }
+
+
+        public PartialViewResult _JEWELRYCategoryProducts()
+        {
+            CategoryBL categoryBL = new CategoryBL();
+            var categoryList = categoryBL.CategoryList();
+            return PartialView("_JEWELRYCategoryProducts", categoryList);
+        }
+
+
+
         public ActionResult ProductDetail(Guid ProductID)
         {
             if (ProductID != null)

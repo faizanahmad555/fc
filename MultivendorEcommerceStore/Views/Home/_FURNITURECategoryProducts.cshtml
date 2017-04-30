@@ -1,0 +1,336 @@
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.CategoryListViewModel>
+
+<!-- featured category furniture -->
+<div class="category-featured furniture">
+    <nav class="navbar nav-menu show-brand">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-brand"><a href="#"><img alt="fashion" src="~/assets/data/icon-furniture.png" />furniture</a></div>
+            <span class="toggle-menu"></span>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a data-toggle="tab" href="#tab-12">Best salers</a></li>
+                    <li><a data-toggle="tab" href="#tab-13">Specials</a></li>
+                    <li><a data-toggle="tab" href="#tab-12">New Arrivals</a></li>
+                    <li><a data-toggle="tab" href="#tab-13">Most Reviews</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        <div id="elevator-5" class="floor-elevator">
+            <a href="#elevator-4" class="btn-elevator up fa fa-angle-up"></a>
+            <a href="#elevator-6" class="btn-elevator down fa fa-angle-down"></a>
+        </div>
+    </nav>
+    <div class="product-featured clearfix">
+        <div class="row">
+            <div class="col-sm-2 sub-category-wapper">
+                <ul class="sub-category-list">
+                    @foreach (var Mainitem in Model)
+                    {
+                        foreach (var item in Mainitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
+                        {
+                            foreach (var SubCat in item.listSubCategoryEntity.OrderBy(c => c.SubCategoryName))
+                            {
+                                <li>
+                                    <a href="#">
+                                        @Html.DisplayFor(modelitem => SubCat.SubCategoryName)
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="col-sm-10 col-right-tab">
+                <div class="product-featured-tab-content">
+                    <div class="tab-container">
+                        <div class="tab-panel active" id="tab-12">
+                            <div class="box-left">
+                                @foreach (var Mianitem in Model)
+                                {
+                                    foreach (var item in Mianitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
+                                    {
+                                        <div class="banner-img">
+                                            <a href="#"><img src="@Html.DisplayFor(modelItem => item.CategoryPicture)" alt="FURNITURE Product"></a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="box-right">
+                                <ul class="product-list row">
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Interesting Chair</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p8.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Relaxed Chair</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p9.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Innovative Red Chair</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p7.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">White Stack Chair</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p14.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Kute Innovative Chair</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p12.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Pretty Green & Inox</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/option5/p13.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-panel" id="tab-13">
+                            <div class="box-left">
+                                <div class="banner-img">
+                                    <a href="#"><img src="assets/data/banner-product3.jpg" alt="Banner Product"></a>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <ul class="product-list row">
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p78.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p77.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p78.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p76.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p75.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Headphone & earphone</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                        </div>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/p74.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end featured category furniture-->

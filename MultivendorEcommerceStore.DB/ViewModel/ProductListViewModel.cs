@@ -19,6 +19,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Sub Category")]
         public string SubCategoryName { get; set; }
 
+        [Display(Name = "Sub-Category Item")]
+        public string SubCategoryItemName { get; set; }
+
+
         [Display(Name = "Product Name")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]

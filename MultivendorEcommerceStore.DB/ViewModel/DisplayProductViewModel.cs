@@ -18,6 +18,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Sub Category")]
         public string SubCategoryName { get; set; }
 
+        [Display(Name = "Sub-Category Item")]
+        public string SubCategoryItemName { get; set; }
+
+
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 

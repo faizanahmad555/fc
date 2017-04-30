@@ -1523,6 +1523,11 @@
     <Content Include="Views\Account\SupplierLogin.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Account\CustomerLogin.cshtml" />
+    <Content Include="Views\Home\_SPORTSCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_ELECTRONICSCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_DIGITALCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_FURNITURECategoryProducts.cshtml" />
+    <Content Include="Views\Home\_JEWELRYCategoryProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

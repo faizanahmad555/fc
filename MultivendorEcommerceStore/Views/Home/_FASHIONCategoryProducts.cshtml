@@ -30,7 +30,7 @@
                     <ul class="sub-category-list">
                         @foreach (var Mainitem in Model)
                         {
-                            foreach (var item in Mainitem.listCategoryEntity.Where(c => c.DisplayOrder == 2).ToList())
+                            foreach (var item in Mainitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FASHION").ToList())
                             {
                                 foreach (var SubCat in item.listSubCategoryEntity.OrderBy(c=>c.SubCategoryName))
                                 {

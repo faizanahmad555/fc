@@ -10,15 +10,33 @@
     <div class="container" id="columns">
         <!-- breadcrumb -->
         <div class="breadcrumb clearfix">
-            <a class="home" href="#" title="Return to Home">Home</a>
+            <a class="home" href="@Url.Action("Index", "Home")" title="Return to Home">Home</a>
+
             <span class="navigation-pipe">&nbsp;</span>
-            <a href="#" title="Return to Home">Fashion</a>
+            <a href="#" title="Category">
+                @foreach (var item in Model)
+                {
+                    @item.CategoryName
+                }
+            </a>
+
             <span class="navigation-pipe">&nbsp;</span>
-            <a href="#" title="Return to Home">Women</a>
+            <a href="#" title="Sub Category">
+                @foreach (var item in Model)
+                {
+                    @item.SubCategoryName
+                }
+            </a>
+
             <span class="navigation-pipe">&nbsp;</span>
-            <a href="#" title="Return to Home">Dresses</a>
-            <span class="navigation-pipe">&nbsp;</span>
-            <span class="navigation_page">Maecenas consequat mauris</span>
+            <a href="#" title="Sub-Category Item">
+                @foreach (var item in Model)
+                {
+                    @item.SubCategoryItemName
+                }
+            </a>
+
+
         </div>
         <!-- ./breadcrumb -->
         <!-- row -->

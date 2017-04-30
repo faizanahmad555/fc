@@ -8,9 +8,40 @@
     <div class="container" id="columns">
         <!-- breadcrumb -->
         <div class="breadcrumb clearfix">
-            <a class="home" href="#" title="Return to Home">Home</a>
+            <a class="home" href="@Url.Action("Index", "Home")" title="Return to Home">
+                Home
+            </a>
+
             <span class="navigation-pipe">&nbsp;</span>
-            <span class="navigation_page">Fashion</span>
+            <span class="navigation_page">
+                @foreach (var item in Model)
+                {
+                    <a href="#" title="Category">
+                        @item.CategoryName
+                    </a>
+                }
+            </span>
+
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">
+                @foreach (var item in Model)
+                {
+                    <a href="#" title="Sub Category">
+                        @item.SubCategoryName
+                    </a>
+                }
+            </span>
+
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">
+                @foreach (var item in Model)
+                {
+                    <a href="#" title="Sub-Category Item">
+                        @item.SubCategoryItemName
+                    </a>
+                }
+            </span>
+
         </div>
         <!-- ./breadcrumb -->
         <!-- row -->
@@ -463,30 +494,34 @@
                 <div class="subcategories">
                     <ul>
                         <li class="current-categorie">
-                            <a href="#">Women's Fashion</a>
+                            @foreach (var item in Model)
+                            {
+                                <a href="#">@item.CategoryName</a>
+                            }
                         </li>
                         <li>
-                            <a href="#">Tops</a>
+                            @foreach (var item in Model)
+                            {
+                                <a href="#">@item.SubCategoryName</a>
+                            }
                         </li>
                         <li>
-                            <a href="#">Dresses</a>
+                            @foreach (var item in Model)
+                            {
+                                <a href="#">@item.SubCategoryItemName</a>
+                            }
                         </li>
-                        <li>
-                            <a href="#">Bags & Shoes</a>
-                        </li>
-                        <li>
-                            <a href="#">Pants</a>
-                        </li>
-                        <li>
-                            <a href="#">Blouses</a>
-                        </li>
+
                     </ul>
                 </div>
                 <!-- ./subcategories -->
                 <!-- view-product-list-->
                 <div id="view-product-list" class="view-product-list">
                     <h2 class="page-heading">
-                        <span class="page-heading-title">Women</span>
+                        @foreach (var item in Model)
+                        {
+                            <span class="page-heading-title">@item.SubCategoryItemName</span>
+                        }
                     </h2>
                     <ul class="display-product-option">
                         <li class="view-as-grid selected">
@@ -498,7 +533,7 @@
                     </ul>
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
-                        @foreach (var item in Model.Where(s=>s.Active == "Yes"))
+                        @foreach (var item in Model.Where(s => s.Active == "Yes"))
                         {
                             <li class="col-sx-12 col-sm-4">
                                 <div class="product-container">
