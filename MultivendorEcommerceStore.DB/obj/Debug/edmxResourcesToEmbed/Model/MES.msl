@@ -278,6 +278,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="FeatureProduct" ColumnName="FeatureProduct" />
           <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />

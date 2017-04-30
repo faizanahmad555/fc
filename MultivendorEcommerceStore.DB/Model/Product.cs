@@ -50,6 +50,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<int> IsActive { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<System.Guid> SubCategoryItemID { get; set; }
+        public Nullable<int> FeatureProduct { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

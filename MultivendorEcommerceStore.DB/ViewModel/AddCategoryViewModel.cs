@@ -10,6 +10,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 {
     public class AddCategoryViewModel
     {
+        [Required]
         [Display(Name = "Category Picture")]
         public HttpPostedFileBase Picture { get; set; }
 

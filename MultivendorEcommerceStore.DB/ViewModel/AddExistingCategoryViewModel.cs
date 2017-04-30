@@ -16,6 +16,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Sub Category")]
         public string SubCategoryName { get; set; }
 
+        [Required]
         [Display(Name = "Category Picture")]
         public HttpPostedFileBase Picture { get; set; }
 

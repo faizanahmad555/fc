@@ -35,8 +35,9 @@
                                 <!-- product-imge-->
                                 <div class="product-image">
                                     <div class="product-full">
-                                        <img id="product-zoom" src='~/assets/data/product-s3-420x512.jpg' data-zoom-image="~/assets/data/product-s3-850x1036.jpg" />
+                                        <img id="product-zoom" src='@Url.Content(item.ProductImage1)' data-zoom-image="@Url.Content(item.ProductImage1)" />
                                     </div>
+
                                     <div class="product-img-thumb" id="gallery_01">
                                         <ul class="owl-carousel" data-items="3" data-nav="true" data-dots="false" data-margin="21" data-loop="true">
                                             <li>
@@ -71,6 +72,7 @@
                                             </li>
                                         </ul>
                                     </div>
+
                                 </div>
                                 <!-- product-imge-->
                             </div>

@@ -64,13 +64,13 @@
                             </section>
                         </div>
                     </div>
-                   
+
                 </div>
 
 
                 <div class="col-sm-6">
                     <div class="box-authentication">
-                        @using (Html.BeginForm("CustomerLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                        @using (Html.BeginForm("CustomerLogin", "Account", @*new { ReturnUrl = ViewBag.ReturnUrl },*@ FormMethod.Post, new { role = "form" }))
                         {
                             @Html.AntiForgeryToken()
                             <h3>Already registered?</h3>
@@ -81,6 +81,7 @@
                             @Html.TextBoxFor(model => model.CustomerLoginVM.Email, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerLoginVM.Email, "", new { @class = "text-danger" })
 
+                            <br />
 
                             @Html.LabelFor(model => model.CustomerLoginVM.Password, new { @class = "control-label" })
                             @Html.PasswordFor(model => model.CustomerLoginVM.Password, new { @class = "form-control" })
@@ -97,7 +98,7 @@
     </div>
 </div>
 <!-- ./page wapper-->
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

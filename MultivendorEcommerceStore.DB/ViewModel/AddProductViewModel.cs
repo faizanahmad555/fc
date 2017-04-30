@@ -48,6 +48,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string Size { get; set; }
 
 
+
+
         //[Required(ErrorMessage = "This field is required.")]
         //[Display(Name = "Quantity Per Unit")]
         //public string QuantityPerUnit { get; set; }

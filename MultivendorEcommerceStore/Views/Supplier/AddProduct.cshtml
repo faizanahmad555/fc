@@ -113,47 +113,10 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ProductList")
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 @section Scripts {
-<script type="text/javascript" src="~/Scripts/JavaScript.js"></script>
-
-    @*<script type="text/javascript">
-        $("#SelectedCategory").change(function () {
-            var categoryId = $('#SelectedCategory').val();
-            $.ajax({
-                url: "/Product/SubCategoriesByCategoryID/" + categoryId,
-                type: "Get",
-                contentType: "application/json; charset=utf-8",
-                datatype: 'JSON',
-                success: function (data) {
-                    $('#SubCategory').empty();
-                    for (var i = 0; i < data.subcategory.length; i++) {
-                        $('#SubCategory').append("<option value= " + data.subcategory[i].Value + ">" + data.subcategory[i].Text + "</option>");
-                    }
-                }
-            });
-        });
-
-        $("#SubCategory").change(function () {
-            var subcategoryId = $('#SubCategory').val();
-            $.ajax({
-                url: "/Product/SubCategoryItemsBySubCategoryID/" + subcategoryId,
-                type: "Get",
-                contentType: "application/json; charset=utf-8",
-                datatype: 'JSON',
-                success: function (data) {
-                    $('#SubCategoryItem').empty();
-                    for (var i = 0; i < data.subcategoryitem.length; i++) {
-                        $('#SubCategoryItem').append("<option value= " + data.subcategoryitem[i].Value + ">" + data.subcategoryitem[i].Text + "</option>");
-                    }
-                }
-            });
-        });
-
-    </script>*@
-
     @Scripts.Render("~/bundles/jqueryval")
 }

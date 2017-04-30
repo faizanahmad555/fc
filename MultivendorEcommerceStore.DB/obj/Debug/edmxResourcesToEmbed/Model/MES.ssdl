@@ -181,6 +181,7 @@
     <Property Name="Quantity" Type="int" />
     <Property Name="UnitSize" Type="nvarchar" MaxLength="50" />
     <Property Name="UnitPrice" Type="int" />
+    <Property Name="FeatureProduct" Type="int" />
     <Property Name="MSRP" Type="money" />
     <Property Name="AvailableSize" Type="nvarchar" MaxLength="50" />
     <Property Name="AvailableColor" Type="nvarchar" MaxLength="500" />
@@ -423,20 +424,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_SubCategory">
-    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SubCategory">
-        <PropertyRef Name="SubCategoryID" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="SubCategoryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Product_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Supplier">
@@ -627,10 +618,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
-      <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Supplier" Association="Self.FK_Product_Supplier">

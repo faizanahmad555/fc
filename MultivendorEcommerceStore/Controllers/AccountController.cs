@@ -65,22 +65,104 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+        // GET: /Account/CustomerLogin
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult CustomerLogin(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+
+        // POST: /Account/CustomerLogin
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CustomerLogin(CustomerLoginRegisterViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.CustomerLoginVM.Email, model.CustomerLoginVM.Password, model.CustomerLoginVM.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindAsync(model.CustomerLoginVM.Email, model.CustomerLoginVM.Password);
+            switch (result)
+            {
+                case SignInStatus.Success:
+
+                    if (UserManager.IsInRole(user.Id, "Customer"))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.CustomerLoginVM.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+        }
+
+
+
+
+        // POST: /Account/CustomerRegister
+        [HttpPost/*, ActionName("Login")*/]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CustomerRegister(CustomerLoginRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
+                var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
+
+                if (result.Succeeded)
+                {
+                    CustomerBL customerBL = new CustomerBL();
+                    UserManager.AddToRole(user.Id, "Customer");
+                    model.CustomerRegisterVM.AspNetUserID = user.Id;
+                    customerBL.CustomerRegister(model);
+                    await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
+                    return RedirectToAction("Index", "Home");
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return RedirectToAction("Login", "Home");
+        }
+
+
+
+
+        // GET: /Account/AdminLogin
+        [AllowAnonymous]
+        public ActionResult AdminLogin(string returnUrl)
         {
            
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        
+        // POST: /Account/AdminLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> AdminLogin(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +192,11 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-        // GET: /Account/Login
+
+
+
+
+        // GET: /Account/SupplierLogin
         [AllowAnonymous]
         public ActionResult SupplierLogin(string returnUrl)
         {
@@ -120,7 +206,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // POST: /Account/SupplierLogin
+        // POST: /Account/SupplierLogin(Without Confirming Email)
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -155,18 +241,8 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-        // POST: /Account/CustomerLogin
 
-        //// GET: /Account/Login
-        //[AllowAnonymous]
-        //public ActionResult SupplierLogin(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return View();
-        //}
-
-
-        //// POST: /Account/Login
+        // POST: /Account/SupplierLogin(Only When Email is Confirmed)
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
@@ -209,6 +285,14 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         // POST: /Account/Register
+
+
+        
+
+        // POST: 
+
+
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -379,41 +463,9 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CustomerLogin(CustomerLoginRegisterViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.CustomerLoginVM.Email, model.CustomerLoginVM.Password, model.CustomerLoginVM.RememberMe, shouldLockout: false);
-            var user = await UserManager.FindAsync(model.CustomerLoginVM.Email, model.CustomerLoginVM.Password);
-            switch (result)
-            {
-                case SignInStatus.Success:
 
-                    if (UserManager.IsInRole(user.Id, "Customer"))
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.CustomerLoginVM.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
-
-        //// Add Supplier
+        //// Add Supplier(Without Sending Confirmation Email)
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
@@ -445,37 +497,8 @@ namespace MultivendorEcommerceStore.Controllers
         //}
 
         // REGISTER: Customer
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CustomerRegister(CustomerLoginRegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
-                var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
 
-                if (result.Succeeded)
-                {
-                    CustomerBL customerBL = new CustomerBL();
-                    UserManager.AddToRole(user.Id, "Customer");
-                    model.CustomerRegisterVM.AspNetUserID = user.Id;
-                    customerBL.CustomerRegister(model);
-                    await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
-                    return RedirectToAction("Index", "Home");
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-            // If we got this far, something failed, redisplay form
-            return RedirectToAction("Login", "Home");
-        }
 
 
 
@@ -560,18 +583,6 @@ namespace MultivendorEcommerceStore.Controllers
             return View(model);
         }
 
-        ////
-        //// GET: /Account/ConfirmEmail
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return View("Error");
-        //    }
-        //    var result = await UserManager.ConfirmEmailAsync(userId, code);
-        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        //}
 
         //
         // GET: /Account/ForgotPassword

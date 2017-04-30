@@ -28,6 +28,7 @@
                                 <div class="col-md-3">
                                     @*@Html.EditorFor(m => m.LogoPath, new { htmlAttributes = new { @class = "form-control" } })*@
                                     <input type="file" id="Picture" name="Picture" class="form-control file-upload" />
+                                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
                                     @*@html.validationmessagefor(m => m.logopath, "", new { @class = "text-danger" })*@
                                 </div>
 
@@ -70,3 +71,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

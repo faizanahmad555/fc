@@ -224,22 +224,6 @@ namespace MultivendorEcommerceStore.Controllers
             return PartialView("Delete", ProductID);
         }
 
-        
-        public bool DeleteProductConfirm(Guid ProductID)
-        {
-            ProductBL productBL = new ProductBL();
-            productBL.DeleteProduct(ProductID);
-            return true;
-        }
-
-
-        public int? ChangeProductActiveStatus(Guid ProductID, int IsActive)
-        {
-            ProductBL productBL = new ProductBL();
-            return productBL.ChangeProductStatus(ProductID, IsActive);
-        }
-
-
 
         // SHOW: All Customers
         [HttpGet]

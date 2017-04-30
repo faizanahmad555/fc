@@ -43,6 +43,8 @@ namespace MultivendorEcommerceStore.BL
             product.IsActive = (int)ProductActive.Yes;
             product.CreatedOn = DateTime.Now;
 
+
+
             repositroy.Create(product);
         }
 
@@ -57,6 +59,42 @@ namespace MultivendorEcommerceStore.BL
             List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
 
             var productTbl = productRepo.Retrive().ToList();
+
+            foreach (var product in productTbl)
+            {
+                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
+                var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
+
+                ProductListViewModel viewModel = new ProductListViewModel();
+
+                viewModel.SupplierID = product.SupplierID;
+                viewModel.ProductID = product.ProductID;
+                viewModel.CategoryName = category.CategoryName;
+                viewModel.SubCategoryName = subCategory.SubCategoryName;
+                viewModel.ProductName = product.ProductName;
+                viewModel.ProductDescription = product.ProductDescription;
+                viewModel.ProductImage1 = product.ProductPicture;
+                viewModel.Price = product.UnitPrice;
+                viewModel.Quantity = product.Quantity;
+                viewModel.Size = product.UnitSize;
+                viewModel.Status = Enum.GetName(typeof(ProductStatus), product.Status);
+                viewModel.Active = Enum.GetName(typeof(ProductActive), product.IsActive);
+                viewModel.CreatedOn = product.CreatedOn;
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
+        }
+
+        // SHOW: ALL Supplier Products(For Admin Side)
+        public List<ProductListViewModel> ProductLists(Guid PId)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+
+            List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
+
+            var productTbl = productRepo.Retrive().Where(p=>p.SubCategoryItemID == PId).ToList();
 
             foreach (var product in productTbl)
             {

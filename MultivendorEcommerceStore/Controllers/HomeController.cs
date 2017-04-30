@@ -14,11 +14,6 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -38,10 +33,10 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        public ActionResult Products()
+        public ActionResult Products(Guid PId)
         {
             ProductBL productBL = new ProductBL();
-            return View(productBL.ProductList());
+            return View(productBL.ProductLists(PId));
         }
 
 
