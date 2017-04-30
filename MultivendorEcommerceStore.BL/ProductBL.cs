@@ -97,7 +97,7 @@ namespace MultivendorEcommerceStore.BL
 
             List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
 
-            var productTbl = productRepo.Retrive().Where(p=>p.SubCategoryItemID == PId).ToList();
+            var productTbl = productRepo.Retrive().Where(p=>p.SubCategoryItemID == PId || p.SubCategoryID == PId).ToList();
 
             foreach (var product in productTbl)
             {
@@ -111,7 +111,7 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.ProductID = product.ProductID;
                 viewModel.CategoryName = category.CategoryName;
                 viewModel.SubCategoryName = subCategory.SubCategoryName;
-                viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
+                //viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
                 viewModel.ProductName = product.ProductName;
                 viewModel.ProductDescription = product.ProductDescription;
                 viewModel.ProductImage1 = product.ProductPicture;
@@ -267,7 +267,7 @@ namespace MultivendorEcommerceStore.BL
                 DisplayProductViewModel viewModel = new DisplayProductViewModel();
                 viewModel.CategoryName = category.CategoryName;
                 viewModel.SubCategoryName = subCategory.SubCategoryName;
-                viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
+                //viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
 
                 viewModel.ProductID = product.ProductID;
                 //viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
