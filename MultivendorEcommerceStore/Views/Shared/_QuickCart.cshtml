@@ -1,0 +1,71 @@
+﻿@using MultivendorEcommerceStore.DB.ViewModel
+@{
+    CartViewModel obj = new CartViewModel();
+    int quantityCount = 0;
+    int? total = 0;
+    List<CartViewModel> List = (List<CartViewModel>)Session["Cart"];
+    if (Session["Cart"] != null)
+    {
+        for (int i = 0; i < List.Count(); i++)
+        {
+            quantityCount = List[i].Quantity + quantityCount;
+            var price = List[i].ProductDetail.Price * List[i].Quantity;
+            total = price + total;
+        }
+        if (quantityCount == 0 || quantityCount < 0)
+        {
+            quantityCount = 0;
+        }
+    }
+
+}
+
+<div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
+    <a class="cart-link" href="@Url.Action("CartIndex","Cart")">
+        <span class="title">Shopping cart</span>
+        <span class="total cart-quantity">@quantityCount items </span> @*- <i id="CartTotal"> @total </i>  Rs.*@ 
+        <span class="notify notify-left cart-quantity">@quantityCount</span>
+    </a>
+    <div class="cart-block">
+        <div class="cart-block-content">
+            <h5 class="cart-title cart-quantity">@quantityCount Items in my cart</h5>
+            <div class="cart-block-list">
+                <ul id="QuickCartView">
+
+                    @if (List != null)
+                    {
+                        foreach (var item in List)
+                        {
+                            <li class="product-info TagToRemove">
+
+                                <div class="p-left">
+                                    <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
+                                        <img class="img-responsive" src="@Url.Content(item.ProductDetail.ProductImage1)" alt="Cart Product">
+                                    </a>
+                                </div>
+
+                                <div class="p-right">
+                                    <p class="p-name">@item.ProductDetail.ProductName</p>
+                                    <p class="p-rice">@(item.ProductDetail.Price * @item.Quantity)</p>
+                                    <p>Quantity: @item.Quantity</p>
+                                    <button class="btn-hover-2 DeleteItemFromCart pull-right" onclick="f1(this)" value="@item.ProductID"><i class="glyphicon glyphicon-trash"></i></button>
+
+                                </div>
+
+                            </li>
+
+                        }
+                    }
+
+                </ul>
+            </div>
+            <div class="toal-cart">
+                <span>Total</span>
+                <span class="toal-price pull-right" id="CartTotal">@total Rs.</span>
+            </div>
+            <div class="cart-buttons">
+                <a href="order.html" class="btn-check-out">Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>

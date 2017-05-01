@@ -37,11 +37,11 @@
             <span class="navigation-pipe">&nbsp;</span>
             <span class="navigation_page">
                 @*@foreach (var item in Model)
-                {
-                    <a href="#" title="Sub-Category Item">
-                        @item.SubCategoryItemName
-                    </a>
-                }*@
+                    {
+                        <a href="#" title="Sub-Category Item">
+                            @item.SubCategoryItemName
+                        </a>
+                    }*@
             </span>
 
         </div>
@@ -511,9 +511,9 @@
                         </li>
                         <li>
                             @*@foreach (var item in Model)
-                            {
-                                <a href="#">@item.SubCategoryItemName</a>
-                            }*@
+                                {
+                                    <a href="#">@item.SubCategoryItemName</a>
+                                }*@
                         </li>
 
                     </ul>
@@ -523,9 +523,9 @@
                 <div id="view-product-list" class="view-product-list">
                     <h2 class="page-heading">
                         @*@foreach (var item in Model)
-                        {
-                            <span class="page-heading-title">@item.SubCategoryItemName</span>
-                        }*@
+                            {
+                                <span class="page-heading-title">@item.SubCategoryItemName</span>
+                            }*@
                     </h2>
                     <ul class="display-product-option">
                         <li class="view-as-grid selected">
@@ -551,7 +551,7 @@
                                             <a title="Quick view" class="search" href="#"></a>
                                         </div>
                                         <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
+                                            <button title="Add to Cart" value="@item.ProductID" class="AddToCart" type="button">Add to Cart</button>
                                         </div>
                                     </div>
                                     <div class="right-block">
@@ -624,3 +624,5 @@
         <!-- ./row-->
     </div>
 </div>
+
+

@@ -138,6 +138,7 @@
     <Compile Include="ViewModel\AddProductViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="ViewModel\CategoryListViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
