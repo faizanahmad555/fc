@@ -33,6 +33,7 @@ namespace MultivendorEcommerceStore.BL
             product.SubCategoryItemID = model.SubCategoryItemID;
 
             product.SupplierID = SupplierID;
+            product.FeatureProduct = model.FeatureProduct;
             product.ProductName = model.ProductName;
             product.ProductDescription = model.ProductDescription;
             product.ProductPicture = basePath + fileName;
@@ -69,6 +70,7 @@ namespace MultivendorEcommerceStore.BL
 
                 viewModel.SupplierID = product.SupplierID;
                 viewModel.ProductID = product.ProductID;
+                viewModel.FeatureProduct = product.FeatureProduct;
                 viewModel.CategoryName = category.CategoryName;
                 viewModel.SubCategoryName = subCategory.SubCategoryName;
                 viewModel.ProductName = product.ProductName;
@@ -86,7 +88,6 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-
         // SHOW: ALL Supplier Products(For Front End Side)
         public List<ProductListViewModel> ProductLists(Guid PId)
         {
@@ -97,7 +98,7 @@ namespace MultivendorEcommerceStore.BL
 
             List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
 
-            var productTbl = productRepo.Retrive().Where(p=>p.SubCategoryItemID == PId || p.SubCategoryID == PId).ToList();
+            var productTbl = productRepo.Retrive().Where(p => p.SubCategoryItemID == PId || p.SubCategoryID == PId).ToList();
 
             foreach (var product in productTbl)
             {
@@ -125,6 +126,85 @@ namespace MultivendorEcommerceStore.BL
             }
             return viewModelList;
         }
+
+
+
+
+
+
+
+
+
+        // SHOW: ALL Feature Products(For Front End Side)
+        public List<FeatureProductsViewModel> FeatureProductList()
+        {
+            IProductRepository productRepo = new ProductRepository();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+
+            List<FeatureProductsViewModel> viewModelList = new List<FeatureProductsViewModel>();
+
+            var productTbl = productRepo.Retrive().ToList();
+            var categoryTbl = categoryRepo.Retrive().ToList();
+
+            foreach (var product in productTbl)
+            {
+                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
+                var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
+
+                FeatureProductsViewModel viewModel = new FeatureProductsViewModel();
+
+                ProductListViewModel productVM = new ProductListViewModel();
+
+                productVM.SupplierID = product.SupplierID;
+                productVM.ProductID = product.ProductID;
+                productVM.FeatureProduct = product.FeatureProduct;
+                productVM.CategoryName = category.CategoryName;
+                productVM.SubCategoryName = subCategory.SubCategoryName;
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.ProductImage1 = product.ProductPicture;
+                productVM.Price = product.UnitPrice;
+                productVM.Quantity = product.Quantity;
+                productVM.Size = product.UnitSize;
+                productVM.Status = Enum.GetName(typeof(ProductStatus), product.Status);
+                productVM.Active = Enum.GetName(typeof(ProductActive), product.IsActive);
+                productVM.CreatedOn = product.CreatedOn;
+
+                viewModel.ProductListVM.Add(productVM);
+                viewModelList.Add(viewModel);
+
+            }
+
+            foreach (var category in categoryTbl)
+            {
+                FeatureProductsViewModel viewModel = new FeatureProductsViewModel();
+
+                CategoryEntity cat = new CategoryEntity();
+
+                cat.CategoryID = category.CategoryID;
+                cat.CategoryName = category.CategoryName;
+                cat.CategoryPicture = category.Picture;
+                cat.DisplayOrder = category.DisplayOrder;
+
+                foreach (var subcategory in category.SubCategories)
+                {
+                    SubCategoryEntity subcat = new SubCategoryEntity();
+                    subcat.SubCategoryID = subcategory.SubCategoryID;
+                    subcat.SubCategoryName = subcategory.SubCategoryName;
+                    cat.listSubCategoryEntity.Add(subcat);
+                }
+                viewModel.CategoryListVM.Add(cat);
+                viewModelList.Add(viewModel);
+
+            }
+
+            return viewModelList;
+        }
+
+
+
+
 
 
         // EDIT: EXISTING Product For Edit

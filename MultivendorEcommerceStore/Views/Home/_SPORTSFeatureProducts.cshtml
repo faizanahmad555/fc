@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.CategoryListViewModel>
+﻿@model List<MultivendorEcommerceStore.DB.ViewModel.FeatureProductsViewModel>
 
 <!-- featured category sports -->
 <div class="category-featured sports">
@@ -25,17 +25,18 @@
     <div class="product-featured clearfix">
         <div class="row">
             <div class="col-sm-2 sub-category-wapper">
-                @*<div class="owl-carousel-vertical" data-items="1" data-nav="true" data-dots="false" data-loop="true">*@
+                @*<div class="owl-carousel-vertical" data-items="1" data-nav="true" data-dots="false" data-loop="true">
+                *@
                 <div class="item">
                     <ul class="sub-category-list">
                         @foreach (var Mainitem in Model)
                         {
-                            foreach (var item in Mainitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "SPORTS").ToList())
+                            foreach (var item in Mainitem.CategoryListVM.Where(c => c.DisplayOrder == 2 & c.CategoryName == "SPORTS").ToList())
                             {
                                 foreach (var SubCat in item.listSubCategoryEntity.OrderBy(c => c.SubCategoryName))
                                 {
                                     <li>
-                                        <a href="#">
+                                        <a href="@Url.Action("Products", "Home" , new{ PId=SubCat.SubCategoryID })">
                                             @Html.DisplayFor(modelitem => SubCat.SubCategoryName)
                                         </a>
                                     </li>
@@ -58,7 +59,8 @@
                             <li><a href="#">Nike Shoes</a></li>
                         </ul>
                     </div>*@
-                @*</div>*@
+                @*
+                    </div>*@
             </div>
             <div class="col-sm-10 col-right-tab">
                 <div class="product-featured-tab-content">
@@ -67,7 +69,7 @@
                             <div class="box-left">
                                 @foreach (var Mianitem in Model)
                                 {
-                                    foreach (var item in Mianitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "SPORTS").ToList())
+                                    foreach (var item in Mianitem.CategoryListVM.Where(c => c.DisplayOrder == 2 & c.CategoryName == "SPORTS").ToList())
                                     {
                                         <div class="banner-img">
                                             <a href="#"><img src="@Html.DisplayFor(modelItem => item.CategoryPicture)" alt="SPORTS Product"></a>
@@ -77,138 +79,32 @@
                             </div>
                             <div class="box-right">
                                 <ul class="product-list row">
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Sexy Sport Shoes</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                                <span class="price old-price">$52,00</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p55.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Tennis Blue Hat</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                                <span class="price old-price">$52,00</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p56.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Blue T-Shirt</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p57.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Tennis Racquet</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                                <span class="price old-price">$52,00</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p58.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Fashion & Sport</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                                <span class="price old-price">$52,00</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p59.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Versatile Package</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/p60.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @foreach (var featureProduct in Model)
+                                    {
+                                        foreach (var item in featureProduct.ProductListVM.Where(p => p.Active == "Yes" && p.FeatureProduct == true && p.CategoryName == "SPORTS"))
+                                        {
+                                            <li class="col-sm-4">
+                                                <div class="right-block">
+                                                    <h5 class="product-name"><a href="#">@item.ProductName</a></h5>
+                                                    <div class="content_price">
+                                                        <span class="price product-price">Rs. @item.Price</span>
+                                                        @*<span class="price old-price">$52,00</span>*@
+                                                    </div>
+                                                </div>
+                                                <div class="left-block">
+                                                    <a href="@Url.Action("ProductDetail", "Home" , new { ProductID=item.ProductID })"><img class="img-responsive" alt="product" src="@Url.Content(item.ProductImage1)" width="268" height="327" /></a>
+                                                    <div class="quick-view">
+                                                        <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                        <a title="Add to compare" class="compare" href="#"></a>
+                                                        <a title="Quick view" class="search" href="#"></a>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                        <a title="Add to Cart" href="#">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.CategoryListViewModel>
+﻿@model List<MultivendorEcommerceStore.DB.ViewModel.FeatureProductsViewModel>
 
 <!-- featured category furniture -->
 <div class="category-featured furniture">
@@ -28,12 +28,12 @@
                 <ul class="sub-category-list">
                     @foreach (var Mainitem in Model)
                     {
-                        foreach (var item in Mainitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
+                        foreach (var item in Mainitem.CategoryListVM.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
                         {
                             foreach (var SubCat in item.listSubCategoryEntity.OrderBy(c => c.SubCategoryName))
                             {
                                 <li>
-                                    <a href="#">
+                                    <a href="@Url.Action("Products", "Home", new{ PId = SubCat.SubCategoryID })">
                                         @Html.DisplayFor(modelitem => SubCat.SubCategoryName)
                                     </a>
                                 </li>
@@ -49,7 +49,7 @@
                             <div class="box-left">
                                 @foreach (var Mianitem in Model)
                                 {
-                                    foreach (var item in Mianitem.listCategoryEntity.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
+                                    foreach (var item in Mianitem.CategoryListVM.Where(c => c.DisplayOrder == 2 & c.CategoryName == "FURNITURE").ToList())
                                     {
                                         <div class="banner-img">
                                             <a href="#"><img src="@Html.DisplayFor(modelItem => item.CategoryPicture)" alt="FURNITURE Product"></a>
@@ -59,133 +59,32 @@
                             </div>
                             <div class="box-right">
                                 <ul class="product-list row">
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Interesting Chair</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p8.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Relaxed Chair</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p9.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Innovative Red Chair</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p7.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">White Stack Chair</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p14.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Kute Innovative Chair</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p12.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-sm-4">
-                                        <div class="right-block">
-                                            <h5 class="product-name"><a href="#">Pretty Green & Inox</a></h5>
-                                            <div class="content_price">
-                                                <span class="price product-price">$38,95</span>
-                                                <span class="price old-price">$52,00</span>
-                                            </div>
-                                        </div>
-                                        <div class="left-block">
-                                            <a href="#">
-                                                <img class="img-responsive" alt="product" src="assets/data/option5/p13.jpg" />
-                                            </a>
-                                            <div class="quick-view">
-                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                <a title="Add to compare" class="compare" href="#"></a>
-                                                <a title="Quick view" class="search" href="#"></a>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a title="Add to Cart" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @foreach (var featureProduct in Model)
+                                    {
+                                        foreach (var item in featureProduct.ProductListVM.Where(p => p.Active == "Yes" && p.FeatureProduct == true && p.CategoryName == "FURNITURE"))
+                                        {
+                                            <li class="col-sm-4">
+                                                <div class="right-block">
+                                                    <h5 class="product-name"><a href="#">@item.ProductName</a></h5>
+                                                    <div class="content_price">
+                                                        <span class="price product-price">Rs. @item.Price</span>
+                                                        @*<span class="price old-price">$52,00</span>*@
+                                                    </div>
+                                                </div>
+                                                <div class="left-block">
+                                                    <a href="@Url.Action("ProductDetail", "Home" , new { ProductID=item.ProductID })"><img class="img-responsive" alt="product" src="@Url.Content(item.ProductImage1)" width="268" height="327" /></a>
+                                                    <div class="quick-view">
+                                                        <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                        <a title="Add to compare" class="compare" href="#"></a>
+                                                        <a title="Quick view" class="search" href="#"></a>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                        <a title="Add to Cart" href="#">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>

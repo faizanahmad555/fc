@@ -49,51 +49,51 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        public PartialViewResult _FASHIONCategoryProducts()
+        public PartialViewResult _FASHIONFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_FASHIONCategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_FASHIONFeatureProducts", productList);
         }
 
 
-        public PartialViewResult _SPORTSCategoryProducts()
+        public PartialViewResult _SPORTSFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_SPORTSCategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_SPORTSFeatureProducts", productList);
         }
 
 
-        public PartialViewResult _ELECTRONICSCategoryProducts()
+        public PartialViewResult _ELECTRONICSFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_ELECTRONICSCategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_ELECTRONICSFeatureProducts", productList);
         }
 
 
-        public PartialViewResult _DIGITALCategoryProducts()
+        public PartialViewResult _DIGITALFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_DIGITALCategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_DIGITALFeatureProducts", productList);
         }
 
 
-        public PartialViewResult _FURNITURECategoryProducts()
+        public PartialViewResult _FURNITUREFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_FURNITURECategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_FURNITUREFeatureProducts", productList);
         }
 
 
-        public PartialViewResult _JEWELRYCategoryProducts()
+        public PartialViewResult _JEWELRYFeatureProducts()
         {
-            CategoryBL categoryBL = new CategoryBL();
-            var categoryList = categoryBL.CategoryList();
-            return PartialView("_JEWELRYCategoryProducts", categoryList);
+            ProductBL productBL = new ProductBL();
+            var productList = productBL.FeatureProductList();
+            return PartialView("_JEWELRYFeatureProducts", productList);
         }
 
 

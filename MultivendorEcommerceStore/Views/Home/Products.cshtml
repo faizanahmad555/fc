@@ -19,6 +19,7 @@
                     <a href="#" title="Category">
                         @item.CategoryName
                     </a>
+                    break;
                 }
             </span>
 
@@ -29,6 +30,7 @@
                     <a href="#" title="Sub Category">
                         @item.SubCategoryName
                     </a>
+                    break;
                 }
             </span>
 
@@ -497,12 +499,14 @@
                             @foreach (var item in Model)
                             {
                                 <a href="#">@item.CategoryName</a>
+                                break;
                             }
                         </li>
                         <li>
                             @foreach (var item in Model)
                             {
                                 <a href="#">@item.SubCategoryName</a>
+                                break;
                             }
                         </li>
                         <li>

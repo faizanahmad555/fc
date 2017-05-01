@@ -1509,7 +1509,7 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\EditProduct.cshtml" />
-    <Content Include="Views\Home\_FASHIONCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_FASHIONFeatureProducts.cshtml" />
     <Content Include="Views\Home\_DEALS.cshtml" />
     <Content Include="Views\Home\_ShowCategories.cshtml" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
@@ -1523,11 +1523,11 @@
     <Content Include="Views\Account\SupplierLogin.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Account\CustomerLogin.cshtml" />
-    <Content Include="Views\Home\_SPORTSCategoryProducts.cshtml" />
-    <Content Include="Views\Home\_ELECTRONICSCategoryProducts.cshtml" />
-    <Content Include="Views\Home\_DIGITALCategoryProducts.cshtml" />
-    <Content Include="Views\Home\_FURNITURECategoryProducts.cshtml" />
-    <Content Include="Views\Home\_JEWELRYCategoryProducts.cshtml" />
+    <Content Include="Views\Home\_SPORTSFeatureProducts.cshtml" />
+    <Content Include="Views\Home\_ELECTRONICSFeatureProducts.cshtml" />
+    <Content Include="Views\Home\_DIGITALFeatureProducts.cshtml" />
+    <Content Include="Views\Home\_FURNITUREFeatureProducts.cshtml" />
+    <Content Include="Views\Home\_JEWELRYFeatureProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

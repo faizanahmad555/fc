@@ -30,7 +30,6 @@
     </div>
 </div>
 <!-- vertical center Modal end -->
-
 <!--main content start-->
 <section class="site-min-height">
     <!-- page start-->
@@ -133,21 +132,17 @@
                                         @Html.DisplayFor(modelItem => item.CreatedOn)
                                     </td>
                                     <td>
-                                        <a id="button" class="btn btn-success btn-circle ItemToChange" value="@item.ProductID">
+                                        <a class="btn btn-success btn-xs btn-circle ItemToChange" title="Active/InActive" value="@item.ProductID">
                                             <i class="glyphicon glyphicon-ok-circle"></i>
                                         </a>
-                                        @*<button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-ok-circle"></i></button>*@
 
-                                        @*<a href="#" class=""><span class="glyphicon glyphicon-ok-circle"></span></a>*@
-
-
-                                        <a href="@Url.Action("EditProduct", "Admin", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })" class="btn btn-primary">
+                                        <a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("EditProduct", "Admin", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger ItemToDelete" data-toggle="modal" data-target="#myModal" value="@item.ProductID">
+
+                                        <a class="btn btn-danger btn-xs ItemToDelete" title="Delete" data-toggle="modal" data-target="#myModal" value="@item.ProductID">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
-
                                     </td>
                                 </tr>
                             }
@@ -162,8 +157,6 @@
     <!-- page end-->
 </section>
 <!--main content end-->
-
-
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">

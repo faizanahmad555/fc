@@ -18,7 +18,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public SubCategory()
         {
             this.SubCategoryItems = new HashSet<SubCategoryItem>();
-            this.Products = new HashSet<Product>();
         }
     
         public System.Guid SubCategoryID { get; set; }
@@ -32,7 +31,5 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubCategoryItem> SubCategoryItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="ViewModel\DisplayProductViewModel.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
+    <Compile Include="ViewModel\FeatureProductsViewModel.cs" />
     <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="ViewModel\SupplierListViewModel.cs" />
     <Compile Include="ViewModel\SupplierProfileViewModel.cs" />

@@ -48,7 +48,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string Size { get; set; }
 
 
-
+        [Display(Name = "Apply For Feature?")]
+        public bool FeatureProduct { get; set; }
 
         //[Required(ErrorMessage = "This field is required.")]
         //[Display(Name = "Quantity Per Unit")]

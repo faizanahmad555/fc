@@ -46,6 +46,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+
         [Authorize(Roles = "Supplier")]
         [HttpPost]
         public ActionResult AddProduct(AddProductViewModel model)

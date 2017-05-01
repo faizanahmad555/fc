@@ -49,8 +49,11 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        [Display(Name = "Status")]
+        [Display(Name = "IsActive")]
         public string Active { get; set; }
+
+        [Display(Name = "Feature")]
+        public bool? FeatureProduct { get; set; }
 
         [Display(Name = "Added on")]
         public DateTime? CreatedOn { get; set; }

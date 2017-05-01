@@ -37,15 +37,14 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_StateMaster" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="9.75" PointY="5.5" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Category" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_SubCategory" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Customer" Width="1.5" PointX="7.5" PointY="16" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Customer" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="9.75" PointY="4.875" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Category" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
