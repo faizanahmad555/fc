@@ -17,23 +17,40 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Name")]
-        [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
-        [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
+        [StringLength(30, ErrorMessage = "No more than 30 characters.", MinimumLength = 1)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
         public string ProductName { get; set; }
 
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Description")]
-        [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
+        [StringLength(500, ErrorMessage = "No more than 500 characters.")]
+
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
         public string ProductDescription { get; set; }
+
+
+
+
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Product Long Description")]
+        [StringLength(1000, ErrorMessage = "No more than 1000 characters.", MinimumLength = 30)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        public string ProductLongDescription { get; set; }
+
+
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Product Image")]
         public HttpPostedFileBase ProductImage1 { get; set; }
 
+
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Price")]
-        // [DataType(DataType.Currency)]
+        //[RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "Price must be positive Numbers only.")]
+        [RegularExpression(@"[^a-zA-Z]+$", ErrorMessage = "Please enter numbers only")]
+        [Range(typeof(int), "0", "50000", ErrorMessage = "{0} can only be between {1} and {2}")]
         public int Price { get; set; }
 
 

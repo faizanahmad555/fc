@@ -8,7 +8,6 @@ namespace MultivendorEcommerceStore.Controllers
 {
     public class HomeController : Controller
     {
-        private CategoryBL _categoryBL = new CategoryBL();
         public ActionResult Index()
         {
             return View();
@@ -27,18 +26,7 @@ namespace MultivendorEcommerceStore.Controllers
 
             return View();
         }
-
-        public ActionResult DailyDealProducts()
-        {
-            return View();
-        }
-
-        public ActionResult Products(Guid PId)
-        {
-            ProductBL productBL = new ProductBL();
-            return View(productBL.ProductLists(PId));
-        }
-
+        
 
         // SHOW: All Categories of Display Order 1
         public PartialViewResult _ShowCategories()
@@ -98,6 +86,15 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
+        // SHOW: All Products According to Categories
+        public ActionResult Products(Guid PId)
+        {
+            ProductBL productBL = new ProductBL();
+            return View(productBL.ProductLists(PId));
+        }
+
+
+        // SHOW: All Products Detail According to Product
         public ActionResult ProductDetail(Guid ProductID)
         {
             if (ProductID != null)
@@ -107,8 +104,16 @@ namespace MultivendorEcommerceStore.Controllers
             }
             else
             {
-                throw new NotImplementedException();
+                return View("Index", "Home");
             }
+        }
+
+
+        // SHOW: All Products of Supplier
+        public ActionResult SupplierProducts(Guid SupplierID)
+        {
+            ProductBL productBL = new ProductBL();
+            return View(productBL.GetProductsBySupplierID(SupplierID));
         }
 
     }

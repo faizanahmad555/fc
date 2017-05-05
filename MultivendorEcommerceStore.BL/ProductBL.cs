@@ -36,6 +36,7 @@ namespace MultivendorEcommerceStore.BL
             product.FeatureProduct = model.FeatureProduct;
             product.ProductName = model.ProductName;
             product.ProductDescription = model.ProductDescription;
+            //product.ProductLongDescription = model.ProductLongDescription;
             product.ProductPicture = basePath + fileName;
             product.UnitPrice = model.Price;
             product.Quantity = model.Quantity;
@@ -88,7 +89,128 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        // SHOW: ALL Supplier Products(For Front End Side)
+        // SHOW: Current Supplier Products(For Supplier Side)
+        public List<ProductListViewModel> GetProductsBySupplierID(Guid SupplierID)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            ICategoryRepository categoryRepo = new CategoryRepository();
+            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
+
+            List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
+
+            var productTbl = productRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
+
+            foreach (var product in productTbl)
+            {
+                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
+                var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
+
+                ProductListViewModel viewModel = new ProductListViewModel();
+
+                viewModel.SupplierID = product.SupplierID;
+                viewModel.ProductID = product.ProductID;
+                viewModel.CategoryName = category.CategoryName;
+                viewModel.SubCategoryName = subCategory.SubCategoryName;
+                viewModel.ProductName = product.ProductName;
+                viewModel.ProductDescription = product.ProductDescription;
+                viewModel.ProductImage1 = product.ProductPicture;
+                viewModel.Price = product.UnitPrice;
+                viewModel.Quantity = product.Quantity;
+                viewModel.Size = product.UnitSize;
+                viewModel.Status = Enum.GetName(typeof(ProductStatus), product.Status);
+                viewModel.Active = Enum.GetName(typeof(ProductActive), product.IsActive);
+                viewModel.CreatedOn = product.CreatedOn;
+                viewModelList.Add(viewModel);
+            }
+            return viewModelList;
+        }
+
+
+        // EDIT: EXISTING Product For Edit(For Admin & Supplier Side)
+        public EditProductViewModel EditSupplierProduct(Guid SupplierID, Guid ProductID)
+        {
+            IProductRepository productRepo = new ProductRepository();
+
+            var supplierProduct = productRepo.Retrive().Where(s => s.ProductID == ProductID && s.SupplierID == SupplierID).FirstOrDefault();
+
+            EditProductViewModel viewModel = new EditProductViewModel();
+            viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
+            viewModel.ProductID = (Guid)supplierProduct.ProductID;
+            viewModel.ProductName = supplierProduct.ProductName;
+            viewModel.ProductDiscription = supplierProduct.ProductDescription;
+            viewModel.ProductImagePath = supplierProduct.ProductPicture;
+            viewModel.UnitPrice = supplierProduct.UnitPrice;
+            viewModel.Quantity = supplierProduct.Quantity;
+            viewModel.Size = supplierProduct.UnitSize;
+            return viewModel;
+        }
+
+        // EDIT: Save Edited Product INFO(For Admin & Supplier Side)
+        public void AddEditedSupplierProduct(EditProductViewModel viewModel)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            Product product = new Product();
+
+            if (viewModel.ProductImage1 != null)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(viewModel.ProductImage1.FileName);
+                fileName += DateTime.Now.Ticks + Path.GetExtension(viewModel.ProductImage1.FileName);
+                var basePath = "~/Content/Users//Suppliers/" + viewModel.SupplierID + "/Products/Images/";
+                var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + viewModel.SupplierID + "/Products/Images/"));
+                viewModel.ProductImage1.SaveAs(path);
+
+                product.ProductPicture = basePath + fileName;
+            }
+            else
+            {
+                product.ProductPicture = viewModel.ProductImagePath;
+            }
+
+            product.ProductID = viewModel.ProductID;
+            product.SupplierID = viewModel.SupplierID;
+            product.ProductName = viewModel.ProductName;
+            product.ProductDescription = viewModel.ProductDiscription;
+            product.UnitPrice = viewModel.UnitPrice;
+            product.Quantity = viewModel.Quantity;
+            product.UnitSize = viewModel.Size;
+
+            productRepo.Update(product);
+        }
+
+
+        // CHANGE: Product Active/InActive State
+        public int? ChangeProductStatus(Guid ProductID, int IsActive)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            var productTbl = productRepo.Retrive().Where(p => p.ProductID == ProductID).FirstOrDefault();
+
+            if (IsActive == 1)
+            {
+                IsActive = 0;
+            }
+            else if (IsActive == 0)
+            {
+                IsActive = 1;
+            }
+            productTbl.IsActive = IsActive;
+
+            return productRepo.ChangeActiveStatus(productTbl);
+
+        }
+
+        
+        // DELETE: Products of All Suppliers(For Admin Side)
+        public void DeleteProduct(Guid ProductID)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            productRepo.Delete(ProductID);
+        }
+
+
+
+
+        // SHOW: ALL Products According to Categories(For Front End Side)
         public List<ProductListViewModel> ProductLists(Guid PId)
         {
             IProductRepository productRepo = new ProductRepository();
@@ -127,14 +249,7 @@ namespace MultivendorEcommerceStore.BL
             return viewModelList;
         }
 
-
-
-
-
-
-
-
-
+        
         // SHOW: ALL Feature Products(For Front End Side)
         public List<FeatureProductsViewModel> FeatureProductList()
         {
@@ -203,132 +318,11 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-
-
-
-
-        // EDIT: EXISTING Product For Edit
-        public EditProductViewModel EditSupplierProduct(Guid SupplierID, Guid ProductID)
-        {
-            IProductRepository productRepo = new ProductRepository();
-
-            var supplierProduct = productRepo.Retrive().Where(s => s.ProductID == ProductID && s.SupplierID == SupplierID).FirstOrDefault();
-
-            EditProductViewModel viewModel = new EditProductViewModel();
-            viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
-            viewModel.ProductID = (Guid)supplierProduct.ProductID;
-            viewModel.ProductName = supplierProduct.ProductName;
-            viewModel.ProductDiscription = supplierProduct.ProductDescription;
-            viewModel.ProductImagePath = supplierProduct.ProductPicture;
-            viewModel.UnitPrice = supplierProduct.UnitPrice;
-            viewModel.Quantity = supplierProduct.Quantity;
-            viewModel.Size = supplierProduct.UnitSize;
-            return viewModel;
-        }
-
-        // EDIT: Save Edited Product INFO
-        public void AddEditedSupplierProduct(EditProductViewModel viewModel)
-        {
-            IProductRepository productRepo = new ProductRepository();
-            Product product = new Product();
-
-            if (viewModel.ProductImage1 != null)
-            {
-                var fileName = Path.GetFileNameWithoutExtension(viewModel.ProductImage1.FileName);
-                fileName += DateTime.Now.Ticks + Path.GetExtension(viewModel.ProductImage1.FileName);
-                var basePath = "~/Content/Users//Suppliers/" + viewModel.SupplierID + "/Products/Images/";
-                var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
-                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + viewModel.SupplierID + "/Products/Images/"));
-                viewModel.ProductImage1.SaveAs(path);
-
-                product.ProductPicture = basePath + fileName;
-            }
-            else
-            {
-                product.ProductPicture = viewModel.ProductImagePath;
-            }
-
-            product.ProductID = viewModel.ProductID;
-            product.SupplierID = viewModel.SupplierID;
-            product.ProductName = viewModel.ProductName;
-            product.ProductDescription = viewModel.ProductDiscription;
-            product.UnitPrice = viewModel.UnitPrice;
-            product.Quantity = viewModel.Quantity;
-            product.UnitSize = viewModel.Size;
-
-            productRepo.Update(product);
-        }
-
-
-        // DELETE: Products of All Suppliers(Admin Side)
-        public void DeleteProduct(Guid ProductID)
-        {
-            IProductRepository productRepo = new ProductRepository();
-            productRepo.Delete(ProductID);
-        }
-
-
-
-        // SHOW: Current Supplier Products(For Supplier Side)
-        public List<ProductListViewModel> GetProductsBySupplierID(Guid SupplierID)
-        {
-            IProductRepository productRepo = new ProductRepository();
-            ICategoryRepository categoryRepo = new CategoryRepository();
-            ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
-
-            List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
-
-            var productTbl = productRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
-
-            foreach (var product in productTbl)
-            {
-                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
-                var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
-
-                ProductListViewModel viewModel = new ProductListViewModel();
-
-                viewModel.SupplierID = product.SupplierID;
-                viewModel.ProductID = product.ProductID;
-                viewModel.CategoryName = category.CategoryName;
-                viewModel.SubCategoryName = subCategory.SubCategoryName;
-                viewModel.ProductName = product.ProductName;
-                viewModel.ProductDescription = product.ProductDescription;
-                viewModel.ProductImage1 = product.ProductPicture;
-                viewModel.Price = product.UnitPrice;
-                viewModel.Quantity = product.Quantity;
-                viewModel.Size = product.UnitSize;
-                viewModel.Status = Enum.GetName(typeof(ProductStatus), product.Status);
-                viewModel.Active = Enum.GetName(typeof(ProductActive), product.IsActive);
-                viewModel.CreatedOn = product.CreatedOn;
-                viewModelList.Add(viewModel);
-            }
-            return viewModelList;
-        }
-
-        public int? ChangeProductStatus(Guid ProductID, int IsActive)
-        {
-            IProductRepository productRepo = new ProductRepository();
-            var productTbl = productRepo.Retrive().Where(p => p.ProductID == ProductID).FirstOrDefault();
-
-            if (IsActive == 1)
-            {
-                IsActive = 0;
-            }
-            else if (IsActive == 0)
-            {
-                IsActive = 1;
-            }
-            productTbl.IsActive = IsActive;
-
-            return productRepo.ChangeActiveStatus(productTbl);
-            
-        }
-
-
-        // GET: Product Detials
+        // GET: Products Detial With Supplier Info(For Front End Side)
         public List<DisplayProductViewModel> GetProductDetails(Guid ProductID)
         {
             IProductRepository productRepo = new ProductRepository();
+            ISupplierRepository supplierRepo = new SupplierRepository();
             ICategoryRepository categoryRepo = new CategoryRepository();
             ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
             ISubCategoryItemRepository subCategoryItemRepo = new SubCategoryItemRepository();
@@ -336,6 +330,7 @@ namespace MultivendorEcommerceStore.BL
             List<DisplayProductViewModel> viewModelList = new List<DisplayProductViewModel>();
 
             var productDetail = productRepo.Retrive().Where(s => s.ProductID == ProductID).ToList();
+
 
             foreach (var product in productDetail)
             {
@@ -350,7 +345,7 @@ namespace MultivendorEcommerceStore.BL
                 //viewModel.SubCategoryItemName = subCategoryItem.SubCategoryName;
 
                 viewModel.ProductID = product.ProductID;
-                //viewModel.SupplierID = (Guid)supplierProduct.SupplierID;
+
                 viewModel.ProductName = product.ProductName;
                 viewModel.ProductDescription = product.ProductDescription;
                 viewModel.ProductImage1 = product.ProductPicture;
@@ -358,10 +353,23 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.Quantity = product.Quantity;
                 viewModel.Size = product.UnitSize;
                 viewModelList.Add(viewModel);
+
+                var supplierDetail = supplierRepo.Retrive().Where(s => s.SupplierID == product.SupplierID).ToList();
+
+                foreach (var supplier in supplierDetail)
+                {
+                    viewModel.SupplierID = supplier.SupplierID;
+                    viewModel.SupplierName = supplier.SupplierFirstName;
+
+                    viewModelList.Add(viewModel);
+                }
+
             }
+
             return viewModelList;
         }
 
 
+     
     }
 }

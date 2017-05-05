@@ -1507,12 +1507,10 @@
     <Content Include="Views\Admin\AddExistingCategoryItem.cshtml" />
     <Content Include="Views\Supplier\ProductList.cshtml" />
     <Content Include="Views\Admin\CategoryList.cshtml" />
-    <Content Include="Views\Home\DailyDealProducts.cshtml" />
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\EditProduct.cshtml" />
     <Content Include="Views\Home\_FASHIONFeatureProducts.cshtml" />
-    <Content Include="Views\Home\_DEALS.cshtml" />
     <Content Include="Views\Home\_ShowCategories.cshtml" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Manage\ChangeSupplierPassword.cshtml" />
@@ -1523,7 +1521,6 @@
     <Content Include="Views\Account\ConfirmationLinkExpired.cshtml" />
     <Content Include="Views\Account\EmailConfirmationFailed.cshtml" />
     <Content Include="Views\Account\SupplierLogin.cshtml" />
-    <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Account\CustomerLogin.cshtml" />
     <Content Include="Views\Home\_SPORTSFeatureProducts.cshtml" />
     <Content Include="Views\Home\_ELECTRONICSFeatureProducts.cshtml" />
@@ -1531,6 +1528,9 @@
     <Content Include="Views\Home\_FURNITUREFeatureProducts.cshtml" />
     <Content Include="Views\Home\_JEWELRYFeatureProducts.cshtml" />
     <Content Include="Views\Shared\_QuickCart.cshtml" />
+    <Content Include="Views\Cart\CartIndex.cshtml" />
+    <Content Include="Views\Home\SupplierProducts.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

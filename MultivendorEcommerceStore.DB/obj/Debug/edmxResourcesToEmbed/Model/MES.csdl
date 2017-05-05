@@ -630,6 +630,7 @@
     <Property Name="SKU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductLongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SupplierID" Type="Guid" />
     <Property Name="CategoryID" Type="Guid" />
     <Property Name="SubCategoryID" Type="Guid" />

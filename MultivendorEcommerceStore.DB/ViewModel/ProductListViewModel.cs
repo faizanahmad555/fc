@@ -29,6 +29,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string ProductName { get; set; }
 
 
+        [Display(Name = "Supplier Name")]
+        public string SupplierName { get; set; }
+
+
         [Display(Name = "Product Description")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         public string ProductDescription { get; set; }

@@ -15,7 +15,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-
+        
         // CHANGE: Product Active Status
         [Authorize(Roles = "Admin, Supplier")]
         public int? ChangeProductActiveStatus(Guid ProductID, int IsActive)

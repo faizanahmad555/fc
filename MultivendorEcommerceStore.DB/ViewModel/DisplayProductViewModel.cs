@@ -26,6 +26,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string ProductName { get; set; }
 
 
+        [Display(Name = "Supplier Name")]
+        public string SupplierName { get; set; }
+
+
         [Display(Name = "Product Description")]
         public string ProductDescription { get; set; }
 
@@ -50,5 +54,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Display(Name = "Added on")]
         public DateTime? CreatedOn { get; set; }
+
     }
 }

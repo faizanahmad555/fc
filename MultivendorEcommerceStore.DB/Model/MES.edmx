@@ -179,6 +179,7 @@
           <Property Name="SKU" Type="nvarchar" MaxLength="100" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="500" />
           <Property Name="ProductDescription" Type="nvarchar(max)" />
+          <Property Name="ProductLongDescription" Type="nvarchar(max)" />
           <Property Name="SupplierID" Type="uniqueidentifier" />
           <Property Name="CategoryID" Type="uniqueidentifier" />
           <Property Name="SubCategoryID" Type="uniqueidentifier" />
@@ -1223,7 +1224,7 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -1304,6 +1305,7 @@
           <Property Name="SKU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductLongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SupplierID" Type="Guid" />
           <Property Name="CategoryID" Type="Guid" />
           <Property Name="SubCategoryID" Type="Guid" />
@@ -1375,7 +1377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1719,6 +1721,7 @@
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ProductLongDescription" ColumnName="ProductLongDescription" />
                 <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />

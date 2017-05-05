@@ -24,6 +24,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public string SKU { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
+        public string ProductLongDescription { get; set; }
         public Nullable<System.Guid> SupplierID { get; set; }
         public Nullable<System.Guid> CategoryID { get; set; }
         public Nullable<System.Guid> SubCategoryID { get; set; }
