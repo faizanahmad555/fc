@@ -65,6 +65,13 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
+
+
+
+
+
+        #region CustomerLogin & Register
+
         // GET: /Account/CustomerLogin
         [AllowAnonymous]
         public ActionResult CustomerLogin(string returnUrl)
@@ -146,7 +153,10 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        #endregion
 
+
+        #region AdminLogin
 
         // GET: /Account/AdminLogin
         [AllowAnonymous]
@@ -193,8 +203,11 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        #endregion
 
 
+
+        #region SuppierLogin & AddSupplier
 
         // GET: /Account/SupplierLogin
         [AllowAnonymous]
@@ -242,6 +255,39 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        // Add Supplier Without Confirmating Email
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    AdminBL adminBL = new AdminBL();
+                    UserManager.AddToRole(user.Id, "Supplier");
+                    model.AspNetUserID = user.Id;
+                    adminBL.AddSupplier(model);
+                    return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return RedirectToAction("AddSupplier", "Admin");
+        }
+
+
+
         //POST: /Account/SupplierLogin(Only When Email is Confirmed)
         //[HttpPost]
         //[AllowAnonymous]
@@ -284,41 +330,8 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        // Add Supplier
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddSupplier(AddSupplierViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    AdminBL adminBL = new AdminBL();
-                    UserManager.AddToRole(user.Id, "Supplier");
-                    model.AspNetUserID = user.Id;
-                    adminBL.AddSupplier(model);
-                    return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-            // If we got this far, something failed, redisplay form
-            return RedirectToAction("AddSupplier", "Admin");
-        }
-
-
-
-
-        //// POST: 
+        //// POST: Add Supplier and Send Confirmation Email
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
@@ -368,6 +381,13 @@ namespace MultivendorEcommerceStore.Controllers
         //    // If we got this far, something failed, redisplay form
         //    return View(model);
         //}
+
+
+        #endregion
+
+
+            
+        #region Send Confirmation Email
 
 
         // GET: /Account/ConfirmEmail
@@ -488,22 +508,11 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-
-
-
-
-
-        
-
-
-
-
+        #endregion
 
 
         //GET: /Account/VerifyCode
-
-
-       [AllowAnonymous]
+        [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -583,7 +592,8 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        //
+        #region Forgot Password
+
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -591,7 +601,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        //
+        
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -619,7 +629,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View(model);
         }
 
-        //
+
+        
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -627,7 +638,12 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        //
+        #endregion
+
+
+        
+
+
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
