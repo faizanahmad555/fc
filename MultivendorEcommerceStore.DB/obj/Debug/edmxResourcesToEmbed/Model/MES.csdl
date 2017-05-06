@@ -234,7 +234,7 @@
     <Property Name="DiscountAvailable" Type="Boolean" />
     <Property Name="CurrentOrder" Type="Boolean" />
     <Property Name="SizeURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ProfilePhoto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Ranking" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -255,7 +255,7 @@
     <Property Name="BusinessInfoID" Type="Guid" Nullable="false" />
     <Property Name="SupplierID" Type="Guid" />
     <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CountryID" Type="Int32" />

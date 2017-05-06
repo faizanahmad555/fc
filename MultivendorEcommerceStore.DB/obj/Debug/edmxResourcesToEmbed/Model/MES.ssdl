@@ -280,7 +280,7 @@
     <Property Name="DiscountAvailable" Type="bit" />
     <Property Name="CurrentOrder" Type="bit" />
     <Property Name="SizeURL" Type="varchar" MaxLength="100" />
-    <Property Name="ProfilePhoto" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProfilePhoto" Type="nvarchar(max)" />
     <Property Name="Ranking" Type="int" />
     <Property Name="Note" Type="varchar" MaxLength="255" />
     <Property Name="CreatedOn" Type="datetime" />
@@ -294,7 +294,7 @@
     <Property Name="BusinessInfoID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierID" Type="uniqueidentifier" />
     <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar(max)" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="CountryID" Type="int" />

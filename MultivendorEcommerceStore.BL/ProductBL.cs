@@ -368,8 +368,6 @@ namespace MultivendorEcommerceStore.BL
 
             return viewModelList;
         }
-
-
      
     }
 }

@@ -14,7 +14,7 @@ namespace MultivendorEcommerceStore.BL
     public class AdminBL
     {
 
-        // ADD: Supplier
+        // ADD: Supplier(For Admin Side)
         public void AddSupplier(AddSupplierViewModel model)
         {
             ISupplierRepository repository = new SupplierRepository();
@@ -22,16 +22,18 @@ namespace MultivendorEcommerceStore.BL
 
             var fileName = Path.GetFileNameWithoutExtension(model.ProfilePhoto.FileName);
             fileName += DateTime.Now.Ticks + Path.GetExtension(model.ProfilePhoto.FileName);
-            var basePath = "~/Content/Users/" + model.AspNetUserID + "/Profile/Images/";
+            var basePath = "~/Content/Users/Suppliers/" + model.AspNetUserID + "/Profile/Images/";
             var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/" + model.AspNetUserID + "/Profile/Images/"));
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + model.AspNetUserID + "/Profile/Images/"));
             model.ProfilePhoto.SaveAs(path);
+
 
             supplier.SupplierID = Guid.NewGuid();
             supplier.AspNetUserID = model.AspNetUserID;
             supplier.SupplierFirstName = model.FirstName;
             supplier.SupplierLastName = model.LastName;
             supplier.ProfilePhoto = basePath + fileName;
+            supplier.Gender = model.Gender;
             supplier.Phone = model.MobileNumber;
             supplier.Address = model.Address;
             supplier.Email = model.Email;
@@ -45,7 +47,7 @@ namespace MultivendorEcommerceStore.BL
             repository.Create(supplier);
         }
 
-        // SHOW: All Suppliers
+        // SHOW: All Suppliers(For Admin Side)
         public List<SupplierListViewModel> SupplierList()
         {
             ISupplierRepository supplierRepo = new SupplierRepository();
@@ -82,28 +84,36 @@ namespace MultivendorEcommerceStore.BL
             return viewModelList;
         }
 
-        // DELETE: Supplier
+        // DELETE: Supplier(For Admin Side)
         public void DeleteSupplier(string UserID)
         {
             ISupplierRepository repository = new SupplierRepository();
-            repository.Delete(UserID);
+            repository.DeleteSuppliers(UserID);
         }
 
 
-        // ADD: Supplier Busienss Information
+        // ADD: Supplier Busienss Information(For Admin Side)
         public void AddBusinessInfo(AddSupplierBusinessInfoVM viewModel)
         {
             ISupplierBusinessInfo repository = new SupplierBusinessInfo();
             SupplierBusinessInformation businessInfo = new SupplierBusinessInformation();
 
+            var fileName = Path.GetFileNameWithoutExtension(viewModel.Logo.FileName);
+            fileName += DateTime.Now.Ticks + Path.GetExtension(viewModel.Logo.FileName);
+            var basePath = "~/Content/Users/Suppliers/" + viewModel.SupplierID + "/BusinessInfo/Images/";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Users/Suppliers/" + viewModel.SupplierID + "/BusinessInfo/Images/"));
+            viewModel.Logo.SaveAs(path);
+
+
             businessInfo.BusinessInfoID = Guid.NewGuid();
             businessInfo.SupplierID = viewModel.SupplierID;
             businessInfo.CompanyName = viewModel.CompanyName;
-            businessInfo.Logo = viewModel.Logo;
+            businessInfo.Logo = basePath + fileName;
             //businessInfo.Country = viewModel.Country;
             //businessInfo.State = viewModel.State;
             //businessInfo.City = viewModel.City;
-            businessInfo.Phone = viewModel.Mobile;
+            businessInfo.Phone = viewModel.Phone;
             businessInfo.BusinessExperience = viewModel.BusinessExperience;
             businessInfo.ProductType = viewModel.ProductsType;
             businessInfo.CreatedOn = DateTime.Now;

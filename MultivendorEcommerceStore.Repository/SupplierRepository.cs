@@ -34,6 +34,7 @@ namespace MultivendorEcommerceStore.Repository
             var supplierProfile = _db.Suppliers.Where(s => s.AspNetUserID == entity.AspNetUserID).FirstOrDefault();
             supplierProfile.SupplierFirstName = entity.SupplierFirstName;
             supplierProfile.SupplierLastName = entity.SupplierLastName;
+            supplierProfile.Gender = entity.Gender;
             supplierProfile.Address = entity.Address;
             supplierProfile.Phone = entity.Phone;
             supplierProfile.ProfilePhoto = entity.ProfilePhoto;
@@ -46,7 +47,7 @@ namespace MultivendorEcommerceStore.Repository
         }
 
 
-        public void Delete(string UserID)
+        public void DeleteSuppliers(string UserID)
         {
             var suppliers = GetByAspNetUserID(UserID);
             _db.AspNetUsers.Remove(suppliers);

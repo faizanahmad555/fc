@@ -12,7 +12,7 @@
             </header>
             <div class="panel-body">
                 <div class="form">
-                    <h2 style="text-align:center">Add Product</h2>
+                    <h2 style="text-align:center">Add Product Details</h2>
 
                     @using (Html.BeginForm("AddProduct", "Supplier", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
                     {
@@ -28,18 +28,18 @@
                                 @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @Html.DropDownListFor(Model => Model.CategoryID,
-                    (SelectList)ViewBag.CategoryDropDown,
-                    "--Select Category--",
-                    new { @class = "form-control", @id = "SelectedCategory" })
+                                    (SelectList)ViewBag.CategoryDropDown,
+                                    "--Select Category--",
+                                    new { @class = "form-control", @id = "SelectedCategory" })
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                 </div>
 
                                 @Html.LabelFor(model => model.SubCategoryID, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @Html.DropDownListFor(Model => Model.SubCategoryID,
-                    new SelectList(string.Empty, "Value", "Text"),
-                    "--Select Sub Category--",
-                    new { @class = "form-control", @id = "SubCategory" })
+                                    new SelectList(string.Empty, "Value", "Text"),
+                                    "--Select Sub Category--",
+                                    new { @class = "form-control", @id = "SubCategory" })
                                     @Html.ValidationMessageFor(model => model.SubCategoryID, "", new { @class = "text-danger" })
                                 </div>
 
@@ -75,10 +75,10 @@
                                 </div>
 
                                 @*@Html.LabelFor(model => model.ProductLongDescription, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.ProductLongDescription, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.ProductLongDescription, "", new { @class = "text-danger" })
-                                </div>*@
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.ProductLongDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ProductLongDescription, "", new { @class = "text-danger" })
+                                    </div>*@
 
                                 @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
@@ -106,7 +106,6 @@
                                 <div class="col-md-3">
                                     @Html.CheckBoxFor(m => m.FeatureProduct, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.FeatureProduct, "", new { @class = "text-danger" })
-                                    @*<label for="ISEnroled" class="css-label9" checked="checked">  </label>*@
                                 </div>
 
 
@@ -136,6 +135,40 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 @section Scripts {
+    <script type="text/javascript">
+        $("#SelectedCategory").change(function () {
+            var categoryId = $('#SelectedCategory').val();
+            $.ajax({
+                url: "/Product/SubCategoriesByCategoryID/" + categoryId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#SubCategory').empty();
+                    for (var i = 0; i < data.subcategory.length; i++) {
+                        $('#SubCategory').append("<option value= " + data.subcategory[i].Value + ">" + data.subcategory[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+        $("#SubCategory").change(function () {
+            var subcategoryId = $('#SubCategory').val();
+            $.ajax({
+                url: "/Product/SubCategoryItemsBySubCategoryID/" + subcategoryId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#SubCategoryItem').empty();
+                    for (var i = 0; i < data.subcategoryitem.length; i++) {
+                        $('#SubCategoryItem').append("<option value= " + data.subcategoryitem[i].Value + ">" + data.subcategoryitem[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }
 

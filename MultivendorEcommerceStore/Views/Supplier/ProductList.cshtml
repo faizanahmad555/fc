@@ -21,7 +21,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                    <button id="btnContinueDelete" class="btn btn-warning" type="button"> Confirm</button>
+                    <button id="btnContinueDeleteProduct" class="btn btn-warning" type="button"> Confirm</button>
                 </div>
             </div>
         </div>
@@ -169,3 +169,70 @@
     </div>
 </footer>
 <!--footer end-->
+@section Scripts{
+
+    <!--script for Product Deletion and Change Active/InActive State-->
+    <script type="text/javascript">
+
+
+        $('.ItemToDelete').click(function () {
+            var productId = $(this).attr("value");
+            $("#btnContinueDeleteProduct").val(productId);
+
+        });
+
+        $('#btnContinueDeleteProduct').click(function () {
+            var productId = $(this).attr("value");
+            $.ajax({
+                type: "POST",
+                url: "/Product/DeleteProductConfirm",
+                data: { ProductID: productId },
+                success: function (data) {
+                    if (data == "True") {
+                        $("#myModal").modal("hide");
+                        $("#ProductToDelete_" + productId).remove();
+                    }
+                }
+
+            });
+        });
+
+        $('.ItemToChange').click(function () {
+            $(this).css('btn btn-danger', 'btn btn-primary');
+            var productId = $(this).attr("value");
+            var active = $("#ItemActive_" + productId).text();
+            var ActiveState;
+            if (active == "Yes") {
+                ActiveState = 1;
+            }
+            else {
+                ActiveState = 0;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Product/ChangeProductActiveStatus",
+                data: { ProductID: productId, IsActive: ActiveState },
+                success: function (data) {
+                    if (data == "1") {
+
+                        $("#ItemActive_" + productId).text("Yes");
+
+                        $("#button").click(function () {
+                            $(this).css(".btn btn-primary");
+                        });
+
+                    } else {
+                        $("#ItemActive_" + productId).text("No");
+
+                        $("#button").click(function () {
+                            $(this).css(".btn btn-danger");
+                        });
+                    }
+                }
+
+            });
+        });
+
+    </script>
+}

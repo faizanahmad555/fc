@@ -102,11 +102,20 @@
 
                                 <div class="product-price-group">
                                     <span class="price">@item.Price Rs.</span>
-                                    <p class="pull-right">
-                                        Sold By:
-                                        <br />
-                                        <a href="@Url.Action("SupplierProducts","Home", new { SupplierID = item.SupplierID })"><stong>@item.SupplierName</stong></a>
-                                    </p>
+
+                                    <div class="pull-right" style="border:1px solid #eaeaea; padding:0px; text-align:center;">
+                                        @*<div style="height:50px;">
+                                                <img src="#" />
+                                            </div>*@
+                                        <div style="font-size:14px; background-color:lightgrey;">
+                                            Sold By:
+                                            <br />
+                                        </div>
+                                        <p style="text-align:left; padding-left:8px;">
+                                            <a href="@Url.Action("SupplierProducts","Home", new { SupplierID = item.SupplierID })"><stong>@item.SupplierName</stong></a>
+                                        </p>
+                                    </div>
+
                                 </div>
                                 <div class="info-orther">
                                     <p>Item Code: #453217907</p>
@@ -187,14 +196,14 @@
                                     <div class="network-share">
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
 
                         </div>
                         break;
                     }
-                    
-             
+
+
                 </div>
                 <!-- Product -->
             </div>

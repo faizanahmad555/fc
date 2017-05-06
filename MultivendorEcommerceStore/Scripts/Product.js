@@ -38,11 +38,11 @@ $("#SubCategory").change(function () {
 
 $('.ItemToDelete').click(function () {
     var productId = $(this).attr("value");
-    $("#btnContinueDelete").val(productId);
+    $("#btnContinueDeleteProduct").val(productId);
 
 });
 
-$('#btnContinueDelete').click(function () {
+$('#btnContinueDeleteProduct').click(function () {
     var productId = $(this).attr("value");
     $.ajax({
         type: "POST",

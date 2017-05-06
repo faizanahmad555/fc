@@ -103,6 +103,7 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.CNIC = supplierProfile.CNIC;
                 viewModel.Address = supplierProfile.Address;
                 viewModel.PostalCode = supplierProfile.PostalCode;
+                viewModel.Gender = supplierProfile.Gender;
                 viewModel.CityID = city.CityID;
                 viewModel.StateID = state.StateID;
                 viewModel.CountryID = country.CountryID;
@@ -136,6 +137,7 @@ namespace MultivendorEcommerceStore.BL
             supplier.SupplierID = viewModel.SupplierID;
             supplier.SupplierFirstName = viewModel.FirstName;
             supplier.SupplierLastName = viewModel.LastName;
+            supplier.Gender = viewModel.Gender;
             supplier.Phone = viewModel.MobileNumber;
             supplier.CNIC = viewModel.CNIC;
             supplier.Address = viewModel.Address;
@@ -147,60 +149,5 @@ namespace MultivendorEcommerceStore.BL
             supplierRepo.Update(supplier);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public List<SupplierProfileViewModel> GetSuppliers()
-        //{
-        //    SupplierRepository supplierRepo = new SupplierRepository();
-        //    var supplierTBL = supplierRepo.Retrive();
-        //    return (suppliers(supplierTBL));
-        //}
-
-
-
-        //private List<SupplierProfileViewModel> suppliers(IEnumerable<DB.Model.Supplier> supplierTBL)
-        //{
-        //    ICountryRepository countryRepo = new CountryRepository();
-        //    IStateRepository stateRepo = new StateRepository();
-        //    ICityRepository cityRepo = new CityRepository();
-
-        //    List<SupplierProfileViewModel> viewModels = new List<SupplierProfileViewModel>();
-        //    foreach (var supplier_tbl in supplierTBL)
-        //    {
-        //        var city = cityRepo.Get().Where(s => s.CityID == supplier_tbl.CityID).FirstOrDefault();
-        //        var state = stateRepo.Get().Where(s => s.StateID == city.StateID).FirstOrDefault();
-        //        var country = countryRepo.Get().Where(s => s.CountryID == state.CountryID).FirstOrDefault();
-
-        //        SupplierProfileViewModel supplierProfileViewModel = new SupplierProfileViewModel();
-        //        supplierProfileViewModel.FirstName = supplier_tbl.SupplierFirstName;
-        //        supplierProfileViewModel.LastName = supplier_tbl.SupplierLastName;
-        //        supplierProfileViewModel.Email = supplier_tbl.Email;
-        //        supplierProfileViewModel.Address = supplier_tbl.Address;
-        //        //supplierProfileViewModel.Country = country.Name;
-        //        //supplierProfileViewModel.State = state.Name;
-        //        //supplierProfileViewModel.City = city.Name;
-
-        //        viewModels.Add(supplierProfileViewModel);
-        //    }
-        //    return viewModels;
-        //}
     }
 }

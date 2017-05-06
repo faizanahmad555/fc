@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategory" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Supplier" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SupplierBusinessInformation" Width="1.5" PointX="9.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SupplierBusinessInformation" Width="1.5" PointX="9.625" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Tracking" Width="1.5" PointX="2.75" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.UserMessage" Width="1.5" PointX="4.75" PointY="10.625" IsExpanded="true" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" ManuallyRouted="false" />

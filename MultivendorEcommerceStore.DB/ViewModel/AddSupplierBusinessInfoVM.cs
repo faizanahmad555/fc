@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MultivendorEcommerceStore.DB.ViewModel
 {
@@ -11,46 +12,44 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public Guid SupplierID { get; set; }
 
-        [Required(ErrorMessage = "This field is required.")]
-        [Display(Name = "Company Name")]
-        [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
+
+
+        [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "First Name")]
+        [StringLength(30, ErrorMessage = "No more than 30 characters.", MinimumLength = 1)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
         public string CompanyName { get; set; }
 
 
+
         [Required(ErrorMessage = "This field is required.")]
-        [Display(Name = "Logo")]
-        public string Logo { get; set; }
+        [Display(Name = "Company Logo")]
+        public HttpPostedFileBase Logo { get; set; }
+
 
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Business Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Please Enter a Valid Email Address.")]
+        [EmailAddress]
         public string BusinessEmail { get; set; }
 
 
 
+        
+        
+
         [Required(ErrorMessage = "This field is required.")]
-        [Display(Name = "Complete Address")]
+        [Display(Name = "Business Address")]
+        [StringLength(200, ErrorMessage = "No more than 200 characters.", MinimumLength = 5)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
         public string Address { get; set; }
 
-
-        //[Required(ErrorMessage = "This field is required.")]
-        //public string Country { get; set; }
-
-
-
-        //[Required(ErrorMessage = "This field is required.")]
-        //public string State { get; set; }
-
-
-        //[Required(ErrorMessage = "This field is required.")]
-        //public string City { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile")]
-        public string Mobile { get; set; }
-
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter numbers only")]
+        public string Phone { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
@@ -62,6 +61,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Products Type")]
         [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
         public string ProductsType { get; set; }
+
+
     }
 }
