@@ -1,0 +1,68 @@
+﻿@model MultivendorEcommerceStore.DB.ViewModel.DisplayProductViewModel
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- page start-->
+<div class="row">
+
+    <div class="col-md-3">
+        <section class="panel">
+            <header class="panel-heading">
+                Seller Info
+            </header>
+            <div class="panel-body">
+                <div class="best-seller">
+                    
+                    <article class="media">
+                        <a class="pull-left thumb p-thumb">
+                            <img src="@Url.Content(Model.ProfilePhoto)" width="110" height="89">
+                        </a>
+                        <div class="media-body">
+                            <a href="@Url.Action("SupplierProfiles", "Supplier", new { userId = Model.UserID })" class="p-head">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</a>
+                            <br />
+                            Company: <p class="p-head"> @Html.DisplayFor(model => model.CompanyName)</p>
+                        </div>
+                    </article>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+        <div class="col-md-9">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="pro-img-details">
+                            <img src="@Url.Content(Model.ProductImage1)" alt="Product Image" width="372" height="370" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="pro-d-title">
+                            <a href="@Url.Action("ProductDetail", "Home", new { ProductID = Model.ProductID})" class="">
+                                @Html.DisplayFor(model => model.ProductName)
+                            </a>
+                        </h4>
+                        <p>
+                            @Html.DisplayFor(model => model.ProductDescription)
+                        </p>
+                        <div class="product_meta">
+                            <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Jackets</a>, <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>.</span>
+                            <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
+                        </div>
+                        <div class="m-bot15"> <strong>Price : </strong>  <span class="pro-price"> Rs.@Html.DisplayFor(model => model.Price)</span></div>
+                        <div class="m-bot15"> <strong>Quantity : </strong>  <span class="pro-price"> @Html.DisplayFor(model => model.Quantity)</span></div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+<!-- page end-->

@@ -208,6 +208,17 @@
           <Property Name="IsActive" Type="int" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="ProductNotification">
+          <Key>
+            <PropertyRef Name="ProductNotificationID" />
+          </Key>
+          <Property Name="ProductNotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsSeen" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="ReturnRequest">
           <Key>
             <PropertyRef Name="ReturnRequestID" />
@@ -444,6 +455,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductNotification_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductNotification">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ReturnRequest_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
@@ -585,6 +608,7 @@
           <EntitySet Name="OrderHistory" EntityType="Self.OrderHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductNotification" EntityType="Self.ProductNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReturnRequest" EntityType="Self.ReturnRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
@@ -629,6 +653,10 @@
           <AssociationSet Name="FK_Product_Supplier" Association="Self.FK_Product_Supplier">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductNotification_Product" Association="Self.FK_ProductNotification_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductNotification" EntitySet="ProductNotification" />
           </AssociationSet>
           <AssociationSet Name="FK_ReturnRequest_Customer" Association="Self.FK_ReturnRequest_Customer">
             <End Role="Customer" EntitySet="Customer" />
@@ -1224,6 +1252,11 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="ProductNotifications" EntityType="MultivendorEcommerceStoreModel.ProductNotification" />
+          <AssociationSet Name="FK_ProductNotification_Product" Association="MultivendorEcommerceStoreModel.FK_ProductNotification_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductNotification" EntitySet="ProductNotifications" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -1336,6 +1369,7 @@
           <NavigationProperty Name="Category" Relationship="MultivendorEcommerceStoreModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="OrderDetails" Relationship="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="Supplier" Relationship="MultivendorEcommerceStoreModel.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+          <NavigationProperty Name="ProductNotifications" Relationship="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" FromRole="Product" ToRole="ProductNotification" />
         </EntityType>
         <Association Name="FK_Product_Category">
           <End Type="MultivendorEcommerceStoreModel.Category" Role="Category" Multiplicity="0..1">
@@ -1374,6 +1408,30 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductNotification">
+          <Key>
+            <PropertyRef Name="ProductNotificationID" />
+          </Key>
+          <Property Name="ProductNotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsSeen" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" FromRole="ProductNotification" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductNotification_Product">
+          <End Type="MultivendorEcommerceStoreModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="MultivendorEcommerceStoreModel.ProductNotification" Role="ProductNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductNotification">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1726,6 +1784,18 @@
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductNotifications">
+            <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ProductNotification">
+              <MappingFragment StoreEntitySet="ProductNotification">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductNotificationID" ColumnName="ProductNotificationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

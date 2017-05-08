@@ -60,7 +60,8 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        
+
+
         // SHOW: All Suppliers
         [HttpGet]
         public ActionResult SupplierList()
@@ -109,6 +110,9 @@ namespace MultivendorEcommerceStore.Controllers
             adminBL.DeleteSupplier(UserID);
             return true;
         }
+
+
+
 
 
 

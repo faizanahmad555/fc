@@ -10,6 +10,9 @@ namespace MultivendorEcommerceStore.Repository
     public interface IProductRepository
     {
         void Create(Product entity);
+
+        Guid InsertAndGetID(Product entity);
+
         IEnumerable<Product> Retrive();
         void Update(Product entity);
         void Delete(Guid id);

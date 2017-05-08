@@ -41,10 +41,12 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Customer" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="16.125" PointY="3.125" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Category" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ProductNotification" Width="2.125" PointX="12.625" PointY="1" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

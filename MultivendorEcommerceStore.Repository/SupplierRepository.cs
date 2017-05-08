@@ -62,7 +62,7 @@ namespace MultivendorEcommerceStore.Repository
         }
 
 
-        public Supplier GetById(Guid id)
+        public Supplier GetById(Guid? id)
         {
             _db = new MultivendorEcommerceStoreEntities();
             return _db.Suppliers.Where(s => s.SupplierID == id).FirstOrDefault();

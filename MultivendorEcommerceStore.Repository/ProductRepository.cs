@@ -55,10 +55,20 @@ namespace MultivendorEcommerceStore.Repository
         public int? ChangeActiveStatus(Product entity)
         {
             _db = new MultivendorEcommerceStoreEntities();
-            var product =  _db.Products.Where(s => s.ProductID == entity.ProductID).FirstOrDefault();
+            var product = _db.Products.Where(s => s.ProductID == entity.ProductID).FirstOrDefault();
             product.IsActive = entity.IsActive;
             _db.SaveChanges();
             return entity.IsActive;
         }
+
+
+        public Guid InsertAndGetID(Product entity)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            _db.Products.Add(entity);
+            _db.SaveChanges();
+            return entity.ProductID;
+        }
+
     }
 }

@@ -44,7 +44,7 @@ namespace MultivendorEcommerceStore.Repository
 
         public SupplierBusinessInformation GetById(Guid id)
         {
-            var businessInfoID = _db.SupplierBusinessInformations.Where(b => b.BusinessInfoID == id).FirstOrDefault();
+            var businessInfoID = _db.SupplierBusinessInformations.Where(b => b.SupplierID == id).FirstOrDefault();
             return businessInfoID;
         }
     }

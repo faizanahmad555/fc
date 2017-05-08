@@ -66,7 +66,50 @@ namespace MultivendorEcommerceStore.BL
                     //viewModel.Country = country.Name;
                 }
             }
+
             return viewModel;
         }
+
+
+
+        // GET: Current User Profile
+        public UserProfileViewModel GetSupplierProfileByUserIdentity(string userID)
+        {
+            AspNetUsersRepository userRepo = new AspNetUsersRepository();
+            SupplierRepository supplierRepo = new SupplierRepository();
+            CustomerRepository customerRepo = new CustomerRepository();
+
+            ICountryRepository countryRepo = new CountryRepository();
+            IStateRepository stateRepo = new StateRepository();
+            ICityRepository cityRepo = new CityRepository();
+
+            UserProfileViewModel viewModel = new UserProfileViewModel();
+
+            if (HttpContext.Current.User.IsInRole("Admin"))
+            {
+                var yourProfile = supplierRepo.Retrive().Where(s => s.AspNetUserID == userID).FirstOrDefault();
+                if (yourProfile != null)
+                {
+                    var city = cityRepo.Get().Where(s => s.CityID == yourProfile.CityID).FirstOrDefault();
+                    var state = stateRepo.Get().Where(s => s.StateID == yourProfile.StateID).FirstOrDefault();
+                    var country = countryRepo.Get().Where(s => s.CountryID == yourProfile.CountryID).FirstOrDefault();
+
+                    viewModel.UserID = userID;
+                    viewModel.SupplierID = yourProfile.SupplierID;
+                    viewModel.FirstName = yourProfile.SupplierFirstName;
+                    viewModel.LastName = yourProfile.SupplierLastName;
+                    viewModel.Email = yourProfile.Email;
+                    viewModel.Address = yourProfile.Address;
+                    viewModel.MobileNo = yourProfile.Phone;
+                    viewModel.ProfilePhoto = yourProfile.ProfilePhoto;
+                    viewModel.City = city.Name;
+                    viewModel.State = state.Name;
+                    viewModel.Country = country.Name;
+                }
+            }
+            
+            return viewModel;
+        }
+
     }
 }

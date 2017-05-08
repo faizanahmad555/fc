@@ -17,7 +17,7 @@ namespace MultivendorEcommerceStore.BL
         public void AddProduct(AddProductViewModel model, Guid SupplierID)
         {
             MultivendorEcommerceStoreEntities _db = new MultivendorEcommerceStoreEntities();
-            IProductRepository repositroy = new ProductRepository();
+            IProductRepository productRepo = new ProductRepository();
             Product product = new Product();
 
             var fileName = Path.GetFileNameWithoutExtension(model.ProductImage1.FileName);
@@ -46,8 +46,19 @@ namespace MultivendorEcommerceStore.BL
             product.CreatedOn = DateTime.Now;
 
 
+            var productID = productRepo.InsertAndGetID(product);
 
-            repositroy.Create(product);
+            var productNE = new ProductNotification();
+            var productNR = new ProductNotificationRepository();
+
+            productNE.ProductID = productID;
+            productNE.CreatedOn = DateTime.Now;
+            productNE.Description = "New Product has been added";
+            productNE.URL = "/Notification/ProductDetail?productID=" + productID;
+            productNE.IsSeen = false;
+
+            productNR.Insert(productNE);
+
         }
 
 

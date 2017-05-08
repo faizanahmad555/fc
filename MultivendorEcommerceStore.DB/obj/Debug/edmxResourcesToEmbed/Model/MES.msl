@@ -347,5 +347,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductNotifications">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ProductNotification">
+        <MappingFragment StoreEntitySet="ProductNotification">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductNotificationID" ColumnName="ProductNotificationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

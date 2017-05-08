@@ -24,13 +24,21 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult SupplierProfile()
         {
-            //string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
-
             UserProfileBL userProfileBL = new UserProfileBL();
             return View(userProfileBL.GetProfileByUserIdentity(CurrentUserID));
         }
 
-        
+
+        // GET : Supplier Profile(For Admin Side)
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult SupplierProfiles(string userId)
+        {
+            UserProfileBL userProfileBL = new UserProfileBL();
+            return View(userProfileBL.GetSupplierProfileByUserIdentity(userId));
+        }
+
+
         // ADD: Product
         [Authorize(Roles = "Supplier")]
         [HttpGet]

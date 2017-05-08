@@ -18,6 +18,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public Product()
         {
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.ProductNotifications = new HashSet<ProductNotification>();
         }
     
         public System.Guid ProductID { get; set; }
@@ -57,5 +58,7 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Supplier Supplier { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
     }
 }

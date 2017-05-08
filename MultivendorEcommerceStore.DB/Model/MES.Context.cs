@@ -46,5 +46,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<UserMessage> UserMessages { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductNotification> ProductNotifications { get; set; }
     }
 }

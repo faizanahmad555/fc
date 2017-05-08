@@ -55,11 +55,10 @@
     <Compile Include="CartBL.cs" />
     <Compile Include="CategoryBL.cs" />
     <Compile Include="CustomerBL.cs" />
-    <Compile Include="FrontEndProductBL.cs" />
+    <Compile Include="NotificationBL.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminBL.cs" />
-    <Compile Include="SupplierBL.cs" />
     <Compile Include="SupplierProfileBL.cs" />
     <Compile Include="UserProfileBL.cs" />
   </ItemGroup>

@@ -10,14 +10,41 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminDashboardBL
     {
-        public DashboardStatisticsVM DashboardStats()
+        public List<DashboardStatisticsVM> DashboardStats()
         {
-            IDashboardRepository dashboardRepo = new DashboardRepository();
+            IAspNetUsersRepository aspNetUserRepo = new AspNetUsersRepository();
+            IProductRepository productRepo = new ProductRepository();
+
+            List<DashboardStatisticsVM> viewModelList = new List<DashboardStatisticsVM>();
             DashboardStatisticsVM viewModel = new DashboardStatisticsVM();
 
-            viewModel.UsersCount = dashboardRepo.Retrive().Count();
-            viewModel.ProductsCount = dashboardRepo.Get().Count();
-            return viewModel;
+            viewModel.UsersCount = aspNetUserRepo.Retrive().Count();
+            viewModel.ProductsCount = productRepo.Retrive().Count();
+            viewModelList.Add(viewModel);
+
+            return viewModelList;
         }
+
+        //public List<OrganizationUsersViewModel> DashboardStats()
+        //{
+
+        //    IUserProfileRepository userProfileRepository = new UserProfileRepository();
+        //    IOrganizationRepository organizationRepository = new OrganizationRepository();
+
+        //    List<OrganizationUsersViewModel> viewModelList = new List<OrganizationUsersViewModel>();
+
+        //    var organizations = organizationRepository.Retrive();
+        //    foreach (var item in organizations)
+        //    {
+        //        OrganizationUsersViewModel viewModel = new OrganizationUsersViewModel();
+        //        viewModel.OrganizationID = item.OrganizationID;
+        //        viewModel.OrganizationName = item.Name;
+        //        viewModel.UsersCount = userProfileRepository.Get().Where(s => s.OrganizationID == item.OrganizationID).Count();
+
+        //        viewModelList.Add(viewModel);
+        //    }
+        //    return viewModelList;
+        //}
+
     }
 }

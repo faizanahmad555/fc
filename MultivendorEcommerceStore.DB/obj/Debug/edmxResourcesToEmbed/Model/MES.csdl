@@ -549,6 +549,11 @@
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="ProductNotifications" EntityType="MultivendorEcommerceStoreModel.ProductNotification" />
+    <AssociationSet Name="FK_ProductNotification_Product" Association="MultivendorEcommerceStoreModel.FK_ProductNotification_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductNotification" EntitySet="ProductNotifications" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -661,6 +666,7 @@
     <NavigationProperty Name="Category" Relationship="MultivendorEcommerceStoreModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="OrderDetails" Relationship="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="Supplier" Relationship="MultivendorEcommerceStoreModel.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+    <NavigationProperty Name="ProductNotifications" Relationship="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" FromRole="Product" ToRole="ProductNotification" />
   </EntityType>
   <Association Name="FK_Product_Category">
     <End Type="MultivendorEcommerceStoreModel.Category" Role="Category" Multiplicity="0..1">
@@ -699,6 +705,30 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductNotification">
+    <Key>
+      <PropertyRef Name="ProductNotificationID" />
+    </Key>
+    <Property Name="ProductNotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Guid" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsSeen" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" FromRole="ProductNotification" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_ProductNotification_Product">
+    <End Type="MultivendorEcommerceStoreModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="MultivendorEcommerceStoreModel.ProductNotification" Role="ProductNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductNotification">
+        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
