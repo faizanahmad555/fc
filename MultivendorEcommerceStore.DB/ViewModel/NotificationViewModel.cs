@@ -17,9 +17,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     }
     public class CustomerNotificationViewModel
     {
-        public int CustomerNotificationID { get; set; }
+        public Guid CustomerNotificationID { get; set; }
 
-        public int? CustomerID { get; set; }
+        public Guid? CustomerID { get; set; }
 
         public string CustomerNotificationDescription { get; set; }
 
@@ -84,7 +84,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
     public class SeenNotifications
     {
-        public int[] CustomerArray { get; set; }
+        public Guid[] CustomerArray { get; set; }
         public int[] OrderArray { get; set; }
         public int[] SupplierArray { get; set; }
         public Guid[] ProductArray { get; set; }

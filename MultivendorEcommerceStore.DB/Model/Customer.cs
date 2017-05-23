@@ -17,23 +17,26 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            this.CustomerNotifications = new HashSet<CustomerNotification>();
             this.Orders = new HashSet<Order>();
             this.ReturnRequests = new HashSet<ReturnRequest>();
+            this.ShoppingCarts = new HashSet<ShoppingCart>();
+            this.WishLists = new HashSet<WishList>();
         }
     
         public System.Guid CustomerID { get; set; }
         public string AspNetUserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
+        public string ProfilePhoto { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public Nullable<int> CityID { get; set; }
+        public Nullable<int> StateID { get; set; }
         public string PostalCode { get; set; }
-        public string Country { get; set; }
-        public string Phone { get; set; }
+        public Nullable<int> CountryID { get; set; }
+        public string Mobile { get; set; }
         public string CreditCard { get; set; }
         public string CreditCardType { get; set; }
         public Nullable<System.DateTime> CardExpDate { get; set; }
@@ -51,9 +54,18 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual CityMaster CityMaster { get; set; }
+        public virtual CountryMaster CountryMaster { get; set; }
+        public virtual StateMaster StateMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerNotification> CustomerNotifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

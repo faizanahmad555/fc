@@ -13,7 +13,7 @@
     <div class="container" id="columns">
         <!-- breadcrumb -->
         <div class="breadcrumb clearfix">
-            <a class="home" href="#" title="Return to Home">Home</a>
+            <a class="home" href="@Url.Action("Index", "Home")" title="Return to Home">Home</a>
             <span class="navigation-pipe">&nbsp;</span>
             <span class="navigation_page">Authentication</span>
         </div>
@@ -25,80 +25,216 @@
         <!-- ../page heading-->
         <div class="page-content">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="box-authentication">
-                        @using (Html.BeginForm("CustomerRegister", "Account", FormMethod.Post, new { role = "form" }))
+
+
+                <div class="col-md-6">
+                    <div class="#">
+                        @using (Html.BeginForm("CustomerRegister", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
                             <h3>Create an account</h3>
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <p>Please enter your personal information.</p>
                             <br />
-                            <div class="form-group row">
-                                @*@Html.LabelFor(model => model.CustomerRegisterVM.FirstName, new { @class = "col-sm-2 control-label" })*@
-                                @Html.TextBoxFor(model => model.CustomerRegisterVM.FirstName, new { @class = "col-sm-3 form-control", @placeholder = "First Name" })
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.FirstName, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.CustomerRegisterVM.FirstName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.FirstName, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.EmailAddress, "", new { @class = "text-danger" })
+                                            </div>
 
 
-                                @*@Html.LabelFor(model => model.CustomerRegisterVM.LastName, new { @class = "col-sm-2 control-label" })*@
-                                @Html.TextBoxFor(model => model.CustomerRegisterVM.LastName, new { @class = "col-sm-3 form-control", @placeholder = "Last Name" })
-                            </div>
-                            <div class="form-group row">
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "control-label" })
+                                                @Html.PasswordFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.ConfirmPassword, "", new { @class = "text-danger" })
+                                            </div>
 
-                                @*@Html.LabelFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "control-label" })*@
-                                @Html.TextBoxFor(model => model.CustomerRegisterVM.EmailAddress, new { @class = "col-sm-3 form-control", @placeholder = "Email Address" })
 
-                                @*@Html.LabelFor(model => model.CustomerRegisterVM.Password, new { @class = "control-label" })*@
-                                @Html.PasswordFor(model => model.CustomerRegisterVM.Password, new { @class = "col-sm-3 form-control", @placeholder = "Password" })
-                            </div>
-                            <div class="form-group row">
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.Address, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.CustomerRegisterVM.Address, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.Address, "", new { @class = "text-danger" })
+                                            </div>
 
-                                @*@Html.LabelFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "control-label" })*@
-                                @Html.PasswordFor(model => model.CustomerRegisterVM.ConfirmPassword, new { @class = "col-sm-3 form-control", @placeholder = "Confirm Password" })
+
+
+                                            @*<div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.State, new { @class = "control-label" })
+                                                @Html.DropDownListFor(Model => Model.CustomerRegisterVM.State,
+                                                new SelectList(string.Empty, "Value", "Text"),
+                                                "--Select State--",
+                                                new { @class = "col-md-6 form-control", @id = "States" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.State, "", new { @class = "text-danger" })
+                                            </div>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="form-group">
+
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.LastName, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.CustomerRegisterVM.LastName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.LastName, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.Password, new { @class = "control-label" })
+                                                @Html.PasswordFor(model => model.CustomerRegisterVM.Password, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.Password, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="col-md-11">
+                                                @Html.LabelFor(model => model.CustomerRegisterVM.Mobile, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.CustomerRegisterVM.Mobile, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CustomerRegisterVM.Mobile, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            @*<div class="col-md-11">
+                                                    @Html.LabelFor(model => model.CustomerRegisterVM.Country, new { @class = "control-label" })
+                                                    @Html.DropDownListFor(Model => Model.CustomerRegisterVM.Country,
+                                                    (SelectList)ViewBag.CountryDropDown,
+                                                    "--Select Country--",
+                                                    new { @class = "form-control", @id = "SelectedCountry" })
+                                                    @Html.ValidationMessageFor(model => model.CustomerRegisterVM.Country, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <div class="col-md-11">
+                                                    @Html.LabelFor(model => model.CustomerRegisterVM.City, new { @class = "control-label" })
+                                                    @Html.DropDownListFor(Model => Model.CustomerRegisterVM.City,
+                                                    new SelectList(string.Empty, "Value", "Text"),
+                                                    "--Select City--",
+                                                    new { @class = "form-control", @id = "Cities" })
+                                                    @Html.ValidationMessageFor(model => model.CustomerRegisterVM.City, "", new { @class = "text-danger" })
+                                                </div>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <button type="submit" class="button"><i class="fa fa-user"></i> Create an account</button>
                         }
-                        <div class="col-md-4">
-                            <section id="socialLoginForm">
-                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                            </section>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
 
 
-                <div class="col-sm-6">
+
+
+
+                <div class="col-md-6">
                     <div class="box-authentication">
                         @using (Html.BeginForm("CustomerLogin", "Account", @*new { ReturnUrl = ViewBag.ReturnUrl },*@ FormMethod.Post, new { role = "form" }))
                         {
-                            @Html.AntiForgeryToken()
-                            <h3>Already registered?</h3>
-                            <br />
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.AntiForgeryToken()
+                        <h3>Already registered?</h3>
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(model => model.CustomerLoginVM.Email, new { @class = "control-label" })
-                            @Html.TextBoxFor(model => model.CustomerLoginVM.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CustomerLoginVM.Email, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.CustomerLoginVM.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CustomerLoginVM.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CustomerLoginVM.Email, "", new { @class = "text-danger" })
 
-                            <br />
+                        <br />
 
-                            @Html.LabelFor(model => model.CustomerLoginVM.Password, new { @class = "control-label" })
-                            @Html.PasswordFor(model => model.CustomerLoginVM.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CustomerLoginVM.Password, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.CustomerLoginVM.Password, new { @class = "control-label" })
+                        @Html.PasswordFor(model => model.CustomerLoginVM.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CustomerLoginVM.Password, "", new { @class = "text-danger" })
 
-                            <p class="forgot-pass"><a href="@Url.Action("ForgotPassword", "Account")">Forgot your password?</a></p>
-                            <button type="submit" class="button"><i class="fa fa-lock"></i> Sign In</button>
+                        <p class="forgot-pass"><a href="@Url.Action("ForgotPassword", "Account")">Forgot your password?</a></p>
+                        <button type="submit" class="button"><i class="fa fa-lock"></i> Sign In</button>
                         }
 
                     </div>
                 </div>
+
+
             </div>
         </div>
+
+
     </div>
 </div>
 <!-- ./page wapper-->
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
 
+    @*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>*@
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            $("#DOB").datepicker({
+                changeMonth: true,
+                changeYear: true,
+            });
+        });
+
+
+        $("#SelectedCountry").change(function () {
+            var countryId = $('#SelectedCountry').val();
+            $.ajax({
+                url: "/Ajax/StatesByCountryID/" + countryId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#States').empty();
+                    for (var i = 0; i < data.state.length; i++) {
+                        $('#States').append("<option value= " + data.state[i].Value + ">" + data.state[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+        $("#States").change(function () {
+            var stateId = $('#States').val();
+            $.ajax({
+                url: "/Ajax/CitesByStateID/" + stateId,
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: 'JSON',
+                success: function (data) {
+                    $('#Cities').empty();
+                    for (var i = 0; i < data.city.length; i++) {
+                        $('#Cities').append("<option value= " + data.city[i].Value + ">" + data.city[i].Text + "</option>");
+                    }
+                }
+            });
+        });
+
+
+        function showpreview(input, num) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var loadedFile = e.target;
+                    $('#imgpreview' + num).css("background-image", "url(" + loadedFile.result + ")");
+                    $('#imgpreview' + num).css("background-size", "cover");
+                    $('#imgpreview' + num).css("background-position", "center center");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+}

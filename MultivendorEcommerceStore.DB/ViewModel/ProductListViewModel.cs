@@ -61,5 +61,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Display(Name = "Added on")]
         public DateTime? CreatedOn { get; set; }
+
+        public Pager Pager { get; set; }
+        public IEnumerable<ProductListViewModel> Products { get; set; }
     }
+
+
 }

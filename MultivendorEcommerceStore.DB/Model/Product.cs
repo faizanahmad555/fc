@@ -19,6 +19,8 @@ namespace MultivendorEcommerceStore.DB.Model
         {
             this.OrderDetails = new HashSet<OrderDetail>();
             this.ProductNotifications = new HashSet<ProductNotification>();
+            this.ShoppingCartDetails = new HashSet<ShoppingCartDetail>();
+            this.WishLists = new HashSet<WishList>();
         }
     
         public System.Guid ProductID { get; set; }
@@ -60,5 +62,9 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingCartDetail> ShoppingCartDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

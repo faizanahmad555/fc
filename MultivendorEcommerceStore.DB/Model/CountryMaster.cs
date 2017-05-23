@@ -17,6 +17,7 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CountryMaster()
         {
+            this.Customers = new HashSet<Customer>();
             this.StateMasters = new HashSet<StateMaster>();
             this.Suppliers = new HashSet<Supplier>();
         }
@@ -25,6 +26,8 @@ namespace MultivendorEcommerceStore.DB.Model
         public string Name { get; set; }
         public string CountryCode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StateMaster> StateMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

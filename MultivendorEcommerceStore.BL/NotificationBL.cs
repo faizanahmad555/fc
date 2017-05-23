@@ -16,8 +16,25 @@ namespace MultivendorEcommerceStore.BL
             var productNR = new ProductNotificationRepository();
             var productRepo = new ProductRepository();
 
+            var customerRepo = new CustomerRepository();
+            var customerNR = new CustomerNotificationRepository();
+
             var list = new NotificationViewModel();
 
+
+            IEnumerable<CustomerNotification> customerNotification = customerNR.GetUnSeen();
+            List<CustomerNotificationViewModel> customerNL = customerNotification.Select(i => new CustomerNotificationViewModel
+            {
+                CustomerNotificationID = Guid.NewGuid(),
+                CustomerID = i.CustomerID,
+                CustomerNotificationDescription = i.Description,
+                //CustomerNotificationID = i.CustomerNotificationID,
+                CustomerNotificationIsSeen = i.IsSeen,
+                CustomerNotificationURL = i.URL,
+                CustomerImage = customerRepo.Retrive().Where(c => c.CustomerID == i.CustomerID).Select(c => c.ProfilePhoto).FirstOrDefault(),
+            }).ToList();
+
+            
             IEnumerable<ProductNotification> productNotification = productNR.GetUnSeen();
             List<ProductNotificationViewModel> productNL = productNotification.Select(i => new ProductNotificationViewModel
             {
@@ -29,9 +46,12 @@ namespace MultivendorEcommerceStore.BL
                 ProductImage = productRepo.Retrive().Where(p => p.ProductID == i.ProductID).Select(p => p.ProductPicture).FirstOrDefault(),
             }).ToList();
 
+
+
+
             list.ProductNotificationList = productNL;
-
-
+            list.CustomerNotificationList = customerNL;
+            
             return list;
         }
 
@@ -41,6 +61,10 @@ namespace MultivendorEcommerceStore.BL
             {
                 ChangeProductSeenStatus(model.ProductArray[i]);
             }
+            for (int i = 1; i < model.CustomerArray.Count(); i++)
+            {
+                ChangeCustomerSeenStatus(model.CustomerArray[i]);
+            }
         }
 
         public void ChangeProductSeenStatus(Guid productID)
@@ -48,6 +72,13 @@ namespace MultivendorEcommerceStore.BL
             var productNR = new ProductNotificationRepository();
             productNR.ChangeIsSeenByID(productID);
         }
+
+        public void ChangeCustomerSeenStatus(Guid customerID)
+        {
+            var customerNR = new CustomerNotificationRepository();
+            customerNR.ChangeIsSeenByID(customerID);
+        }
+
 
 
         public DisplayProductViewModel GetProductDetail(Guid productID)
@@ -75,16 +106,10 @@ namespace MultivendorEcommerceStore.BL
                 LastName = supplier.SupplierLastName,
                 ProfilePhoto = supplier.ProfilePhoto,
 
-
                 BusinessExperience = supplierBusinessInfo.BusinessExperience,
                 ProductsType = supplierBusinessInfo.ProductType,
                 CompanyName = supplierBusinessInfo.CompanyName,
-
-
-
             };
-
-
         }
 
 

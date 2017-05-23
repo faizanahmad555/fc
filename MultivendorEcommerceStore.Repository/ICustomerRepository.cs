@@ -10,6 +10,8 @@ namespace MultivendorEcommerceStore.Repository
     public interface ICustomerRepository
     {
         void Create(Customer entity);
+
+
         IEnumerable<Customer> Retrive();
         void Update(Customer entity);
         void Delete(string UserID);

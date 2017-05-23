@@ -3,10 +3,11 @@ using MultivendorEcommerceStore.BL;
 using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace MultivendorEcommerceStore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -110,11 +111,43 @@ namespace MultivendorEcommerceStore.Controllers
 
 
         // SHOW: All Products of Supplier
-        public ActionResult SupplierProducts(Guid SupplierID)
+        [HttpGet]
+        public ActionResult SupplierProducts(Guid SupplierID, int? page)
         {
-            ProductBL productBL = new ProductBL();
-            return View(productBL.GetProductsBySupplierID(SupplierID));
+            var product = new ProductBL().GetProductsBySupplierID(SupplierID);
+            var pager = new Pager(product.Count(), page);
+
+            var model = new ProductListViewModel()
+            {
+                Products = product.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Pager = pager
+            };
+
+            return View(model);
         }
+
+
+        // ADD: Products to WishList(For Customers)
+        [HttpPost]
+        public ActionResult AddtoWishList(Guid productId)
+        {
+            WishListBL wishListBL = new WishListBL();
+            wishListBL.AddProductstoWishList(CurrentCustomerID, productId);
+            return RedirectToAction("Index");
+        }
+
+
+        // GET: WishList of Products(For Customers)
+        [Authorize(Roles = "Customer")]
+        [HttpGet]
+        public ActionResult WishList()
+        {
+            WishListBL wishListBL = new WishListBL();
+            return View(wishListBL.GetWishListByCustomerID(CurrentCustomerID));
+        }
+
+
+
 
     }
 }

@@ -54,7 +54,7 @@ namespace MultivendorEcommerceStore.BL
                     //var country = countryRepo.Get().Where(s => s.CountryID == yourProfile.CountryID).FirstOrDefault();
 
                     viewModel.UserID = userID;
-                    viewModel.SupplierID = yourProfile.CustomerID;
+                    viewModel.CustomerID = yourProfile.CustomerID;
                     viewModel.FirstName = yourProfile.FirstName;
                     viewModel.LastName = yourProfile.LastName;
                     viewModel.Email = yourProfile.Email;
@@ -72,7 +72,7 @@ namespace MultivendorEcommerceStore.BL
 
 
 
-        // GET: Current User Profile
+        // GET: Current Supplier Profile(For Admin Side)
         public UserProfileViewModel GetSupplierProfileByUserIdentity(string userID)
         {
             AspNetUsersRepository userRepo = new AspNetUsersRepository();

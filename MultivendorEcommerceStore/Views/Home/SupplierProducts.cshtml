@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.ProductListViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.ProductListViewModel
 
 @{
     ViewBag.Title = "SupplierProducts";
@@ -26,7 +26,7 @@
                         </ul>
                     </div>*@
                 <div class="category-slider">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Products)
                     {
                         <span class="page-heading-title">@item.SupplierID</span>
                         break;
@@ -52,7 +52,7 @@
                     </ul>
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
-                        @foreach (var item in Model.Where(s => s.Active == "Yes"))
+                        @foreach (var item in Model.Products.Where(s => s.Active == "Yes"))
                         {
                             <li class="col-sx-12 col-sm-3">
                                 <div class="product-container">
@@ -100,38 +100,65 @@
                 <div class="sortPagiBar">
                     <div class="bottom-pagination">
                         <nav>
-                            <ul class="pagination">
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">Next &raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            @if (Model.Pager.EndPage > 1)
+                            {
+                                <ul class="pagination">
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            @foreach (var item in Model.Products)
+                                            {
+                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID">First</a>
+                                                break;
+                                            }
+                                        </li>
+
+                                        <li>
+                                            @foreach (var item in Model.Products)
+                                            {
+                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                break;
+                                            }
+                                        </li>
+                                    }
+
+                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                    {
+                                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                            @foreach (var item in Model.Products)
+                                            {
+                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@page">@page</a>
+                                                break;
+                                            }
+                                        </li>
+                                    }
+
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            @foreach (var item in Model.Products)
+                                            {
+                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                                break;
+                                            }
+                                        </li>
+                                        <li>
+                                            @foreach (var item in Model.Products)
+                                            {
+                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.TotalPages)">Last</a>
+                                                break;
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+
                         </nav>
                     </div>
-                    <div class="show-product-item">
-                        <select name="">
-                            <option value="">Show 18</option>
-                            <option value="">Show 20</option>
-                            <option value="">Show 50</option>
-                            <option value="">Show 100</option>
-                        </select>
-                    </div>
-                    <div class="sort-product">
-                        <select>
-                            <option value="">Product Name</option>
-                            <option value="">Price</option>
-                        </select>
-                        <div class="sort-product-icon">
-                            <i class="fa fa-sort-alpha-asc"></i>
-                        </div>
-                    </div>
                 </div>
+
+
+
             </div>
             <!-- ./ Center colunm -->
         </div>

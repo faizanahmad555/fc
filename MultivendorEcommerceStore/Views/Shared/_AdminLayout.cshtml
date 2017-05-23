@@ -115,6 +115,10 @@
     <script type="text/javascript" src="~/Content/assets/data-tables/DT_bootstrap.js"></script>
     <script src="~/Content/Adminplugins/js/respond.min.js"></script>
 
+    <script src="~/Content/assets/fancybox/source/jquery.fancybox.js"></script>
+    <script src="~/Content/Adminplugins/js/modernizr.custom.js"></script>
+    <script src="~/Content/Adminplugins/js/toucheffects.js"></script>
+
     <!--right slidebar-->
     <script src="~/Content/Adminplugins/js/slidebars.min.js"></script>
 
@@ -185,7 +189,7 @@
                 success: function (data) {
                     debugger;
                     //var count = data.OrderNotificationList.length + data.ShopNotificationList.length + data.SupplierNotificationList.length + data.ProductNotificationList.length + data.CustomerNotificationList.length;
-                    var count = data.ProductNotificationList.length;
+                    var count = data.ProductNotificationList.length + data.CustomerNotificationList.length;
                     $("#NotificationCount").empty();
                     $("#NotificationCount").append(count);
                     $(".ToRemove").remove();
@@ -201,43 +205,12 @@
                     //for (var i = 0; i < data.ShopNotificationList.length; i++) {
                     //    $("#ShopNotifications").append("<li class=\"ToRemove\" value=\"" + data.ShopNotificationList[i].ShopNotificationID + "\"><a class=\"list-group-item list-group-item-action\" href= \"" + data.ShopNotificationList[i].ShopNotificationURL + "\"><img src='" + data.ShopNotificationList[i].ShopLogo.replace(/~/g, '') + "' alt=\"\" height=\"35\" width=\"35\" />" + data.ShopNotificationList[i].ShopNotificationDescription + "</a></li>");
                     //}
-                    //for (var i = 0; i < data.CustomerNotificationList.length; i++) {
-                    //    $("#CustomerNotifications").append("<li class=\"ToRemove\" value=\"" + data.CustomerNotificationList[i].CustomerNotificationID + "\"><a class=\"list-group-item list-group-item-action\" href= \"" + data.CustomerNotificationList[i].CustomerNotificationURL + "\"><img src='" + data.CustomerNotificationList[i].CustomerImage.replace(/~/g, '') + "' alt=\"\" height=\"35\" width=\"35\" />" + data.CustomerNotificationList[i].CustomerNotificationDescription + "</a></li>");
-                    //}
+                    for (var i = 0; i < data.CustomerNotificationList.length; i++) {
+                        $("#CustomerNotifications").append("<li class=\"ToRemove\" value=\"" + data.CustomerNotificationList[i].CustomerNotificationID + "\"><a class=\"list-group-item list-group-item-action\" href= \"" + data.CustomerNotificationList[i].CustomerNotificationURL + "\"><img src='" + data.CustomerNotificationList[i].CustomerImage.replace(/~/g, '') + "' alt=\"\" height=\"35\" width=\"35\" />" + data.CustomerNotificationList[i].CustomerNotificationDescription + "</a></li>");
+                    }
                 }
             })
         };
-
-       //$("#NotificationDropDown").click(function () {
-       //     var customerArray = [];
-       //     var orderArray = [];
-       //     var supplierArray = [];
-       //     var productArray = [];
-       //     var shopArray = [];
-       //     $("#CustomerNotifications li").each(function () {
-       //         customerArray.push($(this).val());
-       //     });
-       //     $("#SupplierNotifications li").each(function () {
-       //         supplierArray.push($(this).val());
-       //     });
-       //     $("#ShopNotifications li").each(function () {
-       //         shopArray.push($(this).val());
-       //     });
-       //     $("#OrderNotifications li").each(function () {
-       //         orderArray.push($(this).val());
-       //     });
-       //     $("#ProductNotifications li").each(function () {
-       //         productArray.push($(this).val());
-       //     });
-       //     $.ajax({
-       //         url: "/Notification/ChangeIsSeenState",
-       //         type: "POST",
-       //         data: { CustomerArray: customerArray, ProductArray: productArray, OrderArray: orderArray, SupplierArray: supplierArray, ShopArray: shopArray },
-       //         success: function () {
-
-       //         }
-       //     })
-       // });
     </script>
 
 </body>

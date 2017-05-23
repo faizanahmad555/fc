@@ -25,7 +25,17 @@ namespace MultivendorEcommerceStore.Repository
             _db.SaveChanges();
         }
 
-       
+
+        public Guid InsertAndGetID(Customer entity)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            _db.Customers.Add(entity);
+            _db.SaveChanges();
+            return entity.CustomerID;
+        }
+
+
+
         public AspNetUser GetByAspNetUserID(string UserID)
         {
             _db = new MultivendorEcommerceStoreEntities();

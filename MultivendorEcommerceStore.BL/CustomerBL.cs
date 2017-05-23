@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Web;
 
 namespace MultivendorEcommerceStore.BL
 {
@@ -14,17 +16,46 @@ namespace MultivendorEcommerceStore.BL
         // ADD: Customer
         public void CustomerRegister(CustomerLoginRegisterViewModel model)
         {
-            ICustomerRepository customerRepo = new CustomerRepository();
+            var customerRepo = new CustomerRepository();
             Customer customer = new Customer();
-            
+
+
+            //var fileName = Path.GetFileNameWithoutExtension(model.CustomerRegisterVM.ProfilePicture.FileName);
+            //fileName += DateTime.Now.Ticks + Path.GetExtension(model.CustomerRegisterVM.ProfilePicture.FileName);
+            //var basePath = "~/Content/Customer/" + model.CustomerRegisterVM.AspNetUserID + "/ProfilePhoto/";
+            //var path = Path.Combine(HttpContext.Current.Server.MapPath(basePath), fileName);
+            //Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Content/Customer/" + model.CustomerRegisterVM.AspNetUserID + "/ProfilePhoto/"));
+            //model.CustomerRegisterVM.ProfilePicture.SaveAs(path);
+
             customer.CustomerID = Guid.NewGuid();
             customer.AspNetUserID = model.CustomerRegisterVM.AspNetUserID;
             customer.Email = model.CustomerRegisterVM.EmailAddress;
             customer.FirstName = model.CustomerRegisterVM.FirstName;
             customer.LastName = model.CustomerRegisterVM.LastName;
+            //customer.ProfilePhoto = basePath + fileName;
+            customer.Address = model.CustomerRegisterVM.Address;
+            customer.Mobile = model.CustomerRegisterVM.Mobile;
+            customer.CityID = model.CustomerRegisterVM.City;
+            customer.StateID = model.CustomerRegisterVM.State;
+            customer.CountryID = model.CustomerRegisterVM.Country;
             customer.CreatedOn = DateTime.Now;
+            
+            //customer.DOB = model.DOB;
+            //customer.IsActive = true;
 
-            customerRepo.Create(customer);
+            var customerID = customerRepo.InsertAndGetID(customer);
+
+            var customerNR = new CustomerNotificationRepository();
+            var customerNE = new CustomerNotification();
+
+            customerNE.CustomerNotificationID = Guid.NewGuid();
+            customerNE.CustomerID = customerID;
+            customerNE.Description = "New Customer has been added";
+            customerNE.IsSeen = false;
+            customerNE.URL = "/Notification/CustomerDetail?customerID=" + customerID;
+            customerNE.CreatedOn = DateTime.Now;
+
+            customerNR.Insert(customerNE);
         }
 
 
@@ -58,7 +89,7 @@ namespace MultivendorEcommerceStore.BL
         {
             ICustomerRepository customerRepo = new CustomerRepository();
             customerRepo.Delete(UserID);
-        }
+        } 
 
     }
 }

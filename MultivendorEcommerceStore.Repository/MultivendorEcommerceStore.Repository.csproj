@@ -54,6 +54,7 @@
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CityRepository.cs" />
     <Compile Include="CountryRepository.cs" />
+    <Compile Include="CustomerNotificationRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="DashboardRepository.cs" />
     <Compile Include="Enemurations.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="ICityRepository.cs" />
     <Compile Include="ICountryRepository.cs" />
+    <Compile Include="ICustomerNotificationRepository.cs" />
     <Compile Include="ICustomerRepository.cs" />
     <Compile Include="IDashboardRepository.cs" />
     <Compile Include="IProductNotificationRepository.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="ISubCategoryRepository.cs" />
     <Compile Include="ISupplierBusinessInfo.cs" />
     <Compile Include="ISupplierRepository.cs" />
+    <Compile Include="IWishListRepository.cs" />
     <Compile Include="ProductNotificationRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="SubCategoryRepository.cs" />
     <Compile Include="SupplierBusinessInfo.cs" />
     <Compile Include="SupplierRepository.cs" />
+    <Compile Include="WishListRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MultivendorEcommerceStore.DB\MultivendorEcommerceStore.DB.csproj">

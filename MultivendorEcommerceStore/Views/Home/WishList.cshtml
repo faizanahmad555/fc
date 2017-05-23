@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.DisplayWishListViewModel>
+
+@{
+    ViewBag.Title = "WishList";
+}
+
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="@Url.Action("Index", "Home")" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a href="#" title="Return to Home">My account</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a href="@Url.Action("WishList", "Home")" title="My Wishlist">
+                <span class="navigation_page">My Wishlist</span>
+            </a>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+
+                <ul class="row list-wishlist">
+                    @foreach (var item in Model)
+                    { 
+                        <li class="col-sm-3">
+                            <div class="product-img">
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.ProductImage1)" alt="Product"></a>
+                            </div>
+                            <h5 class="product-name">
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">@Html.DisplayFor(modelItem => item.ProductName)</a>
+                            </h5>
+                            <div class="qty">
+                                <label>Price: @Html.DisplayFor(modelItem => item.Price)</label>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>
+

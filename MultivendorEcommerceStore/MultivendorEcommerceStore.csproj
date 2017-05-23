@@ -215,9 +215,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -1531,14 +1531,15 @@
     <Content Include="Views\Home\_JEWELRYFeatureProducts.cshtml" />
     <Content Include="Views\Shared\_QuickCart.cshtml" />
     <Content Include="Views\Cart\CartIndex.cshtml" />
-    <Content Include="Views\Home\SupplierProducts.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
-    <Content Include="Views\Shared\AddSupplier.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Notification\ProductDetail.cshtml" />
     <Content Include="Views\Shared\_Notification.cshtml" />
     <Content Include="Views\Supplier\SupplierProfiles.cshtml" />
+    <Content Include="Views\Home\WishList.cshtml" />
+    <Content Include="Views\Home\Page.cshtml" />
+    <Content Include="Views\Home\SupplierProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

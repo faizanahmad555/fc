@@ -16,7 +16,6 @@ namespace MultivendorEcommerceStore.BL
         // ADD: Product
         public void AddProduct(AddProductViewModel model, Guid SupplierID)
         {
-            MultivendorEcommerceStoreEntities _db = new MultivendorEcommerceStoreEntities();
             IProductRepository productRepo = new ProductRepository();
             Product product = new Product();
 
@@ -136,7 +135,7 @@ namespace MultivendorEcommerceStore.BL
             return viewModelList;
         }
 
-
+     
         // EDIT: EXISTING Product For Edit(For Admin & Supplier Side)
         public EditProductViewModel EditSupplierProduct(Guid SupplierID, Guid ProductID)
         {

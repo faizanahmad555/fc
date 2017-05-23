@@ -22,7 +22,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public string ReturnReason { get; set; }
         public Nullable<bool> Fullfilled { get; set; }
     
-        public virtual OrderDetail OrderDetail { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

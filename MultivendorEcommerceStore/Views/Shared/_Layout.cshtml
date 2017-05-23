@@ -58,20 +58,19 @@
                         <ul class="dropdown-menu mega_dropdown" role="menu">
                             <li><a href="@Url.Action("CustomerLogin", "Account")">Login</a></li>
                             <li><a href="#">Compare</a></li>
-                            <li><a href="#">Wishlists</a></li>
+                            <li><a href="@Url.Action("WishList", "Home")">Wishlists</a></li>
                             <li>
                                 @*@if (UserManager.IsInRole())
-                                {*@
-                                    @if (Request.IsAuthenticated)
+                                    {*@
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                     {
-                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            <a href="javascript:document.getElementById('logoutForm').submit()"> Log out</a>
-                                        }
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()"> Log out</a>
                                     }
+                                }
                                 @*}*@
-
                             </li>
                         </ul>
                     </div>
@@ -100,7 +99,7 @@
                         <button type="submit" class="pull-right btn-search"></button>
                     </form>
                 </div>
-                
+
                 @Html.Partial("_QuickCart")
 
             </div>
@@ -281,6 +280,28 @@
 
     <!-- Scripts for Cart -->
     <script type="text/javascript" src="~/Scripts/Cart.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Add product to wishlist
+            $('.AddToWishList').click(function () {
+                var productId = $(this).val();
+                $.ajax({
+                    url: "/Home/WishList",
+                    type: "POST",
+                    datatype: "json",
+                    data: { ProductID: productId },
+                    success: function (data) {
+                        var count = parseInt(0);
+                        alert("Success");
+                    }
+                })
+            })
+
+        })
+    </script>
+
 
     @RenderSection("scripts", required: false)
 

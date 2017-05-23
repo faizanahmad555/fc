@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<link href="~/Content/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/Adminplugins/css/gallery.css" />
 
 <!--vertical center Modal start-->
 <div class="modal fade modal-dialog-center " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -29,7 +31,6 @@
     </div>
 </div>
 <!-- vertical center Modal end -->
-
 <!--main content start-->
 <section class="site-min-height">
     <!-- page start-->
@@ -131,8 +132,10 @@
                                         @Html.DisplayFor(modelItem => item.MobileNumber)
                                     </td>
                                     <td>
-                                        <img class="img-thumbnail" src="@Url.Content(item.ProfilePhoto)" height="50" width="50" />
+                                        <img class="img-thumbnail" src="@Url.Content(item.ProfilePhoto)" height="60" width="60" />
                                     </td>
+
+
 
                                     <td>
                                         <a href="@Url.Action("EditSupplier", "Admin", new { SupplierID = item.SupplierID, UserID = item.AspNetUserID  })" class="btn btn-primary">
@@ -157,7 +160,6 @@
     <!-- page end-->
 </section>
 <!--main content end-->
-
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
@@ -168,6 +170,15 @@
     </div>
 </footer>
 <!--footer end-->
+
+
+<script type="text/javascript">
+    $(function () {
+        //    fancybox
+        jQuery(".fancybox").fancybox();
+    });
+
+</script>
 
 
 @section Scripts{

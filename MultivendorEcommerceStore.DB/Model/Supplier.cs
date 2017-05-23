@@ -17,14 +17,15 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
-            this.SupplierBusinessInformations = new HashSet<SupplierBusinessInformation>();
             this.Products = new HashSet<Product>();
+            this.SupplierBusinessInformations = new HashSet<SupplierBusinessInformation>();
         }
     
         public System.Guid SupplierID { get; set; }
         public string AspNetUserID { get; set; }
         public string SupplierFirstName { get; set; }
         public string SupplierLastName { get; set; }
+        public string Gender { get; set; }
         public string Address { get; set; }
         public string PostalCode { get; set; }
         public Nullable<int> CountryID { get; set; }
@@ -45,15 +46,14 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string CNIC { get; set; }
-        public string Gender { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CityMaster CityMaster { get; set; }
         public virtual CountryMaster CountryMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
         public virtual StateMaster StateMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

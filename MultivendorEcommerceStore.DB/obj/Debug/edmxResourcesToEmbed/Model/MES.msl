@@ -22,14 +22,14 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Category">
         <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,6 +57,66 @@
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
+          <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
+          <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
+          <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
+          <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
+          <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+          <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+          <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerNotifications">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.CustomerNotification">
+        <MappingFragment StoreEntitySet="CustomerNotification">
+          <ScalarProperty Name="CustomerNotificationID" ColumnName="CustomerNotificationID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiscountVouchers">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.DiscountVoucher">
+        <MappingFragment StoreEntitySet="DiscountVoucher">
+          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+          <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+          <ScalarProperty Name="VoucherDiscountTypeID" ColumnName="VoucherDiscountTypeID" />
+          <ScalarProperty Name="VoucherValue" ColumnName="VoucherValue" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UsedOn" ColumnName="UsedOn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -144,6 +204,56 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="ProductLongDescription" ColumnName="ProductLongDescription" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="FeatureProduct" ColumnName="FeatureProduct" />
+          <ScalarProperty Name="MSRP" ColumnName="MSRP" />
+          <ScalarProperty Name="AvailableSize" ColumnName="AvailableSize" />
+          <ScalarProperty Name="AvailableColor" ColumnName="AvailableColor" />
+          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+          <ScalarProperty Name="UnitInStock" ColumnName="UnitInStock" />
+          <ScalarProperty Name="UnitOnOrder" ColumnName="UnitOnOrder" />
+          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+          <ScalarProperty Name="ProductAvailable" ColumnName="ProductAvailable" />
+          <ScalarProperty Name="DiscountAvailable" ColumnName="DiscountAvailable" />
+          <ScalarProperty Name="CurrentOrder" ColumnName="CurrentOrder" />
+          <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
+          <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductNotifications">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ProductNotification">
+        <MappingFragment StoreEntitySet="ProductNotification">
+          <ScalarProperty Name="ProductNotificationID" ColumnName="ProductNotificationID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ReturnRequests">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ReturnRequest">
         <MappingFragment StoreEntitySet="ReturnRequest">
@@ -167,6 +277,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingCarts">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ShoppingCart">
+        <MappingFragment StoreEntitySet="ShoppingCart">
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DiscountVoucherID" ColumnName="DiscountVoucherID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingCartDetails">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ShoppingCartDetail">
+        <MappingFragment StoreEntitySet="ShoppingCartDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="StateMasters">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.StateMaster">
         <MappingFragment StoreEntitySet="StateMaster">
@@ -179,38 +318,38 @@
     <EntitySetMapping Name="SubCategories">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubCategoryItems">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SubCategoryItem">
         <MappingFragment StoreEntitySet="SubCategoryItem">
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
           <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
           <ScalarProperty Name="SupplierFirstName" ColumnName="SupplierFirstName" />
           <ScalarProperty Name="SupplierLastName" ColumnName="SupplierLastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
@@ -275,87 +414,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
-          <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
-          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
-          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
-          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-          <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
-          <ScalarProperty Name="BillingCountry" ColumnName="BillingCountry" />
-          <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-          <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
-          <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
-          <ScalarProperty Name="CardExpYear" ColumnName="CardExpYear" />
-          <ScalarProperty Name="CardExpDate" ColumnName="CardExpDate" />
-          <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
-          <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Address2" ColumnName="Address2" />
-          <ScalarProperty Name="Address1" ColumnName="Address1" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+    <EntitySetMapping Name="WishLists">
+      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.WishList">
+        <MappingFragment StoreEntitySet="WishList">
+          <ScalarProperty Name="WishListID" ColumnName="WishListID" />
+          <ScalarProperty Name="WishListName" ColumnName="WishListName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="Ranking" ColumnName="Ranking" />
-          <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
-          <ScalarProperty Name="CurrentOrder" ColumnName="CurrentOrder" />
-          <ScalarProperty Name="DiscountAvailable" ColumnName="DiscountAvailable" />
-          <ScalarProperty Name="ProductAvailable" ColumnName="ProductAvailable" />
-          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
-          <ScalarProperty Name="UnitOnOrder" ColumnName="UnitOnOrder" />
-          <ScalarProperty Name="UnitInStock" ColumnName="UnitInStock" />
-          <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
-          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
-          <ScalarProperty Name="AvailableColor" ColumnName="AvailableColor" />
-          <ScalarProperty Name="AvailableSize" ColumnName="AvailableSize" />
-          <ScalarProperty Name="MSRP" ColumnName="MSRP" />
-          <ScalarProperty Name="FeatureProduct" ColumnName="FeatureProduct" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="UnitSize" ColumnName="UnitSize" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="SubCategoryItemID" ColumnName="SubCategoryItemID" />
-          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-          <ScalarProperty Name="ProductLongDescription" ColumnName="ProductLongDescription" />
-          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="SKU" ColumnName="SKU" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductNotifications">
-      <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.ProductNotification">
-        <MappingFragment StoreEntitySet="ProductNotification">
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProductNotificationID" ColumnName="ProductNotificationID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

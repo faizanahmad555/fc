@@ -18,6 +18,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public StateMaster()
         {
             this.CityMasters = new HashSet<CityMaster>();
+            this.Customers = new HashSet<Customer>();
             this.Suppliers = new HashSet<Supplier>();
         }
     
@@ -28,6 +29,8 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CityMaster> CityMasters { get; set; }
         public virtual CountryMaster CountryMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
     }

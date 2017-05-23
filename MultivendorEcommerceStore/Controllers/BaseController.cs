@@ -33,7 +33,9 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
         public string CurrentUserID { get; set; }
+
         public Guid CurrentSupplierID { get; set; }
+        
         public Guid CurrentCustomerID { get; set; }
 
 

@@ -45,11 +45,12 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<short> OrderStatus { get; set; }
         public string Currency { get; set; }
     
+        public virtual Customer Customer { get; set; }
+        public virtual DiscountVoucher DiscountVoucher { get; set; }
         public virtual Payment Payment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderHistory> OrderHistories { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }

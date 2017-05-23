@@ -77,6 +77,13 @@ namespace MultivendorEcommerceStore.Controllers
         public ActionResult CustomerLogin(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            AdminBL adminBL = new AdminBL();
+            var countries = adminBL.GetCountries().Select(c => new
+            {
+                Text = c.Name,
+                Value = c.CountryID
+            }).ToList();
+            ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
             return View();
         }
 
@@ -125,8 +132,7 @@ namespace MultivendorEcommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CustomerRegister(CustomerLoginRegisterViewModel model)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
                 var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
 
@@ -147,7 +153,7 @@ namespace MultivendorEcommerceStore.Controllers
                     //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
-            }
+            
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Login", "Home");
         }
