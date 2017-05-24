@@ -74,7 +74,7 @@ namespace MultivendorEcommerceStore.Controllers
 
         // GET: /Account/CustomerLogin
         [AllowAnonymous]
-        public ActionResult CustomerLogin(string returnUrl)
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             AdminBL adminBL = new AdminBL();
@@ -92,7 +92,7 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CustomerLogin(CustomerLoginRegisterViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(CustomerLoginRegisterViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {

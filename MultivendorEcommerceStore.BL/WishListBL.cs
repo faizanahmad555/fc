@@ -26,7 +26,7 @@ namespace MultivendorEcommerceStore.BL
         // SHOW: Current Customer Products WishList(For Front Side)
         public IEnumerable<DisplayWishListViewModel> GetWishListByCustomerID(Guid customerId)
         {
-            IWishListRepository wishListRepo = new WishListRepository();
+            var wishListRepo = new WishListRepository();
 
             var wishlist = wishListRepo.Retrive().Where(w => w.CustomerID == customerId).ToList();
 

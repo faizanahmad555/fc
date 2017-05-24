@@ -53,35 +53,12 @@
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = "Password" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                    <label class="checkbox">
-                        <input type="checkbox" value="remember-me"> Remember me
-                        <span class="pull-right">
-                            <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-
-                        </span>
-                    </label>
+                  
                     <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
 
                 }
 
-                <p>or you can sign in via social network</p>
-                <div class="login-social-link">
-                    <a href="index-2.html" class="facebook">
-                        <i class="fa fa-facebook"></i>
-                        Facebook
-                    </a>
-                    <a href="index-2.html" class="twitter">
-                        <i class="fa fa-twitter"></i>
-                        Twitter
-                    </a>
-                </div>
-                <div class="registration">
-                    Don't have an account yet?
-                    <a class="" href="registration.html">
-                        Create an account
-                    </a>
-                </div>
-
+              
             </div>
 
             @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

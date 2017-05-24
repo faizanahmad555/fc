@@ -976,5 +976,17 @@
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="SupplierBusinessInformation" EntitySet="SupplierBusinessInformations" />
     </AssociationSet>
+    <EntitySet Name="ContactUS" EntityType="MultivendorEcommerceStoreModel.ContactU" />
   </EntityContainer>
+  <EntityType Name="ContactU">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Guid" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

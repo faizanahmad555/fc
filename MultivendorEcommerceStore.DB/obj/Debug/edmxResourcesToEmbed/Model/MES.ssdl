@@ -38,6 +38,17 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="StateID" Type="int" />
   </EntityType>
+  <EntityType Name="ContactUS">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="datetime" />
+  </EntityType>
   <EntityType Name="Conversation">
     <Key>
       <PropertyRef Name="ConversationID" />
@@ -471,7 +482,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
@@ -519,7 +532,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -571,7 +586,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductNotification_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ProductNotification" Type="Self.ProductNotification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -772,6 +789,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactUS" EntityType="Self.ContactUS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />

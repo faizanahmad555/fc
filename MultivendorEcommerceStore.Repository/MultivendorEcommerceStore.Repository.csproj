@@ -53,6 +53,7 @@
     <Compile Include="AspNetUsersRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CityRepository.cs" />
+    <Compile Include="ContactUsRepository.cs" />
     <Compile Include="CountryRepository.cs" />
     <Compile Include="CustomerNotificationRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="IAspNetUsersRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="ICityRepository.cs" />
+    <Compile Include="IContactUsRepository.cs" />
     <Compile Include="ICountryRepository.cs" />
     <Compile Include="ICustomerNotificationRepository.cs" />
     <Compile Include="ICustomerRepository.cs" />

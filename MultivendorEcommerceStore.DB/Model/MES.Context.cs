@@ -52,5 +52,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
         public virtual DbSet<WishList> WishLists { get; set; }
+        public virtual DbSet<ContactU> ContactUS { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -16,18 +17,48 @@ namespace MultivendorEcommerceStore.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
+        [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult Contact(AddContactUsViewModel model)
+        {
+            ContactUsBL contactBL = new ContactUsBL();
+            contactBL.AddContactMessage(model);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeliveryInformation()
+        {
+            return View();
+        }
+
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
+        public ActionResult TermsConditions()
+        {
+            return View();
+        }
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
+        public ActionResult SiteMap()
+        {
+            return View();
+        }
+
 
         // SHOW: All Categories of Display Order 1
         public PartialViewResult _ShowCategories()
@@ -114,10 +145,10 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult SupplierProducts(Guid SupplierID, int? page)
         {
-            var product = new ProductBL().GetProductsBySupplierID(SupplierID);
+            var product = new ProductBL().GetProductsOfSupplier(SupplierID);
             var pager = new Pager(product.Count(), page);
 
-            var model = new ProductListViewModel()
+            var model = new SupplierProductShopViewModel()
             {
                 Products = product.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
                 Pager = pager
@@ -145,9 +176,6 @@ namespace MultivendorEcommerceStore.Controllers
             WishListBL wishListBL = new WishListBL();
             return View(wishListBL.GetWishListByCustomerID(CurrentCustomerID));
         }
-
-
-
 
     }
 }

@@ -62,6 +62,9 @@
     <Compile Include="Model\CityMaster.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ContactU.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Conversation.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
@@ -158,11 +161,14 @@
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="ViewModel\CategoryListViewModel.cs" />
+    <Compile Include="ViewModel\AddContactUsViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\DashboardStatisticsVM.cs" />
+    <Compile Include="ViewModel\DisplayContactUsViewModel.cs" />
     <Compile Include="ViewModel\DisplayProductViewModel.cs" />
     <Compile Include="ViewModel\DisplayWishListViewModel.cs" />
+    <Compile Include="ViewModel\EditContactUsViewModel.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
     <Compile Include="ViewModel\FeatureProductsViewModel.cs" />
@@ -170,6 +176,7 @@
     <Compile Include="ViewModel\Pager.cs" />
     <Compile Include="ViewModel\PaginationViewModel.cs" />
     <Compile Include="ViewModel\ProductListViewModel.cs" />
+    <Compile Include="ViewModel\SupplierBusinessInfoListViewModel.cs" />
     <Compile Include="ViewModel\SupplierListViewModel.cs" />
     <Compile Include="ViewModel\SupplierProductShopViewModel.cs" />
     <Compile Include="ViewModel\SupplierProfileViewModel.cs" />

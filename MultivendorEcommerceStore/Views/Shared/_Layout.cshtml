@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Fine Collection</title>
-    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/Icons/FineCollection.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/Icons/Favicon.png" />
     <link rel="stylesheet" type="text/css" href="~/assets/lib/bootstrap/css/bootstrap.min.css" />
 
     @Styles.Render("~/Assets/css")
@@ -23,28 +23,7 @@
             <div class="container">
                 <div class="nav-top-links">
                     <a class="first-item" href="#"><img alt="phone" src="~/assets/images/phone.png" />+92-304-133-7887</a>
-                    <a href="#"><img alt="email" src="~/assets/images/email.png" />Contact us today!</a>
-                </div>
-                <div class="currency ">
-                    <div class="dropdown">
-                        <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">USD</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Dollar</a></li>
-                            <li><a href="#">Euro</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="language ">
-                    <div class="dropdown">
-                        <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                            <img alt="email" src="~/assets/images/fr.jpg" />French
-
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><img alt="email" src="~/assets/images/en.jpg" />English</a></li>
-                            <li><a href="#"><img alt="email" src="~/assets/images/fr.jpg" />French</a></li>
-                        </ul>
-                    </div>
+                    <a href="@Url.Action("Contact", "Home")"><img alt="email" src="~/assets/images/email.png" />Contact us today!</a>
                 </div>
 
                 <div class="support-link">
@@ -82,7 +61,7 @@
         <div class="container main-header">
             <div class="row">
                 <div class="col-xs-12 col-sm-3 logo">
-                    <a href="@Url.Action("Index", "Home")"><img alt="Kute shop" src="~/Content/Images/Icons/FineCollection.png" height="64" width="255" /></a>
+                    <a href="@Url.Action("Index", "Home")"><img alt="Logo" src="~/Content/Images/Icons/FineCollection_Color.png" height="64" width="255" /></a>
                 </div>
                 <div class="col-xs-7 col-sm-7 header-search-box">
                     <form class="form-inline">
@@ -120,10 +99,10 @@
             <div id="introduce-box" class="row">
                 <div class="col-md-3">
                     <div id="address-box">
-                        <a href="#"><img src="~/assets/data/introduce-logo.png" alt="" /></a>
+                        <a href="@Url.Action("Index", "Home")"><img src="~/Content/Images/Icons/Finecollection.jpg" height="64" width="255" alt="Logo" /></a>
                         <div id="address-list">
                             <div class="tit-name">Address:</div>
-                            <div class="tit-contain">Example Street 68, Gujranwala, Pakistan.</div>
+                            <div class="tit-contain">Example Street 68, Gujranwala, Pakistan</div>
                             <div class="tit-name">Phone:</div>
                             <div class="tit-contain">+92 304 133 7887</div>
                             <div class="tit-name">Email:</div>
@@ -136,18 +115,18 @@
                         <div class="col-sm-4">
                             <div class="introduce-title">Company</div>
                             <ul id="introduce-company" class="introduce-list">
-                                <li><a href="@Url.Action("SupplierLogin", "Account")">Join Us</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Affiliate Program</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="@Url.Action("SupplierLogin", "Account")" title="Join Us">Join Us</a></li>
+                                <li><a href="@Url.Action("About" , "Home")" title="About">About Us</a></li>
+                                <li><a href="@Url.Action("TermsConditions" , "Home")" title="Terms & Conditions">Terms & Conditions</a></li>
+                                <li><a href="@Url.Action("PrivacyPolicy" , "Home")" title="Privacy Policy">Privacy Policy</a></li>
+                                <li><a href="@Url.Action("Contact" , "Home")" title="Contact Us">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
                             <div class="introduce-title">My Account</div>
                             <ul id="introduce-Account" class="introduce-list">
                                 <li><a href="#">My Order</a></li>
-                                <li><a href="#">My Wishlist</a></li>
+                                <li><a href="@Url.Action("WishList", "Home")" title="My Wish List">My Wishlist</a></li>
                                 <li><a href="#">My Credit Slip</a></li>
                                 <li><a href="#">My Addresses</a></li>
                                 <li><a href="#">My Personal In</a></li>
@@ -160,27 +139,21 @@
                                 <li><a href="#">Testimonials</a></li>
                                 <li><a href="#">Affiliate Program</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div id="contact-box">
-                        <div class="introduce-title">Newsletter</div>
-                        <div class="input-group" id="mail-box">
-                            <input type="text" placeholder="Your Email Address" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">OK</button>
-                            </span>
-                        </div><!-- /input-group -->
+
                         <div class="introduce-title">Let's Socialize</div>
                         <div class="social-link">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            <a href="#"><i class="fa fa-vk"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="https://www.facebook.com/finecollection/" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.pinterest.com/finecollectionstore/" title="Pinterest"><i class="fa fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="false" title="Instagram"></i></a>
+                            <a href="https://twitter.com/finecollection5/" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="https://plus.google.com/109985227721488180970/" title="Google+"><i class="fa fa-google-plus"></i></a>
                         </div>
                     </div>
                 </div>
@@ -225,51 +198,6 @@
             </div> <!-- /#trademark-box -->
 
             <div id="footer-menu-box">
-                <div class="col-sm-12">
-                    <ul class="footer-menu-list">
-                        <li><a href="#">Company Info - Partnerships</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul class="footer-menu-list">
-                        <li><a href="#">Online Shopping</a></li>
-                        <li><a href="#">Promotions</a></li>
-                        <li><a href="#">My Orders</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Site Map</a></li>
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">Support</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul class="footer-menu-list">
-                        <li><a href="#">Most Populars</a></li>
-                        <li><a href="#">Best Sellers</a></li>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Special Products</a></li>
-                        <li><a href="#">Manufacturers</a></li>
-                        <li><a href="#">Our Stores</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Payments</a></li>
-                        <li><a href="#">Warantee</a></li>
-                        <li><a href="#">Refunds</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Discount</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12">
-                    <ul class="footer-menu-list">
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Policy</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Payments</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Refunds</a></li>
-                        <li><a href="#">Warrantee</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
                 <p class="text-center">Copyrights &#169; 2017 FineCollection. All Rights Reserved.</p>
             </div><!-- /#footer-menu-box -->
         </div>

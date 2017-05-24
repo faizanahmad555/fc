@@ -1356,7 +1356,9 @@
     <Content Include="Content\assets\xchart\xcharts.css" />
     <Content Include="Content\assets\xchart\xcharts.min.js" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\Images\Icons\FineCollection.png" />
+    <Content Include="Content\Images\Icons\Favicon.png" />
+    <Content Include="Content\Images\Icons\Finecollection.jpg" />
+    <Content Include="Content\Images\Icons\FineCollection_Color.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontello.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1467,7 +1469,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -1523,7 +1524,7 @@
     <Content Include="Views\Account\ConfirmationLinkExpired.cshtml" />
     <Content Include="Views\Account\EmailConfirmationFailed.cshtml" />
     <Content Include="Views\Account\SupplierLogin.cshtml" />
-    <Content Include="Views\Account\CustomerLogin.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\_SPORTSFeatureProducts.cshtml" />
     <Content Include="Views\Home\_ELECTRONICSFeatureProducts.cshtml" />
     <Content Include="Views\Home\_DIGITALFeatureProducts.cshtml" />
@@ -1540,6 +1541,15 @@
     <Content Include="Views\Home\WishList.cshtml" />
     <Content Include="Views\Home\Page.cshtml" />
     <Content Include="Views\Home\SupplierProducts.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Shared\_CompanyInfo.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\DeliveryInformation.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\SiteMap.cshtml" />
+    <Content Include="Views\Home\TermsConditions.cshtml" />
+    <Content Include="Views\Admin\ContactMessagesList.cshtml" />
+    <Content Include="Views\Admin\EditContactMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

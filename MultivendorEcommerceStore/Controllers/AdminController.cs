@@ -18,7 +18,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View(adminDBL.DashboardStats());
         }
 
-
+        #region Manage Supplier
 
         // ADD: Supplier
         [HttpGet]
@@ -111,10 +111,10 @@ namespace MultivendorEcommerceStore.Controllers
             return true;
         }
 
+        #endregion
 
 
-
-
+        #region Manage Category
 
         //ADD: Category
         [HttpGet]
@@ -192,8 +192,11 @@ namespace MultivendorEcommerceStore.Controllers
             return View(categoryBL.CategoryList());
         }
 
-        
 
+        #endregion
+
+
+        #region Manage Products
 
         // SHOW: Products of All Suppliers
         public ActionResult ProductList()
@@ -231,6 +234,10 @@ namespace MultivendorEcommerceStore.Controllers
             return PartialView("Delete", ProductID);
         }
 
+        #endregion
+
+
+        #region Manage Customer
 
         // SHOW: All Customers
         [HttpGet]
@@ -248,8 +255,48 @@ namespace MultivendorEcommerceStore.Controllers
             customerBL.DeleteCustomer(UserID);
             return true;
         }
+       
+        #endregion
 
 
+        #region ContactMessage
+        // SHOW: All Contact Messages
+        [HttpGet]
+        public ActionResult ContactMessagesList()
+        {
+            var contactBL = new ContactUsBL();
+            return View(contactBL.ContactMessageList());
+        }
 
+
+        // EDIT: Existing Contact Message
+        [HttpGet]
+        public ActionResult EditContactMessage(Guid ContactID)
+        {
+            var contactBL = new ContactUsBL();
+            EditContactUsViewModel viewModel = contactBL.EditContactMessage(ContactID);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditContactMessage(EditContactUsViewModel viewModel)
+        {
+            var contactBL = new ContactUsBL();
+            contactBL.AddEditedContactMessage(viewModel);
+            return RedirectToAction("ContactMessagesList");
+        }
+
+
+        // DELETE: Prompt Before Delete ContactMessage
+        public bool DeleteContactMessageConfirm(Guid ContactID)
+        {
+            ContactUsBL contactBL = new ContactUsBL();
+            contactBL.DeleteContactMessage(ContactID);
+            return true;
+        }
+
+        #endregion
+
+        
     }
 }

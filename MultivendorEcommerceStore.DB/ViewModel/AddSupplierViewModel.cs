@@ -16,7 +16,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "First Name")]
         [StringLength(20, ErrorMessage = "No less than 1 & No more than 20 characters", MinimumLength = 1)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string FirstName { get; set; }
 
 

@@ -103,12 +103,18 @@ namespace MultivendorEcommerceStore.BL
         public List<ProductListViewModel> GetProductsBySupplierID(Guid SupplierID)
         {
             IProductRepository productRepo = new ProductRepository();
+            ISupplierRepository supplierRepo = new SupplierRepository();
+            ISupplierBusinessInfo businessInfoRepo = new SupplierBusinessInfo();
+
+
             ICategoryRepository categoryRepo = new CategoryRepository();
             ISubCategoryRepository subCategoryRepo = new SubCategoryRepository();
 
             List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
 
             var productTbl = productRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
+            var supplierbusinessInfoTbl = businessInfoRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
+
 
             foreach (var product in productTbl)
             {
@@ -132,10 +138,63 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.CreatedOn = product.CreatedOn;
                 viewModelList.Add(viewModel);
             }
+
+            foreach (var businessInfo in supplierbusinessInfoTbl)
+            {
+                ProductListViewModel viewModel = new ProductListViewModel();
+
+                SupplierBusinessInfoListViewModel businessInfoVM = new SupplierBusinessInfoListViewModel();
+
+                businessInfoVM.SupplierID = businessInfo.SupplierID;
+                businessInfoVM.ProductsType = businessInfo.ProductType;
+                businessInfoVM.CompanyName = businessInfo.CompanyName;
+                businessInfoVM.BusinessExperience = businessInfo.BusinessExperience;
+                businessInfoVM.BusinessEmail = businessInfo.BusinessExperience;
+                businessInfoVM.Logo = businessInfo.Logo;
+                businessInfoVM.Phone = businessInfo.Phone;
+                businessInfoVM.Address = businessInfo.Address;
+
+                viewModel.SupplierBusinessInformationList.Add(businessInfoVM);
+                viewModelList.Add(viewModel);
+
+            }
+
             return viewModelList;
         }
 
-     
+
+        // SHOW: Current Supplier Products(For Front End Side)
+        public IEnumerable<SupplierProductShopViewModel> GetProductsOfSupplier(Guid supplierID)
+        {
+            IProductRepository productRepo = new ProductRepository();
+            var businessInfoRepo = new SupplierBusinessInfo();
+
+            var businessInfo = businessInfoRepo.GetById(supplierID);
+
+            return new ProductRepository().Retrive().Where(s => s.SupplierID == supplierID).Select(p => new SupplierProductShopViewModel
+            {
+                SupplierID = p.SupplierID,
+                ProductName = p.ProductName,
+                ProductDescription = p.ProductDescription,
+                ProductImage1 = p.ProductPicture,
+                CategoryName = p.Category.CategoryName,
+                SupplierName = p.Supplier.SupplierFirstName,
+                Price = p.UnitPrice,
+                Quantity = p.Quantity,
+                Size = p.UnitSize,
+                CompanyName = businessInfo.CompanyName,
+                Logo = businessInfo.Logo,
+                BusinessEmail = businessInfo.BusinessExperience,
+                Address = businessInfo.Address,
+                Phone = businessInfo.Phone,
+                BusinessExperience = businessInfo.BusinessExperience,
+                ProductsType = businessInfo.BusinessType,
+            }).ToList();
+
+
+        }
+
+
         // EDIT: EXISTING Product For Edit(For Admin & Supplier Side)
         public EditProductViewModel EditSupplierProduct(Guid SupplierID, Guid ProductID)
         {

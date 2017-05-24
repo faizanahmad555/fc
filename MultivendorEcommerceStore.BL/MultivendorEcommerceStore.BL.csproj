@@ -54,6 +54,7 @@
     <Compile Include="AdminDashboardBL.cs" />
     <Compile Include="CartBL.cs" />
     <Compile Include="CategoryBL.cs" />
+    <Compile Include="ContactUsBL.cs" />
     <Compile Include="CustomerBL.cs" />
     <Compile Include="NotificationBL.cs" />
     <Compile Include="ProductBL.cs" />

@@ -1,17 +1,89 @@
-﻿@{
+﻿@model MultivendorEcommerceStore.DB.ViewModel.AddContactUsViewModel
+
+@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!-- page wapper-->
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="@Url.Action("Index", "Home")" title="Return to Home">Home</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <a class="navigation_page" href="@Url.Action("Contact", "Home")" title="Contact Us">Contact</a>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Contact Us</span>
+        </h2>
+        <!-- ../page heading-->
+        <div id="contact" class="page-content page-contact">
+            <div id="message-box-conact"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="page-subheading">CONTACT FORM</h3>
+                    <div class="contact-form-box">
+                        @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        <div class="form-selector">
+                            <label>First Name</label>
+                            @*<input type="text" class="form-control input-sm" id="email" />*@
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-selector">
+                            <label>Last Name</label>
+                            @*<input type="text" class="form-control input-sm" id="email" />*@
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-selector">
+                            <label>Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-selector">
+                            <label>Message</label>
+                            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                            @*<textarea class="form-control input-sm" rows="10" id="message"></textarea>*@
+                        </div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+                        <div class="form-selector">
+                            <button type="submit" id="btn-send-contact" class="btn">Send</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6" id="contact_form_map">
+                    <h3 class="page-subheading">Information</h3>
+                    <p>Lorem ipsum dolor sit amet onsectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor dapibus eget. Mauris tincidunt aliquam lectus sed vestibulum. Vestibulum bibendum suscipit mattis.</p>
+                    <br />
+                    <ul>
+                        <li>Praesent nec tincidunt turpis.</li>
+                        <li>Aliquam et nisi risus.&nbsp;Cras ut varius ante.</li>
+                        <li>Ut congue gravida dolor, vitae viverra dolor.</li>
+                    </ul>
+                    <br />
+                    <ul class="store_info">
+                        <li><i class="fa fa-home"></i>Example Street 68, Gujranwala, Pakistan</li>
+                        <li><i class="fa fa-phone"></i><span>+ 92 304 133 7887</span></li>
+                        <li><i class="fa fa-phone"></i><span>+ 92 345 461 7318</span></li>
+                        <li><i class="fa fa-envelope"></i>Email: <span><a>finecollectionstore@gmail.com</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./page wapper-->
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
