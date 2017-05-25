@@ -16,7 +16,7 @@ namespace MultivendorEcommerceStore.Repository
         IEnumerable<Product> Retrive();
         void Update(Product entity);
         void Delete(Guid id);
-        Product GetById(Guid id);
+        Product GetById(Guid? id);
 
         Product GetBySupplierId(Guid id);
 

@@ -9,15 +9,22 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     public class DisplayWishListViewModel
     {
         public Guid? CustomerID { get; set; }
-
+        public Guid? WishListID { get; set; }
         public Guid? ProductID { get; set; }
 
-        public string ProductName { get; set; }
+        public DisplayProductViewModel Product { get; set; }
 
-        public string ProductImage1 { get; set; }
-
-        public int? Price { get; set; }
-
+        public Pager Pager { get; set; }
     }
+
+    public class WishListViewModel
+    {
+        public IEnumerable<DisplayWishListViewModel> WishList { get; set; }
+        public Pager Pager { get; set; }
+    }
+
+
+
+
 }
 

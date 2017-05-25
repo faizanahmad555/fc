@@ -11,10 +11,10 @@ namespace MultivendorEcommerceStore.BL
 {
     public class WishListBL
     {
-        public void AddProductstoWishList(Guid CustomerId, Guid productId)
+        public void AddProductstoWishList(Guid? CustomerId, Guid? productId)
         {
-            IWishListRepository wishListRepo = new WishListRepository();
-            WishList wishList = new WishList();
+            var wishListRepo = new WishListRepository();
+            var wishList = new WishList();
 
             wishList.WishListID = Guid.NewGuid();
             wishList.ProductID = productId;
@@ -27,18 +27,30 @@ namespace MultivendorEcommerceStore.BL
         public IEnumerable<DisplayWishListViewModel> GetWishListByCustomerID(Guid customerId)
         {
             var wishListRepo = new WishListRepository();
-
             var wishlist = wishListRepo.Retrive().Where(w => w.CustomerID == customerId).ToList();
 
             return wishlist.Select(s => new DisplayWishListViewModel
             {
+                WishListID = s.WishListID,
                 CustomerID = s.CustomerID,
                 ProductID = s.ProductID,
-                Price = s.Product.UnitPrice,
-                ProductImage1 = s.Product.ProductPicture,
-                ProductName = s.Product.ProductName,
+                Product = GetProductByID(s.ProductID),
             });
+        }
 
+        public DisplayProductViewModel GetProductByID(Guid? productID)
+        {
+            var productRepo = new ProductRepository();
+            DisplayProductViewModel viewmodel = new DisplayProductViewModel();
+
+            var product = productRepo.GetById(productID);
+            viewmodel.ProductName = product.ProductName;
+            viewmodel.ProductImage1 = product.ProductPicture;
+            viewmodel.ProductDescription = product.ProductDescription;
+            viewmodel.Size = product.UnitSize;
+            viewmodel.Price = product.UnitPrice;
+
+            return viewmodel;
         }
 
 

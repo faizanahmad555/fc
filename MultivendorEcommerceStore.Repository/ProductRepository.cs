@@ -46,7 +46,7 @@ namespace MultivendorEcommerceStore.Repository
             _db.SaveChanges();
         }
 
-        public Product GetById(Guid id)
+        public Product GetById(Guid? id)
         {
             _db = new MultivendorEcommerceStoreEntities();
             return _db.Products.Where(s => s.ProductID == id).FirstOrDefault();

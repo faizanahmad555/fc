@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.DisplayWishListViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.WishListViewModel
 
 @{
     ViewBag.Title = "WishList";
@@ -20,25 +20,71 @@
         <!-- row -->
         <div class="row">
             <!-- Center colunm-->
-            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+            <div class="center_column col-xs-12 col-sm-12" id="center_column">
 
                 <ul class="row list-wishlist">
-                    @foreach (var item in Model)
-                    { 
-                        <li class="col-sm-3">
+                    @foreach (var item in Model.WishList)
+                    {
+                        <li id="Item_@item.WishListID" class="col-sm-3">
                             <div class="product-img">
-                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.ProductImage1)" alt="Product"></a>
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.Product.ProductImage1)" alt="Product"></a>
                             </div>
                             <h5 class="product-name">
-                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">@Html.DisplayFor(modelItem => item.ProductName)</a>
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">@Html.DisplayFor(modelItem => item.Product.ProductName)</a>
                             </h5>
                             <div class="qty">
-                                <label>Price: @Html.DisplayFor(modelItem => item.Price)</label>
+                                <label>Price: @Html.DisplayFor(modelItem => item.Product.Price)</label>
+                            </div>
+                            <br />
+
+                            <div class="button-action">
+                                <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>
+
+                                <button type="button" value="@item.WishListID" class="pull-right" title="Remove" onclick="RemoveFromWishList(this)"><i class="fa fa-close"></i></button>
+                                @*<a href="#"><i class="fa fa-close"></i></a>*@
                             </div>
                         </li>
                     }
-
                 </ul>
+
+                <!-- ./view-product-list-->
+                <div class="sortPagiBar">
+                    <div class="bottom-pagination">
+                        <nav>
+                            <!-- pager -->
+                            @if (Model.Pager.EndPage > 1)
+                            {
+                                <ul class="pagination">
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="~/Home/WishList">First</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Home/WishList?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                        </li>
+                                    }
+                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                    {
+                                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                            <a href="~/Home/WishList?page=@page">@page</a>
+                                        </li>}
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="~/Home/WishList?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Home/WishList?page=@(Model.Pager.TotalPages)">Last</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+
+                        </nav>
+                    </div>
+                </div>
+
             </div>
             <!-- ./ Center colunm -->
         </div>
@@ -46,3 +92,10 @@
     </div>
 </div>
 
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-1.11.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/table_editable.js"></script>
+}

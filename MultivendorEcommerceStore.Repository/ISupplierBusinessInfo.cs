@@ -13,6 +13,6 @@ namespace MultivendorEcommerceStore.Repository
         IEnumerable<SupplierBusinessInformation> Retrive();
         void Update(SupplierBusinessInformation entity);
         void Delete(Guid id);
-        SupplierBusinessInformation GetById(Guid id);
+        SupplierBusinessInformation GetById(Guid? id);
     }
 }

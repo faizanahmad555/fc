@@ -73,7 +73,10 @@
                                                 <div class="left-block">
                                                     <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img class="img-responsive" alt="product" src="@Url.Content(item.ProductImage1)" width="268" height="327" /></a>
                                                     <div class="quick-view">
-                                                        <a title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID">h</a>
+                                                   
+                                                            <button href="#" value="@item.ProductID" class="AddToWishList" title="Add to my wishlist"><i class="glyphicon glyphicon-heart"></i></button>
+                                               
+                                                        @*<a title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID">h</a>*@
                                                         <a title="Add to compare" class="compare" href="#"></a>
                                                         <a title="Quick view" class="search" href="#"></a>
                                                     </div>
@@ -106,3 +109,55 @@
     </div>
 </div>
 <!-- end featured category fashion -->
+
+
+<script type="text/javascript">
+        //$(document).ready(function () {
+        //    // Add product to wishlist
+        //    $('.AddToWishList').click(function () {
+        //        var productId = $(this).val();
+        //        $.ajax({
+        //            url: "/Home/WishList",
+        //            type: "POST",
+        //            datatype: "json",
+        //            data: { ProductID: productId },
+        //            success: function (data) {
+        //                var count = parseInt(0);
+        //                alert("Success");
+        //            }
+        //        })
+        //    })
+
+    //})
+    $('.AddToWishList').click(function () {
+        var value = $(this).val();
+        $.ajax({
+            url: "/Home/AddtoWishList",
+            type: "POST",
+            datatype: "json",
+            data: { productId: value },
+            success: function (data) {
+                //int variable empty(0)
+                //var count = parseInt(0);
+                //var count = $("#WishListCount").text();
+                //$("#WishListCount").html(data);
+                alert("Item successfully added...");
+
+            }
+        })
+    });
+    function RemoveFromWishList(obj) {
+        var value = obj.value;
+        $.ajax({
+            url: "/Home/DeleteItemFromWishList",
+            type: "POST",
+            datatype: "json",
+            data: { wishListID: value, },
+            success: function (data) {
+                $("#Item_" + value).remove();
+                //$("#WishListCount").html(data);
+                alert("Item successfully Removed...");
+            }
+        })
+    }
+</script>

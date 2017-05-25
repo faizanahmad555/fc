@@ -1,5 +1,7 @@
 ﻿using MultivendorEcommerceStore.BL;
 using MultivendorEcommerceStore.DB.ViewModel;
+using MultivendorEcommerceStore.Repository;
+using MultivendorEcommerceStore.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Web.Mvc;
 
 namespace MultivendorEcommerceStore.Controllers
 {
-    public class AjaxController : Controller
+    public class AjaxController : BaseController
     {
         // GET: Ajax
         public ActionResult Index()
@@ -102,6 +104,24 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        #region WishList
+        // ADD: Products to WishList(For Customers)
+        [HttpPost]
+        public Guid AddtoWishList(Guid? productId)
+        {
+            var wishListBL = new WishListBL();
+            wishListBL.AddProductstoWishList(CurrentCustomerID, productId);
+            return User.Identity.GetCustomerCurrentID();
+        }
+
+        [HttpPost]
+        public Guid DeleteItemFromWishList(Guid wishListID)
+        {
+            new WishListRepository().Delete(wishListID);
+            return User.Identity.GetCustomerCurrentID();
+        }
+
+        #endregion
 
     }
 }

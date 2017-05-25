@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 using System.Collections.Generic;
+using MultivendorEcommerceStore.Utility;
+using MultivendorEcommerceStore.Repository;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -141,16 +143,16 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // SHOW: All Products of Supplier
+        // SHOW: All Products of Supplier(For Front End Side)
         [HttpGet]
         public ActionResult SupplierProducts(Guid SupplierID, int? page)
         {
-            var product = new ProductBL().GetProductsOfSupplier(SupplierID);
+            var product = new ProductBL().GetProductBySupplier(SupplierID);
             var pager = new Pager(product.Count(), page);
 
-            var model = new SupplierProductShopViewModel()
+            var model = new SupplierBusinessInfoandProductsViewModel()
             {
-                Products = product.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Supplier = product.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
                 Pager = pager
             };
 
@@ -158,24 +160,24 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // ADD: Products to WishList(For Customers)
-        [HttpPost]
-        public ActionResult AddtoWishList(Guid productId)
-        {
-            WishListBL wishListBL = new WishListBL();
-            wishListBL.AddProductstoWishList(CurrentCustomerID, productId);
-            return RedirectToAction("Index");
-        }
-
+        #region GetWishList
 
         // GET: WishList of Products(For Customers)
         [Authorize(Roles = "Customer")]
         [HttpGet]
-        public ActionResult WishList()
+        public ActionResult WishList(int? page)
         {
-            WishListBL wishListBL = new WishListBL();
-            return View(wishListBL.GetWishListByCustomerID(CurrentCustomerID));
+            var wishList = new WishListBL().GetWishListByCustomerID(User.Identity.GetCustomerCurrentID());
+            var pager = new Pager(wishList.Count(), page);
+            var model = new WishListViewModel()
+            {
+                WishList = wishList.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Pager = pager,
+            };
+            return View(model);
         }
+        
+        #endregion
 
     }
 }

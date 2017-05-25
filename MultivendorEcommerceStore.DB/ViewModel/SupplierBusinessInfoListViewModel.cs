@@ -12,6 +12,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public Guid? SupplierID { get; set; }
 
 
+        public Guid? BusinessInfoID { get; set; }
+
         [Display(Name = "First Name")]
         public string CompanyName { get; set; }
 

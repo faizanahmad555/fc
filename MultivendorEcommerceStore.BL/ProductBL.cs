@@ -13,6 +13,7 @@ namespace MultivendorEcommerceStore.BL
 {
     public class ProductBL
     {
+
         // ADD: Product
         public void AddProduct(AddProductViewModel model, Guid SupplierID)
         {
@@ -163,39 +164,108 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-        // SHOW: Current Supplier Products(For Front End Side)
-        public IEnumerable<SupplierProductShopViewModel> GetProductsOfSupplier(Guid supplierID)
+        // SHOW: Current Supplier Products Shop And Business Information(For Front End Side)
+        public IEnumerable<SupplierProductShopViewModel> GetProductBySupplier(Guid? supplierID)
         {
-            IProductRepository productRepo = new ProductRepository();
-            var businessInfoRepo = new SupplierBusinessInfo();
+            var productRepo = new ProductRepository();
+            var product = productRepo.Retrive().Where(w => w.SupplierID == supplierID).ToList();
 
-            var businessInfo = businessInfoRepo.GetById(supplierID);
-
-            return new ProductRepository().Retrive().Where(s => s.SupplierID == supplierID).Select(p => new SupplierProductShopViewModel
+            return product.Select(s => new SupplierProductShopViewModel
             {
-                SupplierID = p.SupplierID,
-                ProductName = p.ProductName,
-                ProductDescription = p.ProductDescription,
-                ProductImage1 = p.ProductPicture,
-                CategoryName = p.Category.CategoryName,
-                SupplierName = p.Supplier.SupplierFirstName,
-                Price = p.UnitPrice,
-                Quantity = p.Quantity,
-                Size = p.UnitSize,
-                CompanyName = businessInfo.CompanyName,
-                Logo = businessInfo.Logo,
-                BusinessEmail = businessInfo.BusinessExperience,
-                Address = businessInfo.Address,
-                Phone = businessInfo.Phone,
-                BusinessExperience = businessInfo.BusinessExperience,
-                ProductsType = businessInfo.BusinessType,
-            }).ToList();
+                SupplierID = s.SupplierID,
+                ProductID = s.ProductID,
+                Product = GetProductByID(s.ProductID),
+                SupplierBusinessInfo = GetSupplierBusinessInfoBySupplierID(s.SupplierID)
+            });
+        }
 
+        public DisplayProductViewModel GetProductByID(Guid? productID)
+        {
+            var productRepo = new ProductRepository();
+            DisplayProductViewModel viewmodel = new DisplayProductViewModel();
 
+            var product = productRepo.GetById(productID);
+            viewmodel.ProductName = product.ProductName;
+            viewmodel.ProductImage1 = product.ProductPicture;
+            viewmodel.ProductDescription = product.ProductDescription;
+            viewmodel.Size = product.UnitSize;
+            viewmodel.Price = product.UnitPrice;
+
+            return viewmodel;
+        }
+        
+        public SupplierBusinessInfoListViewModel GetSupplierBusinessInfoBySupplierID(Guid? supplierID)
+        {
+            var supplierBusinessRepo = new SupplierBusinessInfo();
+            SupplierBusinessInfoListViewModel viewmodel = new SupplierBusinessInfoListViewModel();
+
+            var businessInfo = supplierBusinessRepo.GetById(supplierID);
+            viewmodel.BusinessInfoID = businessInfo.BusinessInfoID;
+            viewmodel.CompanyName = businessInfo.CompanyName;
+            viewmodel.BusinessEmail = businessInfo.BusinessEmail;
+            viewmodel.Logo = businessInfo.Logo;
+            viewmodel.Address = businessInfo.Address;
+            viewmodel.BusinessExperience = businessInfo.BusinessExperience;
+            viewmodel.Phone = businessInfo.Phone;
+            viewmodel.ProductsType = businessInfo.ProductType;
+            
+            return viewmodel;
         }
 
 
+
+
+
+        // SHOW: Current Supplier Products(For Front End Side)
+        //public IEnumerable<SupplierProductShopViewModel> GetProductsOfSupplier(Guid supplierID)
+        //{
+        //    IProductRepository productRepo = new ProductRepository();
+        //    var businessInfoRepo = new SupplierBusinessInfo();
+
+        //    var businessInfo = businessInfoRepo.GetById(supplierID);
+
+        //    return new ProductRepository().Retrive().Where(s => s.SupplierID == supplierID).Select(p => new SupplierProductShopViewModel
+        //    {
+        //        SupplierID = p.SupplierID,
+        //        ProductName = p.ProductName,
+        //        ProductDescription = p.ProductDescription,
+        //        ProductImage1 = p.ProductPicture,
+        //        CategoryName = p.Category.CategoryName,
+        //        SupplierName = p.Supplier.SupplierFirstName,
+        //        Price = p.UnitPrice,
+        //        Quantity = p.Quantity,
+        //        Size = p.UnitSize,
+        //        CompanyName = businessInfo.CompanyName,
+        //        Logo = businessInfo.Logo,
+        //        BusinessEmail = businessInfo.BusinessExperience,
+        //        Address = businessInfo.Address,
+        //        Phone = businessInfo.Phone,
+        //        BusinessExperience = businessInfo.BusinessExperience,
+        //        ProductsType = businessInfo.BusinessType,
+        //    }).ToList();
+
+
+        //}
+
+
+
+        //public IEnumerable<SupplierProductShopViewModel.DisplaySupplierListViewModel> GetMyProductList(Guid? supplierID)
+        //{
+        //    var wishListRepository = new WishListRepository();
+        //    //var wishList = wishListRepository.Get();
+        //    return wishList.Select(s => new DisplayWishListViewModel
+        //    {
+        //        CustomerID = s.CustomerID,
+        //        //Product = GetProductByID(s.ProductID),
+        //        ProductID = s.ProductID,
+        //        WishListID = s.WishListID
+        //    });
+        //}
+
+
         // EDIT: EXISTING Product For Edit(For Admin & Supplier Side)
+
+
         public EditProductViewModel EditSupplierProduct(Guid SupplierID, Guid ProductID)
         {
             IProductRepository productRepo = new ProductRepository();
@@ -268,7 +338,7 @@ namespace MultivendorEcommerceStore.BL
 
         }
 
-        
+
         // DELETE: Products of All Suppliers(For Admin Side)
         public void DeleteProduct(Guid ProductID)
         {
@@ -318,7 +388,7 @@ namespace MultivendorEcommerceStore.BL
             return viewModelList;
         }
 
-        
+
         // SHOW: ALL Feature Products(For Front End Side)
         public List<FeatureProductsViewModel> FeatureProductList()
         {
@@ -437,6 +507,6 @@ namespace MultivendorEcommerceStore.BL
 
             return viewModelList;
         }
-     
+
     }
 }

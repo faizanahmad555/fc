@@ -110,9 +110,7 @@ namespace MultivendorEcommerceStore.BL
             businessInfo.SupplierID = viewModel.SupplierID;
             businessInfo.CompanyName = viewModel.CompanyName;
             businessInfo.Logo = basePath + fileName;
-            //businessInfo.Country = viewModel.Country;
-            //businessInfo.State = viewModel.State;
-            //businessInfo.City = viewModel.City;
+            businessInfo.BusinessEmail = viewModel.BusinessEmail;
             businessInfo.Phone = viewModel.Phone;
             businessInfo.BusinessExperience = viewModel.BusinessExperience;
             businessInfo.ProductType = viewModel.ProductsType;

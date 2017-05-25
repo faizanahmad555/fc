@@ -22,5 +22,19 @@ namespace MultivendorEcommerceStore.Repository
             _db = new MultivendorEcommerceStoreEntities();
             return _db.WishLists.ToList();
         }
+
+        public void Delete(Guid id)
+        {
+            var wishlist = GetById(id);
+            _db.WishLists.Remove(wishlist);
+            _db.SaveChanges();
+        }
+
+        public WishList GetById(Guid id)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.WishLists.Where(s => s.WishListID == id).FirstOrDefault();
+        }
+
     }
 }

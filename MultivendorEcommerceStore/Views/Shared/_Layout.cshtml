@@ -210,26 +210,44 @@
     <script type="text/javascript" src="~/Scripts/Cart.js"></script>
 
 
+    <script src="~/Scripts/alertify.min.js"></script>
+
     <script type="text/javascript">
-        $(document).ready(function () {
-            // Add product to wishlist
-            $('.AddToWishList').click(function () {
-                var productId = $(this).val();
-                $.ajax({
-                    url: "/Home/WishList",
-                    type: "POST",
-                    datatype: "json",
-                    data: { ProductID: productId },
-                    success: function (data) {
-                        var count = parseInt(0);
-                        alert("Success");
-                    }
-                })
-            })
 
+    $('.AddToWishList').click(function () {
+        var value = $(this).val();
+        $.ajax({
+            url: "/Ajax/AddtoWishList",
+            type: "POST",
+            datatype: "json",
+            data: { productId: value },
+            success: function (data) {
+                //int variable empty(0)
+                //var count = parseInt(0);
+                //var count = $("#WishListCount").text();
+                //$("#WishListCount").html(data);
+                alert("Item successfully added...");
+
+            }
         })
-    </script>
+    });
 
+    function RemoveFromWishList(obj) {
+        var value = obj.value;
+        $.ajax({
+            url: "/Ajax/DeleteItemFromWishList",
+            type: "POST",
+            datatype: "json",
+            data: { wishListID: value, },
+            success: function (data) {
+                $("#Item_" + value).remove();
+                //$("#WishListCount").html(data);
+                alert("Item successfully Removed...");
+            }
+        })
+    }
+
+    </script>
 
     @RenderSection("scripts", required: false)
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.SupplierProductShopViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.SupplierBusinessInfoandProductsViewModel
 
 @{
     ViewBag.Title = "SupplierProducts";
@@ -14,24 +14,46 @@
             <!-- Center colunm-->
             <div class="center_column col-xs-12 col-sm-12" id="center_column">
                 <!-- category-slider -->
-                <div class="category-slider">
 
-                    @foreach (var item in Model)
-                    {
-                        <ul class="owl-carousel owl-style2" data-dots="false" data-loop="true" data-nav="true" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-items="1">
+                @foreach (var item in Model.Supplier)
+                {
+                    <div class="#">
+                        <ul class="#" data-dots="false" data-loop="true" data-nav="true" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-items="1">
                             <li>
-                                <img src="~/assets/data/category-slide.jpg" alt="category-slider">
+                                <img src="@Url.Content(item.SupplierBusinessInfo.Logo)" width="100%" height="220" alt="category-slider">
                             </li>
-                            <li>
-                                <img src="~/assets/data/slide-cart2.jpg" alt="category-slider">
-                            </li>
+
                         </ul>
-                    }
-                        
+                        <br />
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <strong>Email: </strong> @Html.DisplayFor(modelItem => item.SupplierBusinessInfo.BusinessEmail)
+                                </div>
+
+                                <div class="col-md-4">
+                                    <strong>Company: </strong> @Html.DisplayFor(modelItem => item.SupplierBusinessInfo.CompanyName)
+                                </div>
+
+                                <div class="col-md-4">
+                                    <strong>Mobile: </strong>@Html.DisplayFor(modelItem => item.SupplierBusinessInfo.Phone)
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <strong>Address: </strong> @Html.DisplayFor(modelItem => item.SupplierBusinessInfo.Address)
+                                </div>
+
+
+                            </div>
+                        </div>
                     </div>
+                    break;
+                }
+
+
                 <!-- ./category-slider -->
-
-
                 <!-- view-product-list-->
                 <div id="view-product-list" class="view-product-list">
                     <h2 class="page-heading">
@@ -42,21 +64,21 @@
                     </h2>
                     <ul class="display-product-option">
                         <li class="view-as-grid selected">
-                            <span>grid</span>
+                            <span title="Grid View">grid</span>
                         </li>
                         <li class="view-as-list">
-                            <span>list</span>
+                            <span title="List View">list</span>
                         </li>
                     </ul>
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
-                        @foreach (var item in Model.Where(s => s.Active == "Yes"))
+                        @foreach (var item in Model.Supplier)
                         {
                             <li class="col-sx-12 col-sm-3">
                                 <div class="product-container">
                                     <div class="left-block">
                                         <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
-                                            <img class="img-thumbnail" src="@Url.Content(item.ProductImage1)" height="350" width="350" />
+                                            <img class="img-thumbnail" src="@Url.Content(item.Product.ProductImage1)" height="350" width="350" />
                                         </a>
                                         <div class="quick-view">
                                             <a title="Add to my wishlist" class="heart" href="#"></a>
@@ -68,34 +90,27 @@
                                         </div>
                                     </div>
                                     <div class="right-block">
-                                        <h5 class="product-name"><a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.ProductName)</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
+                                        <h5 class="product-name"><a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"> @Html.DisplayFor(modelItem => item.Product.ProductName)</a></h5>
+
                                         <div class="content_price">
-                                            <span class="price product-price">Rs.@Html.DisplayFor(modelItem => item.Price)</span>
+                                            <span class="price product-price">Rs.@Html.DisplayFor(modelItem => item.Product.Price)</span>
                                         </div>
                                         <div class="info-orther">
                                             <p>Item Code: #453217907</p>
                                             <p class="availability">Availability: <span>In stock</span></p>
                                             <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
+                                                @Html.DisplayFor(modelItem => item.Product.ProductDescription)
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-
                         }
                     </ul>
                     <!-- ./PRODUCT LIST -->
                 </div>
                 <!-- ./view-product-list-->
-                @*<div class="sortPagiBar">
+                <div class="sortPagiBar">
                     <div class="bottom-pagination">
                         <nav>
                             @if (Model.Pager.EndPage > 1)
@@ -104,26 +119,26 @@
                                     @if (Model.Pager.CurrentPage > 1)
                                     {
                                         <li>
-                                            @foreach (var item in Model)
+                                            @foreach (var item in Model.Supplier)
                                             {
                                                 <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID">First</a>
                                                 break;
                                             }
                                         </li>
 
-                                        <li>
-                                            @foreach (var item in Model)
-                                            {
-                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                                                break;
-                                            }
-                                        </li>
+                                            <li>
+                                                @foreach (var item in Model.Supplier)
+                                                {
+                                                    <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                    break;
+                                                }
+                                            </li>
                                     }
 
                                     @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                                     {
                                         <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                                            @foreach (var item in Model)
+                                            @foreach (var item in Model.Supplier)
                                             {
                                                 <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@page">@page</a>
                                                 break;
@@ -134,26 +149,26 @@
                                     @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                                     {
                                         <li>
-                                            @foreach (var item in Model)
+                                            @foreach (var item in Model.Supplier)
                                             {
                                                 <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.CurrentPage + 1)">Next</a>
                                                 break;
                                             }
                                         </li>
-                                        <li>
-                                            @foreach (var item in Model)
-                                            {
-                                                <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.TotalPages)">Last</a>
-                                                break;
-                                            }
-                                        </li>
+                                            <li>
+                                                @foreach (var item in Model.Supplier)
+                                                {
+                                                    <a href="~/Home/SupplierProducts?SupplierID=@item.SupplierID&page=@(Model.Pager.TotalPages)">Last</a>
+                                                    break;
+                                                }
+                                            </li>
                                     }
                                 </ul>
                             }
 
                         </nav>
                     </div>
-                </div>*@
+                </div>
 
 
 
@@ -163,3 +178,5 @@
         <!-- ./row-->
     </div>
 </div>
+
+

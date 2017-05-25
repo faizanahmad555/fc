@@ -1364,6 +1364,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1440,6 +1442,8 @@
     <Content Include="Content\templates\WelcomeEmail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
+    <Content Include="Scripts\jquery-1.11.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\Product.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1453,6 +1457,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\table_editable.js" />
     <Content Include="Scripts\theme-script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -1574,6 +1579,10 @@
     <ProjectReference Include="..\MultivendorEcommerceStore.DB\MultivendorEcommerceStore.DB.csproj">
       <Project>{edc781e7-8a2b-44f0-8fc0-0625b15b4eb9}</Project>
       <Name>MultivendorEcommerceStore.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MultivendorEcommerceStore.Repository\MultivendorEcommerceStore.Repository.csproj">
+      <Project>{7600B14C-CB3D-4350-8FDA-9A7F67B20028}</Project>
+      <Name>MultivendorEcommerceStore.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

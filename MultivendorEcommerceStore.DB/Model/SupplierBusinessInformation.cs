@@ -29,6 +29,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public string ProductType { get; set; }
         public string Website { get; set; }
         public string PaymentMethods { get; set; }
+        public string BusinessEmail { get; set; }
     
         public virtual Supplier Supplier { get; set; }
     }

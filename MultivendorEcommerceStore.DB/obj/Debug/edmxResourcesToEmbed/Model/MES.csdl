@@ -426,6 +426,7 @@
     <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PaymentMethods" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_SupplierBusinessInformation_Supplier" FromRole="SupplierBusinessInformation" ToRole="Supplier" />
+    <Property Name="BusinessEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Tracking">
     <Key>

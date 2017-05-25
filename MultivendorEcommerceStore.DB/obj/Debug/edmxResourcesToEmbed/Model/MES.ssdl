@@ -366,6 +366,7 @@
     </Key>
     <Property Name="BusinessInfoID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierID" Type="uniqueidentifier" />
+    <Property Name="BusinessEmail" Type="nvarchar" MaxLength="100" />
     <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
     <Property Name="Logo" Type="nvarchar(max)" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />

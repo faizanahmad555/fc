@@ -376,6 +376,7 @@
     <EntitySetMapping Name="SupplierBusinessInformations">
       <EntityTypeMapping TypeName="MultivendorEcommerceStoreModel.SupplierBusinessInformation">
         <MappingFragment StoreEntitySet="SupplierBusinessInformation">
+          <ScalarProperty Name="BusinessEmail" ColumnName="BusinessEmail" />
           <ScalarProperty Name="BusinessInfoID" ColumnName="BusinessInfoID" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />

@@ -12,5 +12,8 @@ namespace MultivendorEcommerceStore.Repository
         void Create(WishList entity);
 
         IEnumerable<WishList> Retrive();
+
+        void Delete(Guid id);
+        WishList GetById(Guid id);
     }
 }
