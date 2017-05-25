@@ -9,13 +9,13 @@ using System.Web.Mvc;
 namespace MultivendorEcommerceStore.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class AdminController : AdminBaseController
     {
         // Dashboard
         public ActionResult Index()
         {
-            AdminDashboardBL adminDBL = new AdminDashboardBL();
-            return View(adminDBL.DashboardStats());
+            var BL = new AdminDashboardBL();
+            return View(BL.DashboardStats());
         }
 
         #region Manage Supplier

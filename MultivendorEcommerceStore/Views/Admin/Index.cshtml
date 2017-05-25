@@ -1,9 +1,14 @@
-﻿@model List<MultivendorEcommerceStore.DB.ViewModel.DashboardStatisticsVM>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.DashboardStatisticsVM
+
+@*@{
+        MultivendorEcommerceStore.DB.ViewModel.AdminLayoutViewModel layoutdata  = ViewBag.LayoutData;
+    }*@
 
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 @*<div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -17,6 +22,7 @@
         </div>
     </div>
 *@
+
 <!--state overview start-->
 <div class="row state-overview">
 
@@ -27,12 +33,12 @@
             </div>
 
             <div class="value">
-                @foreach (var item in Model)
-                {
-                    <h1>
-                        @item.UsersCount
-                    </h1>
-                }
+                @*@foreach (var item in Model)
+                    {
+                        <h1>
+                          @item.UsersCount
+                        </h1>
+                    }*@
                 <p>Total Users</p>
             </div>
 
@@ -45,17 +51,17 @@
                 <i class="fa fa-tags"></i>
             </div>
             <a href="@Url.Action("ProductList", "Admin")">
-                
+
                 <div class="value">
-                    @foreach (var item in Model)
-                    {
-                        <h1>
-                            @item.ProductsCount
-                        </h1>
-                    }
+                    @*@foreach (var item in Model)
+                        {
+                             <h1>
+                                 @item.ProductsCount
+                             </h1>
+                         }*@
                     <p>Total Products</p>
                 </div>
-            
+
             </a>
         </section>
     </div>

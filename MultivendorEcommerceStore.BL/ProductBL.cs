@@ -140,35 +140,36 @@ namespace MultivendorEcommerceStore.BL
                 viewModelList.Add(viewModel);
             }
 
-            foreach (var businessInfo in supplierbusinessInfoTbl)
-            {
-                ProductListViewModel viewModel = new ProductListViewModel();
+            //foreach (var businessInfo in supplierbusinessInfoTbl)
+            //{
+            //    ProductListViewModel viewModel = new ProductListViewModel();
 
-                SupplierBusinessInfoListViewModel businessInfoVM = new SupplierBusinessInfoListViewModel();
+            //    SupplierBusinessInfoListViewModel businessInfoVM = new SupplierBusinessInfoListViewModel();
 
-                businessInfoVM.SupplierID = businessInfo.SupplierID;
-                businessInfoVM.ProductsType = businessInfo.ProductType;
-                businessInfoVM.CompanyName = businessInfo.CompanyName;
-                businessInfoVM.BusinessExperience = businessInfo.BusinessExperience;
-                businessInfoVM.BusinessEmail = businessInfo.BusinessExperience;
-                businessInfoVM.Logo = businessInfo.Logo;
-                businessInfoVM.Phone = businessInfo.Phone;
-                businessInfoVM.Address = businessInfo.Address;
+            //    businessInfoVM.SupplierID = businessInfo.SupplierID;
+            //    businessInfoVM.ProductsType = businessInfo.ProductType;
+            //    businessInfoVM.CompanyName = businessInfo.CompanyName;
+            //    businessInfoVM.BusinessExperience = businessInfo.BusinessExperience;
+            //    businessInfoVM.BusinessEmail = businessInfo.BusinessExperience;
+            //    businessInfoVM.Logo = businessInfo.Logo;
+            //    businessInfoVM.Phone = businessInfo.Phone;
+            //    businessInfoVM.Address = businessInfo.Address;
 
-                viewModel.SupplierBusinessInformationList.Add(businessInfoVM);
-                viewModelList.Add(viewModel);
+            //    viewModel.SupplierBusinessInformationList.Add(businessInfoVM);
+            //    viewModelList.Add(viewModel);
 
-            }
+            //}
 
             return viewModelList;
         }
+
 
 
         // SHOW: Current Supplier Products Shop And Business Information(For Front End Side)
         public IEnumerable<SupplierProductShopViewModel> GetProductBySupplier(Guid? supplierID)
         {
             var productRepo = new ProductRepository();
-            var product = productRepo.Retrive().Where(w => w.SupplierID == supplierID).ToList();
+            var product = productRepo.Retrive().Where(w => w.SupplierID == supplierID && w.IsActive == 1).ToList();
 
             return product.Select(s => new SupplierProductShopViewModel
             {
@@ -412,6 +413,7 @@ namespace MultivendorEcommerceStore.BL
 
                 productVM.SupplierID = product.SupplierID;
                 productVM.ProductID = product.ProductID;
+                productVM.SupplierName = product.Supplier.SupplierFirstName;
                 productVM.FeatureProduct = product.FeatureProduct;
                 productVM.CategoryName = category.CategoryName;
                 productVM.SubCategoryName = subCategory.SubCategoryName;

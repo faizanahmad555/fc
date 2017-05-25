@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/Icons/FineCollection.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/Icons/Favicon.png" />
 
     <title>AdminPanel - FineCollection</title>
 
@@ -140,7 +140,16 @@
     <script src="~/Content/Adminplugins/js/easy-pie-chart.js"></script>
     <script src="~/Content/Adminplugins/js/count.js"></script>
 
-
+    <!--script for print record-->
+    <script type="text/javascript">
+        function Print(content) {
+            var printContents = document.getElementById(content).innerHTML;
+            w = window.open();
+            w.document.write(printContents);
+            w.print();
+            w.close();
+        }
+    </script>
 
 
     <!--  END JAVASCRIPTS -->

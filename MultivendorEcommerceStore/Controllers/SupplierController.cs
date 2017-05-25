@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MultivendorEcommerceStore.Utility;
 
 namespace MultivendorEcommerceStore.Controllers
 {
@@ -19,13 +20,14 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+
         // GET : Supplier Profile
         [Authorize(Roles = "Supplier")]
         [HttpGet]
         public ActionResult SupplierProfile()
         {
             UserProfileBL userProfileBL = new UserProfileBL();
-            return View(userProfileBL.GetProfileByUserIdentity(CurrentUserID));
+            return View(userProfileBL.GetProfileByUserIdentity(User.Identity.GetCurrentUserID()));
         }
 
 
@@ -37,7 +39,9 @@ namespace MultivendorEcommerceStore.Controllers
             UserProfileBL userProfileBL = new UserProfileBL();
             return View(userProfileBL.GetSupplierProfileByUserIdentity(userId));
         }
+        
 
+        #region Manage Products
 
         // ADD: Product
         [Authorize(Roles = "Supplier")]
@@ -71,7 +75,7 @@ namespace MultivendorEcommerceStore.Controllers
         public ActionResult ProductList()
         {
             ProductBL productBL = new ProductBL();
-            return View(productBL.GetProductsBySupplierID(CurrentSupplierID));
+            return View(productBL.GetProductsBySupplierID(User.Identity.GetSupplierCurrentID()));
         }
 
 
@@ -101,6 +105,8 @@ namespace MultivendorEcommerceStore.Controllers
             productBL.DeleteProduct(ProductID);
             return true;
         }
+
+        #endregion
 
 
     }

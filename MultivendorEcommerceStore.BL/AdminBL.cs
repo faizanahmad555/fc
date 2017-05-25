@@ -13,6 +13,7 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
+        #region Manage Supplier
 
         // ADD: Supplier(For Admin Side)
         public void AddSupplier(AddSupplierViewModel model)
@@ -125,7 +126,10 @@ namespace MultivendorEcommerceStore.BL
             return repo.Retrive().FirstOrDefault(s => s.AspNetUserID == userID).SupplierID;
         }
 
-       
+        #endregion
+
+        #region CountryStateCity
+
         // GET: Countries
         public IEnumerable<CountryMaster> GetCountries()
         {
@@ -146,5 +150,39 @@ namespace MultivendorEcommerceStore.BL
             ICityRepository cityRepo = new CityRepository();
             return cityRepo.Get().Where(c => c.StateID == ID).ToList();
         }
+
+        #endregion
+
+        #region Dashboard Statistics
+
+        public int GetAllUserCount()
+        {
+            var aspNetUserRepo = new AspNetUsersRepository();
+            return aspNetUserRepo.Retrive().Count();
+        }
+
+        public int GetSupplierCount()
+        {
+            var supplierRepo = new SupplierRepository();
+            return supplierRepo.Retrive().Count();
+        }
+
+        public int GetCustomerCount()
+        {
+            var customerRepo = new CustomerRepository();
+            return customerRepo.Retrive().Count();
+        }
+
+
+        public int GetProductCount()
+        {
+            var productRepo = new ProductRepository();
+            return productRepo.Retrive().Count();
+        }
+
+
+
+
+        #endregion 
     }
 }

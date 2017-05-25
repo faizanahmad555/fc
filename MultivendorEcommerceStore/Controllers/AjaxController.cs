@@ -107,12 +107,14 @@ namespace MultivendorEcommerceStore.Controllers
         #region WishList
         // ADD: Products to WishList(For Customers)
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         public Guid AddtoWishList(Guid? productId)
         {
             var wishListBL = new WishListBL();
             wishListBL.AddProductstoWishList(CurrentCustomerID, productId);
             return User.Identity.GetCustomerCurrentID();
         }
+
 
         [HttpPost]
         public Guid DeleteItemFromWishList(Guid wishListID)
