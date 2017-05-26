@@ -176,6 +176,7 @@
     <Compile Include="ViewModel\NotificationViewModel.cs" />
     <Compile Include="ViewModel\Pager.cs" />
     <Compile Include="ViewModel\PaginationViewModel.cs" />
+    <Compile Include="ViewModel\ProductByCategoryViewModel.cs" />
     <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="ViewModel\SupplierBusinessInfoListViewModel.cs" />
     <Compile Include="ViewModel\SupplierListViewModel.cs" />

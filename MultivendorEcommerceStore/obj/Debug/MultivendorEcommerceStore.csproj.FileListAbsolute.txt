@@ -447,3 +447,11 @@ C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Twilio.dll
 C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\Twilio.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.Plugins.PrettyGifs.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.Plugins.PrettyGifs.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.Plugins.DiskCache.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\ImageResizer.Plugins.DiskCache.xml
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\PayPal.dll
+C:\Users\Faizan\Source\fc\MultivendorEcommerceStore\bin\PayPal.xml

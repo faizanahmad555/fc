@@ -13,6 +13,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public Guid? SupplierID { get; set; }
         public Guid ProductID { get; set; }
 
+        public Guid SubCategoryID { get; set; }
+        public Guid SubCategoryItemID { get; set; }
+
         [Display(Name = "Category")]
         public string CategoryName { get; set; }
 

@@ -36,12 +36,12 @@
 
             <span class="navigation-pipe">&nbsp;</span>
             <span class="navigation_page">
-                @*@foreach (var item in Model)
+                @foreach (var item in Model.ProductsList)
                     {
                         <a href="#" title="Sub-Category Item">
                             @item.SubCategoryItemName
                         </a>
-                    }*@
+                    }
             </span>
 
         </div>
@@ -498,17 +498,18 @@
                                 break;
                             }
                         </li>
+                        <li>
+                            @foreach (var item in Model.ProductsList)
+                                {
+                                    <a href="#">@item.SubCategoryItemName</a>
+                                }
+                        </li>
+
                     </ul>
                 </div>
                 <!-- ./subcategories -->
                 <!-- view-product-list-->
                 <div id="view-product-list" class="view-product-list">
-
-                    @*<div class="container">
-                            <img src="~/Content/Images/Icons/Favicon.png?w=170&h=170&mode=pad|" />
-                        </div>*@
-
-
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
                         @foreach (var item in Model.ProductsList.Where(s => s.Active == "Yes"))
@@ -563,7 +564,7 @@
                                         <li>
                                             @foreach (var item in Model.ProductsList)
                                             {
-                                                <a href="~/Home/Products?PId=@item.SubCategoryID">First</a>
+                                                <a href="~/Home/ProductSs?PId=@item.SubCategoryItemID">First</a>
                                                 break;
                                             }
                                         </li>
@@ -571,7 +572,7 @@
                                         <li>
                                             @foreach (var item in Model.ProductsList)
                                             {
-                                                <a href="~/Home/Products?PId=@item.SubCategoryID&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                <a href="~/Home/ProductSs?PId=@item.SubCategoryItemID&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
                                                 break;
                                             }
                                         </li>
@@ -582,7 +583,7 @@
                                         <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
                                             @foreach (var item in Model.ProductsList)
                                             {
-                                                <a href="~/Home/Products?PId=@item.SubCategoryID&page=@page">@page</a>
+                                                <a href="~/Home/ProductSs?PId=@item.SubCategoryItemID&page=@page">@page</a>
                                                 break;
                                             }
                                         </li>
@@ -593,14 +594,14 @@
                                         <li>
                                             @foreach (var item in Model.ProductsList)
                                             {
-                                                <a href="~/Home/Products?PId=@item.SubCategoryID&page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                                <a href="~/Home/ProductSs?PId=@item.SubCategoryItemID&page=@(Model.Pager.CurrentPage + 1)">Next</a>
                                                 break;
                                             }
                                         </li>
                                         <li>
                                             @foreach (var item in Model.ProductsList)
                                             {
-                                                <a href="~/Home/Products?PId=@item.SubCategoryID&page=@(Model.Pager.TotalPages)">Last</a>
+                                                <a href="~/Home/ProductSs?PId=@item.SubCategoryItemID&page=@(Model.Pager.TotalPages)">Last</a>
                                                 break;
                                             }
                                         </li>

@@ -120,12 +120,33 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-        // SHOW: All Products According to Categories
-        public ActionResult Products(Guid PId)
+        // SHOW: All Products According to Sub Categories
+        public ActionResult Products(Guid PId, int? page)
         {
-            ProductBL productBL = new ProductBL();
-            return View(productBL.ProductLists(PId));
+            var products = new ProductBL().ProductLists(PId);
+            var pager = new Pager(products.Count(), page);
+            var model = new ProductByCategoryViewModel()
+            {
+                Pager = pager,
+                ProductsList = products.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize)
+            };
+            return View(model);
         }
+
+
+        // SHOW: All Products According to Sub Category Items
+        public ActionResult ProductSs(Guid PId, int? page)
+        {
+            var products = new ProductBL().ProductLists(PId);
+            var pager = new Pager(products.Count(), page);
+            var model = new ProductByCategoryViewModel()
+            {
+                Pager = pager,
+                ProductsList = products.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize)
+            };
+            return View(model);
+        }
+
 
 
         // SHOW: All Products Detail According to Product
