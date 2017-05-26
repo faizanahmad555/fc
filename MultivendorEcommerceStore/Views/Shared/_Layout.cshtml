@@ -1,4 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
+@using MultivendorEcommerceStore.DB.ViewModel
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +12,7 @@
     <title>Fine Collection</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/Icons/Favicon.png" />
     <link rel="stylesheet" type="text/css" href="~/assets/lib/bootstrap/css/bootstrap.min.css" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
 
     @Styles.Render("~/Assets/css")
     @Scripts.Render("~/bundles/jquery")
@@ -151,7 +156,6 @@
                         <div class="social-link">
                             <a href="https://www.facebook.com/finecollection/" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="https://www.pinterest.com/finecollectionstore/" title="Pinterest"><i class="fa fa-pinterest-p"></i></a>
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="false" title="Instagram"></i></a>
                             <a href="https://twitter.com/finecollection5/" title="Twitter"><i class="fa fa-twitter"></i></a>
                             <a href="https://plus.google.com/109985227721488180970/" title="Google+"><i class="fa fa-google-plus"></i></a>
                         </div>
@@ -212,22 +216,22 @@
 
     <script src="~/Scripts/alertify.min.js"></script>
 
-    <script type="text/javascript">
 
-    $('.AddToWishList').click(function () {
+    <script type="text/javascript">
+        $('.AddToWishList').click(function () {
         var value = $(this).val();
+        debugger;
         $.ajax({
             url: "/Ajax/AddtoWishList",
             type: "POST",
             datatype: "json",
-            data: { productId: value },
+            data: { productId : value },
             success: function (data) {
                 //int variable empty(0)
                 //var count = parseInt(0);
                 //var count = $("#WishListCount").text();
                 //$("#WishListCount").html(data);
-                alert("Item successfully added...");
-
+                alertify.success("Item successfully added...");
             }
         })
     });
@@ -242,7 +246,8 @@
             success: function (data) {
                 $("#Item_" + value).remove();
                 //$("#WishListCount").html(data);
-                alert("Item successfully Removed...");
+                alertify.success("Item successfully Removed...");
+
             }
         })
     }

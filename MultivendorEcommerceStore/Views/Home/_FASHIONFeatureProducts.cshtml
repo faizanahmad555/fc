@@ -65,7 +65,7 @@
                                         {
                                             <li class="col-sm-4">
                                                 <div class="right-block">
-                                                    <h5 class="product-name"><a href="#">@item.ProductName</a></h5>
+                                                    <h5 class="product-name"><a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">@item.ProductName</a></h5>
                                                     <div class="content_price">
                                                         <span class="price product-price">Rs. @item.Price</span>
                                                     </div>
@@ -74,24 +74,18 @@
                                                     <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img class="img-responsive" alt="product" src="@Url.Content(item.ProductImage1)" width="268" height="327" /></a>
                                                     <div class="quick-view">
 
-                                                        <button href="#" value="@item.ProductID" class="AddToWishList" title="Add to my wishlist"><i class="glyphicon glyphicon-heart"></i></button>
-
-                                                        @*<a title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID">h</a>*@
-                                                        <a title="Add to compare" class="compare" href="#"></a>
-
-
+                                                        <button title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID"><i class="glyphicon glyphicon-heart"></i></button>
                                                         <button href="#" data-toggle="modal" data-target="#productModal_@item.ProductID" title="Quick view"><i class="glyphicon glyphicon-zoom-in"></i></button>
 
+                                                        @*<a href="#" title="Add to my wishlist" class="heart" value="@item.ProductID"></a>*@
+                                                        @*<a title="Add to compare" class="compare" href="#"></a>*@
                                                         @*<a title="Quick view" class="search" href="#"></a>*@
                                                     </div>
-                                                    <div class="add-to-cart">
-                                                        <button title="Add to Cart" value="@item.ProductID" class="AddToCart" type="button" style="background-color: rgba(255, 51, 102, 0.7);
-    background: rgba(255, 51, 102, 0.7);
-    color: rgba(255, 51, 102, 0.7);">
-                                                            Add to Cart
-                                                        </button>
-                                                        @*<a title="Add to Cart" href="#">Add to Cart</a>*@
+
+                                                    <div class="button-group center">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp; <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>
                                                     </div>
+
                                                 </div>
                                             </li>
                                         }
@@ -131,7 +125,7 @@
                         </div>
                         <div class="modal-body">
 
-                            @*<div class="primary-box row">
+                            <div class="primary-box row">
                                 <div class="pb-left-column col-xs-12 col-sm-5">
                                     <!-- product-imge-->
                                     <div class="product-image">
@@ -145,7 +139,9 @@
                                 </div>
 
                                 <div class="pb-right-column col-xs-12 col-sm-7">
-                                    <h4 class="product-name">@item.ProductName</h4>
+                                    <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
+                                        <h4 class="product-name">@item.ProductName</h4>
+                                    </a>
                                     <br />
                                     <div class="product-price-group">
                                         <h5> <span class="price">@item.Price Rs.</span> </h5>
@@ -160,7 +156,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="product-desc">
                                         <hr />
                                         @item.ProductDescription
@@ -170,20 +166,20 @@
                                     <div class="form-action">
                                         <div class="button-group">
                                             <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>
-
-                                            @*<a class="btn-add-cart" href="#">Add to cart</a>*@
-                                        @*</div>
+                                        </div>
                                     </div>
 
                                 </div>
 
-                            </div>*@
+                            </div>
 
                         </div><!-- .modal-body -->
                     </div><!-- .modal-content -->
                 </div><!-- .modal-dialog -->
             </div>
     <!-- END Modal -->
+
+
         }
     }
 </div>

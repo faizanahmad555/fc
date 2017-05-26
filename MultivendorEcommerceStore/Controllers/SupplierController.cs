@@ -19,7 +19,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-
+        #region Supplier Profile
 
         // GET : Supplier Profile
         [Authorize(Roles = "Supplier")]
@@ -39,7 +39,9 @@ namespace MultivendorEcommerceStore.Controllers
             UserProfileBL userProfileBL = new UserProfileBL();
             return View(userProfileBL.GetSupplierProfileByUserIdentity(userId));
         }
-        
+
+        #endregion
+
 
         #region Manage Products
 
