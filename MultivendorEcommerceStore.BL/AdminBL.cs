@@ -53,10 +53,10 @@ namespace MultivendorEcommerceStore.BL
         // SHOW: All Suppliers(For Admin Side)
         public List<SupplierListViewModel> SupplierList()
         {
-            ISupplierRepository supplierRepo = new SupplierRepository();
-            ICountryRepository countryRepo = new CountryRepository();
-            IStateRepository stateRepo = new StateRepository();
-            ICityRepository cityRepo = new CityRepository();
+            var supplierRepo = new SupplierRepository();
+            var countryRepo = new CountryRepository();
+            var stateRepo = new StateRepository();
+            var cityRepo = new CityRepository();
 
             List<SupplierListViewModel> viewModelList = new List<SupplierListViewModel>();
 

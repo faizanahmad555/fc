@@ -121,8 +121,8 @@
             var OrderData = @Html.Raw(Json.Encode(Model.OrdersChart));
             CreateOrderChart(OrderData);
 
-            var NewUsersData = @Html.Raw(Json.Encode(Model.NewUserChart));
-            CreateNewUsersChart(NewUsersData);
+            @*var NewUsersData = @Html.Raw(Json.Encode(Model.NewUserChart));
+            CreateNewUsersChart(NewUsersData);*@
 
         });
     </script>

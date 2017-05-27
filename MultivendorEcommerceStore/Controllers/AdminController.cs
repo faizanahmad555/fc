@@ -66,7 +66,7 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult SupplierList()
         {
-            AdminBL adminBL = new AdminBL();
+            var adminBL = new AdminBL();
             return View(adminBL.SupplierList());
         }
 
@@ -297,6 +297,48 @@ namespace MultivendorEcommerceStore.Controllers
 
         #endregion
 
-        
+
+        #region Manage Orders
+
+        [HttpGet]
+        public ActionResult OrderList()
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetAllOrders();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        public ActionResult OrderDetails(Guid orderID)
+        {
+            try
+            {
+                if (orderID != null)
+                {
+                    var orderBL = new OrderBL();
+                    var model = new OrderViewModel();
+                    model.Order = orderBL.GetOrderByID(orderID);
+                    model.OrderDetail = orderBL.GetOrderDetailByOrderID(orderID);
+                    return View(model);
+                }
+                return RedirectToAction("OrderList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        #endregion
+
+
+
     }
 }

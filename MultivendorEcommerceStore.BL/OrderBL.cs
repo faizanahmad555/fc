@@ -87,5 +87,60 @@ namespace MultivendorEcommerceStore.BL
             entity.CreatedOn = DateTime.Now;
             return orderRepo.InsertAndReturnID(entity);
         }
+
+
+        // Get All Orders(For Admin Side)
+        public IEnumerable<DisplayOrderViewModel> GetAllOrders()
+        {
+            var orderRepo = new OrderRepository();
+            var customerRepo = new CustomerRepository();
+            IEnumerable<DisplayOrderViewModel> orderList = orderRepo.Get().Select(s => new DisplayOrderViewModel
+            {
+                OrderID = s.OrderID,
+                CustomerName = customerRepo.GetById(s.CustomerID).FirstName,
+                CreatedOn = s.CreatedOn,
+                Tax = s.Tax,
+                Total = s.Total,
+                Shipping = s.Shipping,
+                SubTotal = s.SubTotal,
+            });
+            return orderList;
+        }
+
+
+
+        public DisplayOrderViewModel GetOrderByID(Guid orderID)
+        {
+            var orderRepo = new OrderRepository();
+            var order = orderRepo.GetByID(orderID);
+            var customerRepo = new CustomerRepository();
+            var viewModel = new DisplayOrderViewModel();
+            viewModel.CustomerName = customerRepo.GetById(order.CustomerID).FirstName;
+            viewModel.Tax = order.Tax;
+            viewModel.Shipping = order.Shipping;
+            viewModel.Total = order.Total;
+            viewModel.SubTotal = order.SubTotal;
+            viewModel.CreatedOn = order.CreatedOn;
+            return viewModel;
+        }
+
+
+
+        public IEnumerable<DisplayOrderDetailViewModel> GetOrderDetailByOrderID(Guid orderID)
+        {
+            var orderDetailRepo = new OrderDetailRepository();
+            var productRepo = new ProductRepository();
+            IEnumerable<DisplayOrderDetailViewModel> orderDetailList = orderDetailRepo.GetByOrderID(orderID).Select(s => new DisplayOrderDetailViewModel
+            {
+                OrderDetailID = s.OrderDetailID,
+                OrderID = s.OrderID,
+                Product = productRepo.GetById(s.ProductID).ProductName,
+                Quantity = s.Quantity,
+                UnitPrice = s.UnitPrice,
+            });
+            return orderDetailList;
+        }
+
+
     }
 }

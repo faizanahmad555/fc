@@ -15,7 +15,7 @@ namespace MultivendorEcommerceStore.Repository
         IEnumerable<Customer> Retrive();
         void Update(Customer entity);
         void Delete(string UserID);
-        Customer GetById(Guid Id);
+        Customer GetById(Guid? Id);
         AspNetUser GetByAspNetUserID(string UserID);
     }
 }

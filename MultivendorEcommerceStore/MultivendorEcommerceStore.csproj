@@ -1638,6 +1638,8 @@
     <Content Include="Views\Cart\SuccessView.cshtml" />
     <Content Include="Views\Cart\Thankyou.cshtml" />
     <Content Include="Views\Cart\CartErrors.cshtml" />
+    <Content Include="Views\Admin\OrderList.cshtml" />
+    <Content Include="Views\Admin\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

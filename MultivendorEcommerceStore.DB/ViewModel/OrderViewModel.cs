@@ -14,7 +14,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     }
     public class DisplayOrderViewModel
     {
-        public int OrderID { get; set; }
+        public Guid OrderID { get; set; }
 
         [Display(Name = "Customer")]
         public string CustomerName { get; set; }
@@ -36,8 +36,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     }
     public class DisplayOrderDetailViewModel
     {
-        public int? OrderDetailID { get; set; }
-        public int? OrderID { get; set; }
+        public Guid? OrderDetailID { get; set; }
+        public Guid? OrderID { get; set; }
         public string Product { get; set; }
         public int? Quantity { get; set; }
         public Decimal? UnitPrice { get; set; }

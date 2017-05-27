@@ -42,9 +42,10 @@ namespace MultivendorEcommerceStore.Repository
             return _db.AspNetUsers.Where(s => s.Id == UserID).FirstOrDefault();
         }
 
-        public Customer GetById(Guid Id)
+        public Customer GetById(Guid? Id)
         {
-            throw new NotImplementedException();
+            _db = new MultivendorEcommerceStoreEntities();
+            return _db.Customers.Where(w => w.CustomerID == Id).FirstOrDefault();
         }
 
         public IEnumerable<Customer> Retrive()
