@@ -156,6 +156,8 @@
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AddExistingCategoryItemViewModel.cs" />
     <Compile Include="ViewModel\AddExistingCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AddOrderDetailViewModel.cs" />
+    <Compile Include="ViewModel\AddOrderViewModel.cs" />
     <Compile Include="ViewModel\AddProductViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierBusinessInfoVM.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="ViewModel\CategoryListViewModel.cs" />
     <Compile Include="ViewModel\AddContactUsViewModel.cs" />
+    <Compile Include="ViewModel\CompleteOrderDetail.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\DashboardStatisticsVM.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
     <Compile Include="ViewModel\FeatureProductsViewModel.cs" />
     <Compile Include="ViewModel\NotificationViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\Pager.cs" />
     <Compile Include="ViewModel\PaginationViewModel.cs" />
     <Compile Include="ViewModel\ProductByCategoryViewModel.cs" />

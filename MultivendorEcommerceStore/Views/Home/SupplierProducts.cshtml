@@ -56,12 +56,7 @@
                 <!-- ./category-slider -->
                 <!-- view-product-list-->
                 <div id="view-product-list" class="view-product-list">
-                    <h2 class="page-heading">
-                        @*@foreach (var item in Model)
-                            {
-                                <span class="page-heading-title">@item.SubCategoryItemName</span>
-                            }*@
-                    </h2>
+
                     <ul class="display-product-option">
                         <li class="view-as-grid selected">
                             <span title="Grid View">grid</span>
@@ -78,7 +73,7 @@
                                 <div class="product-container">
                                     <div class="left-block">
                                         <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
-                                            <img class="img-thumbnail" src="@Url.Content(item.Product.ProductImage1)" height="350" width="350" />
+                                            <img src="@Url.Content(item.Product.ProductImage1)?w=300&mode=max|" class="img img-thumbnail img-responsive" alt="Product Image" @*width="275" height="375"*@ />
                                         </a>
                                         <div class="quick-view">
                                             <a title="Add to my wishlist" class="heart" href="#"></a>
