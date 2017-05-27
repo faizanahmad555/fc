@@ -11,5 +11,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public int UsersCount { get; set; }
 
         public int ProductsCount { get; set; }
+        public dynamic OrdersChart { get; set; }
+        
     }
 }

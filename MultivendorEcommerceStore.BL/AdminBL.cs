@@ -13,6 +13,8 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
+       private MultivendorEcommerceStoreEntities _dbctx = new MultivendorEcommerceStoreEntities();
+     
         #region Manage Supplier
 
         // ADD: Supplier(For Admin Side)

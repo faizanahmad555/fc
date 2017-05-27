@@ -14,11 +14,15 @@ namespace MultivendorEcommerceStore.BL
         {
             var aspNetUserRepo = new AspNetUsersRepository();
             var productRepo = new ProductRepository();
-
+            var OrderBL = new OrderBL();
             DashboardStatisticsVM viewModel = new DashboardStatisticsVM();
 
             viewModel.UsersCount = aspNetUserRepo.Retrive().Count();
             viewModel.ProductsCount = productRepo.Retrive().Count();
+
+            viewModel.OrdersChart = OrderBL.GetOrdersForChart();
+           
+
 
             return viewModel;
         }

@@ -57,6 +57,7 @@
     <Compile Include="ContactUsBL.cs" />
     <Compile Include="CustomerBL.cs" />
     <Compile Include="NotificationBL.cs" />
+    <Compile Include="OrderBL.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminBL.cs" />

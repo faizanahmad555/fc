@@ -4,33 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd6f7aab3d664d2c912eee8f569f9d2c" Name="Diagram1">
+      <Diagram DiagramId="6a5970cb847548cda4097b98dfab2975" Name="Diagram1">
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.AspNetUser" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Category" Width="1.5" PointX="13.5" PointY="37.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.CityMaster" Width="1.5" PointX="5.25" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Conversation" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ContactU" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Conversation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.CountryMaster" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Customer" Width="1.5" PointX="7.5" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.CustomerNotification" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.DiscountVoucher" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.EmailHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Order" Width="1.5" PointX="12.75" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.OrderDetail" Width="1.5" PointX="18" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.EmailHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.OrderHistory" Width="1.5" PointX="15" PointY="33.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Payment" Width="1.5" PointX="10.5" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Product" Width="1.5" PointX="15.75" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ProductNotification" Width="1.5" PointX="18" PointY="27.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ReturnRequest" Width="1.5" PointX="20.25" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Shipper" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ShoppingCart" Width="1.5" PointX="9.75" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ShoppingCartDetail" Width="1.5" PointX="13" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Shipper" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.StateMaster" Width="1.5" PointX="3" PointY="25.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategory" Width="1.5" PointX="15.75" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SubCategoryItem" Width="1.5" PointX="18" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Supplier" Width="1.5" PointX="10.5" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.SupplierBusinessInformation" Width="1.5" PointX="12.75" PointY="30.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Tracking" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.UserMessage" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Tracking" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.UserMessage" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.WishList" Width="1.5" PointX="15.75" PointY="21.5" IsExpanded="true" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Customer_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_AspNetUsers1" ManuallyRouted="false" />
@@ -44,25 +40,21 @@
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_CountryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Customer_StateMaster" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_CustomerNotification_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ShoppingCart_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_WishList_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_DiscountVoucher" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Payment" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderHistory_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_OrderDetail" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Product_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ProductNotification_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ShoppingCartDetail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_WishList_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ShoppingCartDetail_ShoppingCart" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Supplier_StateMaster" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SubCategoryItem_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_SupplierBusinessInformation_Supplier" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.ContactU" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.OrderDetail" Width="1.5" PointX="18" PointY="23.75" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_ReturnRequest_OrderDetail" />
+        <EntityTypeShape EntityType="MultivendorEcommerceStoreModel.Order" Width="1.5" PointX="9.75" PointY="28.5" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_Order_Customer" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderDetail_Order" />
+        <AssociationConnector Association="MultivendorEcommerceStoreModel.FK_OrderHistory_Order" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

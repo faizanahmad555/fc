@@ -28,22 +28,18 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CityMaster> CityMasters { get; set; }
+        public virtual DbSet<ContactU> ContactUs { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<CountryMaster> CountryMasters { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerNotification> CustomerNotifications { get; set; }
         public virtual DbSet<DiscountVoucher> DiscountVouchers { get; set; }
         public virtual DbSet<EmailHistory> EmailHistories { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderHistory> OrderHistories { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductNotification> ProductNotifications { get; set; }
         public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public virtual DbSet<ShoppingCartDetail> ShoppingCartDetails { get; set; }
         public virtual DbSet<StateMaster> StateMasters { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubCategoryItem> SubCategoryItems { get; set; }
@@ -52,6 +48,7 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
         public virtual DbSet<WishList> WishLists { get; set; }
-        public virtual DbSet<ContactU> ContactUS { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

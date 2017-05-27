@@ -38,15 +38,15 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="StateID" Type="int" />
   </EntityType>
-  <EntityType Name="ContactUS">
+  <EntityType Name="ContactUs">
     <Key>
       <PropertyRef Name="ContactID" />
     </Key>
     <Property Name="ContactID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="100" />
-    <Property Name="Message" Type="nvarchar(max)" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
     <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Message" Type="nvarchar(max)" />
     <Property Name="CreatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="Conversation">
@@ -140,27 +140,16 @@
     </Key>
     <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="CustomerID" Type="uniqueidentifier" />
-    <Property Name="PaymentID" Type="uniqueidentifier" />
-    <Property Name="OrderDate" Type="datetime" />
-    <Property Name="RequiredDate" Type="datetime" />
-    <Property Name="ShipDate" Type="datetime" />
+    <Property Name="TransactionNumber" Type="int" />
     <Property Name="ShipperID" Type="uniqueidentifier" />
-    <Property Name="Freight" Type="money" />
-    <Property Name="SalesTax" Type="money" />
-    <Property Name="Timestamp" Type="nvarchar" MaxLength="50" />
-    <Property Name="TransactStatus" Type="nvarchar" MaxLength="50" />
-    <Property Name="ErrLoc" Type="nvarchar" MaxLength="50" />
-    <Property Name="ErrMsg" Type="nvarchar" MaxLength="50" />
-    <Property Name="Fulfilled" Type="bit" />
-    <Property Name="Deleted" Type="bit" />
-    <Property Name="Paid" Type="money" />
-    <Property Name="PaymentDate" Type="datetime" />
-    <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
-    <Property Name="OrderNumber" Type="nvarchar" MaxLength="300" />
-    <Property Name="OrderTrackingNumber" Type="nvarchar" MaxLength="300" />
-    <Property Name="DiscountVoucherID" Type="uniqueidentifier" />
-    <Property Name="OrderStatus" Type="smallint" />
-    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="ShippingAddress" Type="varchar" MaxLength="1024" />
+    <Property Name="PayPalReference" Type="varchar" MaxLength="100" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Shipping" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -169,18 +158,8 @@
     <Property Name="OrderDetailID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="OrderID" Type="uniqueidentifier" />
     <Property Name="ProductID" Type="uniqueidentifier" />
-    <Property Name="Price" Type="money" />
-    <Property Name="Quantity" Type="smallint" />
-    <Property Name="Discount" Type="real" />
-    <Property Name="Total" Type="money" />
-    <Property Name="Size" Type="nvarchar" MaxLength="50" />
-    <Property Name="Color" Type="nvarchar" MaxLength="50" />
-    <Property Name="Fulfilled" Type="bit" />
-    <Property Name="BillDate" Type="datetime" />
-    <Property Name="ShipDate" Type="datetime" />
-    <Property Name="ShipperID" Type="uniqueidentifier" />
-    <Property Name="Freight" Type="money" />
-    <Property Name="SalesTax" Type="money" />
+    <Property Name="UnitPrice" Type="int" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="OrderHistory">
     <Key>
@@ -192,14 +171,6 @@
     <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Payment">
-    <Key>
-      <PropertyRef Name="PaymentID" />
-    </Key>
-    <Property Name="PaymentID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PaymentType" Type="nvarchar" MaxLength="100" />
-    <Property Name="Allowed" Type="bit" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -270,33 +241,6 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Website" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <EntityType Name="ShoppingCart">
-    <Key>
-      <PropertyRef Name="CartId" />
-    </Key>
-    <Property Name="CartId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="TotalAmount" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="UpdatedOn" Type="datetime" />
-    <Property Name="CustomerID" Type="uniqueidentifier" />
-    <Property Name="DiscountVoucherID" Type="uniqueidentifier" />
-  </EntityType>
-  <EntityType Name="ShoppingCartDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CartId" Type="uniqueidentifier" />
-    <Property Name="UnitPrice" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="Quantity" Type="int" />
-    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsActive" Type="bit" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="UpdatedOn" Type="datetime" />
-    <Property Name="ProductID" Type="uniqueidentifier" />
-  </EntityType>
   <EntityType Name="StateMaster">
     <Key>
       <PropertyRef Name="StateID" />
@@ -366,7 +310,6 @@
     </Key>
     <Property Name="BusinessInfoID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierID" Type="uniqueidentifier" />
-    <Property Name="BusinessEmail" Type="nvarchar" MaxLength="100" />
     <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
     <Property Name="Logo" Type="nvarchar(max)" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />
@@ -380,6 +323,7 @@
     <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
     <Property Name="Website" Type="nvarchar" MaxLength="50" />
     <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
+    <Property Name="BusinessEmail" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Tracking">
     <Key>
@@ -471,7 +415,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CustomerNotification_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="CustomerNotification" Type="Self.CustomerNotification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
@@ -496,32 +442,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_DiscountVoucher">
-    <End Role="DiscountVoucher" Type="Self.DiscountVoucher" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DiscountVoucher">
-        <PropertyRef Name="DiscountID" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="DiscountVoucherID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Order_Payment">
-    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Payment">
-        <PropertyRef Name="PaymentID" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="PaymentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OrderDetail_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">
@@ -533,9 +457,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -624,42 +546,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ShoppingCart_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ShoppingCartDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="ShoppingCartDetail" Type="Self.ShoppingCartDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="ShoppingCartDetail">
-        <PropertyRef Name="ProductID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ShoppingCartDetail_ShoppingCart">
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="0..1" />
-    <End Role="ShoppingCartDetail" Type="Self.ShoppingCartDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShoppingCart">
-        <PropertyRef Name="CartId" />
-      </Principal>
-      <Dependent Role="ShoppingCartDetail">
-        <PropertyRef Name="CartId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StateMaster_CountryMaster">
     <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="0..1" />
     <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
@@ -673,7 +559,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SubCategory_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
@@ -685,7 +573,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SubCategoryItem_SubCategory">
-    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SubCategoryItem" Type="Self.SubCategoryItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubCategory">
@@ -790,7 +680,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ContactUS" EntityType="Self.ContactUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -800,13 +690,10 @@
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderHistory" EntityType="Self.OrderHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductNotification" EntityType="Self.ProductNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReturnRequest" EntityType="Self.ReturnRequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ShoppingCartDetail" EntityType="Self.ShoppingCartDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategoryItem" EntityType="Self.SubCategoryItem" Schema="dbo" store:Type="Tables" />
@@ -843,14 +730,6 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_DiscountVoucher" Association="Self.FK_Order_DiscountVoucher">
-      <End Role="DiscountVoucher" EntitySet="DiscountVoucher" />
-      <End Role="Order" EntitySet="Order" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
-      <End Role="Payment" EntitySet="Payment" />
-      <End Role="Order" EntitySet="Order" />
-    </AssociationSet>
     <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderDetail" EntitySet="OrderDetail" />
@@ -882,18 +761,6 @@
     <AssociationSet Name="FK_ReturnRequest_OrderDetail" Association="Self.FK_ReturnRequest_OrderDetail">
       <End Role="OrderDetail" EntitySet="OrderDetail" />
       <End Role="ReturnRequest" EntitySet="ReturnRequest" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ShoppingCart_Customer" Association="Self.FK_ShoppingCart_Customer">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ShoppingCartDetail_Product" Association="Self.FK_ShoppingCartDetail_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="ShoppingCartDetail" EntitySet="ShoppingCartDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ShoppingCartDetail_ShoppingCart" Association="Self.FK_ShoppingCartDetail_ShoppingCart">
-      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-      <End Role="ShoppingCartDetail" EntitySet="ShoppingCartDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
       <End Role="CountryMaster" EntitySet="CountryMaster" />

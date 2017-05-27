@@ -100,7 +100,27 @@
                 <div class="cart_navigation">
                     <a class="prev-btn" href="#">Continue shopping</a>
                     <a class="next-btn" href="#">Proceed to checkout</a>
+
+
+
                 </div>
+
+                <div class="form-group">
+                    <label>Popup Checkout Experience</label>
+                    <form id="myContainer" method="post" action="@Url.Action("Checkout", "Cart")"></form>
+                    <script>
+                        window.paypalCheckoutReady = function () {
+                            paypal.checkout.setup('BRKKN32NLUD56',
+                                {
+                                    environment: 'sandbox',
+                                    container: 'myContainer'
+                                });
+                        };
+                    </script>
+                    <script src="//www.paypalobjects.com/api/checkout.js" async></script>
+                </div>
+
+
             </div>
         </div>
     </div>

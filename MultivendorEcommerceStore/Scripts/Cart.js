@@ -2,6 +2,7 @@
     //--Add item in cart
     $('.AddToCart').click(function () {
         var value = $(this).val();
+        debugger;
         $.ajax({
             url: "/Cart/AddItemInCart",
             type: "POST",

@@ -23,22 +23,12 @@ namespace MultivendorEcommerceStore.DB.Model
         public System.Guid OrderDetailID { get; set; }
         public Nullable<System.Guid> OrderID { get; set; }
         public Nullable<System.Guid> ProductID { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<short> Quantity { get; set; }
-        public Nullable<float> Discount { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public string Size { get; set; }
-        public string Color { get; set; }
-        public Nullable<bool> Fulfilled { get; set; }
-        public Nullable<System.DateTime> BillDate { get; set; }
-        public Nullable<System.DateTime> ShipDate { get; set; }
-        public Nullable<System.Guid> ShipperID { get; set; }
-        public Nullable<decimal> Freight { get; set; }
-        public Nullable<decimal> SalesTax { get; set; }
+        public Nullable<int> UnitPrice { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

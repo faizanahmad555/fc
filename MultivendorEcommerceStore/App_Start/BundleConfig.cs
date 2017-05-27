@@ -36,6 +36,12 @@ namespace MultivendorEcommerceStore
                       //"~/assets/js/theme-script.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/highStockCore").Include(
+               "~/Scripts/highStock/js/highstock.js",
+               "~/Scripts/highStock/js/modules/exporting.js",
+               "~/Scripts/highStock/js/modules/no-data-to-display.js"
+               ));
+
             bundles.Add(new StyleBundle("~/Assets/css").Include(
             //"~/assets/lib/bootstrap/css/bootstrap.css",
             "~/assets/lib/font-awesome/css/font-awesome.min.css",

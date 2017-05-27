@@ -23,31 +23,18 @@ namespace MultivendorEcommerceStore.DB.Model
     
         public System.Guid OrderID { get; set; }
         public Nullable<System.Guid> CustomerID { get; set; }
-        public Nullable<System.Guid> PaymentID { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<System.DateTime> RequiredDate { get; set; }
-        public Nullable<System.DateTime> ShipDate { get; set; }
+        public Nullable<int> TransactionNumber { get; set; }
         public Nullable<System.Guid> ShipperID { get; set; }
-        public Nullable<decimal> Freight { get; set; }
-        public Nullable<decimal> SalesTax { get; set; }
-        public string Timestamp { get; set; }
-        public string TransactStatus { get; set; }
-        public string ErrLoc { get; set; }
-        public string ErrMsg { get; set; }
-        public Nullable<bool> Fulfilled { get; set; }
-        public Nullable<bool> Deleted { get; set; }
-        public Nullable<decimal> Paid { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Comments { get; set; }
-        public string OrderNumber { get; set; }
-        public string OrderTrackingNumber { get; set; }
-        public Nullable<System.Guid> DiscountVoucherID { get; set; }
-        public Nullable<short> OrderStatus { get; set; }
-        public string Currency { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string ShippingAddress { get; set; }
+        public string PayPalReference { get; set; }
+        public Nullable<decimal> Tax { get; set; }
+        public Nullable<decimal> Shipping { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<decimal> SubTotal { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual DiscountVoucher DiscountVoucher { get; set; }
-        public virtual Payment Payment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

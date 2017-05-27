@@ -14,6 +14,8 @@ namespace MultivendorEcommerceStore.BL
     public class SupplierProfileBL
     {
 
+
+
         // GET: Current User Profile
         public UserProfileViewModel GetProfileByUserIdentity(string userID)
         {

@@ -107,9 +107,6 @@
     <Compile Include="Model\OrderHistory.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Payment.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Product.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
@@ -120,12 +117,6 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Shipper.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ShoppingCart.cs">
-      <DependentUpon>MES.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ShoppingCartDetail.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\StateMaster.cs">
@@ -203,6 +194,7 @@
     <None Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\MES.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
