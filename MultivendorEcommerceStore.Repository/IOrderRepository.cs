@@ -13,7 +13,7 @@ namespace MultivendorEcommerceStore.Repository
         IEnumerable<Order> Get();
         Order GetByID(Guid? orderID);
         Guid InsertAndReturnID(Order entity);
-        //IEnumerable<Order> GetByShopID(int? shopID);
+        IEnumerable<Order> GetBySupplierID(Guid? supplierID);
         IEnumerable<Order> GetByCustomerID(Guid? customerID);
     }
 }

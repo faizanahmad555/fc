@@ -25,11 +25,10 @@ namespace MultivendorEcommerceStore.Repository
             return _context.Orders.Where(s=> s.OrderID == orderID).FirstOrDefault();
         }
 
-        //public IEnumerable<Order> GetByShopID(int? shopID)
-        //{
-        //    return _context.Orders.Where(s => s.OrderDetails.Any(i=>i.Product.Supplier.Shop.ShopID == shopID)).ToList();
-        //}
-
+        public IEnumerable<Order> GetBySupplierID(Guid? supplierID)
+        {
+            return _context.Orders.Where(s => s.OrderDetails.Any(i => i.Product.Supplier.SupplierID == supplierID)).ToList();
+        }
         public void Insert(Order entity)
         {
             _context.Orders.Add(entity);

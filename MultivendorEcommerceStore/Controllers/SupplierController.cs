@@ -111,5 +111,51 @@ namespace MultivendorEcommerceStore.Controllers
         #endregion
 
 
+        #region Manage Orders
+
+
+        [Authorize(Roles = "Supplier")]
+        public ActionResult DisplayOrder()
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var supplierID = User.Identity.GetSupplierCurrentID();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetOrdersBySupplierID(supplierID).OrderByDescending(s => s.CreatedOn);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
+        //Display Order detail by orderID
+        [Authorize(Roles = "Supplier")]
+        public ActionResult OrderDetails(Guid orderID)
+        {
+            try
+            {
+                if (orderID != null)
+                {
+                    var orderBL = new OrderBL();
+                    var model = new OrderViewModel();
+                    model.Order = orderBL.GetOrderByID(orderID);
+                    model.OrderDetail = orderBL.GetOrderDetailByOrderID(orderID);
+                    return View(model);
+                }
+                return RedirectToAction("DisplayOrder", "Supplier");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        #endregion
+
+
     }
 }

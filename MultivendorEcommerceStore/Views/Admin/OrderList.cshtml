@@ -31,6 +31,12 @@
                                     @Html.DisplayName("Customer Name")
                                 </th>
                                 <th>
+                                    @Html.DisplayName("Email")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Mobile #")
+                                </th>
+                                <th>
                                     @Html.DisplayName("Added On")
                                 </th>
                                 <th>
@@ -58,6 +64,12 @@
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mobile)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CreatedOn)

@@ -98,6 +98,9 @@ namespace MultivendorEcommerceStore.BL
             {
                 OrderID = s.OrderID,
                 CustomerName = customerRepo.GetById(s.CustomerID).FirstName,
+                Email = customerRepo.GetById(s.CustomerID).Email,
+                Mobile = customerRepo.GetById(s.CustomerID).Mobile,
+
                 CreatedOn = s.CreatedOn,
                 Tax = s.Tax,
                 Total = s.Total,
@@ -108,7 +111,6 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
-
         public DisplayOrderViewModel GetOrderByID(Guid orderID)
         {
             var orderRepo = new OrderRepository();
@@ -116,6 +118,8 @@ namespace MultivendorEcommerceStore.BL
             var customerRepo = new CustomerRepository();
             var viewModel = new DisplayOrderViewModel();
             viewModel.CustomerName = customerRepo.GetById(order.CustomerID).FirstName;
+            viewModel.Email = customerRepo.GetById(order.CustomerID).Email;
+            viewModel.Mobile = customerRepo.GetById(order.CustomerID).Mobile;
             viewModel.Tax = order.Tax;
             viewModel.Shipping = order.Shipping;
             viewModel.Total = order.Total;
@@ -123,8 +127,6 @@ namespace MultivendorEcommerceStore.BL
             viewModel.CreatedOn = order.CreatedOn;
             return viewModel;
         }
-
-
 
         public IEnumerable<DisplayOrderDetailViewModel> GetOrderDetailByOrderID(Guid orderID)
         {
@@ -134,13 +136,38 @@ namespace MultivendorEcommerceStore.BL
             {
                 OrderDetailID = s.OrderDetailID,
                 OrderID = s.OrderID,
+
+                ProductID = s.ProductID,
                 Product = productRepo.GetById(s.ProductID).ProductName,
+                ProductImage = productRepo.GetById(s.ProductID).ProductPicture,
+
                 Quantity = s.Quantity,
                 UnitPrice = s.UnitPrice,
             });
             return orderDetailList;
         }
 
+
+        // GET : All Order of Current Supplier(For Supplier Side)
+        public IEnumerable<DisplayOrderViewModel> GetOrdersBySupplierID(Guid? supplierID)
+        {
+            var orderRepo = new OrderRepository();
+            var customerRepo = new CustomerRepository();
+            IEnumerable<DisplayOrderViewModel> orderList = orderRepo.GetBySupplierID(supplierID).Select(s => new DisplayOrderViewModel
+            {
+                OrderID = s.OrderID,
+                CustomerName = customerRepo.GetById(s.CustomerID).FirstName,
+                Email = customerRepo.GetById(s.CustomerID).Email,
+                Mobile = customerRepo.GetById(s.CustomerID).Mobile,
+
+                CreatedOn = s.CreatedOn,
+                Tax = s.Tax,
+                Total = s.Total,
+                Shipping = s.Shipping,
+                SubTotal = s.SubTotal,
+            });
+            return orderList;
+        }
 
     }
 }

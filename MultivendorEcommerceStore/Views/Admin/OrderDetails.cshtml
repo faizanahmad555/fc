@@ -28,6 +28,9 @@
                         <thead>
                             <tr style="text-align:center">
                                 <th style="text-align:center">
+                                    @Html.DisplayName("Product Image")
+                                </th>
+                                <th style="text-align:center">
                                     @Html.DisplayName("Product")
                                 </th>
                                 <th style="text-align:center">
@@ -36,7 +39,7 @@
                                 <th style="text-align:center">
                                     @Html.DisplayName("UnitPrice")
                                 </th>
-                                
+
                             </tr>
                         </thead>
 
@@ -45,7 +48,14 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Product)
+                                        <a title="View Product" href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })" target="_blank">
+                                            <img src="@Url.Content(item.ProductImage)" alt="Product Image" width="70" height="70">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a title="View Product" href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })" target="_blank">
+                                            @Html.DisplayFor(modelItem => item.Product)
+                                        </a>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Quantity)

@@ -16,8 +16,15 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public Guid OrderID { get; set; }
 
-        [Display(Name = "Customer")]
+        [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+
+        [Display(Name = "Mobile No.")]
+        public string Mobile { get; set; }
 
         [Display(Name = "Created")]
         public DateTime? CreatedOn { get; set; }
@@ -38,7 +45,9 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public Guid? OrderDetailID { get; set; }
         public Guid? OrderID { get; set; }
+        public Guid? ProductID { get; set; }
         public string Product { get; set; }
+        public string ProductImage { get; set; }
         public int? Quantity { get; set; }
         public Decimal? UnitPrice { get; set; }
     }

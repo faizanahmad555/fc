@@ -27,5 +27,13 @@ namespace MultivendorEcommerceStore.BL
             return viewModel;
         }
 
+        public int GetAllOrdersCount()
+        {
+            return new OrderRepository().Get().Count();
+        }
+
+
+
+
     }
 }

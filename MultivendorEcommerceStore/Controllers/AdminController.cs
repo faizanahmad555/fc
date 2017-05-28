@@ -14,7 +14,11 @@ namespace MultivendorEcommerceStore.Controllers
         // Dashboard
         public ActionResult Index()
         {
-            var BL = new AdminDashboardBL();
+            AdminDashboardBL BL = new AdminDashboardBL();
+            //var model = new DashboardStatisticsVM();
+            //model.OrdersCount = new AdminDashboardBL().GetAllOrdersCount();
+            //model.AllOrders = new ShopBL().GetAllOrdersCount();
+
             return View(BL.DashboardStats());
         }
 
