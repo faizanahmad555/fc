@@ -12,9 +12,9 @@
         </a>
             <ul class="dropdown-menu extended logout">
                 <div class="log-arrow-up"></div>
-                <li><a href="#"><i class="fa fa-suitcase"></i>Profile</a></li>
+                @*<li><a href="#"><i class="fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
+                <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>*@
                 <li>
                    @if (Request.IsAuthenticated)
                    {
@@ -39,7 +39,7 @@
                 <div class="log-arrow-up"></div>
                 <li><a href="@Url.Action("SupplierProfile", "Supplier")"><i class="fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="@Url.Action("ChangeSupplierPassword", "Manage")"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
+                @*<li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>*@
                 <li>
                     @if (Request.IsAuthenticated)
                     {
@@ -53,7 +53,7 @@
             </ul>
       }
 </li>
-<li class="sb-toggle-right">
+@*<li class="sb-toggle-right">
     <i class="fa  fa-align-right"></i>
-</li>
+</li>*@
 <!-- user login dropdown end -->

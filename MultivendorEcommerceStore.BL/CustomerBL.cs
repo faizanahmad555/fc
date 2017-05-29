@@ -39,23 +39,24 @@ namespace MultivendorEcommerceStore.BL
             customer.StateID = model.CustomerRegisterVM.State;
             customer.CountryID = model.CustomerRegisterVM.Country;
             customer.CreatedOn = DateTime.Now;
-            
+
             //customer.DOB = model.DOB;
             //customer.IsActive = true;
 
-            var customerID = customerRepo.InsertAndGetID(customer);
+            //var customerID = customerRepo.InsertAndGetID(customer);
 
-            var customerNR = new CustomerNotificationRepository();
-            var customerNE = new CustomerNotification();
+            //var customerNR = new CustomerNotificationRepository();
+            //var customerNE = new CustomerNotification();
 
-            customerNE.CustomerNotificationID = Guid.NewGuid();
-            customerNE.CustomerID = customerID;
-            customerNE.Description = "New Customer has been added";
-            customerNE.IsSeen = false;
-            customerNE.URL = "/Notification/CustomerDetail?customerID=" + customerID;
-            customerNE.CreatedOn = DateTime.Now;
+            //customerNE.CustomerNotificationID = Guid.NewGuid();
+            //customerNE.CustomerID = customerID;
+            //customerNE.Description = "New Customer has been added";
+            //customerNE.IsSeen = false;
+            //customerNE.URL = "/Notification/CustomerDetail?customerID=" + customerID;
+            //customerNE.CreatedOn = DateTime.Now;
 
-            customerNR.Insert(customerNE);
+            //customerNR.Insert(customerNE);
+            customerRepo.Create(customer);
         }
 
 

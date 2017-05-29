@@ -15,23 +15,21 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public Guid SupplierID { get; set; }
 
 
-        //Improve
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "First Name")]
         [StringLength(20, ErrorMessage = "No less than 1 & No more than 20 characters", MinimumLength = 1)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string FirstName { get; set; }
 
 
-        //Improve
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Last Name")]
         [StringLength(20, ErrorMessage = "No less than 1 & No more than 20 characters", MinimumLength = 1)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string LastName { get; set; }
 
 
-
+       
         [Display(Name = "Profile Photo")]
         public HttpPostedFileBase ProfilePhoto { get; set; }
 
@@ -48,7 +46,8 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         //Improve
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter numbers only")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^((\03-?)|0)?[0-9]{10}$", ErrorMessage = "Not a valid Phone number")]
         public string MobileNumber { get; set; }
 
 
@@ -56,7 +55,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Complete Address")]
         [StringLength(200, ErrorMessage = "No less than 10 & No more than 200 characters", MinimumLength = 10)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string Address { get; set; }
 
 
@@ -84,7 +83,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Postal Code")]
-        //[RegularExpression(@"\d{5}$", ErrorMessage = "Invalid Postal Code")]
         [RegularExpression(@"^(?!00000)[0-9]{5,5}$", ErrorMessage = "Invalid Postal Code")]
         public string PostalCode { get; set; }
 

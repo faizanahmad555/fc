@@ -16,7 +16,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Display(Name = "Sub Category")]
         public string SubCategoryName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Category Picture")]
         public HttpPostedFileBase Picture { get; set; }
 

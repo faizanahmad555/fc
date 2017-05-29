@@ -31,17 +31,17 @@
                     <a href="@Url.Action("Contact", "Home")"><img alt="email" src="~/assets/images/email.png" />Contact us today!</a>
                 </div>
 
-                <div class="support-link">
+                @*<div class="support-link">
                     <a href="#">Services</a>
                     <a href="#">Support</a>
-                </div>
+                </div>*@
 
                 <div id="user-info-top" class="user-info pull-right">
                     <div class="dropdown">
                         <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>My Account</span></a>
                         <ul class="dropdown-menu mega_dropdown" role="menu">
                             <li><a href="@Url.Action("CustomerLogin", "Account")">Login</a></li>
-                            <li><a href="#">Compare</a></li>
+                            @*<li><a href="#">Compare</a></li>*@
                             <li><a href="@Url.Action("WishList", "Home")">Wishlists</a></li>
                             <li>
                                 @*@if (UserManager.IsInRole())
@@ -69,7 +69,7 @@
                     <a href="@Url.Action("Index", "Home")"><img alt="Logo" src="~/Content/Images/Icons/FineCollection_Color.png" height="64" width="255" /></a>
                 </div>
                 <div class="col-xs-7 col-sm-7 header-search-box">
-                    <form class="form-inline">
+                    @*<form class="form-inline">
                         <div class="form-group form-category">
                             <select class="select-category">
                                 <option value="2">All Categories</option>
@@ -81,7 +81,7 @@
                             <input type="text" placeholder="Keyword here...">
                         </div>
                         <button type="submit" class="pull-right btn-search"></button>
-                    </form>
+                    </form>*@
                 </div>
 
                 @Html.Partial("_QuickCart")
@@ -137,7 +137,7 @@
                                 <li><a href="#">My Personal In</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-4">
+                        @*<div class="col-sm-4">
                             <div class="introduce-title">Support</div>
                             <ul id="introduce-support" class="introduce-list">
                                 <li><a href="#">About Us</a></li>
@@ -146,7 +146,7 @@
                                 <li><a href="#">Terms & Conditions</a></li>
                                 <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -163,10 +163,11 @@
                 </div>
             </div><!-- /#introduce-box -->
             <!-- #trademark-box -->
-            <div id="trademark-box" class="row">
+            @*<div id="trademark-box" class="row">
                 <div class="col-sm-12">
                     <ul id="trademark-list">
                         <li id="payment-methods">Accepted Payment Methods</li>
+
                         <li>
                             <a href="#"><img src="~/assets/data/trademark-ups.jpg" alt="ups" /></a>
                         </li>
@@ -199,7 +200,7 @@
                         </li>
                     </ul>
                 </div>
-            </div> <!-- /#trademark-box -->
+            </div>*@ <!-- /#trademark-box -->
 
             <div id="footer-menu-box">
                 <p class="text-center">Copyrights &#169; 2017 FineCollection. All Rights Reserved.</p>

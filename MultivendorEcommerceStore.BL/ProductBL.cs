@@ -305,7 +305,7 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.SupplierID = product.SupplierID;
                 viewModel.ProductID = product.ProductID;
                 viewModel.SubCategoryID = subCategory.SubCategoryID;
-                viewModel.SubCategoryItemID = subCategoryItem.SubCategoryItemID;
+                //viewModel.SubCategoryItemID = subCategoryItem.SubCategoryItemID;
 
                 viewModel.SupplierName = product.Supplier.SupplierFirstName;
                 viewModel.CategoryName = category.CategoryName;

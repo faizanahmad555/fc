@@ -130,11 +130,11 @@
 
 
                                     <td>
-                                        <a href="@Url.Action("EditSupplier", "Admin", new { SupplierID = item.SupplierID, UserID = item.AspNetUserID  })" class="btn btn-primary">
+                                        <a title="Edit" href="@Url.Action("EditSupplier", "Admin", new { SupplierID = item.SupplierID, UserID = item.AspNetUserID  })" class="btn btn-primary btn-xs">
                                             <i class="fa fa-pencil"></i>
                                         </a>
 
-                                        <a class="btn btn-danger UserToDelete" data-toggle="modal" data-target="#myModal" value="@item.AspNetUserID">
+                                        <a title="Delete" class="btn btn-danger btn-xs UserToDelete" data-toggle="modal" data-target="#myModal" value="@item.AspNetUserID">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
                                     </td>

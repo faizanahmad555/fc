@@ -23,14 +23,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Name")]
         [StringLength(30, ErrorMessage = "No less than 1 & No more than 30 characters", MinimumLength = 1)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string ProductName { get; set; }
 
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Description")]
         [StringLength(500, ErrorMessage = "No less than 20 & No more than 500 characters", MinimumLength = 20)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string ProductDescription { get; set; }
 
 
@@ -39,7 +39,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Product Long Description")]
         [StringLength(1000, ErrorMessage = "No more than 1000 characters.", MinimumLength = 30)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter characters only")]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string ProductLongDescription { get; set; }
 
 
@@ -50,10 +50,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public HttpPostedFileBase ProductImage1 { get; set; }
 
 
-        //Improve
+        
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Price")]
-        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "Price must be positive Numbers only.")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a natural number")]
         [Range(typeof(int), "0", "50000", ErrorMessage = "{0} can only be between {1} and {2}")]
         public int Price { get; set; }
 
