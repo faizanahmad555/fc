@@ -55,7 +55,9 @@
                                 @Html.LabelFor(model => model.ProductImage1, new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @*@Html.EditorFor(model => model.ProfilePhoto, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    <input type="file" id="ProductImage1" name="ProductImage1" class="form-control file-upload" />
+
+                                    @Html.TextBoxFor(m => m.ProductImage1, new { Type = "File", @class = "form-control file-upload" })
+                                    @*<input type="file" id="ProductImage1" name="ProductImage1" class="form-control file-upload" />*@
                                     @Html.ValidationMessageFor(model => model.ProductImage1, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -102,11 +104,11 @@
                                 </div>
 
 
-                                @Html.LabelFor(m => m.FeatureProduct, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @*@Html.LabelFor(m => m.FeatureProduct, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @Html.CheckBoxFor(m => m.FeatureProduct, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.FeatureProduct, "", new { @class = "text-danger" })
-                                </div>
+                                </div>*@
 
 
                             </div>
@@ -136,6 +138,22 @@
 
 @section Scripts {
     <script type="text/javascript">
+
+
+        function showpreview(input, num) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var loadedFile = e.target;
+                    $('#imgpreview' + num).css("background-image", "url(" + loadedFile.result + ")");
+                    $('#imgpreview' + num).css("background-size", "cover");
+                    $('#imgpreview' + num).css("background-position", "center center");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
         $("#SelectedCategory").change(function () {
             var categoryId = $('#SelectedCategory').val();
             $.ajax({

@@ -14,6 +14,60 @@ namespace MultivendorEcommerceStore.BL
     public class ProductBL
     {
 
+        public dynamic GetProductsForChart()
+        {
+            var productRepo = new ProductRepository();
+            dynamic prds = "";
+
+            try
+            {
+                prds = productRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return prds;
+        }
+
+        public dynamic GetProductsChartForSupplier(Guid? supplierID)
+        {
+            var productRepo = new ProductRepository();
+            dynamic supp = "";
+
+            try
+            {
+                supp = productRepo.Retrive().Where(s => s.SupplierID == supplierID).GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return supp;
+        }
+
+
+
         // ADD: Product
         public void AddProduct(AddProductViewModel model, Guid SupplierID)
         {
@@ -152,6 +206,7 @@ namespace MultivendorEcommerceStore.BL
             {
                 SupplierID = s.SupplierID,
                 ProductID = s.ProductID,
+
                 Product = GetProductByID(s.ProductID),
                 SupplierBusinessInfo = GetSupplierBusinessInfoBySupplierID(s.SupplierID)
             });
@@ -168,10 +223,11 @@ namespace MultivendorEcommerceStore.BL
             viewmodel.ProductDescription = product.ProductDescription;
             viewmodel.Size = product.UnitSize;
             viewmodel.Price = product.UnitPrice;
+            viewmodel.SupplierName = product.Supplier.SupplierFirstName;
 
             return viewmodel;
         }
-        
+
         public SupplierBusinessInfoListViewModel GetSupplierBusinessInfoBySupplierID(Guid? supplierID)
         {
             var supplierBusinessRepo = new SupplierBusinessInfo();
@@ -186,7 +242,7 @@ namespace MultivendorEcommerceStore.BL
             viewmodel.BusinessExperience = businessInfo.BusinessExperience;
             viewmodel.Phone = businessInfo.Phone;
             viewmodel.ProductsType = businessInfo.ProductType;
-            
+
             return viewmodel;
         }
 

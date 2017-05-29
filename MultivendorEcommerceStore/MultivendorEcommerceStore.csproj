@@ -811,6 +811,7 @@
     <Content Include="assets\data\zoom-thumb2.jpg" />
     <Content Include="assets\data\zoom-thumb3.jpg" />
     <Content Include="assets\fonts\fontello.svg" />
+    <Content Include="assets\images\2.3.png" />
     <Content Include="assets\images\add-cart.png" />
     <Content Include="assets\images\bar.png" />
     <Content Include="assets\images\bg-top-banner.jpg" />

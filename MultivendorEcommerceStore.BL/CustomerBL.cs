@@ -13,6 +13,34 @@ namespace MultivendorEcommerceStore.BL
 {
     public class CustomerBL
     {
+
+        public dynamic GetCustomersForChart()
+        {
+            var customerRepo = new CustomerRepository();
+            dynamic cust = "";
+
+            try
+            {
+                cust = customerRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return cust;
+        }
+
+
         // ADD: Customer
         public void CustomerRegister(CustomerLoginRegisterViewModel model)
         {

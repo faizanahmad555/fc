@@ -38,6 +38,35 @@ namespace MultivendorEcommerceStore.BL
             return ords;
         }
 
+
+        public dynamic GetOrdersChartForSuppliers(Guid? supplierID)
+        {
+            var orderRepo = new OrderRepository();
+            dynamic ords = "";
+
+            try
+            {
+                ords = orderRepo.GetBySupplierID(supplierID).GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return ords;
+        }
+
+
         public void AddOrderDetail(AddOrderDetailViewModel viewModel)
         {
             IOrderDetailRepository repo = new OrderDetailRepository();

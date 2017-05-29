@@ -36,7 +36,8 @@
                                 @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @*@Html.EditorFor(model => model.ProfilePhoto, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    <input type="file" id="Logo" name="Logo" class="form-control file-upload" />
+                                    @*<input type="file" id="Logo" name="Logo" class="form-control file-upload" />*@
+                                    @Html.TextBoxFor(m => m.Logo, new { Type = "File", @*@id = "image-upload",*@ @class = "form-control file-upload" @*, onchange = "showpreview(this, 1)"*@ })
                                     @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
                                 </div>
 

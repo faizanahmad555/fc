@@ -15,7 +15,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
 
         [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "First Name")]
+        [Display(Name = "Company Name")]
         [StringLength(30, ErrorMessage = "No more than 30 characters.", MinimumLength = 1)]
         [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string CompanyName { get; set; }
@@ -27,16 +27,11 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public HttpPostedFileBase Logo { get; set; }
 
 
-
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Business Email")]
         [EmailAddress]
         public string BusinessEmail { get; set; }
 
-
-
-        
-        
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Business Address")]

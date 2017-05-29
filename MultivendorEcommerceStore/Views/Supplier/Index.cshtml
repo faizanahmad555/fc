@@ -1,8 +1,11 @@
-﻿
+﻿@model MultivendorEcommerceStore.DB.ViewModel.DashboardStatisticsVM
+
 @{
     ViewBag.Title = "Supplier Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -16,3 +19,132 @@
     </div>
 </div>
 
+
+<div class="row state-overview">
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol red">
+                <i class="fa fa-tags"></i>
+            </div>
+            <a href="@Url.Action("ProductList", "Supplier")">
+
+                <div class="value">
+                    <h1>
+                        @if (@Model.SupplierProductsCount > 0)
+                        {
+                            @Model.SupplierProductsCount
+                        }
+                        else if (@Model.SupplierProductsCount == 0)
+                        {
+                            @Model.SupplierProductsCount
+                        }
+                    </h1>
+                    <p>Total Products</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol yellow">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <a href="@Url.Action("DisplayOrder", "Supplier")">
+
+                <div class="value">
+                    <h1>
+                        @if (@Model.SupplierOrdersCount > 0)
+                        {
+                            @Model.SupplierOrdersCount
+                        }
+                        else if (@Model.SupplierOrdersCount == 0)
+                        {
+                            @Model.SupplierOrdersCount
+                        }
+                    </h1>
+                    <p>Total Order</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+
+
+    <section class="panel col-lg-12">
+        <header class="panel-heading">
+            New Products
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewProductsContainerSs">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="panel col-lg-12">
+        <header class="panel-heading">
+            New Orders
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewOrdersContainerSs">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+
+@section scripts
+{   @Scripts.Render("~/bundles/highStockCore")
+<script src="@Url.Content("~/Scripts/CustomHighCharts.js")"></script>
+
+
+@if (Model.SupplierProductsChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var NewUsersData = @Html.Raw(Json.Encode(Model.SupplierProductsChart));
+            CreateNewProductChartSs(NewUsersData);
+
+        });
+    </script>
+}
+
+
+@if (Model.SupplierOrdersChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var OrderData = @Html.Raw(Json.Encode(Model.SupplierOrdersChart));
+            CreateNewOrderChart(OrderData);
+
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -16,6 +16,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         public Guid SubCategoryID { get; set; }
 
+
         public Guid SubCategoryItemID { get; set; }
 
 
@@ -44,7 +45,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
 
 
-        //Improve
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Product Image")]
         public HttpPostedFileBase ProductImage1 { get; set; }
@@ -53,7 +53,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Price")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a natural number")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
         [Range(typeof(int), "0", "50000", ErrorMessage = "{0} can only be between {1} and {2}")]
         public int Price { get; set; }
 
@@ -61,13 +61,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This feild is required")]
         [Display(Name = "Quantity")]
-        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "Quantity must be positive numbers only.")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be positive numbers only.")]
         [Range(typeof(int), "0", "100000", ErrorMessage = "{0} can only be between {1} and {2}")]
         public int Quantity { get; set; }
 
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Size")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
         public string Size { get; set; }
 

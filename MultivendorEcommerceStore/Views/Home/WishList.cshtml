@@ -27,7 +27,7 @@
                     {
                         <li id="Item_@item.WishListID" class="col-sm-3">
                             <div class="product-img">
-                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.Product.ProductImage1)" alt="Product"></a>
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.Product.ProductImage1)?w=200&h=200&mode=stretch|" alt="Product" width="300" height="300"></a>
                             </div>
                             <h5 class="product-name">
                                 <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">@Html.DisplayFor(modelItem => item.Product.ProductName)</a>

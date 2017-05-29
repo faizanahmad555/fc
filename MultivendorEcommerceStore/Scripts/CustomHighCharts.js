@@ -49,8 +49,113 @@ function CreateOrderChart(OrderData, title) {
 }
 
 
-function CreateNewUsersChart(NewUsersData, title) {
+function CreateNewProductsChart(NewUsersData, title) {
   
+    var seriesData = [];
+
+    var itemData = [];
+    $.each(NewUsersData, function (idx, item) {
+
+        var theDt = parseDate(item.CreatedOn);
+        itemData.push(new Array(Date.UTC(theDt.getFullYear(), theDt.getMonth(), theDt.getDate(), theDt.getHours(), theDt.getMinutes(), theDt.getSeconds()), item.Count));
+    });
+
+    seriesData.push({ "name": "New Products", "data": itemData });
+
+    if (title == null || title == undefined)
+        title = 'New Products';
+    CreateChart('ChartNewProductsContainer', title, '', seriesData, null, 1, '(Products)', null);
+}
+
+
+function CreateNewSuppliersChart(NewUsersData, title) {
+
+    var seriesData = [];
+
+    var itemData = [];
+    $.each(NewUsersData, function (idx, item) {
+
+        var theDt = parseDate(item.CreatedOn);
+        itemData.push(new Array(Date.UTC(theDt.getFullYear(), theDt.getMonth(), theDt.getDate(), theDt.getHours(), theDt.getMinutes(), theDt.getSeconds()), item.Count));
+    });
+
+    seriesData.push({ "name": "New Suppliers", "data": itemData });
+
+    if (title == null || title == undefined)
+        title = 'New Suppliers';
+    CreateChart('ChartNewSuppliersContainer', title, '', seriesData, null, 1, '(Suppliers)', null);
+}
+
+
+function CreateNewCustomersChart(NewUsersData, title) {
+
+    var seriesData = [];
+
+    var itemData = [];
+    $.each(NewUsersData, function (idx, item) {
+
+        var theDt = parseDate(item.CreatedOn);
+        itemData.push(new Array(Date.UTC(theDt.getFullYear(), theDt.getMonth(), theDt.getDate(), theDt.getHours(), theDt.getMinutes(), theDt.getSeconds()), item.Count));
+    });
+
+    seriesData.push({ "name": "New Customers", "data": itemData });
+
+    if (title == null || title == undefined)
+        title = 'New Customers';
+    CreateChart('ChartNewCustomersContainer', title, '', seriesData, null, 1, '(Customers)', null);
+}
+
+
+
+
+
+
+function CreateNewProductChartSs(NewUsersData, title) {
+
+    var seriesData = [];
+
+    var itemData = [];
+    $.each(NewUsersData, function (idx, item) {
+
+        var theDt = parseDate(item.CreatedOn);
+        itemData.push(new Array(Date.UTC(theDt.getFullYear(), theDt.getMonth(), theDt.getDate(), theDt.getHours(), theDt.getMinutes(), theDt.getSeconds()), item.Count));
+    });
+
+    seriesData.push({ "name": "New Products", "data": itemData });
+
+    if (title == null || title == undefined)
+        title = 'New Products';
+    CreateChart('ChartNewProductsContainerSs', title, '', seriesData, null, 1, '(Products)', null);
+}
+
+
+function CreateNewOrderChart(OrderData, title) {
+    var seriesData = [];
+
+    var itemData = [];
+    $.each(OrderData, function (idx, item) {
+
+        var theDt = parseDate(item.CreatedOn);
+        itemData.push(new Array(Date.UTC(theDt.getFullYear(), theDt.getMonth(), theDt.getDate(), theDt.getHours(), theDt.getMinutes(), theDt.getSeconds()), item.Count));
+    });
+
+    seriesData.push({ "name": "New Orders", "data": itemData });
+
+    if (title == null || title == undefined)
+        title = 'New Orders';
+    CreateChart('ChartNewOrdersContainerSs', title, '', seriesData, null, 1, '(Orders)', null);
+}
+
+
+
+
+
+
+
+
+
+function CreateNewUsersChart(NewUsersData, title) {
+
     var seriesData = [];
 
     var itemData = [];
@@ -66,6 +171,8 @@ function CreateNewUsersChart(NewUsersData, title) {
         title = 'New Users';
     CreateChart('ChartNewUsersContainer', title, '', seriesData, null, 1, '(Users)', null);
 }
+
+
 
 function CreateChart(holder, title, yAxisText, seriesData, categoriesData, rangeSelected, unit, decimalpointUpto) {
     $('#' + holder).highcharts('StockChart', {

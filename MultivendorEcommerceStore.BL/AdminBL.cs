@@ -13,7 +13,35 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
-       private MultivendorEcommerceStoreEntities _dbctx = new MultivendorEcommerceStoreEntities();
+
+        public dynamic GetSuppliersForChart()
+        {
+            var supplierRepo = new SupplierRepository();
+            dynamic sups = "";
+
+            try
+            {
+                sups = supplierRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return sups;
+        }
+
+
+        private MultivendorEcommerceStoreEntities _dbctx = new MultivendorEcommerceStoreEntities();
      
         #region Manage Supplier
 

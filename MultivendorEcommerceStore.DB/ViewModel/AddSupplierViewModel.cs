@@ -28,7 +28,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string LastName { get; set; }
 
 
-        //Improve
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Profile Photo")]
         public HttpPostedFileBase ProfilePhoto { get; set; }

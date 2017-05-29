@@ -27,7 +27,9 @@
                                 @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-1" })
                                 <div class="col-md-3">
                                     @*@Html.EditorFor(m => m.LogoPath, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    <input type="file" id="Picture" name="Picture" class="form-control file-upload" />
+                                    @*<input type="file" id="Picture" name="Picture" class="form-control file-upload" />*@
+                                    @Html.TextBoxFor(m => m.Picture, new { Type = "File", @*@id = "image-upload",*@ @class = "form-control file-upload" @*, onchange = "showpreview(this, 1)"*@ })
+
                                     @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
                                     @*@html.validationmessagefor(m => m.logopath, "", new { @class = "text-danger" })*@
                                 </div>
