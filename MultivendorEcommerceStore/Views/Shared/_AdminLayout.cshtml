@@ -26,6 +26,7 @@
 
     <!--right slidebar-->
     <link href="~/Content/Adminplugins/css/slidebars.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/bootstrap-datepicker/css/datepicker.css" />
 
     <!-- Custom styles for this template -->
     <link href="~/Content/Adminplugins/css/style.css" rel="stylesheet" />
@@ -94,7 +95,8 @@
     </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="~/Content/Adminplugins/js/jquery.js"></script>
+    @*<script src="~/Content/Adminplugins/js/jquery.js"></script>*@
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
     <script src="~/Content/Adminplugins/js/jquery-ui-1.9.2.custom.min.js"></script>
     <script src="~/Content/Adminplugins/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="~/Content/Adminplugins/js/bootstrap.min.js"></script>
@@ -105,15 +107,26 @@
     <script type="text/javascript" src="~/Content/assets/data-tables/DT_bootstrap.js"></script>
     <script src="~/Content/Adminplugins/js/respond.min.js"></script>
 
+
+    <!--this page plugins-->
+    <script type="text/javascript" src="~/Content/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!--this page  script only-->
+    <script src="~/Content/Adminplugins/js/advanced-form-components.js"></script>
+
+
+
     <script src="~/Content/assets/fancybox/source/jquery.fancybox.js"></script>
     <script src="~/Content/Adminplugins/js/modernizr.custom.js"></script>
     <script src="~/Content/Adminplugins/js/toucheffects.js"></script>
 
+
     <!--right slidebar-->
     <script src="~/Content/Adminplugins/js/slidebars.min.js"></script>
-
+   
     <!--common script for all pages-->
     <script src="~/Content/Adminplugins/js/common-scripts.js"></script>
+
 
     <!--script for this editable page only-->
     <script src="~/Content/Adminplugins/js/editable-table.js"></script>
@@ -186,7 +199,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    debugger;
+                 
                     //var count = data.OrderNotificationList.length + data.ShopNotificationList.length + data.SupplierNotificationList.length + data.ProductNotificationList.length + data.CustomerNotificationList.length;
                     var count = data.ProductNotificationList.length + data.CustomerNotificationList.length;
                     $("#NotificationCount").empty();

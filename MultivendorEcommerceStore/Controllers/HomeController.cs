@@ -22,6 +22,9 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+
+        #region Company Info
+
         [HttpGet]
         public ActionResult Contact()
         {
@@ -61,6 +64,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+        #endregion
 
         // SHOW: All Categories of Display Order 1
         public PartialViewResult _ShowCategories()
@@ -70,6 +74,9 @@ namespace MultivendorEcommerceStore.Controllers
             return PartialView("_ShowCategories", categorylist);
         }
 
+
+
+        #region Feature Products Section
 
         public PartialViewResult _FASHIONFeatureProducts()
         {
@@ -118,7 +125,10 @@ namespace MultivendorEcommerceStore.Controllers
             return PartialView("_JEWELRYFeatureProducts", productList);
         }
 
+        #endregion
 
+
+        #region Display Products According to Categories
 
         // SHOW: All Products According to Sub Categories
         public ActionResult Products(Guid PId, int? page)
@@ -146,7 +156,6 @@ namespace MultivendorEcommerceStore.Controllers
             };
             return View(model);
         }
-
 
 
         // SHOW: All Products Detail According to Product
@@ -181,6 +190,9 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
+        #endregion
+
+
         #region GetWishList
 
         // GET: WishList of Products(For Customers)
@@ -197,7 +209,48 @@ namespace MultivendorEcommerceStore.Controllers
             };
             return View(model);
         }
-        
+
+        #endregion
+
+
+        #region Get Customer Order
+
+        [Authorize(Roles = "Customer")]
+        // SHOW: Customer All Orders
+        public ActionResult MyOrder()
+        {
+            var customerBL = new CustomerBL();
+            var model =new CustomerDetailViewModel();
+
+            model.CustomerOrders = customerBL.GetMyOrder(User.Identity.GetCustomerCurrentID());
+            //model.WishList = homeBL.GetMyWishList(User.Identity.GetCustomerCurrentID());
+
+            return View(model);
+        }
+
+
+        [Authorize(Roles = "Customer")]
+        public ActionResult MyOrdersDetails(Guid orderID)
+        {
+            try
+            {
+                if (orderID != null)
+                {
+                    var orderBL = new OrderBL();
+                    var model = new OrderViewModel();
+                    model.Order = orderBL.GetOrderByID(orderID);
+                    model.OrderDetail = orderBL.GetOrderDetailByOrderID(orderID);
+                    return View(model);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
         #endregion
 
     }

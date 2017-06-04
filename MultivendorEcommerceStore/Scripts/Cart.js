@@ -2,12 +2,16 @@
     //--Add item in cart
     $('.AddToCart').click(function () {
         var value = $(this).val();
+        var quantity = $("#NumberField_" + value).val();
+        if (quantity < 0) {
+            quantity = 1;
+        }
         debugger;
         $.ajax({
             url: "/Cart/AddItemInCart",
             type: "POST",
             datatype: "json",
-            data: { productID: value },
+            data: { productID: value, quantity: quantity },
             success: function (data) {
                 if (data) {
                     $(".TagToRemove").remove();

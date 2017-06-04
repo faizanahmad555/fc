@@ -85,7 +85,7 @@ namespace MultivendorEcommerceStore.BL
         {
             var productRepo = new ProductRepository();
             var supplierRepo = new SupplierRepository();
-            var supplierBusinessRepo = new SupplierBusinessInfo(); 
+            var supplierBusinessRepo = new SupplierBusinessInfo();
 
             var product = productRepo.GetById(productID);
             var supplier = supplierRepo.GetById(product.SupplierID);
@@ -102,7 +102,7 @@ namespace MultivendorEcommerceStore.BL
 
                 UserID = supplier.AspNetUserID,
                 SupplierID = supplier.SupplierID,
-                FirstName = supplier.SupplierFirstName, 
+                FirstName = supplier.SupplierFirstName,
                 LastName = supplier.SupplierLastName,
                 ProfilePhoto = supplier.ProfilePhoto,
 

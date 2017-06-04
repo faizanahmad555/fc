@@ -56,7 +56,17 @@ namespace MultivendorEcommerceStore.Repository
 
         public void Update(Customer entity)
         {
-            throw new NotImplementedException();
+            _db = new MultivendorEcommerceStoreEntities();
+            var customer = _db.Customers.Where(s => s.AspNetUserID == entity.AspNetUserID && s.CustomerID == entity.CustomerID).FirstOrDefault();
+            customer.FirstName = entity.FirstName;
+            customer.LastName = entity.LastName;
+            customer.Mobile = entity.Mobile;
+            customer.Address = entity.Address;
+            //customer.CountryID = entity.CountryID;
+            //customer.StateID = entity.StateID;
+            //customer.CityID = entity.CityID;
+            _db.SaveChanges();
         }
+
     }
 }

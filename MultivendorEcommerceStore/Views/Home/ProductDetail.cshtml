@@ -87,27 +87,29 @@
                                 <div class="product-desc">
                                     @item.ProductDescription
                                 </div>
-                                @*<div class="form-option">
+                                <div class="form-option">
                                     <p class="form-option-title">Available Options:</p>
 
                                     <div class="attributes">
                                         <div class="attribute-label">Qty:</div>
                                         <div class="attribute-list product-qty">
                                             <div class="qty">
-                                                <input id="option-product-qty" type="text" value="1">
+                                                <input type="number" id="NumberField_@item.ProductID" class="numberfield" value="" min="1">
+
                                             </div>
-                                            <div class="btn-plus">
+                                            @*<div class="btn-plus">
                                                 <a href="#" class="btn-plus-up">
                                                     <i class="fa fa-caret-up"></i>
                                                 </a>
                                                 <a href="#" class="btn-plus-down">
                                                     <i class="fa fa-caret-down"></i>
                                                 </a>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
 
-                                </div>*@
+                                </div>
+
                                 <div class="form-action">
                                     <div class="button-group">
                                         <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>

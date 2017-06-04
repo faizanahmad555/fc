@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.CustomerListViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.CustomersReportViewModel
 
 @{
     ViewBag.Title = "CustomerList";
@@ -29,6 +29,8 @@
     </div>
 </div>
 <!-- vertical center Modal end -->
+
+
 <!--main content start-->
 <section class="site-min-height">
     <!-- page start-->
@@ -37,6 +39,37 @@
             Customer's List
         </header>
         <div class="panel-body">
+
+            @using (Html.BeginForm("CustomerList", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-group form-inline">
+                            <div class="col-md-5">
+                                <label for="From" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.From, new { @class = "form-control pickdate", @placeholder = "From", @readonly = "", @hidden = "hidden" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                <label for="To" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.To, new { @class = "form-control pickdate", @placeholder = "To", @readonly = "", @max = DateTime.Now })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" name="Find" value="Find" class="btn btn-primary btn-sm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div class="adv-table editable-table ">
                 <div class="clearfix">
                     <div class="btn-group">
@@ -65,6 +98,12 @@
                                     @Html.DisplayName("Email")
                                 </th>
                                 <th style="text-align:center">
+                                    @Html.DisplayName("Mobile")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Address")
+                                </th>
+                                <th style="text-align:center">
                                     @Html.DisplayName("Added On")
                                 </th>
 
@@ -73,7 +112,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Customers)
                             {
                                 <tr id='CustomerToDelete_@item.AspNetUserID'>
                                     <td>
@@ -86,13 +125,19 @@
                                         @Html.DisplayFor(modelItem => item.Email)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.CreatedOn)
                                     </td>
 
                                     <td>
-                                        @*<a href="@Url.Action("EditCustomer", "Admin", new { CustomerID = item.CustomerID, UserID = item.AspNetUserID  })" class="btn btn-primary">
+                                        <a title="Edit" href="@Url.Action("EditCustomer", "Admin", new { CustomerID = item.CustomerID, UserID = item.AspNetUserID  })" class="btn btn-primary btn-xs">
                                             <i class="fa fa-pencil"></i>
-                                        </a>*@
+                                        </a>
 
                                         <a title="Delete" class="btn btn-danger btn-xs UserToDelete" data-target="#myModal" data-toggle="modal" value="@item.AspNetUserID">
                                             <i class="fa fa-trash-o"></i>
@@ -114,6 +159,7 @@
 </section>
 <!--main content end-->
 
+
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
@@ -125,13 +171,35 @@
 </footer>
 <!--footer end-->
 
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.pickdate').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    $(document).ready(function () {
+        $("#From").val("");
+        $("#To").val("");
+    });
+
+</script>
+
+
+
 
 @section Scripts{
+
     <script type="text/javascript">
         $('.UserToDelete').click(function () {
             var userId = $(this).attr("value");
             $("#btnContinueDelete").val(userId);
         });
+
         $('#btnContinueDelete').click(function () {
             var userId = $(this).attr("value");
             $.ajax({

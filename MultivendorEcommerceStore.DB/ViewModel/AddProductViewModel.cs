@@ -68,8 +68,11 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Size")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
+        //[RegularExpression("^[a-zA-Z0-9]+$", ErrorMessage = "Must be alphabets or numbers only")] // ^[a-zA-Z0-9]+$ // 
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]
         [DataType(DataType.Text, ErrorMessage = "Please enter characters only")]
+        //[RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
+        [StringLength(10, ErrorMessage = "No more than 10 characters.", MinimumLength = 1)]
         public string Size { get; set; }
 
        

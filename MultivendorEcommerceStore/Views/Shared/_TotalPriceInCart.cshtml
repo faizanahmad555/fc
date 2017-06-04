@@ -1,0 +1,40 @@
+﻿@using MultivendorEcommerceStore.DB.ViewModel
+
+@{
+    CartViewModel obj = new CartViewModel();
+    int quantityCount = 0;
+    decimal? total = 0;
+    List<CartViewModel> list = (List<CartViewModel>)Session["Cart"];
+    if (Session["Cart"] != null)
+    {
+        for (int i = 0; i < list.Count(); i++)
+        {
+            quantityCount = list[i].Quantity + quantityCount;
+            var price = list[i].ProductDetail.Price * list[i].Quantity;
+            total = price + total;
+        }
+        if (quantityCount == 0 || quantityCount < 0)
+        {
+            quantityCount = 0;
+        }
+    }
+}
+
+<tfoot>
+
+    @*<tr>
+        <td colspan="2" rowspan="2"></td>
+        <td colspan="3">Total products (tax incl.)</td>
+        <td colspan="2" class="CartTotal"> @total @(item.ProductDetail.Price * item.Quantity) Rs.</td>
+
+    </tr>*@
+
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="3"><strong>Total</strong></td>
+        <td colspan="2"><strong class="CartTotal"> @total @*@(item.ProductDetail.Price * item.Quantity)*@ Rs.</strong></td>
+        @*<td colspan="1"></td>*@
+    </tr>
+
+
+</tfoot>

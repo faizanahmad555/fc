@@ -1,11 +1,9 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.ProductListViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.ProductReporViewModel
 
 @{
     ViewBag.Title = "ProductList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<link rel="stylesheet" href="~/Content/assets/data-tables/DT_bootstrap.css" />
-
 
 <!--vertical center Modal start-->
 <div class="modal fade modal-dialog-center " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -38,13 +36,43 @@
             Product's List
         </header>
         <div class="panel-body">
+
+            @using (Html.BeginForm("ProductList", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="form-group form-inline">
+                        <div class="col-md-5">
+                            <label for="From" style="cursor:pointer">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </label>
+                            @Html.TextBoxFor(m => m.From, new { @class = "form-control pickdate", @placeholder = "From", @hidden = "hidden" })
+                            @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-5">
+                            <label for="To" style="cursor:pointer">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </label>
+                            @Html.TextBoxFor(m => m.To, new { @class = "form-control pickdate", @placeholder = "To", @max = DateTime.Now })
+                            @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" name="Find" value="Find" class="btn btn-primary btn-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+
             <div class="adv-table editable-table ">
                 <div class="clearfix">
                     @*<div class="btn-group">
-                        <a href="@Url.Action("AddProduct","Admin")" class="btn btn-info">
-                            Add New <i class="fa fa-plus"></i>
-                        </a>
-                    </div>*@
+                            <a href="@Url.Action("AddProduct","Admin")" class="btn btn-info">
+                                Add New <i class="fa fa-plus"></i>
+                            </a>
+                        </div>*@
                     <div class="btn-group pull-right">
                         <h1><span><i onclick="Print('ProductsToPrint')" class="fa fa-print pull-right" style="cursor:pointer" title="Print"></i></span></h1>
                     </div>
@@ -91,53 +119,53 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Products)
                             {
-                                <tr id='ProductToDelete_@item.ProductID'>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductDescription)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Quantity)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Price)
-                                    </td>
-                                    <td>
-                                        <img class="img-thumbnail" src="@Url.Content(item.ProductImage1)" height="50" width="50" />
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CategoryName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SubCategoryName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Status)
-                                    </td>
-                                    <td id='ItemActive_@item.ProductID'>
-                                        @Html.DisplayFor(modelItem => item.Active)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedOn)
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success btn-xs btn-circle ItemToChange" title="Active/InActive" value="@item.ProductID">
-                                            <i class="glyphicon glyphicon-ok-circle"></i>
-                                        </a>
+                            <tr id='ProductToDelete_@item.ProductID'>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    <img class="img-thumbnail" src="@Url.Content(item.ProductImage1)" height="50" width="50" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td id='ItemActive_@item.ProductID'>
+                                    @Html.DisplayFor(modelItem => item.Active)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-xs btn-circle ItemToChange" title="Active/InActive" value="@item.ProductID">
+                                        <i class="glyphicon glyphicon-ok-circle"></i>
+                                    </a>
 
-                                        <a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("EditProduct", "Admin", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
+                                    <a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("EditProduct", "Admin", new {  SupplierID = item.SupplierID, ProductID = item.ProductID })">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
 
-                                        <a class="btn btn-danger btn-xs ItemToDelete" title="Delete" data-toggle="modal" data-target="#myModal" value="@item.ProductID">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <a class="btn btn-danger btn-xs ItemToDelete" title="Delete" data-toggle="modal" data-target="#myModal" value="@item.ProductID">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
 
@@ -150,6 +178,7 @@
     <!-- page end-->
 </section>
 <!--main content end-->
+
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
@@ -161,11 +190,29 @@
 </footer>
 <!--footer end-->
 
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.pickdate').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    $(document).ready(function () {
+        $("#From").val("");
+        $("#To").val("");
+    });
+
+</script>
+
+
 @section Scripts{
 
     <!--script for Product Deletion and Change Active/InActive State-->
     <script type="text/javascript">
-
 
         $('.ItemToDelete').click(function () {
             var productId = $(this).attr("value");
@@ -227,4 +274,9 @@
         });
 
     </script>
+
+
+
+
+
 }

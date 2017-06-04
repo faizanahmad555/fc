@@ -13,22 +13,21 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         public Guid CustomerID { get; set; }
 
-        [Required]
         [EmailAddress]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 
-        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Display(Name = "Mobile #")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter characters only")]
         public string Phone { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
 
         [Display(Name = "Added on")]
         public DateTime? CreatedOn { get; set; }

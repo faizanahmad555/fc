@@ -132,28 +132,28 @@ namespace MultivendorEcommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CustomerRegister(CustomerLoginRegisterViewModel model)
         {
-            
-                var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
-                var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
 
-                if (result.Succeeded)
-                {
-                    CustomerBL customerBL = new CustomerBL();
-                    UserManager.AddToRole(user.Id, "Customer");
-                    model.CustomerRegisterVM.AspNetUserID = user.Id;
-                    customerBL.CustomerRegister(model);
-                    await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
-                    return RedirectToAction("Index", "Home");
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            var user = new ApplicationUser { UserName = model.CustomerRegisterVM.EmailAddress, Email = model.CustomerRegisterVM.EmailAddress };
+            var result = await UserManager.CreateAsync(user, model.CustomerRegisterVM.Password);
 
-                    //return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            
+            if (result.Succeeded)
+            {
+                CustomerBL customerBL = new CustomerBL();
+                UserManager.AddToRole(user.Id, "Customer");
+                model.CustomerRegisterVM.AspNetUserID = user.Id;
+                customerBL.CustomerRegister(model);
+                await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
+                return RedirectToAction("Index", "Home");
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                //return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
+
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Login", "Home");
         }
@@ -168,12 +168,12 @@ namespace MultivendorEcommerceStore.Controllers
         [AllowAnonymous]
         public ActionResult AdminLogin(string returnUrl)
         {
-           
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        
+
         // POST: /Account/AdminLogin
         [HttpPost]
         [AllowAnonymous]
@@ -225,7 +225,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        // POST: /Account/SupplierLogin(Without Confirming Email)
+        // POST: /Account/SupplierLogin(Only When Email is Confirmed)
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -235,33 +235,47 @@ namespace MultivendorEcommerceStore.Controllers
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var custEmailConf = EmailConfirmation(model.Email);
+            var custUserName = FindUserName(model.Email);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             var user = await UserManager.FindAsync(model.Email, model.Password);
-            switch (result)
+            if (custEmailConf == false && custUserName != null && result.ToString() == "Success")
             {
-                case SignInStatus.Success:
-
-                    if (UserManager.IsInRole(user.Id, "Supplier"))
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                EConfUser = model.Email;
+                return RedirectToAction("EmailConfirmationFailed", "Account");
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                if (ModelState.IsValid)
+                {
+                    switch (result)
                     {
-                        return RedirectToAction("Index", "Supplier");
+                        case SignInStatus.Success:
+                            if (UserManager.IsInRole(user.Id, "Supplier"))
+                            {
+                                return RedirectToAction("Index", "Supplier");
+                            }
+                            //UpdateLastLoginDate(model.LoginUsername);
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
                     }
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                }
+                // If we got this far, something failed, redisplay form
+                return View("SupplierLogin", "Account");
             }
         }
 
 
-        // Add Supplier Without Confirmating Email
+        // POST: Add Supplier and Send Confirmation Email
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -269,75 +283,88 @@ namespace MultivendorEcommerceStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var custEmail = FindEmail(model.Email);
+                var custUserName = FindUserName(model.Email);
+                var user = new ApplicationUser
                 {
-                    AdminBL adminBL = new AdminBL();
-                    UserManager.AddToRole(user.Id, "Supplier");
-                    model.AspNetUserID = user.Id;
-                    adminBL.AddSupplier(model);
-                    return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    UserName = model.Email,
+                    Email = model.Email
 
-                    //return RedirectToAction("Index", "Home");
+                };
+                if (custEmail == null && custUserName == null)
+                {
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        AdminBL adminBL = new AdminBL();
+                        UserManager.AddToRole(user.Id, "Supplier");
+                        model.AspNetUserID = user.Id;
+                        adminBL.AddSupplier(model);
+
+                        //// Send an email with this link
+                        codeType = "EmailConfirmation";
+                        await SendEmail("ConfirmEmail", "Account", user, model.Email, "WelcomeEmail", "Confirm your account");
+                        return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
+
+                        //return RedirectToAction("ConfirmationEmailSent", "Account");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    if (custEmail != null)
+                    {
+                        ModelState.AddModelError("", "Email is already registered.");
+                    }
+                    if (custUserName != null)
+                    {
+                        ModelState.AddModelError("", "Username " + model.Email.ToLower() + " is already taken.");
+                    }
+                }
             }
             // If we got this far, something failed, redisplay form
-            return RedirectToAction("AddSupplier", "Admin");
+            return View(model);
         }
 
 
 
-        //POST: /Account/SupplierLogin(Only When Email is Confirmed)
+        // POST: /Account/SupplierLogin(Without Confirming Email)
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
         //public async Task<ActionResult> SupplierLogin(SupplierLoginViewModel model, string returnUrl)
         //{
-        //    var custEmailConf = EmailConfirmation(model.Email);
-        //    var custUserName = FindUserName(model.Email);
-        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-        //    if (custEmailConf == false && custUserName != null && result.ToString() == "Success")
+        //    if (!ModelState.IsValid)
         //    {
-        //        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-        //        EConfUser = model.Email;
-        //        return RedirectToAction("EmailConfirmationFailed", "Account");
+        //        return View(model);
         //    }
-        //    else
+
+        //    // This doesn't count login failures towards account lockout
+        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    var user = await UserManager.FindAsync(model.Email, model.Password);
+        //    switch (result)
         //    {
-        //        ViewBag.ReturnUrl = returnUrl;
-        //        if (ModelState.IsValid)
-        //        {
-        //            switch (result)
+        //        case SignInStatus.Success:
+
+        //            if (UserManager.IsInRole(user.Id, "Supplier"))
         //            {
-        //                case SignInStatus.Success:
-        //                    //UpdateLastLoginDate(model.LoginUsername);
-        //                    return RedirectToLocal(returnUrl);
-        //                case SignInStatus.LockedOut:
-        //                    return View("Lockout");
-        //                case SignInStatus.RequiresVerification:
-        //                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-        //                case SignInStatus.Failure:
-        //                default:
-        //                    ModelState.AddModelError("", "Invalid login attempt.");
-        //                    return View("Login");
+        //                return RedirectToAction("Index", "Supplier");
         //            }
-        //        }
-        //        // If we got this far, something failed, redisplay form
-        //        return View("Login");
+        //            return RedirectToLocal(returnUrl);
+        //        case SignInStatus.LockedOut:
+        //            return View("Lockout");
+        //        case SignInStatus.RequiresVerification:
+        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //        case SignInStatus.Failure:
+        //        default:
+        //            ModelState.AddModelError("", "Invalid login attempt.");
+        //            return View(model);
         //    }
         //}
 
 
-
-
-        //// POST: Add Supplier and Send Confirmation Email
+        //// Add Supplier Without Confirmating Email
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
@@ -345,54 +372,35 @@ namespace MultivendorEcommerceStore.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var custEmail = FindEmail(model.Email);
-        //        var custUserName = FindUserName(model.Email);
-        //        var user = new ApplicationUser
+        //        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
         //        {
-        //            UserName = model.Email,
-        //            Email = model.Email
+        //            AdminBL adminBL = new AdminBL();
+        //            UserManager.AddToRole(user.Id, "Supplier");
+        //            model.AspNetUserID = user.Id;
+        //            adminBL.AddSupplier(model);
+        //            return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
+        //            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+        //            // Send an email with this link
+        //            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-        //        };
-        //        if (custEmail == null && custUserName == null)
-        //        {
-        //            var result = await UserManager.CreateAsync(user, model.Password);
-        //            if (result.Succeeded)
-        //            {
-        //                AdminBL adminBL = new AdminBL();
-        //                UserManager.AddToRole(user.Id, "Supplier");
-        //                model.AspNetUserID = user.Id;
-        //                adminBL.AddSupplier(model);
-
-        //                //// Send an email with this link
-        //                //codeType = "EmailConfirmation";
-        //                //await SendEmail("ConfirmEmail", "Account", user, model.Email, "WelcomeEmail", "Confirm your account");
-        //                //return RedirectToAction("AddBusinessInfo", "Admin", new { userID = user.Id });
-
-        //                //return RedirectToAction("ConfirmationEmailSent", "Account");
-        //            }
-        //            AddErrors(result);
+        //            //return RedirectToAction("Index", "Home");
         //        }
-        //        else
-        //        {
-        //            if (custEmail != null)
-        //            {
-        //                ModelState.AddModelError("", "Email is already registered.");
-        //            }
-        //            if (custUserName != null)
-        //            {
-        //                ModelState.AddModelError("", "Username " + model.Email.ToLower() + " is already taken.");
-        //            }
-        //        }
+        //        AddErrors(result);
         //    }
         //    // If we got this far, something failed, redisplay form
-        //    return View(model);
+        //    return RedirectToAction("AddSupplier", "Admin");
         //}
+
 
 
         #endregion
 
 
-            
+
         #region Send Confirmation Email
 
 
@@ -607,7 +615,7 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
-        
+
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -636,7 +644,7 @@ namespace MultivendorEcommerceStore.Controllers
         }
 
 
-        
+
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -647,7 +655,7 @@ namespace MultivendorEcommerceStore.Controllers
         #endregion
 
 
-        
+
 
 
         // GET: /Account/ResetPassword
@@ -905,7 +913,7 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
-       
+
 
         public static async Task<string> EMailTemplate(string template)
         {

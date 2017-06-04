@@ -16,12 +16,17 @@ namespace MultivendorEcommerceStore.Controllers
         [Authorize(Roles = "Supplier")]
         public ActionResult Index()
         {
-            AdminDashboardBL BL = new AdminDashboardBL();
-            //var model = new DashboardStatisticsVM();
-            //model.OrdersCount = new AdminDashboardBL().GetAllOrdersCount();
-            //model.AllOrders = new ShopBL().GetAllOrdersCount();
+            var model = new SupplierDashboardStatisticsVM();
+            var supplierBL = new SupplierDashboardBL();
+            var supplierID = User.Identity.GetSupplierCurrentID();
 
-            return View(BL.SupplierDashboardStats(User.Identity.GetSupplierCurrentID()));
+            model.SupplierProductsCount = supplierBL.GetAllProductsCount(supplierID);
+            model.SupplierOrdersCount = supplierBL.GetAllOrdersCount(supplierID);
+
+            model.SupplierProductsChart = supplierBL.GetProductsForChartForSuppliers(supplierID);
+            model.SupplierOrdersChart = supplierBL.GetOrdersChartForSuppliers(supplierID);
+
+            return View(model);
         }
 
         #region Supplier Profile
@@ -56,7 +61,7 @@ namespace MultivendorEcommerceStore.Controllers
         public ActionResult AddProduct()
         {
             CategoryBL categoryBL = new CategoryBL();
-            var categories = categoryBL.GetCategories().Where(c=>c.DisplayOrder == 1).Select(c => new
+            var categories = categoryBL.GetCategories().Select(c => new
             {
                 Text = c.CategoryName,
                 Value = c.CategoryID

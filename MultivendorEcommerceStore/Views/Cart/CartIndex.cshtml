@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
+
 <!-- page wapper-->
 <div class="columns-container">
     <div class="container" id="columns">
@@ -42,7 +45,7 @@
                             <th>Unit price</th>
                             <th>Qty</th>
                             <th>Total</th>
-                            @*<th class="action"><i class="fa fa-trash-o"></i></th>*@
+                            <th>Remove</th>
                         </tr>
                     </thead>
 
@@ -51,7 +54,7 @@
                         {
                             foreach (var item in Model)
                             {
-                                <tr>
+                                <tr id="CartItem_@item.ProductID">
                                     <td class="cart_product">
                                         <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })"><img src="@Url.Content(item.ProductDetail.ProductImage1)" alt="Product"></a>
                                     </td>
@@ -72,44 +75,39 @@
                                     <td class="price">
                                         <span>@(item.ProductDetail.Price * item.Quantity)</span>
                                     </td>
-                                    @*<td class="action">
-                                        <a href="#">Delete item</a>
-                                    </td>*@
+                                    <td class="action">
+                                        @*<a href="#">Delete item</a>*@
+                                        <button value="@item.ProductID" onclick="RemoveItem(this)"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </td>
                                 </tr>
                             }
                         }
                     </tbody>
-                    <tfoot>
-                        @if (Model != null)
-                        {
-                            foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td colspan="2" rowspan="2"></td>
-                                    <td colspan="3">Total products (tax incl.)</td>
-                                    <td colspan="2">@(item.ProductDetail.Price * item.Quantity) Rs.</td>
-                                    
-                                </tr>
-                               
-                                <tr>
-                                    <td colspan="3"><strong>Total</strong></td>
-                                    <td colspan="2"><strong>@(item.ProductDetail.Price * item.Quantity) Rs.</strong></td>
-                                </tr>
-                             
-                            }
-                        }
-                    </tfoot>
+                    @Html.Partial("_TotalPriceInCart")
 
                 </table>
                 <div class="cart_navigation">
                     <a class="prev-btn" href="@Url.Action("Index", "Home")">Continue shopping</a>
                     @*<a class="next-btn" href="#">Proceed to checkout</a>*@
 
+                    <div class="next-btn form-group pull-right">
+                        <form id="myContainer" method="post" action="@Url.Action("Checkout", "Cart")"></form>
+                        <script>
+                        window.paypalCheckoutReady = function () {
+                            paypal.checkout.setup('BRKKN32NLUD56',
+                                {
+                                    environment: 'sandbox',
+                                    container: 'myContainer'
+                                });
+                        };
+                        </script>
+                        <script src="//www.paypalobjects.com/api/checkout.js" async></script>
+                    </div>
 
 
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label>Popup Checkout Experience</label>
                     <form id="myContainer" method="post" action="@Url.Action("Checkout", "Cart")"></form>
                     <script>
@@ -122,7 +120,7 @@
                         };
                     </script>
                     <script src="//www.paypalobjects.com/api/checkout.js" async></script>
-                </div>
+                </div>*@
 
 
             </div>
@@ -130,3 +128,36 @@
     </div>
 </div>
 <!-- ./page wapper-->
+
+
+@section scripts{
+    <script>
+        function RemoveItem(obj) {
+            var value = obj.value;
+            $.ajax({
+                url: "/Cart/DeleteItemFromCart",
+                type: "POST",
+                datatype: "json",
+                data: { productID: value, },
+                success: function (data) {
+                    debugger;
+                    $(".TagToRemove").remove();
+                    $("#CartItem_" + value).remove();
+                    var quantity = parseInt(0);
+                    var total = parseFloat(0.0);
+                    for (var i = 0; i < data.length; i++) {
+                        quantity = data[i].quantity + quantity;
+                        $("#QuickCartView").append("<li class=\"product-info TagToRemove\"> <div class=\"p-left\"><a href=\"#\"><img class=\"img-responsive\" src='" + data[i].ProductDetail.ProductImage1.replace(/~/g, ' ') + "' alt=\"Cart Product\"></a></div><div class=\"p-right\"><p class=\"p-name\">" + data[i].ProductDetail.ProductName + "</p><p class=\"p-rice\">" + data[i].ProductDetail.Price * data[i].Quantity + "</p><p>Quantity: " + data[i].Quantity + "</p><button class=\"btn-hover-2 DeleteItemFromCart pull-right\" onclick=\"f1(this)\" value=" + data[i].ProductID + "><i class=\"glyphicon glyphicon-trash\"></i></button></div></li>");
+                        var price = data[i].ProductDetail.Price * data[i].Quantity;
+                        total = price + total;
+                    }
+                    $(".cart-quantity").html(quantity);
+                    alertify.success("Item successfully Removed...");
+                    //Updating Cart Total
+                    $(".CartTotal").html(total);
+                }
+            })
+        }
+
+    </script>
+}

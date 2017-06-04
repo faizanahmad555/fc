@@ -7,12 +7,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MultivendorEcommerceStore.Utility;
-
+using System.Net.Mail;
+using System.Net;
 
 namespace MultivendorEcommerceStore.Controllers
 {
     public class CartController : Controller
     {
+
+        #region Manage Cart
+
         // GET: Cart
         public ActionResult CartIndex()
         {
@@ -76,7 +80,11 @@ namespace MultivendorEcommerceStore.Controllers
         {
             Session.Remove("Cart");
         }
-        
+
+        #endregion
+
+
+        #region PayPal Payment Handling
 
         [Authorize(Roles = "Customer")]
         public ActionResult Checkout()
@@ -85,10 +93,10 @@ namespace MultivendorEcommerceStore.Controllers
             if (cart.Any())
             {
                 // Flat rate shipping
-                int shipping = 200;
+                int shipping = 0;
 
                 // Flat rate tax 10%
-                var taxRate = 0.1M;
+                var taxRate = 0;
 
                 var subtotal = cart.Sum(x => x.ProductDetail.Price * x.Quantity);
                 var tax = Convert.ToInt32((subtotal + shipping) * taxRate);
@@ -98,7 +106,7 @@ namespace MultivendorEcommerceStore.Controllers
                 AddOrderViewModel orderObj = new AddOrderViewModel()
                 {
                     CustomerID = User.Identity.GetCustomerCurrentID(),
-                    
+
                     Tax = tax,
                     Total = total,
                     Shipping = shipping,
@@ -177,6 +185,12 @@ namespace MultivendorEcommerceStore.Controllers
 
                 // Send the user to PayPal to approve the payment
                 return Redirect(approvalUrl.href);
+
+
+
+
+
+
             }
 
             return RedirectToAction("CartIndex");
@@ -186,8 +200,12 @@ namespace MultivendorEcommerceStore.Controllers
         {
             // Fetch the existing order
             OrderBL orderDetailBL = new OrderBL();
+            
             var order = orderDetailBL.GetOrderByPayPalReference(paymentId);
+            var orderDetail = orderDetailBL.GetOrderDetailByOrderID(order.OrderID);
+
             var orderID = order.OrderID;
+
             //var orderNR = new OrderNotificationRepository();
             //var orderNE = new OrderNotification();
             //orderNE.OrderID = orderID;
@@ -211,9 +229,72 @@ namespace MultivendorEcommerceStore.Controllers
             };
             // Execute the Payment
             var executedPayment = payment.Execute(apiContext, paymentExecution);
+
+
+
+            //For Email Sending
+            var message = new MailMessage();
+            message.From = new MailAddress("thefinecollectionstore@gmail.com", "Fine Collection");
+            message.To.Add(new MailAddress(order.Customer.Email));
+
+            message.Subject = "Your Order Details";
+            message.Body = "<h1>Dear, " + order.Customer.FirstName + "</h1><br><br>You order For this product <br><br><br>" + order.OrderDetails.Select(o=>o.Product.ProductPicture) + "<h6>" + order.OrderDetails.Select(o=>o.Product.ProductName) + "</h6> <br><br> You Wil Recieve Your Order in next 2 - 3 Business days <br><br> Thanks <br><strong>Fine Collection</strong>";
+            message.IsBodyHtml = true;
+            //// For File Attachment..
+            //message.Attachments.Add(new Attachment(PathToSave));
+
+            SmtpClient SC = new SmtpClient();
+            SC.Credentials = new System.Net.NetworkCredential("thefinecollectionstore@gmail.com", "Pakistan@123");
+            SC.Host = "smtp.gmail.com";
+            SC.Port = 587;
+            SC.EnableSsl = true;
+            try
+            {
+                SC.Send(message);
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+
+
+            ////For message sending
+            //String username = "finecollection";
+            //String password = "Pakistan@123";
+            //String from = "03059337887";
+            //String to = order.Customer.Mobile;
+            //String messageBody = "Dear" + order.Customer.FirstName +"! You will receive your order in 2 - 3 business days. Thank You for shopping at Fine Collection";
+            //String URL = "http://Lifetimesms.com" +
+            //"/plain?" +
+            //"username=" + username +
+            //"&password=" + password +
+            //"&from=" + from +
+            //"&to=" + to +
+            //"&message=" + Uri.UnescapeDataString(messageBody);
+            //try
+            //{
+            //    WebRequest req = WebRequest.Create(URL);
+            //    WebResponse resp = req.GetResponse();
+
+
+            //}
+            //catch (Exception)
+            //{
+
+
+            //}
+
+
+
+
             //ClearCart();
             ClearCart();
-            return RedirectToAction("Thankyou");
+            return RedirectToAction("Thankyou", "Cart");
+
+
+            
         }
 
         public ActionResult Thankyou()
@@ -240,6 +321,9 @@ namespace MultivendorEcommerceStore.Controllers
             var apiContext = new APIContext(accessToken);
             return apiContext;
         }
+
+
+        #endregion
 
     }
 }

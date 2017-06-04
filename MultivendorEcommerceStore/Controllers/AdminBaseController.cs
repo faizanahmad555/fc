@@ -17,7 +17,7 @@ namespace MultivendorEcommerceStore.Controllers
 
             var data = new AdminLayoutViewModel();
 
-            data.UserCount = adminBL.GetAllUserCount();
+            //data.UserCount = adminBL.GetAllUserCount();
             //data.SupplierCount = adminBL.GetSupplierCount();
             //data.CustomerCount = adminBL.GetCustomerCount();
             //data.ProductCount = adminBL.GetProductCount();

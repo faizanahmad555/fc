@@ -13,9 +13,39 @@
             Order's List
         </header>
         <div class="panel-body">
+            @using (Html.BeginForm("OrderList", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-group form-inline">
+                            <div class="col-md-5">
+                                <label for="From" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.From, new { @class = "form-control pickdate", @placeholder = "From", @readonly = "", @hidden = "hidden" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                <label for="To" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.To, new { @class = "form-control pickdate", @placeholder = "To", @readonly = "", @max = DateTime.Now })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" name="Find" value="Find" class="btn btn-primary btn-sm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div class="adv-table editable-table ">
                 <div class="clearfix">
-                 
+
                     <div class="btn-group pull-right">
                         <h1><span><i onclick="Print('OrdersToPrint')" class="fa fa-print pull-right" style="cursor:pointer" title="Print"></i></span></h1>
                     </div>
@@ -86,7 +116,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Total)
                                     </td>
-                                  
+
                                     <td>
                                         @Html.ActionLink(" ", "OrderDetails", "Admin", new { orderID = item.OrderID }, new { @class = "glyphicon glyphicon-eye-open" })
                                     </td>
@@ -99,10 +129,14 @@
                 </div>
             </div>
         </div>
+
+
     </section>
     <!-- page end-->
 </section>
 <!--main content end-->
+
+
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
@@ -114,3 +148,20 @@
 </footer>
 <!--footer end-->
 
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.pickdate').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    $(document).ready(function () {
+        $("#From").val("");
+        $("#To").val("");
+    });
+
+</script>

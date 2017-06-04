@@ -157,13 +157,16 @@
     <Compile Include="ViewModel\CategoryListViewModel.cs" />
     <Compile Include="ViewModel\AddContactUsViewModel.cs" />
     <Compile Include="ViewModel\CompleteOrderDetail.cs" />
+    <Compile Include="ViewModel\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerLoginRegisterViewModel.cs" />
+    <Compile Include="ViewModel\CustomersReport.cs" />
     <Compile Include="ViewModel\DashboardStatisticsVM.cs" />
     <Compile Include="ViewModel\DisplayContactUsViewModel.cs" />
     <Compile Include="ViewModel\DisplayProductViewModel.cs" />
     <Compile Include="ViewModel\DisplayWishListViewModel.cs" />
     <Compile Include="ViewModel\EditContactUsViewModel.cs" />
+    <Compile Include="ViewModel\EditCustomerViewModel.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
     <Compile Include="ViewModel\EditSupplierViewModel.cs" />
     <Compile Include="ViewModel\FeatureProductsViewModel.cs" />

@@ -1,8 +1,5 @@
 ﻿@model MultivendorEcommerceStore.DB.ViewModel.DashboardStatisticsVM
-
-@*@{
-        MultivendorEcommerceStore.DB.ViewModel.AdminLayoutViewModel layoutdata  = ViewBag.LayoutData;
-    }*@
+@using System.Web.Script.Serialization;
 
 @{
     ViewBag.Title = "Dashboard";
@@ -31,23 +28,48 @@
             <div class="symbol terques">
                 <i class="fa fa-user"></i>
             </div>
-
-            <div class="value">
-                <h1>
-                    @if (@Model.UsersCount > 0)
-                    {
-                        @Model.UsersCount
-                    }
-                    else if (@Model.UsersCount == 0)
-                    {
-                        @Model.UsersCount
-                    }
-                </h1>
-                <p>Total Users</p>
-            </div>
-
+            <a href="@Url.Action("SupplierList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.SuppliersCount > 0)
+                        {
+                            @Model.SuppliersCount
+                        }
+                        else if (@Model.SuppliersCount == 0)
+                        {
+                            @Model.SuppliersCount
+                        }
+                    </h1>
+                    <p>Total Suppliers</p>
+                </div>
+            </a>
         </section>
     </div>
+
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol blue">
+                <i class="fa fa-user"></i>
+            </div>
+            <a href="@Url.Action("CustomerList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.CustomersCount > 0)
+                        {
+                            @Model.CustomersCount
+                        }
+                        else if (@Model.CustomersCount == 0)
+                        {
+                            @Model.CustomersCount
+                        }
+                    </h1>
+                    <p>Total Customers</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
 
     <div class="col-lg-3 col-sm-6">
         <section class="panel">
@@ -55,7 +77,6 @@
                 <i class="fa fa-tags"></i>
             </div>
             <a href="@Url.Action("ProductList", "Admin")">
-
                 <div class="value">
                     <h1>
                         @if (@Model.ProductsCount > 0)
@@ -80,22 +101,25 @@
             <div class="symbol yellow">
                 <i class="fa fa-shopping-cart"></i>
             </div>
-            <div class="value">
-                <h1>
-                    @if (@Model.OrdersCount > 0)
-                    {
-                        @Model.OrdersCount
-                    }
-                    else if (@Model.OrdersCount == 0)
-                    {
-                        @Model.OrdersCount
-                    }
-                </h1>
-                <p>Total Order</p>
-            </div>
+            <a href="@Url.Action("OrderList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.OrdersCount > 0)
+                        {
+                            @Model.OrdersCount
+                        }
+                        else if (@Model.OrdersCount == 0)
+                        {
+                            @Model.OrdersCount
+                        }
+                    </h1>
+                    <p>Total Order</p>
+                </div>
+            </a>
         </section>
     </div>
 
+</div>
 
     @*<div class="col-lg-3 col-sm-6">
             <section class="panel">
@@ -111,6 +135,8 @@
             </section>
         </div>*@
 
+<div class="row">
+
     <section class="panel col-lg-12">
         <header class="panel-heading">
             New Orders
@@ -122,6 +148,10 @@
             </div>
         </div>
     </section>
+
+</div>
+
+<div class="row">
 
     <section class="panel col-lg-6">
         <header class="panel-heading">
@@ -148,6 +178,9 @@
         </div>
     </section>
 
+</div>
+
+<div class="row">
 
     <section class="panel col-lg-12">
         <header class="panel-heading">

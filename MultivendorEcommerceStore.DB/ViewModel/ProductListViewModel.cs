@@ -69,8 +69,25 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public Pager Pager { get; set; }
         public IEnumerable<ProductListViewModel> Products { get; set; }
 
-   
         public List<SupplierBusinessInfoListViewModel> SupplierBusinessInformationList = new List<SupplierBusinessInfoListViewModel>();
+
+
+    }
+
+
+    public class ProductReporViewModel
+    {
+        public IEnumerable<DisplayProductViewModel> Products { get; set; }
+
+        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Field must be date.")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime From { get; set; }
+
+        [DataType(DataType.Date, ErrorMessage = "Field must be date.")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime To { get; set; }
+
     }
 
 

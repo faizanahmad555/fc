@@ -10,61 +10,136 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminDashboardBL
     {
-        public DashboardStatisticsVM DashboardStats()
+        public int GetAllUsersCount()
         {
-            var aspNetUserRepo = new AspNetUsersRepository();
-            var productRepo = new ProductRepository();
-            var orderRepo = new OrderRepository();
-
-            var OrderBL = new OrderBL();
-            var ProductBL = new ProductBL();
-            var AdminBL = new AdminBL();
-            var CustomerBL = new CustomerBL();
-
-            DashboardStatisticsVM viewModel = new DashboardStatisticsVM();
-
-            viewModel.UsersCount = aspNetUserRepo.Retrive().Count();
-            viewModel.ProductsCount = productRepo.Retrive().Count();
-            viewModel.OrdersCount = orderRepo.Get().Count();
-
-
-            viewModel.OrdersChart = OrderBL.GetOrdersForChart();
-            viewModel.ProductsChart = ProductBL.GetProductsForChart();
-            viewModel.SuppliersChart = AdminBL.GetSuppliersForChart();
-            viewModel.CustomersChart = CustomerBL.GetCustomersForChart();
-
-
-            return viewModel;
+            return new AspNetUsersRepository().Retrive().Count();
         }
 
-
-        public DashboardStatisticsVM SupplierDashboardStats(Guid? supplierID)
+        public int GetAllSuppliersCount()
         {
-           
-            var productRepo = new ProductRepository();
-            var orderRepo = new OrderRepository();
-
-            var OrderBL = new OrderBL();
-            var ProductBL = new ProductBL();
-            DashboardStatisticsVM viewModel = new DashboardStatisticsVM();
-
-
-            viewModel.SupplierProductsCount = productRepo.Retrive().Where(s=>s.SupplierID == supplierID).Count();
-            viewModel.SupplierOrdersCount = OrderBL.GetOrdersBySupplierID(supplierID).Count();
-
-            viewModel.OrdersChart = OrderBL.GetOrdersForChart();
-            viewModel.SupplierProductsChart = ProductBL.GetProductsChartForSupplier(supplierID);
-            viewModel.SupplierOrdersChart = OrderBL.GetOrdersChartForSuppliers(supplierID);
-
-            return viewModel;
+            return new SupplierRepository().Retrive().Count();
         }
 
+        public int GetAllCustomersCount()
+        {
+            return new CustomerRepository().Retrive().Count();
+        }
 
-
+        public int GetAllProductsCount()
+        {
+            return new ProductRepository().Retrive().Count();
+        }
 
         public int GetAllOrdersCount()
         {
             return new OrderRepository().Get().Count();
+        }
+
+
+
+        public dynamic GetAllProductsForChart()
+        {
+            var productRepo = new ProductRepository();
+            dynamic prds = "";
+
+            try
+            {
+                prds = productRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return prds;
+        }
+
+        public dynamic GetAllOrdersForChart()
+        {
+            var orderRepo = new OrderRepository();
+            dynamic ords = "";
+
+            try
+            {
+                ords = orderRepo.Get().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return ords;
+        }
+
+        public dynamic GetAllSuppliersForChart()
+        {
+            var supplierRepo = new SupplierRepository();
+            dynamic sups = "";
+
+            try
+            {
+                sups = supplierRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return sups;
+        }
+
+        public dynamic GetAllCustomersForChart()
+        {
+            var customerRepo = new CustomerRepository();
+            dynamic cust = "";
+
+            try
+            {
+                cust = customerRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
+           .Select(group => new
+           {
+
+               CreatedOn = group.Key,
+               Count = group.Count()
+           })
+           .ToList();
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+            return cust;
         }
 
 

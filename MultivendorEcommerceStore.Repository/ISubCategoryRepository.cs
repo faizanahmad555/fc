@@ -12,6 +12,6 @@ namespace MultivendorEcommerceStore.Repository
         void Create(SubCategory Entity);
         IEnumerable<SubCategory> Retrive();
 
-        SubCategory GetByID(Guid id);
+        SubCategory GetByID(Guid? id);
     }
 }

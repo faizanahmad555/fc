@@ -13,34 +13,6 @@ namespace MultivendorEcommerceStore.BL
 {
     public class AdminBL
     {
-
-        public dynamic GetSuppliersForChart()
-        {
-            var supplierRepo = new SupplierRepository();
-            dynamic sups = "";
-
-            try
-            {
-                sups = supplierRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
-           .Select(group => new
-           {
-
-               CreatedOn = group.Key,
-               Count = group.Count()
-           })
-           .ToList();
-
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-
-            return sups;
-        }
-
-
         private MultivendorEcommerceStoreEntities _dbctx = new MultivendorEcommerceStoreEntities();
      
         #region Manage Supplier
@@ -158,6 +130,51 @@ namespace MultivendorEcommerceStore.BL
 
         #endregion
 
+
+        #region Manage Customers
+
+        // EDIT: EXISTING Customer(For Admin Side)
+        public EditCustomerViewModel EditCustomerInfo(string userID, Guid customerID)
+        {
+            var customerRepo = new CustomerRepository();
+            var customer = customerRepo.Retrive().Where(s => s.AspNetUserID == userID && s.CustomerID == customerID).FirstOrDefault();
+
+            EditCustomerViewModel viewModel = new EditCustomerViewModel();
+            viewModel.AspNetUserID = customer.AspNetUserID;
+            viewModel.CustomerID = customer.CustomerID;
+            viewModel.FirstName = customer.FirstName;
+            viewModel.LastName = customer.LastName;
+            viewModel.EmailAddress = customer.Email;
+            viewModel.Mobile = customer.Mobile;
+            viewModel.Address = customer.Address;
+            return viewModel;
+        }
+
+        // EDIT: Save Edited Customer(For Admin Side)
+        public void SaveEditedCustomerInfo(EditCustomerViewModel viewModel)
+        {
+            var customerRepo = new CustomerRepository();
+            var customer = new Customer();
+
+            customer.CustomerID = viewModel.CustomerID;
+            customer.AspNetUserID = viewModel.AspNetUserID;
+            customer.FirstName = viewModel.FirstName;
+            customer.LastName = viewModel.LastName;
+            customer.Email = viewModel.EmailAddress;
+            customer.Address = viewModel.Address;
+            customer.Mobile = viewModel.Mobile;
+
+            customerRepo.Update(customer);
+        }
+
+
+
+
+
+        #endregion
+
+
+
         #region CountryStateCity
 
         // GET: Countries
@@ -183,36 +200,11 @@ namespace MultivendorEcommerceStore.BL
 
         #endregion
 
-        #region Dashboard Statistics
-
-        public int GetAllUserCount()
-        {
-            var aspNetUserRepo = new AspNetUsersRepository();
-            return aspNetUserRepo.Retrive().Count();
-        }
-
-        public int GetSupplierCount()
-        {
-            var supplierRepo = new SupplierRepository();
-            return supplierRepo.Retrive().Count();
-        }
-
-        public int GetCustomerCount()
-        {
-            var customerRepo = new CustomerRepository();
-            return customerRepo.Retrive().Count();
-        }
 
 
-        public int GetProductCount()
-        {
-            var productRepo = new ProductRepository();
-            return productRepo.Retrive().Count();
-        }
+      
 
 
 
-
-        #endregion 
     }
 }

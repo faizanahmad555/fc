@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.ProfilePhoto, new { @class = "col-md-2 control-label" })
                                 <div class="col-md-3">
-                                    <input type="file" name="ProfilePhoto" value="ProfilePhoto" class="btn btn-default" />
+                                    @Html.TextBoxFor(m => m.ProfilePhoto, new { Type = "File", @class = "form-control file-upload" })
                                     @Html.ValidationMessageFor(model => model.ProfilePhoto, "", new { @class = "text-danger" })
                                 </div>
                             </div>

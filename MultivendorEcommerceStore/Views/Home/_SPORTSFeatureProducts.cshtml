@@ -25,7 +25,7 @@
                 @*<div class="owl-carousel-vertical" data-items="1" data-nav="true" data-dots="false" data-loop="true">
                 *@
                 <div class="item">
-                    <ul class="sub-category-list">
+                    @*<ul class="sub-category-list">
                         @foreach (var Mainitem in Model)
                         {
                             foreach (var item in Mainitem.CategoryListVM.Where(c => c.DisplayOrder == 2 & c.CategoryName == "SPORTS").ToList())
@@ -40,7 +40,7 @@
                                 }
                             }
                         }
-                    </ul>
+                    </ul>*@
                 </div>
                 @*<div class="item">
                         <ul class="sub-category-list">
@@ -91,12 +91,17 @@
                                                 <div class="left-block">
                                                     <a href="@Url.Action("ProductDetail", "Home" , new { ProductID=item.ProductID })"><img class="img-responsive" alt="product" src="@Url.Content(item.ProductImage1)" width="268" height="327" /></a>
                                                     <div class="quick-view">
-                                                        <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                        <a title="Add to compare" class="compare" href="#"></a>
-                                                        <a title="Quick view" class="search" href="#"></a>
+
+                                                        <button title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID"><i class="glyphicon glyphicon-heart"></i></button>
+                                                        <button href="#" data-toggle="modal" data-target="#productModal_@item.ProductID" title="Quick view"><i class="glyphicon glyphicon-zoom-in"></i></button>
+
+                                                        @*<a href="#" title="Add to my wishlist" class="heart" value="@item.ProductID"></a>*@
+                                                        @*<a title="Add to compare" class="compare" href="#"></a>*@
+                                                        @*<a title="Quick view" class="search" href="#"></a>*@
                                                     </div>
-                                                    <div class="add-to-cart">
-                                                        <a title="Add to Cart" href="#">Add to Cart</a>
+
+                                                    <div class="button-group center">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp; <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -113,3 +118,106 @@
     </div>
 </div>
 <!-- end featured category sports-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+@foreach (var featureProduct in Model)
+{
+    foreach (var item in featureProduct.ProductListVM.Where(p => p.Active == "Yes" && p.FeatureProduct == true && p.CategoryName == "SPORTS"))
+    {
+        <div class="modal fade" id="productModal_@item.ProductID" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="primary-box row">
+                            <div class="pb-left-column col-xs-12 col-sm-5">
+                                <!-- product-imge-->
+                                <div class="product-image">
+                                    <div class="product-full">
+                                        <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
+                                            <img id="product-zoom" src='@Url.Content(item.ProductImage1)' data-zoom-image="@Url.Content(item.ProductImage1)" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- product-imge-->
+                            </div>
+
+                            <div class="pb-right-column col-xs-12 col-sm-7">
+                                <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
+                                    <h4 class="product-name">@item.ProductName</h4>
+                                </a>
+                                <br />
+                                <div class="product-price-group">
+                                    <h5> <span class="price">@item.Price Rs.</span> </h5>
+
+                                    <div class="pull-right" style="border:1px solid #eaeaea; padding:0px; text-align:center;">
+                                        <div style="font-size:14px; background-color:lightgrey;">
+                                            Sold By:
+                                            <br />
+                                        </div>
+                                        <p style="text-align:left; padding-left:8px;">
+                                            <a href="@Url.Action("SupplierProducts","Home", new { SupplierID = item.SupplierID })"><stong>@item.SupplierName</stong></a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="product-desc">
+                                    <hr />
+                                    @item.ProductDescription
+                                    <hr />
+                                </div>
+
+
+                                <div class="form-option">
+                                    <p class="form-option-title"><strong> Available Options: </strong> </p>
+                                    <br />
+                                    <div class="attributes">
+                                        <div class="attribute-label">Qty:</div>
+                                        <div class="attribute-list product-qty">
+                                            <div class="qty">
+
+                                                @*<input id="option-product-qty" type="text" value="1">*@
+                                                <input type="number" id="NumberField_@item.ProductID" class="numberfield" value="" min="1">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="form-action">
+                                    <div class="button-group">
+                                        <button title="Add to Cart" value="@item.ProductID" class="btn-add-cart AddToCart" type="button">Add to Cart</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div><!-- .modal-body -->
+                </div><!-- .modal-content -->
+            </div><!-- .modal-dialog -->
+        </div>
+    <!-- END Modal -->
+
+
+    }
+}

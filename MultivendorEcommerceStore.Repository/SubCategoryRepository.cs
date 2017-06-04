@@ -23,10 +23,10 @@ namespace MultivendorEcommerceStore.Repository
             return _db.SubCategories.ToList();
         }
 
-        public SubCategory GetByID(Guid id)
+        public SubCategory GetByID(Guid? id)
         {
             _db = new MultivendorEcommerceStoreEntities();
-            return _db.SubCategories.Where(c => c.CategoryID == id).FirstOrDefault();
+            return _db.SubCategories.Where(c => c.SubCategoryID == id).FirstOrDefault();
         }
 
         

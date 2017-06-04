@@ -14,33 +14,6 @@ namespace MultivendorEcommerceStore.BL
     public class CustomerBL
     {
 
-        public dynamic GetCustomersForChart()
-        {
-            var customerRepo = new CustomerRepository();
-            dynamic cust = "";
-
-            try
-            {
-                cust = customerRepo.Retrive().GroupBy(item => item.CreatedOn.Value.Date)
-           .Select(group => new
-           {
-
-               CreatedOn = group.Key,
-               Count = group.Count()
-           })
-           .ToList();
-
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-
-            return cust;
-        }
-
-
         // ADD: Customer
         public void CustomerRegister(CustomerLoginRegisterViewModel model)
         {
@@ -89,10 +62,10 @@ namespace MultivendorEcommerceStore.BL
 
 
         // GET: All Customers (For Admin Side)
-        public List<CustomerListViewModel> CustomerList()
+        public IEnumerable<CustomerListViewModel> CustomerList()
         {
-            ICustomerRepository customerRepo = new CustomerRepository();
-            List<CustomerListViewModel> viewModelList = new List<CustomerListViewModel>();
+            var customerRepo = new CustomerRepository();
+            List<CustomerListViewModel> customersList = new List<CustomerListViewModel>();
 
             var customerTbl = customerRepo.Retrive().ToList();
 
@@ -105,11 +78,30 @@ namespace MultivendorEcommerceStore.BL
                 viewModel.FirstName = customer.FirstName;
                 viewModel.LastName = customer.LastName;
                 viewModel.Email = customer.Email;
-                //viewModel.Phone = customer.Phone;
+                viewModel.Phone = customer.Mobile;
+                viewModel.Address = customer.Address;
                 viewModel.CreatedOn = customer.CreatedOn;
-                viewModelList.Add(viewModel);
+                customersList.Add(viewModel);
             }
-            return viewModelList;
+            return customersList;
+        }
+
+
+
+
+        public IEnumerable<CustomerListViewModel> GetCustomersByRange(DateTime from, DateTime to)
+        {
+            return new CustomerRepository().Retrive().Where(s => s.CreatedOn >= from && s.CreatedOn <= s.CreatedOn).Select(i => new CustomerListViewModel
+            {
+                CustomerID = i.CustomerID,
+                AspNetUserID = i.AspNetUserID,
+                FirstName = i.FirstName,
+                LastName = i.LastName,
+                Email = i.Email,
+                Phone = i.Mobile,
+                Address = i.Address,
+                CreatedOn = i.CreatedOn,
+            });
         }
 
 
@@ -118,7 +110,27 @@ namespace MultivendorEcommerceStore.BL
         {
             ICustomerRepository customerRepo = new CustomerRepository();
             customerRepo.Delete(UserID);
-        } 
+        }
+
+
+        // GET: Current Customer Orders(For Front End Side)
+        public IEnumerable<DisplayOrderViewModel> GetMyOrder(Guid? customerID)
+        {
+            var orderRepo = new OrderRepository();
+            var orders = orderRepo.GetByCustomerID(customerID);
+            return orders.Select(s => new DisplayOrderViewModel
+            {
+                CreatedOn = s.CreatedOn,
+                OrderID = s.OrderID,
+                CustomerName = s.Customer.FirstName,
+                Shipping = s.Shipping,
+                SubTotal = s.SubTotal,
+                Tax = s.Tax,
+                Total = s.Total,
+            });
+        }
+
+
 
     }
 }

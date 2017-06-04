@@ -11,62 +11,6 @@ namespace MultivendorEcommerceStore.BL
 {
     public class OrderBL
     {
-        public dynamic GetOrdersForChart()
-        {
-            var orderRepo = new OrderRepository();
-            dynamic ords = "";
-
-            try
-            {
-                ords = orderRepo.Get().GroupBy(item => item.CreatedOn.Value.Date)
-           .Select(group => new
-           {
-
-               CreatedOn = group.Key,
-               Count = group.Count()
-           })
-           .ToList();
-
-            }
-
-            catch (Exception ex)
-            {
-                
-            }
-
-           
-            return ords;
-        }
-
-
-        public dynamic GetOrdersChartForSuppliers(Guid? supplierID)
-        {
-            var orderRepo = new OrderRepository();
-            dynamic ords = "";
-
-            try
-            {
-                ords = orderRepo.GetBySupplierID(supplierID).GroupBy(item => item.CreatedOn.Value.Date)
-           .Select(group => new
-           {
-
-               CreatedOn = group.Key,
-               Count = group.Count()
-           })
-           .ToList();
-
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-
-
-            return ords;
-        }
-
-
         public void AddOrderDetail(AddOrderDetailViewModel viewModel)
         {
             IOrderDetailRepository repo = new OrderDetailRepository();
@@ -198,5 +142,27 @@ namespace MultivendorEcommerceStore.BL
             return orderList;
         }
 
+
+
+
+        // GET: Order By DateTime Range(For Admin Side)
+        public IEnumerable<DisplayOrderViewModel> GetAllOrdersByRange(DateTime from, DateTime to)
+        {
+            var orderRepo = new OrderRepository();
+            var customerRepo = new CustomerRepository();
+            IEnumerable<DisplayOrderViewModel> orderList = orderRepo.Get().Where(w => w.CreatedOn >= from && w.CreatedOn <= to).Select(s => new DisplayOrderViewModel
+            {
+                OrderID = s.OrderID,
+                CustomerName = s.Customer.FirstName,
+                Email = s.Customer.Email,
+                Mobile = s.Customer.Mobile,
+                CreatedOn = s.CreatedOn,
+                Tax = s.Tax,
+                Total = s.Total,
+                Shipping = s.Shipping,
+                SubTotal = s.SubTotal,
+            });
+            return orderList;
+        }
     }
 }

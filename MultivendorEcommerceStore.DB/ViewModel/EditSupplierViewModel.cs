@@ -43,7 +43,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public string Email { get; set; }
 
 
-        //Improve
+
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]

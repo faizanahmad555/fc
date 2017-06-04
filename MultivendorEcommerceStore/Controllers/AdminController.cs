@@ -9,18 +9,29 @@ using System.Web.Mvc;
 namespace MultivendorEcommerceStore.Controllers
 {
     [Authorize(Roles = "Admin")]
+
     public class AdminController : AdminBaseController
     {
         // Dashboard
         public ActionResult Index()
         {
-            AdminDashboardBL BL = new AdminDashboardBL();
-            //var model = new DashboardStatisticsVM();
-            //model.OrdersCount = new AdminDashboardBL().GetAllOrdersCount();
-            //model.AllOrders = new ShopBL().GetAllOrdersCount();
+            var adminBL = new AdminDashboardBL();
+            var model = new DashboardStatisticsVM();
 
-            return View(BL.DashboardStats());
+            model.UsersCount = adminBL.GetAllUsersCount();
+            model.SuppliersCount = adminBL.GetAllSuppliersCount();
+            model.CustomersCount = adminBL.GetAllCustomersCount();
+            model.ProductsCount = adminBL.GetAllProductsCount();
+            model.OrdersCount = adminBL.GetAllOrdersCount();
+
+            model.SuppliersChart = adminBL.GetAllSuppliersForChart();
+            model.CustomersChart = adminBL.GetAllCustomersForChart();
+            model.ProductsChart = adminBL.GetAllProductsForChart();
+            model.OrdersChart = adminBL.GetAllOrdersForChart();
+
+            return View(model);
         }
+
 
         #region Manage Supplier
 
@@ -28,50 +39,78 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult AddSupplier()
         {
-            AdminBL adminBL = new AdminBL();
-            var countries = adminBL.GetCountries().Select(c => new
+            try
             {
-                Text = c.Name,
-                Value = c.CountryID
-            }).ToList();
-            ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
-            return View();
+                var adminBL = new AdminBL();
+                var countries = adminBL.GetCountries().Select(c => new
+                {
+                    Text = c.Name,
+                    Value = c.CountryID
+                }).ToList();
+                ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
-        
+
 
         // ADD: Supplier Business Information
         [HttpGet]
         public ActionResult AddBusinessInfo(string userID)
         {
-            if (userID != null)
+            try
             {
-                AdminBL adminBL = new AdminBL();
-                ViewBag.SupplierID = adminBL.GetSupplierByUserID(userID);
-                return View();
+                if (userID != null)
+                {
+                    var adminBL = new AdminBL();
+                    ViewBag.SupplierID = adminBL.GetSupplierByUserID(userID);
+                    return View();
+                }
+                return RedirectToAction("AddSupplier", "Admin");
             }
-            return RedirectToAction("AddSupplier", "Admin");
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
         [HttpPost]
         public ActionResult AddBusinessInfo(AddSupplierBusinessInfoVM model)
         {
-            if (model != null)
+            try
             {
-                AdminBL adminBL = new AdminBL();
-                adminBL.AddBusinessInfo(model);
-                return View("Index");
+                if (model != null)
+                {
+                    var adminBL = new AdminBL();
+                    adminBL.AddBusinessInfo(model);
+                    return RedirectToAction("SupplierList", "Admin");
+                }
+                return RedirectToAction("AddSupplier", "Admin");
             }
-            return View();
-        }
 
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
 
 
         // SHOW: All Suppliers
         [HttpGet]
         public ActionResult SupplierList()
         {
-            var adminBL = new AdminBL();
-            return View(adminBL.SupplierList());
+            try
+            {
+                var adminBL = new AdminBL();
+                return View(adminBL.SupplierList());
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
 
@@ -79,38 +118,49 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult EditSupplier(string UserID, Guid SupplierID)
         {
-            if (UserID != null && SupplierID != null)
+            try
             {
-                AdminBL adminBL = new AdminBL();
-                SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
-                var countries = adminBL.GetCountries().Select(c => new
+                if (UserID != null && SupplierID != null)
                 {
-                    Text = c.Name,
-                    Value = c.CountryID
-                }).ToList();
-                ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
-                EditSupplierViewModel viewModel = supplierProfileBL.EditSupplierProfile(UserID, SupplierID);
-                return View(viewModel);
+                    var adminBL = new AdminBL();
+                    var supplierProfileBL = new SupplierProfileBL();
+                    var countries = adminBL.GetCountries().Select(c => new
+                    {
+                        Text = c.Name,
+                        Value = c.CountryID
+                    }).ToList();
+                    ViewBag.CountryDropDown = new SelectList(countries, "Value", "Text");
+                    EditSupplierViewModel viewModel = supplierProfileBL.EditSupplierProfile(UserID, SupplierID);
+                    return View(viewModel);
+                }
+                return RedirectToAction("SupplierList", "Admin");
             }
-            else
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
             }
         }
 
         [HttpPost]
         public ActionResult EditSupplier(EditSupplierViewModel viewModel)
         {
-            SupplierProfileBL supplierProfileBL = new SupplierProfileBL();
-            supplierProfileBL.AddEditedSupplierProfile(viewModel);
-            return RedirectToAction("SupplierList");
+            try
+            {
+                var supplierProfileBL = new SupplierProfileBL();
+                supplierProfileBL.AddEditedSupplierProfile(viewModel);
+                return RedirectToAction("SupplierList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
 
         // DELETE: All Suppliers
         public bool DeleteSupplier(string UserID)
         {
-            AdminBL adminBL = new AdminBL();
+            var adminBL = new AdminBL();
             adminBL.DeleteSupplier(UserID);
             return true;
         }
@@ -202,14 +252,42 @@ namespace MultivendorEcommerceStore.Controllers
 
         #region Manage Products
 
-        // SHOW: Products of All Suppliers
+        //SHOW: Products of All Suppliers
+        [HttpGet]
         public ActionResult ProductList()
         {
-            ProductBL productBL = new ProductBL();
-            return View(productBL.ProductList());
+            try
+            {
+                var model = new ProductReporViewModel();
+                var productBL = new ProductBL();
+
+                model.Products = productBL.ProductList();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
-        
+        [HttpPost]
+        public ActionResult ProductList(ProductReporViewModel viewModel)
+        {
+            try
+            {
+                var model = new ProductReporViewModel();
+                var productBL = new ProductBL();
+                model.Products = productBL.GetProductsByRange(viewModel.From, viewModel.To);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
+
         // EDIT: Existing Products of All Suppliers
         [HttpGet]
         public ActionResult EditProduct(Guid SupplierID, Guid ProductID)
@@ -224,7 +302,7 @@ namespace MultivendorEcommerceStore.Controllers
         {
             ProductBL productBL = new ProductBL();
             productBL.AddEditedSupplierProduct(viewModel);
-            return RedirectToAction("ProductList");
+            return RedirectToAction("ProductList", "Admin");
         }
 
 
@@ -244,22 +322,85 @@ namespace MultivendorEcommerceStore.Controllers
         #region Manage Customer
 
         // SHOW: All Customers
+
         [HttpGet]
         public ActionResult CustomerList()
         {
-            CustomerBL customerBL = new CustomerBL();
-            return View(customerBL.CustomerList());
+            try
+            {
+                var model = new CustomersReportViewModel();
+                var customerBL = new CustomerBL();
+                model.Customers = customerBL.CustomerList();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
+        [HttpPost]
+        public ActionResult CustomerList(CustomersReportViewModel viewModel)
+        {
+            try
+            {
+                var customerBL = new CustomerBL();
+                var customers = customerBL.GetCustomersByRange(viewModel.From, viewModel.To).OrderByDescending(s => s.CreatedOn);
+                viewModel.Customers = null;
+                viewModel.Customers = customers;
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
+        // EDIT: Existing Customers
+        [HttpGet]
+        public ActionResult EditCustomer(string UserID, Guid CustomerID)
+        {
+            try
+            {
+                if (UserID != null && CustomerID != null)
+                {
+                    var adminBL = new AdminBL();
+                    EditCustomerViewModel viewModel = adminBL.EditCustomerInfo(UserID, CustomerID);
+                    return View(viewModel);
+                }
+                return RedirectToAction("CustomerList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        // EDIT: Save Edited Customers Info
+        [HttpPost]
+        public ActionResult EditCustomer(EditCustomerViewModel viewModel)
+        {
+            try
+            {
+                var adminBL = new AdminBL();
+                adminBL.SaveEditedCustomerInfo(viewModel);
+                return RedirectToAction("CustomerList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
 
         // DELETE: Customers
         public bool DeleteCustomer(string UserID)
         {
-            CustomerBL customerBL = new CustomerBL();
+            var customerBL = new CustomerBL();
             customerBL.DeleteCustomer(UserID);
             return true;
         }
-       
+
         #endregion
 
 
@@ -320,6 +461,23 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult OrderList(OrderReportViewModel viewModel)
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetAllOrdersByRange(viewModel.From, viewModel.To);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
         public ActionResult OrderDetails(Guid orderID)
         {
             try
@@ -340,8 +498,25 @@ namespace MultivendorEcommerceStore.Controllers
             }
         }
 
+
         #endregion
 
+
+        #region Google Maps
+
+
+        public ActionResult GoogleMaps()
+        {
+            return View();
+        }
+
+        #endregion
+
+
+        public ActionResult DatetimePicker()
+        {
+            return View();
+        }
 
 
     }
