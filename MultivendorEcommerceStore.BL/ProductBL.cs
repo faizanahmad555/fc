@@ -213,30 +213,19 @@ namespace MultivendorEcommerceStore.BL
 
 
         // SHOW: Current Supplier Products(For Supplier Side)
-        public List<ProductListViewModel> GetProductsBySupplierID(Guid SupplierID)
+        public IEnumerable<DisplayProductViewModel> GetProductsBySupplierID(Guid SupplierID)
         {
             var productRepo = new ProductRepository();
-            var supplierRepo = new SupplierRepository();
-            var businessInfoRepo = new SupplierBusinessInfo();
-            var categoryRepo = new CategoryRepository();
             var subCategoryRepo = new SubCategoryRepository();
-
-            List<ProductListViewModel> viewModelList = new List<ProductListViewModel>();
-
+            List<DisplayProductViewModel> viewModelList = new List<DisplayProductViewModel>();
             var productTbl = productRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
-            var supplierbusinessInfoTbl = businessInfoRepo.Retrive().Where(p => p.SupplierID == SupplierID).ToList();
-
-
             foreach (var product in productTbl)
             {
-                var category = categoryRepo.Retrive().Where(c => c.CategoryID == product.CategoryID).FirstOrDefault();
                 var subCategory = subCategoryRepo.Retrive().Where(c => c.SubCategoryID == product.SubCategoryID).FirstOrDefault();
-
-                ProductListViewModel viewModel = new ProductListViewModel();
-
+                DisplayProductViewModel viewModel = new DisplayProductViewModel();
                 viewModel.SupplierID = product.SupplierID;
                 viewModel.ProductID = product.ProductID;
-                viewModel.CategoryName = category.CategoryName;
+                viewModel.CategoryName = product.Category.CategoryName;
                 viewModel.SubCategoryName = subCategory.SubCategoryName;
                 viewModel.ProductName = product.ProductName;
                 viewModel.ProductDescription = product.ProductDescription;
@@ -251,6 +240,34 @@ namespace MultivendorEcommerceStore.BL
             }
             return viewModelList;
         }
+
+        public IEnumerable<DisplayProductViewModel> GetProductsByRange(Guid? supplierID, DateTime from, DateTime to)
+        {
+            var productRepo = new ProductRepository();
+            var subCategoryRepo = new SubCategoryRepository();
+            var products = productRepo.GetBySupplierID(supplierID).Where(s => s.CreatedOn >= from && s.CreatedOn <= to);
+            IEnumerable<DisplayProductViewModel> productList = products.Select(w => new DisplayProductViewModel
+            {
+                SupplierID = w.SupplierID,
+                ProductID = w.ProductID,
+                CategoryName = w.Category.CategoryName,
+                SubCategoryName = subCategoryRepo.GetByID(w.SubCategoryID).SubCategoryName,
+                ProductName = w.ProductName,
+                ProductDescription = w.ProductDescription,
+                ProductImage1 = w.ProductPicture,
+                Price = w.UnitPrice,
+                Quantity = w.Quantity,
+                Size = w.UnitSize,
+                Status = Enum.GetName(typeof(ProductStatus), w.Status),
+                Active = Enum.GetName(typeof(ProductActive), w.IsActive),
+                CreatedOn = w.CreatedOn,
+            });
+            return productList;
+        }
+
+
+
+
 
         public DisplayProductViewModel GetProductByID(Guid? productID)
         {

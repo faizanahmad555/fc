@@ -15,7 +15,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public HttpPostedFileBase Picture { get; set; }
 
         [Required(ErrorMessage = "This filed is required")]
-        [StringLength(50, ErrorMessage = "No more than 50 characters", MinimumLength = 1)]
+        [StringLength(20, ErrorMessage = "No more than 20 characters", MinimumLength = 1)]
         [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         [Display(Name = "Category Name")]
         public string CategoryName { get; set; }
@@ -23,7 +23,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Display Order")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a natural number")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
         public int DisplayOrder { get; set; }
 
         //[Required(ErrorMessage = "This field is required")]

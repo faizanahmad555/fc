@@ -238,7 +238,7 @@ namespace MultivendorEcommerceStore.Controllers
             message.To.Add(new MailAddress(order.Customer.Email));
 
             message.Subject = "Your Order Details";
-            message.Body = "<h1>Dear, " + order.Customer.FirstName + "</h1><br><br>You order For this product <br><br><br>" + order.OrderDetails.Select(o=>o.Product.ProductPicture) + "<h6>" + order.OrderDetails.Select(o=>o.Product.ProductName) + "</h6> <br><br> You Wil Recieve Your Order in next 2 - 3 Business days <br><br> Thanks <br><strong>Fine Collection</strong>";
+            message.Body = "<h1>Dear, " + order.Customer.FirstName + "</h1><br><br> You Wil Recieve Your Order in next 2 - 3 Business days <br><br> Thanks <br><strong>Fine Collection</strong>";
             message.IsBodyHtml = true;
             //// For File Attachment..
             //message.Attachments.Add(new Attachment(PathToSave));
@@ -260,31 +260,31 @@ namespace MultivendorEcommerceStore.Controllers
 
 
 
-            ////For message sending
-            //String username = "finecollection";
-            //String password = "Pakistan@123";
-            //String from = "03059337887";
-            //String to = order.Customer.Mobile;
-            //String messageBody = "Dear" + order.Customer.FirstName +"! You will receive your order in 2 - 3 business days. Thank You for shopping at Fine Collection";
-            //String URL = "http://Lifetimesms.com" +
-            //"/plain?" +
-            //"username=" + username +
-            //"&password=" + password +
-            //"&from=" + from +
-            //"&to=" + to +
-            //"&message=" + Uri.UnescapeDataString(messageBody);
-            //try
-            //{
-            //    WebRequest req = WebRequest.Create(URL);
-            //    WebResponse resp = req.GetResponse();
+            //For message sending
+            String username = "finecollection";
+            String password = "Pakistan@123";
+            String from = "03059337887";
+            String to = order.Customer.Mobile;
+            String messageBody = "Dear" + order.Customer.FirstName + "! You will receive your order in 2 - 3 business days. Thank You for shopping at Fine Collection";
+            String URL = "http://Lifetimesms.com" +
+            "/plain?" +
+            "username=" + username +
+            "&password=" + password +
+            "&from=" + from +
+            "&to=" + to +
+            "&message=" + Uri.UnescapeDataString(messageBody);
+            try
+            {
+                WebRequest req = WebRequest.Create(URL);
+                WebResponse resp = req.GetResponse();
 
 
-            //}
-            //catch (Exception)
-            //{
+            }
+            catch (Exception)
+            {
 
 
-            //}
+            }
 
 
 

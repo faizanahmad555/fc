@@ -86,8 +86,38 @@ namespace MultivendorEcommerceStore.Controllers
         [HttpGet]
         public ActionResult ProductList()
         {
-            ProductBL productBL = new ProductBL();
-            return View(productBL.GetProductsBySupplierID(User.Identity.GetSupplierCurrentID()));
+            try
+            {
+                var productBL = new ProductBL();
+                var model = new ProductReporViewModel();
+                var supplierID = User.Identity.GetSupplierCurrentID();
+                model.Products = productBL.GetProductsBySupplierID(supplierID).OrderByDescending(s => s.CreatedOn);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        //SHOW: Products According to Date Range
+        [HttpPost]
+        public ActionResult ProductList(ProductReporViewModel viewmodel)
+        {
+            try
+            {
+                var productBL = new ProductBL();
+                var model = new ProductReporViewModel();
+                var supplierID = User.Identity.GetSupplierCurrentID();
+                var products = productBL.GetProductsByRange(supplierID, viewmodel.From, viewmodel.To).OrderByDescending(s => s.CreatedOn);
+                model.Products = null;
+                model.Products = products;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
         }
 
 
@@ -140,6 +170,25 @@ namespace MultivendorEcommerceStore.Controllers
                 return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
             }
         }
+
+        //GET: Orders According to Date Range
+        [HttpPost]
+        public ActionResult DisplayOrder(OrderReportViewModel viewModel)
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var supplierID = User.Identity.GetSupplierCurrentID();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetOrdersByRange(supplierID, viewModel.From, viewModel.To).OrderByDescending(s => s.CreatedOn);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
 
 
         //Display Order detail by orderID

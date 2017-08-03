@@ -1,0 +1,16 @@
+﻿
+
+<div class="col-xs-4 col-sm-7 header-search-box">
+    <div class="form-inline">
+       
+        @using (@Html.BeginForm("Search", "Home", FormMethod.Post))
+        {
+            <div class="form-group form-category">
+            </div>
+            <div class="form-group input-serach">
+                <input type="text" name="search" placeholder="Keyword here...">
+            </div>
+            <button type="submit" class="pull-right btn-search"></button>
+        }
+    </div>
+</div>

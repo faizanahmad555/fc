@@ -126,6 +126,9 @@ namespace MultivendorEcommerceStore.BL
         }
 
 
+
+
+
         // GET: Category(For Category DropDown)
         public IEnumerable<Category> GetCategories()
         {

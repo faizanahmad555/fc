@@ -20,7 +20,7 @@ namespace MultivendorEcommerceStore.Repository
 
         Product GetBySupplierId(Guid id);
 
-
+        IEnumerable<Product> GetBySupplierID(Guid? supplierID);
 
         int? ChangeActiveStatus(Product entity);
 

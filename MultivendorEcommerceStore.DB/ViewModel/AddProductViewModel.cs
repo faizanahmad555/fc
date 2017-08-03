@@ -12,11 +12,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public Guid SupplierID { get; set; }
 
+        [Display(Name = "Category")]
         public Guid CategoryID { get; set; }
 
+        [Display(Name = "Sub Category")]
         public Guid SubCategoryID { get; set; }
 
 
+        [Display(Name = "SubCategory Item")]
         public Guid SubCategoryItemID { get; set; }
 
 
@@ -50,7 +53,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         public HttpPostedFileBase ProductImage1 { get; set; }
 
 
-        
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Price")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
@@ -75,10 +78,10 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [StringLength(10, ErrorMessage = "No more than 10 characters.", MinimumLength = 1)]
         public string Size { get; set; }
 
-       
+
         [Display(Name = "Apply For Feature?")]
         public bool FeatureProduct { get; set; }
 
-       
+
     }
 }

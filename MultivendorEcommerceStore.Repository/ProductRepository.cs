@@ -79,5 +79,11 @@ namespace MultivendorEcommerceStore.Repository
         }
 
 
+        public IEnumerable<Product> GetBySupplierID(Guid? supplierID)
+        {
+            _db = new MultivendorEcommerceStoreEntities();
+            var list = _db.Products.Where(s => s.SupplierID == supplierID).ToList();
+            return list;
+        }
     }
 }

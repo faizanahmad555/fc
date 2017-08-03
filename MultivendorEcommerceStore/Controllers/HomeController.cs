@@ -7,10 +7,11 @@ using System.Linq;
 using System.Collections.Generic;
 using MultivendorEcommerceStore.Utility;
 using MultivendorEcommerceStore.Repository;
+using MultivendorEcommerceStore.DB.Model;
 
 namespace MultivendorEcommerceStore.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
@@ -22,6 +23,15 @@ namespace MultivendorEcommerceStore.Controllers
             return View();
         }
 
+        public ActionResult Search(string search)
+        {
+            MultivendorEcommerceStoreEntities _db = new MultivendorEcommerceStoreEntities();
+
+            var searchProduct = _db.Products.Where(x => x.ProductName.StartsWith(search) || x.ProductDescription.StartsWith(search) || x.Category.CategoryName.StartsWith(search)).ToList();
+            return View(searchProduct);
+
+            //_db.Products.Where(x => x.ProductName.StartsWith(search) || x.ProductDescription.StartsWith(search) || x.Category.CategoryName.StartsWith(search)).ToList()
+        }
 
         #region Company Info
 
@@ -220,7 +230,7 @@ namespace MultivendorEcommerceStore.Controllers
         public ActionResult MyOrder()
         {
             var customerBL = new CustomerBL();
-            var model =new CustomerDetailViewModel();
+            var model = new CustomerDetailViewModel();
 
             model.CustomerOrders = customerBL.GetMyOrder(User.Identity.GetCustomerCurrentID());
             //model.WishList = homeBL.GetMyWishList(User.Identity.GetCustomerCurrentID());

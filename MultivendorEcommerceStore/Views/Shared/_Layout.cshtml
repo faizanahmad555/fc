@@ -32,9 +32,9 @@
                 </div>
 
                 @*<div class="support-link">
-                    <a href="#">Services</a>
-                    <a href="#">Support</a>
-                </div>*@
+                        <a href="#">Services</a>
+                        <a href="#">Support</a>
+                    </div>*@
 
                 <div id="user-info-top" class="user-info pull-right">
                     <div class="dropdown">
@@ -65,25 +65,49 @@
         <!-- MAIN HEADER -->
         <div class="container main-header">
             <div class="row">
-                
+
                 <div class="col-xs-12 col-sm-3 logo">
                     <a href="@Url.Action("Index", "Home")"><img alt="Logo" src="~/Content/Images/Icons/FineCollection_Color.png" height="64" width="255" /></a>
                 </div>
-                <div class="col-xs-7 col-sm-7 header-search-box">
-                    @*<form class="form-inline">
-                        <div class="form-group form-category">
-                            <select class="select-category">
-                                <option value="2">All Categories</option>
-                                <option value="1">Men</option>
-                                <option value="2">Women</option>
-                            </select>
-                        </div>
-                        <div class="form-group input-serach">
-                            <input type="text" placeholder="Keyword here...">
-                        </div>
-                        <button type="submit" class="pull-right btn-search"></button>
-                    </form>*@
+
+
+                @*<div class="col-xs-7 col-sm-7 header-search-box">
+                        <form class="form-inline">
+                            <div class="form-group form-category">
+                                @*<select class="select-category">
+                                    @*<option value="2">All Categories</option>
+                                    <option value="1">Men</option>
+                                    <option value="2">Women</option>
+                                </select>
+                            </div>
+                            <div class="form-group input-serach">
+                                <input type="text" placeholder="Keyword here...">
+                            </div>
+                            <button type="submit" class="pull-right btn-search"></button>
+                        </form>
+                    </div>*@
+
+
+
+                <div class="col-xs-4 col-sm-7 header-search-box">
+                    <div class="form-inline">
+
+                        @using (@Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group form-category">
+                            </div>
+                            <div class="form-group input-serach">
+                                <input type="text" name="search" placeholder="Keyword here...">
+                            </div>
+                            <button type="submit" class="pull-right btn-search"></button>
+                        }
+                    </div>
                 </div>
+
+
+
+                @*@Html.Partial("_Search")*@
+
 
                 @Html.Partial("_QuickCart")
 
@@ -139,15 +163,15 @@
                             </ul>
                         </div>
                         @*<div class="col-sm-4">
-                            <div class="introduce-title">Support</div>
-                            <ul id="introduce-support" class="introduce-list">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Testimonials</a></li>
-                                <li><a href="#">Affiliate Program</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
-                            </ul>
-                        </div>*@
+                                <div class="introduce-title">Support</div>
+                                <ul id="introduce-support" class="introduce-list">
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">Affiliate Program</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                                </ul>
+                            </div>*@
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -165,43 +189,43 @@
             </div><!-- /#introduce-box -->
             <!-- #trademark-box -->
             @*<div id="trademark-box" class="row">
-                <div class="col-sm-12">
-                    <ul id="trademark-list">
-                        <li id="payment-methods">Accepted Payment Methods</li>
+                    <div class="col-sm-12">
+                        <ul id="trademark-list">
+                            <li id="payment-methods">Accepted Payment Methods</li>
 
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-ups.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-qiwi.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-wu.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-cn.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-visa.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-mc.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-ems.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-dhl.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-fe.jpg" alt="ups" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="~/assets/data/trademark-wm.jpg" alt="ups" /></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>*@ <!-- /#trademark-box -->
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-ups.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-qiwi.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-wu.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-cn.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-visa.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-mc.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-ems.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-dhl.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-fe.jpg" alt="ups" /></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="~/assets/data/trademark-wm.jpg" alt="ups" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@ <!-- /#trademark-box -->
 
             <div id="footer-menu-box">
                 <p class="text-center">Copyrights &#169; 2017 FineCollection. All Rights Reserved.</p>
@@ -221,42 +245,57 @@
 
     <script type="text/javascript">
         $('.AddToWishList').click(function () {
-        var value = $(this).val();
-        debugger;
-        $.ajax({
-            url: "/Ajax/AddtoWishList",
-            type: "POST",
-            datatype: "json",
-            data: { productId : value },
-            success: function (data) {
-                //int variable empty(0)
-                //var count = parseInt(0);
-                //var count = $("#WishListCount").text();
-                //$("#WishListCount").html(data);
-                alertify.success("Item successfully added...");
-            }
-        })
-    });
+            var value = $(this).val();
+            debugger;
+            $.ajax({
+                url: "/Ajax/AddtoWishList",
+                type: "POST",
+                datatype: "json",
+                data: { productId: value },
+                success: function (data) {
+                    //int variable empty(0)
+                    //var count = parseInt(0);
+                    //var count = $("#WishListCount").text();
+                    //$("#WishListCount").html(data);
+                    alertify.success("Item successfully added...");
+                }
+            })
+        });
 
-    function RemoveFromWishList(obj) {
-        var value = obj.value;
-        $.ajax({
-            url: "/Ajax/DeleteItemFromWishList",
-            type: "POST",
-            datatype: "json",
-            data: { wishListID: value, },
-            success: function (data) {
-                $("#Item_" + value).remove();
-                //$("#WishListCount").html(data);
-                alertify.success("Item successfully Removed...");
+        function RemoveFromWishList(obj) {
+            var value = obj.value;
+            $.ajax({
+                url: "/Ajax/DeleteItemFromWishList",
+                type: "POST",
+                datatype: "json",
+                data: { wishListID: value, },
+                success: function (data) {
+                    $("#Item_" + value).remove();
+                    //$("#WishListCount").html(data);
+                    alertify.success("Item successfully Removed...");
 
-            }
-        })
-    }
+                }
+            })
+        }
 
     </script>
 
     @RenderSection("scripts", required: false)
+
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+        window.$zopim || (function (d, s) {
+            var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+                z.set.
+                _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+            $.src = "https://v2.zopim.com/?4ue0414o5ECpkkgfTnIobFnUXFVZYAmV"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+        })(document, "script");
+    </script>
+    <!--End of Zendesk Chat Script-->
+
 
     <script type="text/javascript" src="~/assets/lib/jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="~/assets/lib/bootstrap/js/bootstrap.min.js"></script>

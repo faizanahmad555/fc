@@ -65,6 +65,7 @@
                             <span title="List View">list</span>
                         </li>
                     </ul>*@
+
                     <!-- PRODUCT LIST -->
                     <ul class="row product-list grid">
                         @foreach (var item in Model.Supplier)
@@ -103,6 +104,7 @@
                         }
                     </ul>
                     <!-- ./PRODUCT LIST -->
+
                 </div>
                 <!-- ./view-product-list-->
                 <div class="sortPagiBar">
@@ -223,6 +225,26 @@
                                     @item.Product.ProductDescription
                                     <hr />
                                 </div>
+
+
+
+                                <div class="form-option">
+                                    <p class="form-option-title"><strong> Available Options: </strong> </p>
+                                    <br />
+
+                                    <div class="attributes">
+                                        <div class="attribute-label">Qty:</div>
+                                        <div class="attribute-list product-qty">
+                                            <div class="qty">
+                                                @*<input id="option-product-qty" type="text" value="1">*@
+                                                <input type="number" id="NumberField_@item.ProductID" class="numberfield" value="" min="1">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
 
                                 <div class="form-action">
                                     <div class="button-group">

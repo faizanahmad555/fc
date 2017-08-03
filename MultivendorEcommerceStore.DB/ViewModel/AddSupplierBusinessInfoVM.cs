@@ -12,8 +12,6 @@ namespace MultivendorEcommerceStore.DB.ViewModel
     {
         public Guid SupplierID { get; set; }
 
-
-
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Company Name")]
         [StringLength(30, ErrorMessage = "No more than 30 characters.", MinimumLength = 1)]
@@ -44,14 +42,14 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^((\03-?)|0)?[0-9]{10}$", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"^((\03-?)|0)?[0-9]{11}$", ErrorMessage = "Not a valid Phone number")]
         public string Phone { get; set; }
 
 
         [Required(ErrorMessage = "Enter Business Experience Years")]
         [Display(Name = "Business Experience")]
-        [StringLength(50, ErrorMessage = "No more than 50 characters.", MinimumLength = 1)]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a natural number")]
+        [StringLength(2, ErrorMessage = "No more than 2 digits.", MinimumLength = 1)]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Must be a positive number")]
         public string BusinessExperience { get; set; }
 
 

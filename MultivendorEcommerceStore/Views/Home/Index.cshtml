@@ -25,6 +25,7 @@
     </div>
 </div>
 <!-- END Home slideder-->
+
 <!-- servives -->
 <div class="container">
     <div class="service ">
@@ -72,10 +73,7 @@
 <div class="content-page">
     <div class="option5 container">
 
-        <!-- featured category FASHION -->
-        @Html.Action("_FASHIONFeatureProducts", "Home")
-        <!-- end featured category FASHION -->
-
+     
         <!-- featured category SPORT -->
         @Html.Action("_SPORTSFeatureProducts", "Home")
         <!-- end featured category SPORT -->
@@ -89,12 +87,18 @@
         <!-- end featured category ELECTRONICS -->
 
         <!-- featured category FURNITURE -->
-        @*@Html.Action("_FURNITUREFeatureProducts", "Home")*@
+        @Html.Action("_FURNITUREFeatureProducts", "Home")
         <!-- end featured category FURNITURE -->
 
         <!-- featured category JEWELRY -->
-        @*@Html.Action("_JEWELRYFeatureProducts", "Home")*@
+        @Html.Action("_JEWELRYFeatureProducts", "Home")
         <!-- end featured category JEWELRY -->
+
+
+        <!-- featured category FASHION -->
+        @Html.Action("_FASHIONFeatureProducts", "Home")
+        <!-- end featured category FASHION -->
+
 
     </div>
 </div>

@@ -513,6 +513,47 @@ namespace MultivendorEcommerceStore.Controllers
         #endregion
 
 
+
+        #region Generate Reports
+
+        [HttpGet]
+        public ActionResult OrderReport()
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetAllOrders();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult orderreportsss(OrderReportViewModel viewModel)
+        {
+            try
+            {
+                var orderBL = new OrderBL();
+                var model = new OrderReportViewModel();
+                model.Orders = orderBL.GetAllOrdersByRange(viewModel.From, viewModel.To);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("PageNotFound", "Error", new { message = ex.Message });
+            }
+        }
+
+
+
+        #endregion
+
+
+
         public ActionResult DatetimePicker()
         {
             return View();

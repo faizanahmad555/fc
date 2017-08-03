@@ -63,7 +63,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^((\03-?)|0)?[0-9]{10}$", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"^((\03-?)|0)?[0-9]{11}$", ErrorMessage = "Not a valid Phone number")]
         public string MobileNumber { get; set; }
 
 
@@ -76,14 +76,17 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "Country")]
         public int Country { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "State")]
         public int State { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
+        [Display(Name = "City")]
         public int City { get; set; }
 
 

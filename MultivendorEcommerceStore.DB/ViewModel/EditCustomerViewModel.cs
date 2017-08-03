@@ -43,14 +43,15 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         [Required(ErrorMessage = "Address is Required")]
         [Display(Name = "Address")]
-        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Only Alphabets and Numbers allowed.")]
+        [StringLength(200, ErrorMessage = "No less than 1 & No more than 200 characters", MinimumLength = 1)]
+        [RegularExpression("[a-zA-Z #,-]+", ErrorMessage = "Please enter characters only")]
         public string Address { get; set; }
 
 
         [Required(ErrorMessage = "This field is required.")]
         [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^((\03-?)|0)?[0-9]{10}$", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"^((\03-?)|0)?[0-9]{11}$", ErrorMessage = "Not a valid Phone number")]
         public string Mobile { get; set; }
 
     }

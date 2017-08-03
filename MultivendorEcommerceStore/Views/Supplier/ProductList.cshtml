@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.ProductListViewModel>
+﻿@model MultivendorEcommerceStore.DB.ViewModel.ProductReporViewModel
 
 @{
     ViewBag.Title = "ProductList";
@@ -14,6 +14,38 @@
             Product's List
         </header>
         <div class="panel-body">
+
+            @using (Html.BeginForm("ProductList", "Supplier", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-group form-inline">
+                            <div class="col-md-5">
+                                <label for="From" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.From, new { @class = "form-control pickdate", @placeholder = "From", @hidden = "hidden" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                <label for="To" style="cursor:pointer">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </label>
+                                @Html.TextBoxFor(m => m.To, new { @class = "form-control pickdate", @placeholder = "To", @max = DateTime.Now })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" name="Find" value="Find" class="btn btn-primary btn-sm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
             <div class="adv-table editable-table ">
                 <div class="clearfix">
                     <div class="btn-group">
@@ -28,6 +60,9 @@
                 <div class="space15"></div>
 
                 <div class="table-responsive" id="ProductSToPrint">
+
+                    <div style="text-align:center; font-size:20px"><strong>Products's Stock Report</strong></div>
+
 
                     <table class="table table-striped table-hover" id="editable-sample" style="text-align:center">
                         <thead>
@@ -67,7 +102,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Products)
                             {
                                 <tr id='ProductToDelete_@item.ProductID'>
                                     <td>
@@ -124,6 +159,9 @@
     <!-- page end-->
 </section>
 <!--main content end-->
+
+
+
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
@@ -134,6 +172,30 @@
     </div>
 </footer>
 <!--footer end-->
+
+
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.pickdate').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    $(document).ready(function () {
+        $("#From").val("");
+        $("#To").val("");
+    });
+
+</script>
+
+
+
+
 @section Scripts{
 
     <!--script for Product Deletion and Change Active/InActive State-->

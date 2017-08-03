@@ -141,7 +141,25 @@ namespace MultivendorEcommerceStore.BL
             });
             return orderList;
         }
-
+        
+        // GET: Order By DateTime Range(For Supplier Side)
+        public IEnumerable<DisplayOrderViewModel> GetOrdersByRange(Guid? supplierID, DateTime from, DateTime to)
+        {
+            var orderRepo = new OrderRepository();
+            IEnumerable<DisplayOrderViewModel> orderList = orderRepo.GetBySupplierID(supplierID).Where(w => w.CreatedOn >= from && w.CreatedOn <= to).Select(s => new DisplayOrderViewModel
+            {
+                OrderID = s.OrderID,
+                CustomerName = s.Customer.FirstName,
+                Email = s.Customer.Email,
+                Mobile = s.Customer.Mobile,
+                CreatedOn = s.CreatedOn,
+                Tax = s.Tax,
+                Total = s.Total,
+                Shipping = s.Shipping,
+                SubTotal = s.SubTotal,
+            });
+            return orderList;
+        }
 
 
 

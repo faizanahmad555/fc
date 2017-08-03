@@ -91,7 +91,7 @@
                                 <div class="product-container">
                                     <div class="left-block">
                                         <a href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })">
-                                            <img src="@Url.Content(item.ProductImage1)?w=200&h=200&mode=stretch|" class="img img-thumbnail img-responsive" alt="Product Image" width="300" height="366" />
+                                            <img src="@Url.Content(item.ProductImage1)?w=200&h=200&mode=stretch|" class="img img-thumbnail img-responsive" alt="Product Image" width="300" height="300" />
                                         </a>
                                         <div class="quick-view">
                                             <button title="Add to my wishlist" class="AddToWishList heart" value="@item.ProductID"><i class="glyphicon glyphicon-heart"></i></button>
@@ -248,6 +248,26 @@
                                 @item.ProductDescription
                                 <hr />
                             </div>
+
+
+
+                            <div class="form-option">
+                                <p class="form-option-title"><strong> Available Options: </strong> </p>
+                                <br />
+
+                                <div class="attributes">
+                                    <div class="attribute-label">Qty:</div>
+                                    <div class="attribute-list product-qty">
+                                        <div class="qty">
+                                            @*<input id="option-product-qty" type="text" value="1">*@
+                                            <input type="number" id="NumberField_@item.ProductID" class="numberfield" value="" min="1">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
 
                             <div class="form-action">
                                 <div class="button-group">
