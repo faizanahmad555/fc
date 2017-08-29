@@ -26,7 +26,7 @@ namespace MultivendorEcommerceStore.DB.ViewModel
 
         public decimal? Total { get; set; }
 
-        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<Orders_Detail> OrderDetails { get; set; }
 
         public int OrderDetailID { get; set; }
 

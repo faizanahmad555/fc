@@ -1,0 +1,82 @@
+﻿@model MultivendorEcommerceStore.DB.ViewModel.AddCategoryViewModel
+
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Add New Category
+            </header>
+            <div class="panel-body">
+                <div class="form">
+                    <h2 style="text-align:center">Add Category</h2>
+                    @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="cmxform form-horizontal tasi-form">
+
+                            <h4 style="text-align:center">Add Different Categories of Products</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(m => m.LogoPath, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @*<input type="file" id="Picture" name="Picture" class="form-control file-upload" />*@
+                                    @Html.TextBoxFor(m => m.Picture, new { Type = "File", @*@id = "image-upload",*@ @class = "form-control file-upload" @*, onchange = "showpreview(this, 1)"*@ })
+
+                                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+                                    @*@html.validationmessagefor(m => m.logopath, "", new { @class = "text-danger" })*@
+                                </div>
+
+                                @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.DisplayOrder, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                <div class="col-md-offset-6 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-primary btn-lg" />
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

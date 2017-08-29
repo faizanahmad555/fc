@@ -18,7 +18,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public Customer()
         {
             this.CustomerNotifications = new HashSet<CustomerNotification>();
-            this.ReturnRequests = new HashSet<ReturnRequest>();
             this.WishLists = new HashSet<WishList>();
             this.Orders = new HashSet<Order>();
         }
@@ -58,8 +57,6 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual StateMaster StateMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerNotification> CustomerNotifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WishList> WishLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

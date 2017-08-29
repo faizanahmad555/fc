@@ -25,6 +25,10 @@ namespace MultivendorEcommerceStore.DB.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CityMaster> CityMasters { get; set; }
@@ -35,20 +39,31 @@ namespace MultivendorEcommerceStore.DB.Model
         public virtual DbSet<CustomerNotification> CustomerNotifications { get; set; }
         public virtual DbSet<DiscountVoucher> DiscountVouchers { get; set; }
         public virtual DbSet<EmailHistory> EmailHistories { get; set; }
-        public virtual DbSet<OrderHistory> OrderHistories { get; set; }
+        public virtual DbSet<FAQ> FAQs { get; set; }
+        public virtual DbSet<FAQ_Categories> FAQ_Categories { get; set; }
+        public virtual DbSet<FAQ_Category_Condition> FAQ_Category_Condition { get; set; }
+        public virtual DbSet<FAQ_Category_Condition_Device> FAQ_Category_Condition_Device { get; set; }
+        public virtual DbSet<HelpTicket> HelpTickets { get; set; }
+        public virtual DbSet<HtmlTemplate> HtmlTemplates { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Orders_Detail> Orders_Detail { get; set; }
+        public virtual DbSet<Orders_History> Orders_History { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductNotification> ProductNotifications { get; set; }
         public virtual DbSet<ReturnRequest> ReturnRequests { get; set; }
+        public virtual DbSet<SequenceNumber> SequenceNumbers { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual DbSet<ShoppingCart_Detail> ShoppingCart_Detail { get; set; }
+        public virtual DbSet<ShoppingCart_Registration> ShoppingCart_Registration { get; set; }
         public virtual DbSet<StateMaster> StateMasters { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubCategoryItem> SubCategoryItems { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<SupplierBusinessInformation> SupplierBusinessInformations { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<UserMessage> UserMessages { get; set; }
         public virtual DbSet<WishList> WishLists { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
     }
 }

@@ -192,7 +192,7 @@ namespace MultivendorEcommerceStore.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (model.Email == "admin@admin.com")
+                    if (model.Email == "finecollectionstore@gmail.com")
                     {
                         return RedirectToAction("Index", "Admin");
                     }

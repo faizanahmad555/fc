@@ -17,27 +17,32 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.OrderHistories = new HashSet<OrderHistory>();
+            this.Orders_Detail = new HashSet<Orders_Detail>();
+            this.Orders_History = new HashSet<Orders_History>();
         }
     
-        public System.Guid OrderID { get; set; }
+        public System.Guid Id { get; set; }
+        public System.Guid CartId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal VAT { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Currency { get; set; }
+        public short OrderStatus { get; set; }
+        public string Comments { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public string OrderNumber { get; set; }
+        public string OrderTrackingNumber { get; set; }
+        public Nullable<System.Guid> DiscountVoucherId { get; set; }
         public Nullable<System.Guid> CustomerID { get; set; }
-        public Nullable<int> TransactionNumber { get; set; }
-        public Nullable<System.Guid> ShipperID { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public string ShippingAddress { get; set; }
-        public string PayPalReference { get; set; }
-        public Nullable<decimal> Tax { get; set; }
-        public Nullable<decimal> Shipping { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public Nullable<decimal> SubTotal { get; set; }
     
+        public virtual DiscountVoucher DiscountVoucher { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders_Detail> Orders_Detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders_History> Orders_History { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
         public virtual Customer Customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderHistory> OrderHistories { get; set; }
     }
 }

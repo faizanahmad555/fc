@@ -1,0 +1,89 @@
+﻿@model MultivendorEcommerceStore.DB.ViewModel.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!--main content start-->
+<section class="site-min-height">
+    <!-- page start-->
+    <section class="panel">
+        <header class="panel-heading">
+            Order's List
+        </header>
+        <div class="panel-body">
+            <div class="adv-table editable-table ">
+                <div class="clearfix">
+
+                    <div class="btn-group pull-right">
+                        <h1><span><i onclick="Print('PrintOrderDetail')" class="fa fa-print pull-right" style="cursor:pointer" title="Print"></i></span></h1>
+                    </div>
+                </div>
+                <div class="space15"></div>
+
+                <div class="table-responsive" id="PrintOrderDetail">
+
+                    <table class="table table-striped table-hover" id="editable-sample" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Product Image")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Product")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Quantity")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("UnitPrice")
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.OrderDetail)
+                            {
+                                <tr>
+                                    <td>
+                                        <a title="View Product" href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })" target="_blank">
+                                            <img src="@Url.Content(item.ProductImage)" alt="Product Image" width="70" height="70">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a title="View Product" href="@Url.Action("ProductDetail", "Home", new { ProductID = item.ProductID })" target="_blank">
+                                            @Html.DisplayFor(modelItem => item.Product)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page end-->
+</section>
+<!--main content end-->
+<!--footer start-->
+<footer class="site-footer">
+    <div class="text-center">
+        2017 &copy; FineCollection by IT Specialists.
+        <a href="#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</footer>
+<!--footer end-->

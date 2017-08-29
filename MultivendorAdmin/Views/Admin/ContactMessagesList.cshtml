@@ -1,0 +1,153 @@
+﻿@model IEnumerable<MultivendorEcommerceStore.DB.ViewModel.DisplayContactUsViewModel>
+
+@{
+    ViewBag.Title = "ContactMessages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/assets/data-tables/DT_bootstrap.css" />
+
+
+<!--vertical center Modal start-->
+<div class="modal fade modal-dialog-center " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content-wrap">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Delete Contact Message</h4>
+                </div>
+                <div class="modal-body">
+
+                    Are you sure you want to delete this Contact Message?
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button id="btnContinueDeleteContact" class="btn btn-warning" type="button"> Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- vertical center Modal end -->
+<!--main content start-->
+<section class="site-min-height">
+    <!-- page start-->
+    <section class="panel">
+        <header class="panel-heading">
+            Contact Messages List
+        </header>
+        <div class="panel-body">
+            <div class="adv-table editable-table ">
+                <div class="clearfix">
+                    <div class="btn-group pull-right">
+                        <h1><span><i onclick="Print('ContactMessagesToPrint')" class="fa fa-print pull-right" style="cursor:pointer" title="Print"></i></span></h1>
+                    </div>
+                </div>
+                <div class="space15"></div>
+
+                <div class="table-responsive" id="ContactMessagesToPrint">
+
+                    <table class="table table-striped table-hover" id="editable-sample" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th style="text-align:center">
+                                    @Html.DisplayName("First Name")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Last Name")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Email")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Message")
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Added On")
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id='ContactMessageToDelete_@item.ContactID'>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Message)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("EditContactMessage", "Admin", new {  ContactID = item.ContactID })">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+
+                                        <a class="btn btn-danger btn-xs ItemToDelete" title="Delete" data-toggle="modal" data-target="#myModal" value="@item.ContactID">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page end-->
+</section>
+<!--main content end-->
+<!--footer start-->
+<footer class="site-footer">
+    <div class="text-center">
+        2017 &copy; FineCollection by IT Specialists.
+        <a href="#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</footer>
+<!--footer end-->
+
+@section Scripts{
+
+    <!--script for Contact Deletion-->
+    <script type="text/javascript">
+
+        $('.ItemToDelete').click(function () {
+            var contactId = $(this).attr("value");
+            $("#btnContinueDeleteContact").val(contactId);
+        });
+
+        $('#btnContinueDeleteContact').click(function () {
+            var contactId = $(this).attr("value");
+            $.ajax({
+                type: "POST",
+                url: "/Admin/DeleteContactMessageConfirm",
+                data: { ContactID: contactId },
+                success: function (data) {
+                    if (data == "True") {
+                        $("#myModal").modal("hide");
+                        $("#ContactMessageToDelete_" + contactId).remove();
+                    }
+                }
+
+            });
+        });
+
+    </script>
+}

@@ -1,5 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MultivendorEcommerceStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
   <EntityType Name="AspNetUsers">
     <Key>
       <PropertyRef Name="Id" />
@@ -111,65 +155,168 @@
   </EntityType>
   <EntityType Name="DiscountVoucher">
     <Key>
-      <PropertyRef Name="DiscountID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="DiscountID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VoucherCode" Type="nvarchar" MaxLength="200" />
-    <Property Name="VoucherDiscountTypeID" Type="smallint" />
-    <Property Name="VoucherValue" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsActive" Type="bit" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VoucherCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="VoucherDiscountTypeId" Type="smallint" Nullable="false" />
+    <Property Name="VoucherValue" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="UsedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="EmailHistory">
     <Key>
-      <PropertyRef Name="EmailID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="EmailID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SentTo" Type="nvarchar" MaxLength="300" />
-    <Property Name="SentFrom" Type="nvarchar" MaxLength="300" />
-    <Property Name="Subject" Type="nvarchar" MaxLength="250" />
-    <Property Name="Body" Type="nvarchar(max)" />
-    <Property Name="SentOn" Type="datetime" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SentTo" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="SentFrom" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SentOn" Type="datetime" Nullable="false" />
     <Property Name="ElasticAPIResponse" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="Order">
+  <EntityType Name="FAQ">
     <Key>
-      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CustomerID" Type="uniqueidentifier" />
-    <Property Name="TransactionNumber" Type="int" />
-    <Property Name="ShipperID" Type="uniqueidentifier" />
-    <Property Name="CreatedOn" Type="datetime" />
-    <Property Name="IsActive" Type="bit" />
-    <Property Name="ShippingAddress" Type="varchar" MaxLength="1024" />
-    <Property Name="PayPalReference" Type="varchar" MaxLength="100" />
-    <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Shipping" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConditionId" Type="uniqueidentifier" />
+    <Property Name="ConditionDeviceId" Type="uniqueidentifier" />
+    <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SequenceNumber" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="OrderDetail">
+  <EntityType Name="FAQ_Categories">
     <Key>
-      <PropertyRef Name="OrderDetailID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="OrderDetailID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OrderID" Type="uniqueidentifier" />
-    <Property Name="ProductID" Type="uniqueidentifier" />
-    <Property Name="UnitPrice" Type="int" />
-    <Property Name="Quantity" Type="int" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryText" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SequenceNumber" Type="smallint" Nullable="false" />
   </EntityType>
-  <EntityType Name="OrderHistory">
+  <EntityType Name="FAQ_Category_Condition">
     <Key>
-      <PropertyRef Name="OrderHistoryID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="OrderHistoryID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OrderID" Type="uniqueidentifier" />
-    <Property Name="OrderStatus" Type="smallint" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConditionCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ConditionName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SequenceNumber" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FAQ_Category_Condition_Device">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConditionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DeviceCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ImageUrl" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="DeviceName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SequenceNumber" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HelpTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClientId" Type="uniqueidentifier" />
+    <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Query" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SendEmailCopy" Type="bit" Nullable="false" />
+    <Property Name="PostedOn" Type="datetime" Nullable="false" />
+    <Property Name="EmailHistoryId" Type="uniqueidentifier" />
+    <Property Name="ReferenceNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QueryStatus" Type="smallint" Nullable="false" />
+    <Property Name="QuerySource" Type="smallint" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SurName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="300" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="300" />
+    <Property Name="Address3" Type="nvarchar" MaxLength="300" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="NHSNumber" Type="varchar" MaxLength="50" />
+    <Property Name="AdvisorNotes" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="HtmlTemplates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Key" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="HTMLColumn" Type="varchar(max)" Nullable="false" />
+    <Property Name="Orignal" Type="varchar(max)" />
+    <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="FromName" Type="varchar" MaxLength="250" />
+    <Property Name="FromEmail" Type="varchar" MaxLength="250" />
+    <Property Name="Subject" Type="varchar" MaxLength="250" />
+    <Property Name="IsBulk" Type="bit" />
+    <Property Name="IsVisible" Type="bit" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CartId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="VAT" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderStatus" Type="smallint" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
-    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CustomerID" Type="uniqueidentifier" />
+    <Property Name="OrderNumber" Type="nvarchar" MaxLength="300" />
+    <Property Name="OrderTrackingNumber" Type="nvarchar" MaxLength="300" />
+    <Property Name="DiscountVoucherId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Orders_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="ItemPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders_History">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderStatus" Type="smallint" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Product">
@@ -232,6 +379,14 @@
     <Property Name="ReturnReason" Type="nvarchar(max)" />
     <Property Name="Fullfilled" Type="bit" />
   </EntityType>
+  <EntityType Name="SequenceNumber">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SequenceValue" Type="bigint" Nullable="false" />
+    <Property Name="SequenceType" Type="smallint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Shipper">
     <Key>
       <PropertyRef Name="ShipperID" />
@@ -240,6 +395,53 @@
     <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Website" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ShoppingCart">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="VAT" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="ClientId" Type="uniqueidentifier" />
+    <Property Name="DiscountVoucherId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ShoppingCart_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CartId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="ItemPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="ProductID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ShoppingCart_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CartId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SurName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="300" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="300" />
+    <Property Name="Address3" Type="nvarchar" MaxLength="300" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="StateMaster">
     <Key>
@@ -324,6 +526,16 @@
     <Property Name="Website" Type="nvarchar" MaxLength="50" />
     <Property Name="PaymentMethods" Type="nvarchar" MaxLength="100" />
     <Property Name="BusinessEmail" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Tracking">
     <Key>
@@ -428,55 +640,191 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAQ_Category_Condition_Device_FAQ_Category_Condition">
+    <End Role="FAQ_Category_Condition" Type="Self.FAQ_Category_Condition" Multiplicity="1" />
+    <End Role="FAQ_Category_Condition_Device" Type="Self.FAQ_Category_Condition_Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAQ_Category_Condition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAQ_Category_Condition_Device">
+        <PropertyRef Name="ConditionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAQ_Category_Condition_FAQ_Categories">
+    <End Role="FAQ_Categories" Type="Self.FAQ_Categories" Multiplicity="1" />
+    <End Role="FAQ_Category_Condition" Type="Self.FAQ_Category_Condition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAQ_Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAQ_Category_Condition">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAQ_FAQ_Categories">
+    <End Role="FAQ_Categories" Type="Self.FAQ_Categories" Multiplicity="1" />
+    <End Role="FAQ" Type="Self.FAQ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAQ_Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAQ">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAQ_FAQ_Category_Condition">
+    <End Role="FAQ_Category_Condition" Type="Self.FAQ_Category_Condition" Multiplicity="0..1" />
+    <End Role="FAQ" Type="Self.FAQ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAQ_Category_Condition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAQ">
+        <PropertyRef Name="ConditionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FAQ_FAQ_Category_Condition_Device">
+    <End Role="FAQ_Category_Condition_Device" Type="Self.FAQ_Category_Condition_Device" Multiplicity="0..1" />
+    <End Role="FAQ" Type="Self.FAQ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAQ_Category_Condition_Device">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FAQ">
+        <PropertyRef Name="ConditionDeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
         <PropertyRef Name="CustomerID" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="Orders">
         <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderDetail_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+  <Association Name="FK_Orders_Detail_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Orders_Detail" Type="Self.Orders_Detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="OrderID" />
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="OrderID" />
+      <Dependent Role="Orders_Detail">
+        <PropertyRef Name="OrderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+  <Association Name="FK_Orders_Detail_ProductID">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Orders_Detail" Type="Self.Orders_Detail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="ProductID" />
       </Principal>
-      <Dependent Role="OrderDetail">
+      <Dependent Role="Orders_Detail">
         <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderHistory_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
-    <End Role="OrderHistory" Type="Self.OrderHistory" Multiplicity="*" />
+  <Association Name="FK_Orders_DiscountVoucher">
+    <End Role="DiscountVoucher" Type="Self.DiscountVoucher" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="OrderID" />
+      <Principal Role="DiscountVoucher">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="OrderHistory">
-        <PropertyRef Name="OrderID" />
+      <Dependent Role="Orders">
+        <PropertyRef Name="DiscountVoucherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_History_Orders1">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Orders_History" Type="Self.Orders_History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders_History">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_ShoppingCart">
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingCart">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CartId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -522,27 +870,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ReturnRequest_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
+  <Association Name="FK_ShoppingCart_Detail_ProductID">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ShoppingCart_Detail" Type="Self.ShoppingCart_Detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
       </Principal>
-      <Dependent Role="ReturnRequest">
-        <PropertyRef Name="CustomerID" />
+      <Dependent Role="ShoppingCart_Detail">
+        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ReturnRequest_OrderDetail">
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
-    <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
+  <Association Name="FK_ShoppingCart_Detail_ShoppingCart1">
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
+    <End Role="ShoppingCart_Detail" Type="Self.ShoppingCart_Detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrderDetail">
-        <PropertyRef Name="OrderDetailID" />
+      <Principal Role="ShoppingCart">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ReturnRequest">
-        <PropertyRef Name="OrderDetailID" />
+      <Dependent Role="ShoppingCart_Detail">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShoppingCart_DiscountVoucher">
+    <End Role="DiscountVoucher" Type="Self.DiscountVoucher" Multiplicity="0..1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountVoucher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="DiscountVoucherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShoppingCart_Registration_ShoppingCart">
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
+    <End Role="ShoppingCart_Registration" Type="Self.ShoppingCart_Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingCart">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCart_Registration">
+        <PropertyRef Name="CartId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -677,6 +1049,11 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MultivendorEcommerceStoreModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
@@ -687,18 +1064,29 @@
     <EntitySet Name="CustomerNotification" EntityType="Self.CustomerNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiscountVoucher" EntityType="Self.DiscountVoucher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmailHistory" EntityType="Self.EmailHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderHistory" EntityType="Self.OrderHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ_Categories" EntityType="Self.FAQ_Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ_Category_Condition" EntityType="Self.FAQ_Category_Condition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ_Category_Condition_Device" EntityType="Self.FAQ_Category_Condition_Device" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HelpTicket" EntityType="Self.HelpTicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HtmlTemplates" EntityType="Self.HtmlTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders_Detail" EntityType="Self.Orders_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders_History" EntityType="Self.Orders_History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductNotification" EntityType="Self.ProductNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReturnRequest" EntityType="Self.ReturnRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SequenceNumber" EntityType="Self.SequenceNumber" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingCart_Detail" EntityType="Self.ShoppingCart_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingCart_Registration" EntityType="Self.ShoppingCart_Registration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategoryItem" EntityType="Self.SubCategoryItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierBusinessInformation" EntityType="Self.SupplierBusinessInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WishList" EntityType="Self.WishList" Schema="dbo" store:Type="Tables" />
@@ -726,21 +1114,65 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="CustomerNotification" EntitySet="CustomerNotification" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAQ_Category_Condition_Device_FAQ_Category_Condition" Association="Self.FK_FAQ_Category_Condition_Device_FAQ_Category_Condition">
+      <End Role="FAQ_Category_Condition" EntitySet="FAQ_Category_Condition" />
+      <End Role="FAQ_Category_Condition_Device" EntitySet="FAQ_Category_Condition_Device" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAQ_Category_Condition_FAQ_Categories" Association="Self.FK_FAQ_Category_Condition_FAQ_Categories">
+      <End Role="FAQ_Categories" EntitySet="FAQ_Categories" />
+      <End Role="FAQ_Category_Condition" EntitySet="FAQ_Category_Condition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAQ_FAQ_Categories" Association="Self.FK_FAQ_FAQ_Categories">
+      <End Role="FAQ_Categories" EntitySet="FAQ_Categories" />
+      <End Role="FAQ" EntitySet="FAQ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAQ_FAQ_Category_Condition" Association="Self.FK_FAQ_FAQ_Category_Condition">
+      <End Role="FAQ_Category_Condition" EntitySet="FAQ_Category_Condition" />
+      <End Role="FAQ" EntitySet="FAQ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FAQ_FAQ_Category_Condition_Device" Association="Self.FK_FAQ_FAQ_Category_Condition_Device">
+      <End Role="FAQ_Category_Condition_Device" EntitySet="FAQ_Category_Condition_Device" />
+      <End Role="FAQ" EntitySet="FAQ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
       <End Role="Customer" EntitySet="Customer" />
-      <End Role="Order" EntitySet="Order" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    <AssociationSet Name="FK_Orders_Detail_Orders" Association="Self.FK_Orders_Detail_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Orders_Detail" EntitySet="Orders_Detail" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+    <AssociationSet Name="FK_Orders_Detail_ProductID" Association="Self.FK_Orders_Detail_ProductID">
       <End Role="Product" EntitySet="Product" />
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
+      <End Role="Orders_Detail" EntitySet="Orders_Detail" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderHistory_Order" Association="Self.FK_OrderHistory_Order">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="OrderHistory" EntitySet="OrderHistory" />
+    <AssociationSet Name="FK_Orders_DiscountVoucher" Association="Self.FK_Orders_DiscountVoucher">
+      <End Role="DiscountVoucher" EntitySet="DiscountVoucher" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_History_Orders1" Association="Self.FK_Orders_History_Orders1">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Orders_History" EntitySet="Orders_History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_ShoppingCart" Association="Self.FK_Orders_ShoppingCart">
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
@@ -754,13 +1186,21 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductNotification" EntitySet="ProductNotification" />
     </AssociationSet>
-    <AssociationSet Name="FK_ReturnRequest_Customer" Association="Self.FK_ReturnRequest_Customer">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="ReturnRequest" EntitySet="ReturnRequest" />
+    <AssociationSet Name="FK_ShoppingCart_Detail_ProductID" Association="Self.FK_ShoppingCart_Detail_ProductID">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ShoppingCart_Detail" EntitySet="ShoppingCart_Detail" />
     </AssociationSet>
-    <AssociationSet Name="FK_ReturnRequest_OrderDetail" Association="Self.FK_ReturnRequest_OrderDetail">
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
-      <End Role="ReturnRequest" EntitySet="ReturnRequest" />
+    <AssociationSet Name="FK_ShoppingCart_Detail_ShoppingCart1" Association="Self.FK_ShoppingCart_Detail_ShoppingCart1">
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+      <End Role="ShoppingCart_Detail" EntitySet="ShoppingCart_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShoppingCart_DiscountVoucher" Association="Self.FK_ShoppingCart_DiscountVoucher">
+      <End Role="DiscountVoucher" EntitySet="DiscountVoucher" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShoppingCart_Registration_ShoppingCart" Association="Self.FK_ShoppingCart_Registration_ShoppingCart">
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+      <End Role="ShoppingCart_Registration" EntitySet="ShoppingCart_Registration" />
     </AssociationSet>
     <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
       <End Role="CountryMaster" EntitySet="CountryMaster" />

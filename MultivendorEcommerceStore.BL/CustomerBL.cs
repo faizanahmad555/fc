@@ -121,12 +121,12 @@ namespace MultivendorEcommerceStore.BL
             return orders.Select(s => new DisplayOrderViewModel
             {
                 CreatedOn = s.CreatedOn,
-                OrderID = s.OrderID,
+                OrderID = s.Id,
                 CustomerName = s.Customer.FirstName,
-                Shipping = s.Shipping,
-                SubTotal = s.SubTotal,
-                Tax = s.Tax,
-                Total = s.Total,
+                //Shipping = s.Shipping,
+                //SubTotal = s.SubTotal,
+                //Tax = s.Tax,
+                //Total = s.Total,
             });
         }
 

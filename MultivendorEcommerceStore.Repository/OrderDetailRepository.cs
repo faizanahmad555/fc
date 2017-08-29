@@ -14,17 +14,17 @@ namespace MultivendorEcommerceStore.Repository
         {
             _context = new MultivendorEcommerceStoreEntities();
         }
-        public IEnumerable<OrderDetail> Get()
+        public IEnumerable<Orders_Detail> Get()
         {
-            return _context.OrderDetails.ToList();
+            return _context.Orders_Detail.ToList();
         }
-        public IEnumerable<OrderDetail> GetByOrderID(Guid? orderID)
+        public IEnumerable<Orders_Detail> GetByOrderID(Guid? orderID)
         {
-            return _context.OrderDetails.Where(s => s.OrderID == orderID).ToList();
+            return _context.Orders_Detail.Where(s => s.Id == orderID).ToList();
         }
-        public void Insert(OrderDetail entity)
+        public void Insert(Orders_Detail entity)
         {
-            _context.OrderDetails.Add(entity);
+            _context.Orders_Detail.Add(entity);
             _context.SaveChanges();
         }
     }

@@ -52,9 +52,9 @@ namespace MultivendorEcommerceStore.Migrations
                 }
 
                 ApplicationUser user = new ApplicationUser();
-                user.Email = "admin@admin.com";
-                user.UserName = "admin@admin.com";
-                manager.Create(user, "admin123");
+                user.Email = "finecollectionstore@gmail.com";
+                user.UserName = "finecollectionstore@gmail.com";
+                manager.Create(user, "BusinessProject@2017");
                 manager.AddToRole(user.Id, "Admin");
             }
         }

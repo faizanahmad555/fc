@@ -36,11 +36,7 @@ namespace MultivendorEcommerceStore
                       //"~/assets/js/theme-script.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/highStockCore").Include(
-               "~/Scripts/highStock/js/highstock.js",
-               "~/Scripts/highStock/js/modules/exporting.js",
-               "~/Scripts/highStock/js/modules/no-data-to-display.js"
-               ));
+            
 
             bundles.Add(new StyleBundle("~/Assets/css").Include(
             //"~/assets/lib/bootstrap/css/bootstrap.css",
@@ -54,7 +50,7 @@ namespace MultivendorEcommerceStore
                 "~/assets/css/style.css",
                 "~/assets/css/responsive.css",
                 "~/assets/css/option5.css"));
-            // "~/Content/site.css"));
+        
             //   BundleTable.EnableOptimizations = false; // when this is not false
         }
     }

@@ -1,0 +1,265 @@
+﻿@model MultivendorEcommerceStore.DB.ViewModel.DashboardStatisticsVM
+@using System.Web.Script.Serialization;
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Dashboard <small>Statistics Overview</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </li>
+            </ol>
+        </div>
+    </div>
+*@
+
+<!--state overview start-->
+<div class="row state-overview">
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol terques">
+                <i class="fa fa-user"></i>
+            </div>
+            <a href="@Url.Action("SupplierList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.SuppliersCount > 0)
+                        {
+                            @Model.SuppliersCount
+                        }
+                        else if (@Model.SuppliersCount == 0)
+                        {
+                            @Model.SuppliersCount
+                        }
+                    </h1>
+                    <p>Total Suppliers</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol blue">
+                <i class="fa fa-user"></i>
+            </div>
+            <a href="@Url.Action("CustomerList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.CustomersCount > 0)
+                        {
+                            @Model.CustomersCount
+                        }
+                        else if (@Model.CustomersCount == 0)
+                        {
+                            @Model.CustomersCount
+                        }
+                    </h1>
+                    <p>Total Customers</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol red">
+                <i class="fa fa-tags"></i>
+            </div>
+            <a href="@Url.Action("ProductList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.ProductsCount > 0)
+                        {
+                            @Model.ProductsCount
+                        }
+                        else if (@Model.ProductsCount == 0)
+                        {
+                            @Model.ProductsCount
+                        }
+                    </h1>
+                    <p>Total Products</p>
+                </div>
+
+            </a>
+        </section>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol yellow">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <a href="@Url.Action("OrderList", "Admin")">
+                <div class="value">
+                    <h1>
+                        @if (@Model.OrdersCount > 0)
+                        {
+                            @Model.OrdersCount
+                        }
+                        else if (@Model.OrdersCount == 0)
+                        {
+                            @Model.OrdersCount
+                        }
+                    </h1>
+                    <p>Total Order</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+</div>
+
+    @*<div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol blue">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="value">
+                    <h1 class="count4">
+                        0
+                    </h1>
+                    <p>Total Profit</p>
+                </div>
+            </section>
+        </div>*@
+
+<div class="row">
+
+    <section class="panel col-lg-12">
+        <header class="panel-heading">
+            New Orders
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewOrdersContainer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="row">
+
+    <section class="panel col-lg-6">
+        <header class="panel-heading">
+            New Products
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewProductsContainer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="panel col-lg-6">
+        <header class="panel-heading">
+            New Suppliers
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewSuppliersContainer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="row">
+
+    <section class="panel col-lg-12">
+        <header class="panel-heading">
+            New Customers
+        </header>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="dashboard-graph graph_chart" id="ChartNewCustomersContainer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+@section scripts
+{   @Scripts.Render("~/bundles/highStockCore")
+<script src="@Url.Content("~/Scripts/CustomHighCharts.js")"></script>
+
+
+@if (Model.OrdersChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var OrderData = @Html.Raw(Json.Encode(Model.OrdersChart));
+            CreateOrderChart(OrderData);
+
+        });
+    </script>
+}
+
+
+@if (Model.ProductsChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var NewUsersData = @Html.Raw(Json.Encode(Model.ProductsChart));
+            CreateNewProductsChart(NewUsersData);
+
+        });
+    </script>
+}
+
+
+@if (Model.SuppliersChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var NewUsersData = @Html.Raw(Json.Encode(Model.SuppliersChart));
+            CreateNewSuppliersChart(NewUsersData);
+
+        });
+    </script>
+}
+
+
+@if (Model.CustomersChart != null)
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var NewUsersData = @Html.Raw(Json.Encode(Model.CustomersChart));
+            CreateNewCustomersChart(NewUsersData);
+
+        });
+    </script>
+}
+
+
+
+
+
+
+}
+
+
+
+
+<!--state overview end-->

@@ -22,12 +22,12 @@ namespace MultivendorEcommerceStore.Repository
 
         public Order GetByID(Guid? orderID)
         {
-            return _context.Orders.Where(s=> s.OrderID == orderID).FirstOrDefault();
+            return _context.Orders.Where(s=> s.Id == orderID).FirstOrDefault();
         }
 
         public IEnumerable<Order> GetBySupplierID(Guid? supplierID)
         {
-            return _context.Orders.Where(s => s.OrderDetails.Any(i => i.Product.Supplier.SupplierID == supplierID)).ToList();
+            return _context.Orders.Where(s => s.Orders_Detail.Any(i => i.Product.Supplier.SupplierID == supplierID)).ToList();
         }
         public void Insert(Order entity)
         {
@@ -40,7 +40,7 @@ namespace MultivendorEcommerceStore.Repository
         {
             _context.Orders.Add(entity);
             _context.SaveChanges();
-            return entity.OrderID;
+            return entity.Id;
         }
 
         public IEnumerable<Order> GetByCustomerID(Guid? customerID)

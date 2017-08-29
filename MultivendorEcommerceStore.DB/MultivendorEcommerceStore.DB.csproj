@@ -53,7 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\AspNetRole.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\AspNetUser.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserClaim.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserLogin.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs">
@@ -77,10 +86,31 @@
     <Compile Include="Model\CustomerNotification.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\C__MigrationHistory.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DiscountVoucher.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EmailHistory.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FAQ.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FAQ_Categories.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FAQ_Category_Condition.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FAQ_Category_Condition_Device.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HelpTicket.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HtmlTemplate.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\MES.Context.cs">
@@ -101,10 +131,10 @@
     <Compile Include="Model\Order.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\OrderDetail.cs">
+    <Compile Include="Model\Orders_Detail.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\OrderHistory.cs">
+    <Compile Include="Model\Orders_History.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Product.cs">
@@ -116,7 +146,19 @@
     <Compile Include="Model\ReturnRequest.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SequenceNumber.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Shipper.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ShoppingCart.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ShoppingCart_Detail.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ShoppingCart_Registration.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\StateMaster.cs">
@@ -132,6 +174,9 @@
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SupplierBusinessInformation.cs">
+      <DependentUpon>MES.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>MES.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tracking.cs">
@@ -191,7 +236,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MES.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Model\MES.edmx.diagram">
       <DependentUpon>MES.edmx</DependentUpon>
     </None>

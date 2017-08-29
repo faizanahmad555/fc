@@ -1,0 +1,165 @@
+﻿@using MultivendorEcommerceStore.Utility;
+
+<!-- sidebar menu start-->
+<ul class="sidebar-menu" id="nav-accordion">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+            <a href="@Url.Action("Index", "Admin")">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+    <!--manage supplier menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Supplier</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("AddSupplier", "Admin")">Add Supplier</a></li>
+                <li><a href="@Url.Action("SupplierList", "Admin")">Show All Supplier</a></li>
+            </ul>
+        </li>
+    <!--manage supplier menu end-->
+
+
+     <!--manage categories menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Category</span>
+            </a>
+            <ul class="sub">
+                <li class="sub-menu">
+                    <a href="boxed_page.html">Add Category</a>
+                    <ul class="sub">
+                        <li><a href="@Url.Action("AddCategory", "Admin")">Add Category</a></li>
+                        <li><a href="@Url.Action("AddExistingCategory", "Admin")">Add Sub Category</a></li>
+                        <li><a href="@Url.Action("AddExistingCategoryItem", "Admin")">Add SubCategory Item</a></li>
+                    </ul>
+                </li>
+                <li><a href="@Url.Action("CategoryList", "Admin")">Show All Categories</a></li>
+            </ul>
+        </li>
+    <!--manage categiries menu end-->
+
+
+        <!--manage products menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub">
+                @*<li><a href="@Url.Action("AddProduct", "Admin")">Add Product</a></li>*@
+                <li><a href="@Url.Action("ProductList", "Admin")">Show All Products</a></li>
+            </ul>
+        </li>
+    <!--manage products menu end-->
+
+
+        <!--manage custumers menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Customers</span>
+            </a>
+            <ul class="sub">
+                @*<li><a href="@Url.Action("AddProduct", "Admin")">Add Product</a></li>*@
+                <li><a href="@Url.Action("CustomerList", "Admin")">Show All Customers</a></li>
+            </ul>
+        </li>
+    <!--manage custumers menu end-->
+
+
+         <!--manage orders menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Orders</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("OrderList", "Admin")">Show All Orders</a></li>
+            </ul>
+        </li>
+    <!--manage orders menu end-->
+
+
+        <!--manage contact messages menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Messages</span>
+            </a>
+            <ul class="sub">
+                <li><a href="@Url.Action("ContactMessagesList", "Admin")">Show All Messages</a></li>
+            </ul>
+        </li>
+    <!--manage contact messages menu end-->
+
+    }
+
+
+
+
+
+    else if (User.IsInRole("Supplier"))
+    {
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+            <a href="@Url.Action("Index", "Supplier")" class="active">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <!--manage products menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub">
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AddProduct" ? "active" : "")">
+                    <a href="@Url.Action("AddProduct", "Supplier")">Add Product</a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "ProductList" ? "active" : "")">
+                    <a href="@Url.Action("ProductList", "Supplier")">Show All Products</a>
+                </li>
+            </ul>
+        </li>
+    <!--manage products menu end-->
+
+
+          <!--manage orders menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span>Manage Orders</span>
+            </a>
+            <ul class="sub">
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "DisplayOrder" ? "active" : "")">
+                    <a href="@Url.Action("DisplayOrder", "Supplier")">Show All Orders</a>
+                </li>
+            </ul>
+        </li>
+        <!--manage orders menu end-->
+
+
+        <!--manage shop menu start-->
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Shop</span>
+            </a>
+            <ul class="sub">
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "#" ? "active" : "")">
+                    <a target="_blank" href="@Url.Action("SupplierProducts", "Home", new { SupplierID = User.Identity.GetSupplierCurrentID() })">View Shop</a>
+                </li>
+            </ul>
+        </li>
+        <!--manage shop menu start-->
+    }
+</ul>

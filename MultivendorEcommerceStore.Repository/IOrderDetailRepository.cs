@@ -9,8 +9,8 @@ namespace MultivendorEcommerceStore.Repository
 {
     public interface IOrderDetailRepository
     {
-        void Insert(OrderDetail entity);
-        IEnumerable<OrderDetail> Get();
-        IEnumerable<OrderDetail> GetByOrderID(Guid? orderID);
+        void Insert(Orders_Detail entity);
+        IEnumerable<Orders_Detail> Get();
+        IEnumerable<Orders_Detail> GetByOrderID(Guid? orderID);
     }
 }

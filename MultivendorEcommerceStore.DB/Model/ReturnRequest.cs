@@ -21,8 +21,5 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<System.Guid> ShipperID { get; set; }
         public string ReturnReason { get; set; }
         public Nullable<bool> Fullfilled { get; set; }
-    
-        public virtual Customer Customer { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

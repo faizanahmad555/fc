@@ -17,9 +17,10 @@ namespace MultivendorEcommerceStore.DB.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.Orders_Detail = new HashSet<Orders_Detail>();
             this.ProductNotifications = new HashSet<ProductNotification>();
+            this.ShoppingCart_Detail = new HashSet<ShoppingCart_Detail>();
             this.WishLists = new HashSet<WishList>();
-            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public System.Guid ProductID { get; set; }
@@ -56,12 +57,14 @@ namespace MultivendorEcommerceStore.DB.Model
         public Nullable<int> Status { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders_Detail> Orders_Detail { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductNotification> ProductNotifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WishList> WishLists { get; set; }
+        public virtual ICollection<ShoppingCart_Detail> ShoppingCart_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

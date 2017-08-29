@@ -12,23 +12,24 @@ namespace MultivendorEcommerceStore.DB.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class FAQ_Category_Condition_Device
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderDetail()
+        public FAQ_Category_Condition_Device()
         {
-            this.ReturnRequests = new HashSet<ReturnRequest>();
+            this.FAQs = new HashSet<FAQ>();
         }
     
-        public System.Guid OrderDetailID { get; set; }
-        public Nullable<System.Guid> OrderID { get; set; }
-        public Nullable<System.Guid> ProductID { get; set; }
-        public Nullable<int> UnitPrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public System.Guid Id { get; set; }
+        public System.Guid ConditionId { get; set; }
+        public string DeviceCode { get; set; }
+        public string ImageUrl { get; set; }
+        public string DeviceName { get; set; }
+        public bool IsActive { get; set; }
+        public short SequenceNumber { get; set; }
     
-        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReturnRequest> ReturnRequests { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual ICollection<FAQ> FAQs { get; set; }
+        public virtual FAQ_Category_Condition FAQ_Category_Condition { get; set; }
     }
 }

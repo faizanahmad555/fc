@@ -18,7 +18,7 @@ namespace MultivendorEcommerceStore.BL
 
         public int GetAllOrdersCount(Guid supplierID)
         {
-            return new OrderRepository().Get().Where(s => s.OrderDetails.Any(i => i.Product.Supplier.SupplierID == supplierID)).Count();
+            return new OrderRepository().Get().Where(s => s.Orders_Detail.Any(i => i.Product.Supplier.SupplierID == supplierID)).Count();
         }
 
 
@@ -55,7 +55,7 @@ namespace MultivendorEcommerceStore.BL
 
             try
             {
-                ords = orderRepo.GetBySupplierID(supplierID).GroupBy(item => item.CreatedOn.Value.Date)
+                ords = orderRepo.GetBySupplierID(supplierID).GroupBy(item => item.CreatedOn.Date)
            .Select(group => new
            {
 

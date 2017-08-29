@@ -70,7 +70,7 @@ namespace MultivendorEcommerceStore.BL
 
             try
             {
-                ords = orderRepo.Get().GroupBy(item => item.CreatedOn.Value.Date)
+                ords = orderRepo.Get().GroupBy(item => item.CreatedOn.Date)
            .Select(group => new
            {
 

@@ -14,12 +14,12 @@ namespace MultivendorEcommerceStore.DB.Model
     
     public partial class EmailHistory
     {
-        public System.Guid EmailID { get; set; }
+        public System.Guid Id { get; set; }
         public string SentTo { get; set; }
         public string SentFrom { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
-        public Nullable<System.DateTime> SentOn { get; set; }
+        public System.DateTime SentOn { get; set; }
         public string ElasticAPIResponse { get; set; }
     }
 }

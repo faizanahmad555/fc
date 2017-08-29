@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultivendorEcommerceStore.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultivendorEcommerceStore.DB", "MultivendorEcommerceStore.DB\MultivendorEcommerceStore.DB.csproj", "{EDC781E7-8A2B-44F0-8FC0-0625B15B4EB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultivendorAdmin", "MultivendorAdmin\MultivendorAdmin.csproj", "{14E1BDA1-DA65-41FA-A0DC-F4449925FE3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{EDC781E7-8A2B-44F0-8FC0-0625B15B4EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC781E7-8A2B-44F0-8FC0-0625B15B4EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC781E7-8A2B-44F0-8FC0-0625B15B4EB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E1BDA1-DA65-41FA-A0DC-F4449925FE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E1BDA1-DA65-41FA-A0DC-F4449925FE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E1BDA1-DA65-41FA-A0DC-F4449925FE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E1BDA1-DA65-41FA-A0DC-F4449925FE3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

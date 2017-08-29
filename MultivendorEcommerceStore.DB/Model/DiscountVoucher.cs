@@ -14,13 +14,25 @@ namespace MultivendorEcommerceStore.DB.Model
     
     public partial class DiscountVoucher
     {
-        public System.Guid DiscountID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DiscountVoucher()
+        {
+            this.Orders = new HashSet<Order>();
+            this.ShoppingCarts = new HashSet<ShoppingCart>();
+        }
+    
+        public System.Guid Id { get; set; }
         public string VoucherCode { get; set; }
-        public Nullable<short> VoucherDiscountTypeID { get; set; }
-        public Nullable<decimal> VoucherValue { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public short VoucherDiscountTypeId { get; set; }
+        public decimal VoucherValue { get; set; }
+        public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public bool IsActive { get; set; }
         public Nullable<System.DateTime> UsedOn { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }
